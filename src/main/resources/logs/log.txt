@@ -1,0 +1,2 @@
+2020-12-22 13:34:14.930 INFO javax.servlet.http.HttpServlet - Do post
+2020-12-22 13:34:17.502 INFO javax.servlet.http.HttpServlet - Do get
