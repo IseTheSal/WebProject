@@ -2,16 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Welcome</title>
 </head>
 <body>
-<h2>Hello World!</h2>
-<br/>
-<form action="hello_servlet" method="get">
-    <input type="submit" name="Button" value="Ok">
-</form>
-<form action="hello_servlet" method="post">
-    <input type="submit" name="Button" value="Ok">
-</form>
+<h2>Hello</h2>
+<jsp:forward page="jsp/registration.jsp"></jsp:forward>
 </body>
 </html>
