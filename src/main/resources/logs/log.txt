@@ -15,3 +15,5 @@
 2020-12-24 08:37:47.430 INFO learning.web.command.impl.RegistrationCommand - User was added
 2020-12-24 08:38:00.031 INFO learning.web.command.impl.RegistrationCommand - User was added
 2020-12-24 08:38:13.273 INFO learning.web.command.impl.RemoveUserCommand - User was removed
+2020-12-24 09:26:47.867 INFO learning.web.command.impl.RegistrationCommand - User was added
+2020-12-24 09:27:03.967 INFO learning.web.command.impl.RemoveUserCommand - User was removed

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class UserServiceImpl {
 
-    public UserServiceImpl(){
+    public UserServiceImpl() {
 
     }
 

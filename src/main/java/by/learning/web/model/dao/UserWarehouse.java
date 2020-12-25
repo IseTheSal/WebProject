@@ -63,7 +63,7 @@ public class UserWarehouse {
         return result;
     }
 
-    public boolean removeById(int id){
+    public boolean removeById(int id) {
         boolean isRemoved = false;
         int i = 0;
         while (i < userList.size()) {

@@ -1,6 +1,6 @@
 package by.learning.web.exception;
 
-public class ServiceException extends Exception{
+public class ServiceException extends Exception {
     public ServiceException() {
         super();
     }

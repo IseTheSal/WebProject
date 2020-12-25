@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void add(User user){
+    public void add(User user) {
         userWarehouse.add(user);
     }
 
