@@ -13,7 +13,7 @@
             <PatternLayout pattern="${pattern_console}"/>
         </Console>
         <File name="txt_file"
-              filename="C:\Users\illya\Desktop\Epam\Epam Learning\Servlet\src\main\resources\logs\log.txt">
+              filename="\src\main\resources\logs\log.txt">
             <PatternLayout pattern="${pattern_file}"/>
         </File>
     </Appenders>
