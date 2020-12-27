@@ -1,9 +1,9 @@
-package by.learning.web.command;
+package by.learning.web.controller.command;
 
-import by.learning.web.command.impl.LoginCommand;
-import by.learning.web.command.impl.LogoutCommand;
-import by.learning.web.command.impl.RegistrationCommand;
-import by.learning.web.command.impl.RemoveUserCommand;
+import by.learning.web.controller.command.impl.LoginCommand;
+import by.learning.web.controller.command.impl.LogoutCommand;
+import by.learning.web.controller.command.impl.RegistrationCommand;
+import by.learning.web.controller.command.impl.RemoveUserCommand;
 import by.learning.web.model.service.impl.UserServiceImpl;
 
 public enum CommandType {

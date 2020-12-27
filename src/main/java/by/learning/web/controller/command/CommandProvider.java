@@ -1,4 +1,4 @@
-package by.learning.web.command;
+package by.learning.web.controller.command;
 
 
 import org.apache.logging.log4j.Level;

@@ -1,9 +1,7 @@
 package by.learning.web.controller;
 
-import by.learning.web.command.ActionCommand;
-import by.learning.web.command.CommandProvider;
-import by.learning.web.command.PagePath;
-import by.learning.web.command.impl.LogoutCommand;
+import by.learning.web.controller.command.ActionCommand;
+import by.learning.web.controller.command.CommandProvider;
 import by.learning.web.manager.MessageManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -36,15 +34,18 @@ public class Controller extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commandValue = req.getParameter(COMMAND_PARAM);
+        logger.log(Level.INFO, "Command - " + commandValue);
         Optional<ActionCommand> commandOptional = CommandProvider.defineCommand(commandValue);
         ActionCommand command = commandOptional.orElseThrow();
         String page = command.execute(req);
         if (page != null) {
-            RequestDispatcher dispatcher = req.getRequestDispatcher(page);
+            RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(page);
             dispatcher.forward(req, resp);
         } else {
             req.getSession().setAttribute(NULL_PAGE, MessageManager.EN.getMessage("message.incorrectData"));
-            resp.sendRedirect(req.getContextPath() + PagePath.INDEX);
+            page = PagePath.ERROR;
+            logger.log(Level.INFO, "Command 2 -" + req.getContextPath() + page);
+            resp.sendRedirect(req.getContextPath() + page);
         }
     }
 }
