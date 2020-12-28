@@ -5,14 +5,17 @@ import by.learning.web.model.dao.impl.UserDaoImpl;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.UserService;
 import by.learning.web.validator.UserValidator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.List;
 import java.util.Optional;
 
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     public UserServiceImpl() {
-
     }
 
     private static final UserDaoImpl userDao = UserDaoImpl.getInstance();
@@ -26,7 +29,42 @@ public class UserServiceImpl {
         return result;
     }
 
-    public void addUser(User user) {
+    public boolean registerUser(String name, String lastname, String login,
+                                String password, String repeatPassword, String email) {
+        boolean isRegister = true;
+        if (!repeatPassword.equals(password)) {
+            logger.log(Level.WARN, "Passwords not equals");
+            isRegister = false;
+        }
+
+        if (!(UserValidator.isLoginValid(login) && UserValidator.isPasswordValid(password)
+                && UserValidator.isNameValid(name) && UserValidator.isNameValid(lastname)
+                && UserValidator.isEmailValid(email))) {
+            logger.log(Level.WARN, "Not valid");
+            logger.log(Level.WARN, login);
+            logger.log(Level.WARN, password);
+            logger.log(Level.WARN, name);
+            logger.log(Level.WARN, lastname);
+            logger.log(Level.WARN, email);
+            isRegister = false;
+        }
+
+        if (userDao.isLoginExist(login) && userDao.isEmailExist(email)) {
+            logger.log(Level.WARN, "This login or email already exist");
+            isRegister = false;
+        }
+
+        if (isRegister) {
+            User user = new User(login, name, lastname, password, email);
+            addUser(user);
+            logger.log(Level.INFO, "User was added");
+            isRegister = true;
+
+        }
+        return isRegister;
+    }
+
+    private void addUser(User user) {
         userDao.add(user);
     }
 
@@ -36,15 +74,6 @@ public class UserServiceImpl {
             throw new ServiceException("This user does not exist");
         }
         return userIndex.get();
-
     }
 
-    public boolean removeUserById(int id) {
-        return userDao.removeById(id);
-    }
-
-    public List<User> findAllUsers() {
-        List<User> result = userDao.findAll();
-        return result;
-    }
 }

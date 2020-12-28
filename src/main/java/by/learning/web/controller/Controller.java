@@ -44,7 +44,6 @@ public class Controller extends HttpServlet {
         } else {
             req.getSession().setAttribute(NULL_PAGE, MessageManager.EN.getMessage("message.incorrectData"));
             page = PagePath.ERROR;
-            logger.log(Level.INFO, "Command 2 -" + req.getContextPath() + page);
             resp.sendRedirect(req.getContextPath() + page);
         }
     }

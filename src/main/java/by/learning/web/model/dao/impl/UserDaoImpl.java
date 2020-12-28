@@ -1,11 +1,9 @@
 package by.learning.web.model.dao.impl;
 
-import by.learning.web.exception.DaoException;
 import by.learning.web.model.dao.UserDao;
 import by.learning.web.model.dao.UserWarehouse;
 import by.learning.web.model.entity.User;
 
-import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
@@ -36,12 +34,17 @@ public class UserDaoImpl implements UserDao {
     }
 
 
-    @Override
-    public List<User> findAll() {
-        return null;
-    }
-
     public Optional<Integer> findUserIndex(User user) {
         return Optional.empty();
+    }
+
+    @Override
+    public boolean isLoginExist(String login) {
+        return userWarehouse.isLoginExist(login);
+    }
+
+    @Override
+    public boolean isEmailExist(String email) {
+        return userWarehouse.isEmailExist(email);
     }
 }

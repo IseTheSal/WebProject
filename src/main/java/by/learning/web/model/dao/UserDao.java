@@ -3,7 +3,6 @@ package by.learning.web.model.dao;
 import by.learning.web.exception.DaoException;
 import by.learning.web.model.entity.User;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserDao {
@@ -14,5 +13,7 @@ public interface UserDao {
 
     boolean removeById(int id);
 
-    List<User> findAll();
+    boolean isLoginExist(String login);
+
+    boolean isEmailExist(String email);
 }

@@ -4,19 +4,34 @@ import by.learning.web.util.IdGenerator;
 
 public class User {
     private long id = IdGenerator.getUserId();
-    private String name;
     private String login;
+    private String name;
+    private String lastname;
     private String password;
+    private String email;
 
-    public User(String login, String password) {
+    public User(String login, String name, String lastname, String password, String email) {
         this.login = login;
+        this.name = name;
+        this.lastname = lastname;
         this.password = password;
+        this.email = email;
     }
 
-    public User(String name, String login, String password) {
-        this.name = name;
-        this.login = login;
-        this.password = password;
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getId() {

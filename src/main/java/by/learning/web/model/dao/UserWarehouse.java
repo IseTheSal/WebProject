@@ -76,4 +76,30 @@ public class UserWarehouse {
         }
         return isRemoved;
     }
+
+    public boolean isLoginExist(String login) {
+        boolean loginExist = false;
+        int i = 0;
+        while (i < userList.size()) {
+            User user = userList.get(i);
+            if (user.getLogin().equals(login)) {
+                loginExist = true;
+                break;
+            }
+        }
+        return loginExist;
+    }
+
+    public boolean isEmailExist(String email) {
+        boolean emailExist = false;
+        int i = 0;
+        while (i < userList.size()) {
+            User user = userList.get(i);
+            if (user.getEmail().equals(email)) {
+                emailExist = true;
+                break;
+            }
+        }
+        return emailExist;
+    }
 }
