@@ -12,8 +12,8 @@
         <label for="txtUsername">
             Username</label>
         <input name="login" type="text" id="txtUsername"
-               title="Username must contain only lower upper case letters and/or numbers from 8 to 20 symbols"
-               class="form-control" placeholder="Enter Username" required pattern="^[a-z0-9]{6,15}"/>
+               title="Username must contain only lower case letters and/or numbers from 8 to 20 symbols"
+               class="form-control" placeholder="powerty" required pattern="^[a-z0-9]{6,15}"/>
         <br/>
         <label for="txtPassword">
             Password</label>
@@ -30,17 +30,17 @@
             Firstname</label>
         <input name="name" type="text" id="txtFirstname"
                title="Firstname must contain letters from 2 to 20 symbols"
-               class="form-control" placeholder="Enter firstname" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
+               class="form-control" placeholder="Illia" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
         <br/>
         <label for="txtLastname">
             Lastname</label>
         <input name="lastname" type="text" id="txtLastname"
                title="Lastname must contain letters from 2 to 20 symbols"
-               class="form-control" placeholder="Enter lastname" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
+               class="form-control" placeholder="Aheyeu" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
         <br/>
         <label for="txtEmail">
             Email</label>
-        <input name="email" id="txtEmail" class="form-control" placeholder="Enter Email"
+        <input name="email" id="txtEmail" class="form-control" placeholder="isethesal@gmail.com"
                required type="email"/>
         <h5 style="text-align: center; color: red"> ${registrationFail} </h5>
         <hr/>

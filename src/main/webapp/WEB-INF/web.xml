@@ -9,11 +9,11 @@
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
+
     <filter>
         <filter-name>CharacterSetFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.CharacterSetFilter</filter-class>
     </filter>
-
     <filter-mapping>
         <filter-name>CharacterSetFilter</filter-name>
         <url-pattern>/*</url-pattern>
