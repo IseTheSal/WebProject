@@ -34,7 +34,7 @@ public class Controller extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commandValue = req.getParameter(COMMAND_PARAM);
-        logger.log(Level.INFO, "Command - " + commandValue);
+        logger.log(Level.DEBUG, "Command - " + commandValue);
         Optional<ActionCommand> commandOptional = CommandProvider.defineCommand(commandValue);
         ActionCommand command = commandOptional.orElseThrow();
         String page = command.execute(req);
@@ -42,7 +42,6 @@ public class Controller extends HttpServlet {
             RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(page);
             dispatcher.forward(req, resp);
         } else {
-            req.getSession().setAttribute(NULL_PAGE, MessageManager.EN.getMessage("message.incorrectData"));
             page = PagePath.ERROR;
             resp.sendRedirect(req.getContextPath() + page);
         }

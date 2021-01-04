@@ -13,30 +13,33 @@
         <label for="txtUsername">Username</label>
         <input name="login" type="text" id="txtUsername"
                title="Username must contain only lower case letters and/or numbers from 8 to 20 symbols"
-               class="form-control" placeholder="Your name" required pattern="^[a-z0-9]{6,15}"/>
+               class="form-control" placeholder="Enter your login" required pattern="^[a-z0-9]{6,15}"/>
         <br/>
         <label for="txtPassword">Password</label>
         <input name="password" type="password" id="txtPassword"
                title="Password must contain letters and/or numbers from 8 to 20 symbols"
-               class="form-control" placeholder="Enter Password" required pattern="[a-zA-Z0-9]{8,20}"/>
+        class="form-control" placeholder="Enter Password" required pattern="[a-zA-Z0-9]{8,20}"/>
         <br/>
         <label for="txtConfirmPassword">Confirm Password</label>
         <input name="repeatPassword" type="password" id="txtConfirmPassword"
-               class="form-control" placeholder="Confirm Password"/>
+        class="form-control" placeholder="Confirm Password"/>
         <br/>
         <label for="txtFirstname">Firstname</label>
         <input name="name" type="text" id="txtFirstname"
                title="Firstname must contain letters from 2 to 20 symbols"
-               class="form-control" placeholder="Illia" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
+        class="form-control" placeholder="Enter your firstname" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
+        <label style="color: darkgrey">(etc. Illia)</label>
         <br/>
         <label for="txtLastname">Lastname</label>
         <input name="lastname" type="text" id="txtLastname"
                title="Lastname must contain letters from 2 to 20 symbols"
-               class="form-control" placeholder="Aheyeu" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
+        class="form-control" placeholder="Enter your lastname" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
+        <label style="color: darkgrey">(etc. Aheyeu)</label>
         <br/>
         <label for="txtEmail"> Email</label>
-        <input name="email" id="txtEmail" class="form-control" placeholder="isethesal@gmail.com"
-               required type="email"/>
+        <input name="email" id="txtEmail" class="form-control" placeholder="Enter your email"
+        required type="email"/>
+        <label style="color: darkgrey;">(etc. isethesal@gmail.com)</label>
 
         <h5 style="text-align: center; color: red"> ${registrationFail} </h5>
         <hr/>

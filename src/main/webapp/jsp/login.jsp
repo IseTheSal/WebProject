@@ -7,6 +7,7 @@
       media="screen"/>
 <body>
 <%@include file="header.jsp" %>
+<h5 style="color: green; text-align: center">${requestScope.registrationComplete}</h5>
 </body>
 <form method="post" action="/controller">
     <input type="hidden" name="command" value="login"/>

@@ -32,9 +32,10 @@ public class RegistrationCommand implements ActionCommand {
         boolean isRegister = service.registerUser(nameValue, lastnameValue, loginValue, passwordValue, repeatPasswordValue, emailValue);
         if (isRegister) {
             logger.log(Level.INFO, "Successful registration");
+            request.setAttribute("registrationComplete","Registration successfully complete");
             page = PagePath.LOGIN;
         } else {
-            request.setAttribute(RequestParameter.REGISTRATION_FAIL, "Registration fail");
+            request.setAttribute(RequestParameter.REGISTRATION_FAIL, "User already exist or incorrect input");
             page = PagePath.REGISTRATION;
         }
         return page;
