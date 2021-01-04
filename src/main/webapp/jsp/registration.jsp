@@ -4,49 +4,47 @@
         src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script>
 <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css'
       media="screen"/>
-
-<form method="post" action="controller">
+<body>
+<%@include file="header.jsp" %>
+<form method="post" action="/controller">
     <input type="hidden" name="command" value="registration"/>
     <div style="max-width: 400px;margin-right: auto; margin-left: auto">
-        <h2 style="text-align: center"> Registration</h2>
-        <label for="txtUsername">
-            Username</label>
+        <h2 style="text-align:center">Registration</h2>
+        <label for="txtUsername">Username</label>
         <input name="login" type="text" id="txtUsername"
                title="Username must contain only lower case letters and/or numbers from 8 to 20 symbols"
-               class="form-control" placeholder="powerty" required pattern="^[a-z0-9]{6,15}"/>
+               class="form-control" placeholder="Your name" required pattern="^[a-z0-9]{6,15}"/>
         <br/>
-        <label for="txtPassword">
-            Password</label>
+        <label for="txtPassword">Password</label>
         <input name="password" type="password" id="txtPassword"
                title="Password must contain letters and/or numbers from 8 to 20 symbols"
                class="form-control" placeholder="Enter Password" required pattern="[a-zA-Z0-9]{8,20}"/>
         <br/>
-        <label for="txtConfirmPassword">
-            Confirm Password</label>
+        <label for="txtConfirmPassword">Confirm Password</label>
         <input name="repeatPassword" type="password" id="txtConfirmPassword"
                class="form-control" placeholder="Confirm Password"/>
         <br/>
-        <label for="txtFirstname">
-            Firstname</label>
+        <label for="txtFirstname">Firstname</label>
         <input name="name" type="text" id="txtFirstname"
                title="Firstname must contain letters from 2 to 20 symbols"
                class="form-control" placeholder="Illia" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
         <br/>
-        <label for="txtLastname">
-            Lastname</label>
+        <label for="txtLastname">Lastname</label>
         <input name="lastname" type="text" id="txtLastname"
                title="Lastname must contain letters from 2 to 20 symbols"
                class="form-control" placeholder="Aheyeu" required pattern="^[A-Za-z|А-Яа-я]{2,20}"/>
         <br/>
-        <label for="txtEmail">
-            Email</label>
+        <label for="txtEmail"> Email</label>
         <input name="email" id="txtEmail" class="form-control" placeholder="isethesal@gmail.com"
                required type="email"/>
+
         <h5 style="text-align: center; color: red"> ${registrationFail} </h5>
         <hr/>
         <input type="submit" name="btnSignup" value="Sign up" id="btnSignup" class="btn btn-primary"/>
     </div>
 </form>
+</body>
+
 <script type="text/javascript">
     window.onload = function () {
         var txtPassword = document.getElementById("txtPassword");

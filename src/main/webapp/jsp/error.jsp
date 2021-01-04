@@ -4,6 +4,7 @@
     <title>Error</title>
 </head>
 <body>
-
+<%@include file="header.jsp"%>
+<h1>Page not found</h1>
 </body>
 </html>

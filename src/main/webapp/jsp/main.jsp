@@ -4,21 +4,11 @@
 <html>
 <head>
     <title>Main</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-    <div class="collapse navbar-collapse" id="logoutButton">
-        <form action="controller" method="post" class="form-inline my-2 my-lg-0">
-            <input type="hidden" name="command" value="logout">
-            <button style="margin-inline-end: revert" class="btn btn-outline-danger" type="submit">Logout
-            </button>
-        </form>
-    </div>
-</nav>
-<h1 style="text-align: center;">Hello ${name}</h1>
+<%@include file="header.jsp"%>
 </body>
 </html>

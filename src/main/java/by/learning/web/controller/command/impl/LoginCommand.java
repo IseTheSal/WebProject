@@ -25,13 +25,14 @@ public class LoginCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
+        logger.log(Level.INFO,"here");
         String loginValue = request.getParameter(RequestParameter.LOGIN);
         String passwordValue = request.getParameter(RequestParameter.PASSWORD);
         Optional<User> user = service.singIn(loginValue, passwordValue);
         if (user.isPresent()) {
             User currentUser = user.get();
             request.setAttribute(RequestParameter.USER_PARAM, currentUser);
-            request.setAttribute(RequestParameter.FIRSTNAME, currentUser.getName());
+            request.getSession().setAttribute(RequestParameter.FIRSTNAME, currentUser.getName());
             request.setAttribute(RequestParameter.USER_PASSWORD, currentUser.getPassword());
             page = PagePath.MAIN_PAGE;
         } else {
@@ -39,6 +40,7 @@ public class LoginCommand implements ActionCommand {
             page = PagePath.LOGIN;
             logger.log(Level.INFO, "Error in logging");
         }
+        logger.log(Level.DEBUG, page);
         return page;
     }
 }
