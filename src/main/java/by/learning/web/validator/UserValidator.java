@@ -2,9 +2,9 @@ package by.learning.web.validator;
 
 public class UserValidator {
 
-    private final static String LOGIN_REGEX = "^[a-z0-9]{6,15}";
+    private final static String LOGIN_REGEX = "^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$";
     private final static String PASSWORD_REGEX = "[a-zA-Z0-9]{8,20}";
-    private final static String NAME_REGEX = "^[A-Za-z|À-ÿ]{2,20}";
+    private final static String NAME_REGEX = "^[A-Za-z|À-ÿ]{2,20}$";
     private final static String EMAIL_REGEX = "[a-zA-Z0-9]+[._a-zA-Z0-9]*[a-zA-Z]*@[a-zA-Z0-9]{2,8}.[a-zA-Z.]{2,6}";
 
 

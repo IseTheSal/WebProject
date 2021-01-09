@@ -27,7 +27,7 @@
 
     <div class="navbar pull-right">
         <div style="display: inline-grid">
-            <c:if test="${empty sessionScope.name}">
+            <c:if test="${empty sessionScope.firstname}">
                 <a href="${pageContext.request.contextPath}/jsp/registration.jsp"
                    style="text-decoration: none;color:lawngreen;">
                     <span class="far fa-user" style="margin-right:0.40em; display:inline-block;"></span>Sign up</a>
@@ -38,12 +38,12 @@
         </div>
 
         <div style="display: inline">
-            <c:if test="${not empty sessionScope.name}">
+            <c:if test="${not empty sessionScope.firstname}">
                 <div class="nav-item dropdown">
                     <a class="nav-link" href="" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true"
                        style="text-decoration: none; color:#56ff42; margin-left: 6.0em"><span
-                            class="fas fa-user" style="margin-right:0.40em"></span>${sessionScope.get("name")}</a>
+                            class="fas fa-user" style="margin-right:0.40em"></span>${sessionScope.get("firstname")}</a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"
                          style="text-align: center; border: none; padding-top: 5px; padding-bottom: 5px">

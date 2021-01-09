@@ -2,7 +2,7 @@ package by.learning.web.controller;
 
 public class RequestParameter {
 
-    public final static String FIRSTNAME = "name";
+    public final static String FIRSTNAME = "firstname";
     public final static String LASTNAME = "lastname";
     public final static String LOGIN = "login";
     public final static String PASSWORD = "password";
