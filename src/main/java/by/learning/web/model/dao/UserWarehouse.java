@@ -86,6 +86,7 @@ public class UserWarehouse {
                 loginExist = true;
                 break;
             }
+            i++;
         }
         return loginExist;
     }
@@ -99,6 +100,7 @@ public class UserWarehouse {
                 emailExist = true;
                 break;
             }
+            i++;
         }
         return emailExist;
     }

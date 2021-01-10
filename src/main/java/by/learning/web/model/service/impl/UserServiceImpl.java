@@ -32,11 +32,11 @@ public class UserServiceImpl implements UserService {
     public boolean registerUser(String name, String lastname, String login,
                                 String password, String repeatPassword, String email) {
         boolean isRegister = true;
+        logger.log(Level.DEBUG, name + " " + lastname + " " + login + " " + password + " " + repeatPassword + " " + email);
         if (!repeatPassword.equals(password)) {
             logger.log(Level.WARN, "Passwords not equals");
             isRegister = false;
         }
-
         if (!(UserValidator.isLoginValid(login) && UserValidator.isPasswordValid(password)
                 && UserValidator.isNameValid(name) && UserValidator.isNameValid(lastname)
                 && UserValidator.isEmailValid(email))) {
@@ -48,7 +48,6 @@ public class UserServiceImpl implements UserService {
             logger.log(Level.WARN, email);
             isRegister = false;
         }
-
         if (userDao.isLoginExist(login) && userDao.isEmailExist(email)) {
             logger.log(Level.WARN, "This login or email already exist");
             isRegister = false;
@@ -61,10 +60,12 @@ public class UserServiceImpl implements UserService {
             isRegister = true;
 
         }
+
         return isRegister;
     }
 
     private void addUser(User user) {
+        logger.log(Level.DEBUG, "adding user");
         userDao.add(user);
     }
 

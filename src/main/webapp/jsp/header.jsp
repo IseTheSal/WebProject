@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/text-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button-style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form-style.css">
 
 </head>
 <body>
@@ -22,7 +23,8 @@
      style="padding-top: 2px;padding-bottom: 2px; zoom: 0.9;
       background-image: linear-gradient(45deg, rgba(255,255,255,.07) 100%, transparent 10%)">
     <div class="navbar-brand">
-        <a href="/index.jsp" class="texas-blue-animated" style="color: white; text-decoration: none">Web task</a>
+        <a href="/index.jsp" class="texas-blue-animated" style="text-decoration: none">Web task</a>
+        <a href="/index.jsp" class="texas-purple-animated" style="text-decoration: none;margin-left: 30px">Link</a>
     </div>
 
     <div class="navbar pull-right">

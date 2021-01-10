@@ -14,12 +14,28 @@
     0 0 40px #e1c6c6;
 }
 
+.neon-title-cyan-light {
+    color: #fff;
+    text-shadow: 0 0 50px #fff,
+    0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 40px #9efefe;
+}
+
 .neon-title-lime {
     color: #7CFC00;
     text-shadow: 0 0 5px #4cf028,
     0 0 10px #40c423,
     0 0 20px #38c01a,
     0 0 40px #20750e;
+}
+
+.neon-title-green {
+    color: #50ab00;
+    text-shadow: 0 0 5px #387900,
+    0 0 10px #275f01,
+    0 0 20px #214c00,
+    0 0 40px #0b3700;
 }
 
 .neon-title-orange {
@@ -30,6 +46,21 @@
     0 0 40px #9a5c00;
 }
 
+.neon-title-purple {
+    color: #eed3ff;
+    text-shadow: 0 0 50px #b07fc1,
+    0 0 10px #a276b5,
+    0 0 20px #856792,
+    0 0 40px #71557d;
+}
+
+.neon-title-pink {
+    color: #fb41d5;
+    text-shadow: 0 0 50px #ed3ec9,
+    0 0 10px #e63dc3,
+    0 0 20px #de3cbc,
+    0 0 40px #d238b1;
+}
 
 
 @font-face {
@@ -37,44 +68,45 @@
     src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
 }
 
-.texas-orange-animated {
+.texas-purple-animated {
     font-family: neon;
-    color: #FB4264;
-    font-size: 9vw;
-    line-height: 9vw;
-    text-shadow: 0 0 3vw #F40A35;
+    color: #a542fb;
+    font-size: 1.7vw;
+    line-height: 1.7vw;
+    text-shadow: 0 0 1vw #6e2da7;
 }
 
 .texas-blue-animated {
     font-family: neon;
     color: #426DFB;
-    font-size: 2vw;
-    line-height: 2vw;
+    font-size: 2.3vw;
+    line-height: 2.3vw;
     text-shadow: 0 0 1vw #2356FF;
 }
 
-.texas-orange-animated {
-    animation: texas-orange-animated 1s ease infinite;
-    -moz-animation: texas-orange-animated 1s ease infinite;
-    -webkit-animation: texas-orange-animated 1s ease infinite;
+.texas-purple-animated {
+    animation: texas-purple-animated 2s ease infinite;
+    -moz-animation: texas-purple-animated 2s ease infinite;
+    -webkit-animation: texas-purple-animated 2s ease infinite;
+    -o-animation: texas-purple-animated 2s linear infinite;
 }
 
-@keyframes texas-orange-animated {
+@keyframes texas-purple-animated {
     0%,
     100% {
-        text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-        color: #FED128;
+        text-shadow: 0 0 1vw #b710ff, 0 0 3vw #B710FF, 0 0 5vw #B710FF, 0 0 5vw #B710FF, 0 0 .4vw #B710FF, .5vw .5vw .1vw #B710FF;
+        color: #fe28fa;
     }
     50% {
-        text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-        color: #806914;
+        text-shadow: 0 0 .5vw #7e0992, 0 0 1.5vw #7e0992, 0 0 2.5vw #7e0992, 0 0 2.5vw #7e0992, 0 0 .2vw #7e0992, .5vw .5vw .1vw #7e0992;
+        color: #991a9a;
     }
 }
 
 .texas-blue-animated {
-    animation: texas-blue-animated 2s linear infinite;
-    -moz-animation: texas-blue-animated 2s linear infinite;
-    -webkit-animation: texas-blue-animated 2s linear infinite;
+    animation: texas-blue-animated 2s ease infinite;
+    -moz-animation: texas-blue-animated 2s ease infinite;
+    -webkit-animation: texas-blue-animated 2s ease infinite;
     -o-animation: texas-blue-animated 2s linear infinite;
 }
 
@@ -82,10 +114,10 @@
     0%,
     100% {
         text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 5vw #1041FF, 0 0 5vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
-        color: #28D7FE;
+        color: #289afe;
     }
     50% {
         text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 2.5vw #082180, 0 0 2.5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
-        color: #146C80;
+        color: #175993;
     }
 }
