@@ -3,10 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 
     <script src="https://kit.fontawesome.com/c1f7a487ad.js" crossorigin="anonymous"></script>
 
@@ -14,25 +12,27 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/text-style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button-style.css">
+
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark" style="line-height: normal">
+
+<nav class="navbar fixed-top navbar-dark"
+     style="padding-top: 2px;padding-bottom: 2px; zoom: 0.9;
+      background-image: linear-gradient(45deg, rgba(255,255,255,.07) 100%, transparent 10%)">
     <div class="navbar-brand">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="/index.jsp" style="color: white; text-decoration: none">Web task</a>
+        <a href="/index.jsp" class="texas-blue-animated" style="color: white; text-decoration: none">Web task</a>
     </div>
 
     <div class="navbar pull-right">
         <div style="display: inline-grid">
             <c:if test="${empty sessionScope.firstname}">
                 <a href="${pageContext.request.contextPath}/jsp/registration.jsp"
-                   style="text-decoration: none;color:lawngreen;">
+                   style="text-decoration: none" class="neon-title-lime">
                     <span class="far fa-user" style="margin-right:0.40em; display:inline-block;"></span>Sign up</a>
                 <a href="${pageContext.request.contextPath}/jsp/login.jsp"
-                   style="text-decoration: none;color:#ff9900">
+                   style="text-decoration: none" class="neon-title-orange">
                     <span class="fas fa-sign-in-alt" style="margin-right:0.30em; display:inline-block;"></span>Login</a>
             </c:if>
         </div>
@@ -40,14 +40,16 @@
         <div style="display: inline">
             <c:if test="${not empty sessionScope.firstname}">
                 <div class="nav-item dropdown">
-                    <a class="nav-link" href="" id="navbarDropdown" role="button"
+                    <a class="nav-link neon-title-lime" href="" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true"
-                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em"><span
-                            class="fas fa-user" style="margin-right:0.40em"></span>${sessionScope.get("firstname")}</a>
+                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em"><span class="fas fa-user"
+                                                                                              style="margin-right:0.40em">
+                    </span>${sessionScope.get("firstname")}
+                    </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"
-                         style="text-align: center; border: none; padding-top: 5px; padding-bottom: 5px">
-                        <a class="dropdown-item" href="#">Action</a>
+                         style="text-align: center; border: none; padding-top: 5px; padding-bottom: 5px;">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/jsp/profile.jsp">Profile</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"
                              style="padding: 0 0;"></div>
@@ -63,27 +65,8 @@
             </c:if>
         </div>
     </div>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
 </nav>
-
+<br>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
