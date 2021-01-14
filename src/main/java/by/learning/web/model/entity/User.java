@@ -1,7 +1,5 @@
 package by.learning.web.model.entity;
 
-import by.learning.web.util.IdGenerator;
-
 public class User {
     private int id;
     private String login;
