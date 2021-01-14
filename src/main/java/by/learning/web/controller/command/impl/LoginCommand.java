@@ -26,7 +26,6 @@ public class LoginCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        logger.log(Level.INFO, "here");
         String loginValue = request.getParameter(RequestParameter.LOGIN);
         String passwordValue = request.getParameter(RequestParameter.PASSWORD);
         Optional<User> user;
