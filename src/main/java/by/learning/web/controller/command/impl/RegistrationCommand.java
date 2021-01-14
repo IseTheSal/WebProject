@@ -3,6 +3,7 @@ package by.learning.web.controller.command.impl;
 import by.learning.web.controller.PagePath;
 import by.learning.web.controller.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
+import by.learning.web.exception.ServiceException;
 import by.learning.web.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +22,7 @@ public class RegistrationCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request){
         String page;
         String nameValue = request.getParameter(RequestParameter.FIRSTNAME);
         String lastnameValue = request.getParameter(RequestParameter.LASTNAME);
@@ -29,12 +30,18 @@ public class RegistrationCommand implements ActionCommand {
         String passwordValue = request.getParameter(RequestParameter.PASSWORD);
         String repeatPasswordValue = request.getParameter(RequestParameter.REPEAT_PASSWORD);
         String emailValue = request.getParameter(RequestParameter.EMAIL);
-        boolean isRegister = service.registerUser(nameValue, lastnameValue, loginValue, passwordValue, repeatPasswordValue, emailValue);
-        if (isRegister) {
-            logger.log(Level.INFO, "Successful registration");
-            request.setAttribute("registrationComplete","Registration successfully complete");
-            page = PagePath.LOGIN;
-        } else {
+        boolean isRegister;
+        try {
+            isRegister = service.registerUser(nameValue, lastnameValue, loginValue, passwordValue, repeatPasswordValue, emailValue);
+            if (isRegister) {
+                logger.log(Level.INFO, "Successful registration");
+                request.setAttribute("registrationComplete", "Registration successfully complete");
+                page = PagePath.LOGIN;
+            } else {
+                request.setAttribute(RequestParameter.REGISTRATION_FAIL, "Username or email already in use");
+                page = PagePath.REGISTRATION;
+            }
+        } catch (ServiceException e) {
             request.setAttribute(RequestParameter.REGISTRATION_FAIL, "Username or email already in use");
             page = PagePath.REGISTRATION;
         }

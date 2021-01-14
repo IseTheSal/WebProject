@@ -12,7 +12,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <form class="needs-validation" novalidate method="post" action="/controller">
             <input type="hidden" name="command" value="login"/>
             <div style="max-width: 350px;margin: auto">
-                <h2 class="neon-title-cyan" style="text-align: center"> Authorisation </h2>
+                <h2 class="neon-title-cyan" style="text-align: center"> Authorization </h2>
                 <div class="form-group" style="margin-bottom: 14px">
                     <label class="neon-title-white" for="txtLogin">Username</label>
                     <input name="login" style="border-width: medium"

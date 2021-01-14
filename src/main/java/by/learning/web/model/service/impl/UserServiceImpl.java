@@ -1,9 +1,11 @@
 package by.learning.web.model.service.impl;
 
+import by.learning.web.exception.DaoException;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.dao.impl.UserDaoImpl;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.UserService;
+import by.learning.web.util.CryptEncoder;
 import by.learning.web.validator.UserValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -20,61 +22,46 @@ public class UserServiceImpl implements UserService {
 
     private static final UserDaoImpl userDao = UserDaoImpl.getInstance();
 
-    public Optional<User> singIn(String login, String password) {
+    public Optional<User> singIn(String login, String password) throws ServiceException {
         Optional<User> result = Optional.empty();
         if (UserValidator.isLoginValid(login)
                 && UserValidator.isPasswordValid(password)) {
-            result = userDao.findUser(login, password);
+            try {
+                result = userDao.findUser(login, password);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
         }
         return result;
     }
 
-    public boolean registerUser(String name, String lastname, String login,
-                                String password, String repeatPassword, String email) {
-        boolean isRegister = true;
-        logger.log(Level.DEBUG, name + " " + lastname + " " + login + " " + password + " " + repeatPassword + " " + email);
+    public boolean registerUser(String firstname, String lastname, String login,
+                                String password, String repeatPassword, String email) throws ServiceException {
+        boolean isValid = true;
         if (!repeatPassword.equals(password)) {
-            logger.log(Level.WARN, "Passwords not equals");
-            isRegister = false;
+            logger.log(Level.WARN, "Passwords not equal");
+            isValid = false;
         }
+
         if (!(UserValidator.isLoginValid(login) && UserValidator.isPasswordValid(password)
-                && UserValidator.isNameValid(name) && UserValidator.isNameValid(lastname)
+                && UserValidator.isNameValid(firstname) && UserValidator.isNameValid(lastname)
                 && UserValidator.isEmailValid(email))) {
             logger.log(Level.WARN, "Not valid");
-            logger.log(Level.WARN, login);
-            logger.log(Level.WARN, password);
-            logger.log(Level.WARN, name);
-            logger.log(Level.WARN, lastname);
-            logger.log(Level.WARN, email);
-            isRegister = false;
-        }
-        if (userDao.isLoginExist(login) && userDao.isEmailExist(email)) {
-            logger.log(Level.WARN, "This login or email already exist");
-            isRegister = false;
+            isValid = false;
         }
 
-        if (isRegister) {
-            User user = new User(login, name, lastname, password, email);
-            addUser(user);
-            logger.log(Level.INFO, "User was added");
-            isRegister = true;
-
+        boolean isRegister = false;
+        if (isValid) {
+            logger.log(Level.DEBUG, "All user fields are valid");
+            User user = new User(login, password, firstname, lastname, email);
+            try {
+                String cryptPassword = CryptEncoder.generateCrypt(user.getPassword());
+                isRegister = userDao.addUser(user, cryptPassword);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
         }
-
         return isRegister;
-    }
-
-    private void addUser(User user) {
-        logger.log(Level.DEBUG, "adding user");
-        userDao.add(user);
-    }
-
-    public int findUserIndex(User user) throws ServiceException {
-        Optional<Integer> userIndex = userDao.findUserIndex(user);
-        if (userIndex.isEmpty()) {
-            throw new ServiceException("This user does not exist");
-        }
-        return userIndex.get();
     }
 
 }

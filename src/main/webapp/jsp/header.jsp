@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -17,7 +17,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form-style.css">
 
 </head>
-<body>
+<body style="background-image: url(/img/registration-background.jpg);
+background-size: cover; background-attachment: fixed; min-height: 100%">
 
 <nav class="navbar fixed-top navbar-dark"
      style="padding-top: 2px;padding-bottom: 2px; zoom: 0.9;
@@ -44,8 +45,7 @@
                 <div class="nav-item dropdown">
                     <a class="nav-link neon-title-lime" href="" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true"
-                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em"><span class="fas fa-user"
-                                                                                              style="margin-right:0.40em">
+                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em"><span class="fas fa-user" style="margin-right:0.40em">
                     </span>${sessionScope.get("firstname")}
                     </a>
 
@@ -68,6 +68,7 @@
         </div>
     </div>
 </nav>
+
 <br>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

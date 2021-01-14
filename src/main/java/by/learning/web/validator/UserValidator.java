@@ -2,10 +2,10 @@ package by.learning.web.validator;
 
 public class UserValidator {
 
-    private final static String LOGIN_REGEX = "^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$";
-    private final static String PASSWORD_REGEX = "[a-zA-Z0-9]{8,20}";
-    private final static String NAME_REGEX = "^[A-Za-z|¿-ˇ]{2,20}$";
-    private final static String EMAIL_REGEX = "[a-zA-Z0-9]+[._a-zA-Z0-9]*[a-zA-Z]*@[a-zA-Z0-9]{2,8}.[a-zA-Z.]{2,6}";
+    private static final  String LOGIN_REGEX = "^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$";
+    private static final  String PASSWORD_REGEX = "[a-zA-Z0-9]{8,20}";
+    private static final  String NAME_REGEX = "^[A-Za-z|–ê-—è]{2,20}$";
+    private static final  String EMAIL_REGEX = "[a-zA-Z0-9]+[._a-zA-Z0-9]*[a-zA-Z]*@[a-zA-Z0-9]{2,8}.[a-zA-Z.]{2,6}";
 
 
     public static boolean isLoginValid(String login) {
@@ -26,6 +26,8 @@ public class UserValidator {
 
     public static boolean isNameValid(String name) {
         boolean isValid = true;
+        System.out.println("ÔøΩÔøΩÔøΩ");
+        System.out.println(name);
         if ((name == null) || (!name.matches(NAME_REGEX))) {
             isValid = false;
         }

@@ -3,6 +3,7 @@ package by.learning.web.controller.command.impl;
 import by.learning.web.controller.PagePath;
 import by.learning.web.controller.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
+import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
@@ -25,22 +26,27 @@ public class LoginCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        logger.log(Level.INFO,"here");
+        logger.log(Level.INFO, "here");
         String loginValue = request.getParameter(RequestParameter.LOGIN);
         String passwordValue = request.getParameter(RequestParameter.PASSWORD);
-        Optional<User> user = service.singIn(loginValue, passwordValue);
-        if (user.isPresent()) {
-            User currentUser = user.get();
-            request.setAttribute(RequestParameter.USER_PARAM, currentUser);
-            request.getSession().setAttribute(RequestParameter.FIRSTNAME, currentUser.getName());
-            request.setAttribute(RequestParameter.USER_PASSWORD, currentUser.getPassword());
-            page = PagePath.MAIN_PAGE;
-        } else {
+        Optional<User> user;
+        try {
+            user = service.singIn(loginValue, passwordValue);
+            if (user.isPresent()) {
+                User currentUser = user.get();
+                request.setAttribute(RequestParameter.USER_PARAM, currentUser);
+                request.getSession().setAttribute(RequestParameter.FIRSTNAME, currentUser.getFirstname());
+                request.setAttribute(RequestParameter.USER_PASSWORD, currentUser.getPassword());
+                page = PagePath.MAIN_PAGE;
+            } else {
+                request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");
+                page = PagePath.LOGIN;
+                logger.log(Level.INFO, "Error in logging");
+            }
+        } catch (ServiceException e) {
             request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");
             page = PagePath.LOGIN;
-            logger.log(Level.INFO, "Error in logging");
         }
-        logger.log(Level.DEBUG, page);
         return page;
     }
 }
