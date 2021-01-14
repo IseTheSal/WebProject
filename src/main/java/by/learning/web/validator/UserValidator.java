@@ -26,8 +26,6 @@ public class UserValidator {
 
     public static boolean isNameValid(String name) {
         boolean isValid = true;
-        System.out.println("���");
-        System.out.println(name);
         if ((name == null) || (!name.matches(NAME_REGEX))) {
             isValid = false;
         }
