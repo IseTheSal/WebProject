@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
         boolean isRegister = false;
         if (isValid) {
             logger.log(Level.DEBUG, "All user fields are valid");
-            User user = new User(login, password, firstname, lastname, email);
+            User user = new User(login, firstname, lastname, email);
             try {
-                String cryptPassword = CryptEncoder.generateCrypt(user.getPassword());
+                String cryptPassword = CryptEncoder.generateCrypt(password);
                 isRegister = userDao.addUser(user, cryptPassword);
             } catch (DaoException e) {
                 throw new ServiceException(e);
