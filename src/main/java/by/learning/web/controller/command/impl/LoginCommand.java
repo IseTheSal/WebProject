@@ -35,7 +35,6 @@ public class LoginCommand implements ActionCommand {
                 User currentUser = user.get();
                 request.setAttribute(RequestParameter.USER_PARAM, currentUser);
                 request.getSession().setAttribute(RequestParameter.FIRSTNAME, currentUser.getFirstname());
-                request.setAttribute(RequestParameter.USER_PASSWORD, currentUser.getPassword());
                 page = PagePath.MAIN_PAGE;
             } else {
                 request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");

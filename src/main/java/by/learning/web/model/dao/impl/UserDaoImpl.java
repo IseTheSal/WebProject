@@ -56,7 +56,6 @@ public class UserDaoImpl implements UserDao {
         try {
             connection = DriverManager.getConnection(URL_TABLES, LOGIN_TABLES, PASS_TABLES);
             preparedStatement = connection.prepareStatement(FIND_USER);
-            connection.setAutoCommit(false);
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
@@ -71,7 +70,6 @@ public class UserDaoImpl implements UserDao {
                 User.Role role = User.Role.valueOf(roleString);
                 result = Optional.of(new User(id, login, firstname, lastname, email, role));
             }
-            connection.commit();
         } catch (SQLException ex) {
             throw new DaoException(ex);
         } finally {

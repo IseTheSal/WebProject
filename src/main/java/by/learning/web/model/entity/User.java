@@ -3,7 +3,6 @@ package by.learning.web.model.entity;
 public class User {
     private int id;
     private String login;
-    private String password;
     private String firstname;
     private String lastname;
     private String email;
@@ -22,14 +21,6 @@ public class User {
         this.lastname = lastname;
         this.email = email;
         this.role = role;
-    }
-
-    public User(String login, String password, String firstname, String lastname, String email) {
-        this.login = login;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
     }
 
     public User(String login, String firstname, String lastname, String email) {
@@ -75,14 +66,6 @@ public class User {
         this.login = login;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -100,20 +83,33 @@ public class User {
 
         if (id != user.id) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) return false;
         if (lastname != null ? !lastname.equals(user.lastname) : user.lastname != null) return false;
-        return email != null ? email.equals(user.email) : user.email == null;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return role == user.role;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("id=").append(id);
+        sb.append(", login='").append(login).append('\'');
+        sb.append(", firstname='").append(firstname).append('\'');
+        sb.append(", lastname='").append(lastname).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", role=").append(role);
+        sb.append('}');
+        return sb.toString();
     }
 }
