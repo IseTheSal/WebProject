@@ -30,3 +30,12 @@
     box-shadow: 0 0 10px #1744f9, 0 0 40px #1744f9, 0 0 80px #1744f9;
 }
 
+.button-border-red {
+    background-color: transparent !important;
+    outline: none;
+    border-color: #f02828;
+    min-width: 100%;
+}
+
+
+

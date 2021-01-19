@@ -6,12 +6,12 @@ public class User {
     private String firstname;
     private String lastname;
     private String email;
-    private Role role = Role.Client;
+    private Role role = Role.CLIENT;
 
     public enum Role {
-        Admin,
-        Manager,
-        Client
+        ADMIN,
+        MANAGER,
+        CLIENT
     }
 
     public User(int id, String login, String firstname, String lastname, String email, Role role) {

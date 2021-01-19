@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/text-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form-style.css">
-
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footer-style.css">
 </head>
 <body style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%">
@@ -45,20 +45,23 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                 <div class="nav-item dropdown">
                     <a class="nav-link neon-title-lime" href="" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true"
-                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em"><span class="fas fa-user" style="margin-right:0.40em">
+                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em"><span class="fas fa-user"
+                                                                                              style="margin-right:0.40em">
                     </span>${sessionScope.get("firstname")}
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"
-                         style="text-align: center; border: none; padding-top: 5px; padding-bottom: 5px;">
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/jsp/profile.jsp">Profile</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"
-                             style="padding: 0 0;"></div>
+                         style="background:  rgba(152,148,148,0.2);
+                          border: none; margin-left: 5%; margin-top: 15px">
+                        <a class="dropdown-item neon-title-white"
+                           style="text-align: center; background-color: transparent"
+                           href="${pageContext.request.contextPath}/jsp/profile.jsp">Profile</a>
+                        <a class="dropdown-item neon-title-white"
+                           style="text-align: center; background-color: transparent"
+                           href="#">Another action</a>
                         <form method="post" action="/controller" style="height: 15px">
                             <input type="hidden" name="command" value="logout"/>
-                            <button class="btn btn-outline-danger"
-                                    style="border: none; min-width: 100%"
+                            <button class="btn btn-outline-danger neon-title-red button-border-red"
                                     type="submit">Log out
                             </button>
                         </form>
@@ -68,7 +71,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         </div>
     </div>
 </nav>
-
 <br>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

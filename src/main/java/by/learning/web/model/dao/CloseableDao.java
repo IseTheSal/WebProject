@@ -5,16 +5,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public interface CloseableDao {
 
-    default void close(PreparedStatement preparedStatement) {
+    default void close(Statement statement) {
         final Logger logger = LogManager.getLogger(CloseableDao.class);
-        if (preparedStatement != null) {
+        if (statement != null) {
             try {
-                preparedStatement.close();
+                statement.close();
             } catch (SQLException exception) {
                 logger.log(Level.DEBUG, "Statement was`t closed");
             }

@@ -6,7 +6,7 @@
 <body>
 <div style="background-image: url(/img/login-background-blur.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
-    <%@include file="header.jsp" %>
+    <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 15%">
         <h5 class="neon-title-green" style="text-align: center">${requestScope.registrationComplete}</h5>
         <form class="needs-validation" novalidate method="post" action="/controller">
@@ -31,6 +31,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <input type="submit" name="btnLogin" value="Login" id="btnLogin" class="button-glow-blue">
             </div>
         </form>
+    </div>
+    <div style="margin-top: 15%">
+        <jsp:include page="support/footer.jsp"/>
     </div>
 </div>
 </body>

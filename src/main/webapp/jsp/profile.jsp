@@ -4,6 +4,6 @@
     <title>Profile</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="support/header.jsp"%>
 </body>
 </html>

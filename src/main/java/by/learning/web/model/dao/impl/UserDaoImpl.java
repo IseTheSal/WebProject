@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.Optional;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends UserDao {
 
     private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 

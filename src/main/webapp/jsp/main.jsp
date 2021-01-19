@@ -6,6 +6,9 @@
     <title>Main</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="support/header.jsp"%>
+<div style="position: fixed; width: 100%; bottom: 0">
+    <jsp:include page="support/footer.jsp"/>
+</div>
 </body>
 </html>

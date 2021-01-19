@@ -30,6 +30,14 @@
     0 0 40px #20750e;
 }
 
+.neon-title-red {
+    color: #fc0000;
+    text-shadow: 0 0 5px #f02828,
+    0 0 10px #c42323,
+    0 0 20px #c01a1a,
+    0 0 40px #750e0e;
+}
+
 .neon-title-green {
     color: #50ab00;
     text-shadow: 0 0 5px #387900,

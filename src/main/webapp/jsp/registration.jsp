@@ -5,7 +5,7 @@
 <body>
 <div style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
-    <%@include file="header.jsp" %>
+    <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%">
         <form class="needs-validation" novalidate method="post" action="/controller">
             <input type="hidden" name="command" value="registration"/>
@@ -111,8 +111,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <div class="form-group form-check">
                     <label class="form-check-label" style="color: white">
                         <input class="form-check-input" type="checkbox" name="remember" required/>
-                        I am 18+ years old and agree with <a href="/jsp/terms.jsp"
-                                                             target="_blank">terms conditions and privacy policy.</a>
+                        I am 18+ years old and agree with <a href="/jsp/support/terms.jsp"
+                                                             target="_blank" style="text-decoration: none">terms
+                        conditions and privacy policy.</a>
                         <div class="invalid-feedback">Agree to continue</div>
                     </label>
                 </div>
@@ -121,6 +122,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <input type="submit" name="btnSignup" value="Sign up" id="btnSignup" class="button-glow-lime">
             </div>
         </form>
+        <div style="margin-top: 5%">
+        <jsp:include page="support/footer.jsp"/>
+        </div>
     </div>
 </body>
 

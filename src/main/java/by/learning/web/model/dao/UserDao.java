@@ -5,11 +5,11 @@ import by.learning.web.model.entity.User;
 
 import java.util.Optional;
 
-public interface UserDao extends CloseableDao {
+public abstract class UserDao implements CloseableDao {
 
-    Optional<User> findUser(String login, String password) throws DaoException;
+    protected abstract Optional<User> findUser(String login, String password) throws DaoException;
 
-    boolean exist(String value, String sqlRequest) throws DaoException;
+    protected abstract boolean exist(String value, String sqlRequest) throws DaoException;
 
-    boolean addUser(User user, String cryptPassword) throws DaoException;
+    protected abstract boolean addUser(User user, String cryptPassword) throws DaoException;
 }
