@@ -13,12 +13,12 @@ public class CryptEncoder {
 
     public static String generateCrypt(String password) {
         String salt = BCrypt.gensalt(LOG_ROUND);
-        String hashed = BCrypt.hashpw(password,salt);
+        String hashed = BCrypt.hashpw(password, salt);
         return hashed;
     }
 
-    public static boolean check(String password, String cryptValue){
-        boolean result = BCrypt.checkpw(password,cryptValue);
+    public static boolean check(String password, String cryptValue) {
+        boolean result = BCrypt.checkpw(password, cryptValue);
         logger.log(Level.DEBUG, "Bcrypt match: " + result);
         return result;
     }

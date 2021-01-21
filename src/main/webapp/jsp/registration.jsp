@@ -123,7 +123,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             </div>
         </form>
         <div style="margin-top: 5%">
-        <jsp:include page="support/footer.jsp"/>
+            <jsp:include page="support/footer.jsp"/>
         </div>
     </div>
 </body>

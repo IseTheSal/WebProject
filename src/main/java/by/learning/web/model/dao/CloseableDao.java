@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -28,6 +29,17 @@ public interface CloseableDao {
                 connection.close();
             } catch (SQLException exception) {
                 logger.log(Level.DEBUG, "Connection was`t closed");
+            }
+        }
+    }
+
+    default void close(ResultSet resultSet) {
+        final Logger logger = LogManager.getLogger(CloseableDao.class);
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException exception) {
+                logger.log(Level.DEBUG, "ResultSet was`t close");
             }
         }
     }

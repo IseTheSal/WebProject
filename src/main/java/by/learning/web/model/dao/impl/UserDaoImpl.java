@@ -36,7 +36,7 @@ public class UserDaoImpl extends UserDao {
     private final static String LOGIN_TABLES = "postgres";
     private final static String PASS_TABLES = "aili61329";
 
-    
+
     private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, users.role " +
             "FROM users WHERE users.login = ?";
 
@@ -53,11 +53,12 @@ public class UserDaoImpl extends UserDao {
         Optional<User> result = Optional.empty();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(URL_TABLES, LOGIN_TABLES, PASS_TABLES);
             preparedStatement = connection.prepareStatement(FIND_USER);
             preparedStatement.setString(1, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             resultSet.next();
             String cryptPassword = resultSet.getString(2);
             boolean isMatch = CryptEncoder.check(password, cryptPassword);
@@ -75,6 +76,7 @@ public class UserDaoImpl extends UserDao {
         } finally {
             close(preparedStatement);
             close(connection);
+            close(resultSet);
         }
         return result;
     }
@@ -96,11 +98,12 @@ public class UserDaoImpl extends UserDao {
         boolean result;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(URL_TABLES, LOGIN_TABLES, PASS_TABLES);
             preparedStatement = connection.prepareStatement(sqlRequest);
             preparedStatement.setString(1, value);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             int counter = 0;
             if (resultSet.next()) {
                 counter = Integer.parseInt(resultSet.getString(1));
@@ -112,6 +115,7 @@ public class UserDaoImpl extends UserDao {
         } finally {
             close(preparedStatement);
             close(connection);
+            close(resultSet);
         }
         return result;
     }

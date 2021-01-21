@@ -19,7 +19,6 @@ import java.util.Optional;
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(Controller.class);
     private final static String COMMAND_PARAM = "command";
-    private final static String NULL_PAGE = "nullPage";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

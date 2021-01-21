@@ -22,7 +22,7 @@ public class RegistrationCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request){
+    public String execute(HttpServletRequest request) {
         String page;
         String nameValue = request.getParameter(RequestParameter.FIRSTNAME);
         String lastnameValue = request.getParameter(RequestParameter.LASTNAME);

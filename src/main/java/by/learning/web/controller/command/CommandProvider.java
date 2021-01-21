@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Optional;
 
 public class CommandProvider {
-    private final static Logger logger = LogManager.getLogger(CommandProvider.class);
+    private static final Logger logger = LogManager.getLogger(CommandProvider.class);
 
     public static Optional<ActionCommand> defineCommand(String commandName) {
         if (commandName == null || commandName.isBlank()) {
