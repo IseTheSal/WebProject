@@ -1,6 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.currentLocale}"/>
+<fmt:setBundle basename="property.language"/>
 <html>
 <head>
     <meta charset="utf-8">
@@ -24,30 +26,35 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
      style="padding-top: 2px;padding-bottom: 2px; zoom: 0.9;
       background-image: linear-gradient(45deg, rgba(255,255,255,.07) 100%, transparent 10%)">
     <div class="navbar-brand">
-        <a href="/index.jsp" class="texas-blue-animated" style="text-decoration: none">Web task</a>
-        <a href="/index.jsp" class="texas-purple-animated" style="text-decoration: none;margin-left: 30px">Link</a>
+        <a href="/index.jsp" class="texas-blue-animated" style="text-decoration: none"><fmt:message
+                key="header.mainLink"/></a>
+        <a href="/index.jsp" class="texas-purple-animated" style="text-decoration: none;margin-left: 30px"><fmt:message
+                key="header.supportLink1"/></a>
     </div>
 
     <div class="navbar pull-right">
         <div style="display: inline-grid">
-            <c:if test="${empty sessionScope.firstname}">
+            <c:if test="${empty sessionScope.currentUser}">
                 <a href="${pageContext.request.contextPath}/jsp/registration.jsp"
                    style="text-decoration: none" class="neon-title-lime">
-                    <span class="far fa-user" style="margin-right:0.40em; display:inline-block;"></span>Sign up</a>
+                    <span class="far fa-user" style="margin-right:0.40em; display:inline-block;"></span><fmt:message
+                        key="header.signUp"/></a>
                 <a href="${pageContext.request.contextPath}/jsp/login.jsp"
                    style="text-decoration: none" class="neon-title-orange">
-                    <span class="fas fa-sign-in-alt" style="margin-right:0.30em; display:inline-block;"></span>Login</a>
+                    <span class="fas fa-sign-in-alt"
+                          style="margin-right:0.30em; display:inline-block;"></span><fmt:message
+                        key="header.login"/></a>
             </c:if>
         </div>
 
         <div style="display: inline">
-            <c:if test="${not empty sessionScope.firstname}">
+            <c:if test="${not empty sessionScope.currentUser}">
                 <div class="nav-item dropdown">
                     <a class="nav-link neon-title-lime" href="" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true"
-                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em"><span class="fas fa-user"
-                                                                                              style="margin-right:0.40em">
-                    </span>${sessionScope.get("firstname")}
+                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em">
+                        <span class="fas fa-user" style="margin-right:0.40em"></span>
+                            ${sessionScope.currentUser.firstname}
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"
@@ -55,14 +62,15 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                           border: none; margin-left: 5%; margin-top: 15px">
                         <a class="dropdown-item neon-title-white"
                            style="text-align: center; background-color: transparent"
-                           href="${pageContext.request.contextPath}/jsp/profile.jsp">Profile</a>
+                           href="${pageContext.request.contextPath}/jsp/profile.jsp"><fmt:message
+                                key="header.profile"/></a>
                         <a class="dropdown-item neon-title-white"
                            style="text-align: center; background-color: transparent"
-                           href="#">Another action</a>
+                           href="#"><fmt:message key="header.cart"/></a>
                         <form method="post" action="/controller" style="height: 15px">
                             <input type="hidden" name="command" value="logout"/>
                             <button class="btn btn-outline-danger neon-title-red button-border-red"
-                                    type="submit">Log out
+                                    type="submit"><fmt:message key="header.logout"/>
                             </button>
                         </form>
                     </div>
@@ -70,8 +78,23 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
             </c:if>
         </div>
     </div>
+    <form method="post" action="/controller" style="position: absolute; top: 80px; left: 20px">
+        <input type="hidden" name="command" value="change_locale"/>
+        <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
+        <button type="submit" name="currentLocale" value="en_US" class="button-locale-change neon-title-white">
+            <fmt:message key="header.English"/>
+        </button>
+        <button type="submit" name="currentLocale" value="pl_PL" class="button-locale-change neon-title-white">
+            <fmt:message key="header.Polish"/>
+        </button>
+        <button type="submit" name="currentLocale" value="ru_RU" class="button-locale-change neon-title-white">
+            <fmt:message key="header.Russian"/>
+        </button>
+        <h1 class="neon-title-white">${pageContext.request.contextPath}</h1>
+    </form>
 </nav>
 <br>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -85,4 +108,3 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         crossorigin="anonymous"></script>
 </body>
 </html>
-

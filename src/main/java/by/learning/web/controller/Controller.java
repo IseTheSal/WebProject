@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public class Controller extends HttpServlet {
         Optional<ActionCommand> commandOptional = CommandProvider.defineCommand(commandValue);
         ActionCommand command = commandOptional.orElseThrow();
         String page = command.execute(req);
+        logger.log(Level.DEBUG, "to page - " + page);
         if (page != null) {
             RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(page);
             dispatcher.forward(req, resp);

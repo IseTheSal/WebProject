@@ -1,7 +1,9 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<fmt:setLocale value="${sessionScope.currentLocale}"/>
+<fmt:setBundle basename="property.language"/>
 <html>
 <head>
-
 </head>
 <body>
 <footer class="mainfooter" role="contentinfo">
@@ -21,7 +23,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 copy">
-                    <p class="text-center">&copy; Copyright 2021 - IseTheSal. All rights reserved.</p>
+                    <p class="text-center"><fmt:message key="footer.copyright"/></p>
                 </div>
             </div>
         </div>

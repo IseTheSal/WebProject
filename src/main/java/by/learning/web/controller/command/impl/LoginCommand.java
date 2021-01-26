@@ -33,8 +33,7 @@ public class LoginCommand implements ActionCommand {
             user = service.singIn(loginValue, passwordValue);
             if (user.isPresent()) {
                 User currentUser = user.get();
-                request.setAttribute(RequestParameter.USER_PARAM, currentUser);
-                request.getSession().setAttribute(RequestParameter.FIRSTNAME, currentUser.getFirstname());
+                request.getSession().setAttribute(RequestParameter.USER_PARAM, currentUser);
                 page = PagePath.MAIN_PAGE;
             } else {
                 request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");

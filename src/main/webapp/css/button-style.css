@@ -37,5 +37,23 @@
     min-width: 100%;
 }
 
+.button-locale-change {
+    background-color: transparent !important;
+    border: none;
+    border-radius: 35%;
+
+}
+
+.button-locale-change:hover {
+    cursor: pointer;
+    background: #f9ee17;
+    color: white;
+    box-shadow: 0 0 10px #f9ee17, 0 0 40px #f9ee17, 0 0 80px #f9ee17;
+}
+
+.button-locale-change:focus {
+    background-color: #28f08b;
+}
+
 
 

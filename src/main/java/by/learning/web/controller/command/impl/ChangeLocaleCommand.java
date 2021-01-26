@@ -1,6 +1,5 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.PagePath;
 import by.learning.web.controller.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import org.apache.logging.log4j.Level;
@@ -10,15 +9,20 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class LogoutCommand implements ActionCommand {
-    private static final Logger logger = LogManager.getLogger(LogoutCommand.class);
+public class ChangeLocaleCommand implements ActionCommand {
+
+    private static final Logger logger = LogManager.getLogger(ChangeLocaleCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = PagePath.LOGIN;
+        String page = request.getParameter(RequestParameter.CURRENT_PAGE);
         HttpSession session = request.getSession();
-        session.invalidate();
-        logger.log(Level.INFO, "Session was invalidate");
+        String locale = request.getParameter(RequestParameter.CURRENT_LOCALE);
+        if (locale != null) {
+            session.setAttribute(RequestParameter.CURRENT_LOCALE, locale);
+        } else {
+            logger.log(Level.DEBUG, "Locale is null");
+        }
         return page;
     }
 }
