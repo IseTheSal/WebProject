@@ -2,6 +2,7 @@ package by.learning.web.controller.command.impl;
 
 import by.learning.web.controller.PagePath;
 import by.learning.web.controller.RequestParameter;
+import by.learning.web.controller.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.User;
@@ -33,7 +34,7 @@ public class LoginCommand implements ActionCommand {
             user = service.singIn(loginValue, passwordValue);
             if (user.isPresent()) {
                 User currentUser = user.get();
-                request.getSession().setAttribute(RequestParameter.USER_PARAM, currentUser);
+                request.getSession().setAttribute(SessionAttribute.USER_PARAM, currentUser);
                 page = PagePath.MAIN_PAGE;
             } else {
                 request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");

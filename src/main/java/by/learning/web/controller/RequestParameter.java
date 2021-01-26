@@ -13,9 +13,8 @@ public class RequestParameter {
     public static final String EMAIL = "email";
     public static final String REGISTRATION_FAIL = "registrationFail";
     public static final String ERROR_SING_IN = "errorSingIn";
-    public static final String USER_PARAM = "currentUser";
-
-    public static final String CURRENT_LOCALE = "currentLocale";
     public static final String CURRENT_PAGE = "currentPage";
+    public static final String CURRENT_LOCALE = "currentLocale";
+
 
 }
