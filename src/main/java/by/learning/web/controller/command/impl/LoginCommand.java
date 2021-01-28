@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class LoginCommand implements ActionCommand {
@@ -34,7 +35,8 @@ public class LoginCommand implements ActionCommand {
             user = service.singIn(loginValue, passwordValue);
             if (user.isPresent()) {
                 User currentUser = user.get();
-                request.getSession().setAttribute(SessionAttribute.USER_PARAM, currentUser);
+                HttpSession session = request.getSession();
+                session.setAttribute(SessionAttribute.USER_PARAM, currentUser);
                 page = PagePath.MAIN_PAGE;
             } else {
                 request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");

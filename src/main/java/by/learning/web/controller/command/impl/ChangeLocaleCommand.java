@@ -22,7 +22,7 @@ public class ChangeLocaleCommand implements ActionCommand {
         if (locale != null) {
             session.setAttribute(SessionAttribute.CURRENT_LOCALE, locale);
         } else {
-            logger.log(Level.DEBUG, "Locale is null");
+            logger.log(Level.INFO, "Locale is null");
         }
         return page;
     }

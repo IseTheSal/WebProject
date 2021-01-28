@@ -1,8 +1,10 @@
 package by.learning.web.model.dao.impl;
 
+import by.learning.web.exception.ConnectionPoolException;
 import by.learning.web.exception.DaoException;
 import by.learning.web.model.dao.UserDao;
 import by.learning.web.model.entity.User;
+import by.learning.web.model.pool.ConnectionPool;
 import by.learning.web.util.CryptEncoder;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -15,14 +17,6 @@ public class UserDaoImpl extends UserDao {
 
     private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
-    static {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static UserDaoImpl INSTANCE;
 
     public static UserDaoImpl getInstance() {
@@ -32,21 +26,17 @@ public class UserDaoImpl extends UserDao {
         return INSTANCE;
     }
 
-    private final static String URL_TABLES = "jdbc:postgresql://localhost:5432/postgres?useUnicode=true;characterEncoding=UTF-8";
-    private final static String LOGIN_TABLES = "postgres";
-    private final static String PASS_TABLES = "aili61329";
-
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.INSTANCE;
 
     private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, users.role " +
             "FROM users WHERE users.login = ?";
 
-    private final static String CONTAIN_LOGIN = "SELECT COUNT(*) FROM users WHERE users.login = ?";
+    private static final String CONTAIN_LOGIN = "SELECT COUNT(*) FROM users WHERE users.login = ?";
 
-    private final static String CONTAIN_EMAIL = "SELECT COUNT(*) FROM users WHERE users.email = ?";
+    private static final String CONTAIN_EMAIL = "SELECT COUNT(*) FROM users WHERE users.email = ?";
 
-    private final static String ADD_USER = "INSERT INTO users (login, password, firstname, lastname, email, role) " +
+    private static final String ADD_USER = "INSERT INTO users (login, password, firstname, lastname, email, role) " +
             " VALUES(?,?,?,?,?,?)";
-
 
     @Override
     public Optional<User> findUser(String login, String password) throws DaoException {
@@ -55,7 +45,7 @@ public class UserDaoImpl extends UserDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection(URL_TABLES, LOGIN_TABLES, PASS_TABLES);
+            connection = CONNECTION_POOL.getConnection();
             preparedStatement = connection.prepareStatement(FIND_USER);
             preparedStatement.setString(1, login);
             resultSet = preparedStatement.executeQuery();
@@ -71,7 +61,7 @@ public class UserDaoImpl extends UserDao {
                 User.Role role = User.Role.valueOf(roleString);
                 result = Optional.of(new User(id, login, firstname, lastname, email, role));
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ConnectionPoolException ex) {
             throw new DaoException(ex);
         } finally {
             close(preparedStatement);
@@ -100,7 +90,7 @@ public class UserDaoImpl extends UserDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection(URL_TABLES, LOGIN_TABLES, PASS_TABLES);
+            connection = CONNECTION_POOL.getConnection();
             preparedStatement = connection.prepareStatement(sqlRequest);
             preparedStatement.setString(1, value);
             resultSet = preparedStatement.executeQuery();
@@ -109,7 +99,7 @@ public class UserDaoImpl extends UserDao {
                 counter = Integer.parseInt(resultSet.getString(1));
             }
             result = (counter > 0);
-        } catch (SQLException ex) {
+        } catch (SQLException | ConnectionPoolException ex) {
             logger.log(Level.DEBUG, ex);
             throw new DaoException(ex);
         } finally {
@@ -129,7 +119,7 @@ public class UserDaoImpl extends UserDao {
         if (!existEmail(email) && !existLogin(login)) {
             logger.log(Level.DEBUG, "Login and email are available");
             try {
-                connection = DriverManager.getConnection(URL_TABLES, LOGIN_TABLES, PASS_TABLES);
+                connection = CONNECTION_POOL.getConnection();
                 preparedStatement = connection.prepareStatement(ADD_USER);
                 preparedStatement.setString(1, login);
                 preparedStatement.setString(2, cryptPassword);
@@ -141,7 +131,7 @@ public class UserDaoImpl extends UserDao {
                 preparedStatement.executeUpdate();
                 result = true;
                 logger.log(Level.DEBUG, "New user register successfully");
-            } catch (SQLException ex) {
+            } catch (SQLException | ConnectionPoolException ex) {
                 throw new DaoException(ex);
             } finally {
                 close(preparedStatement);

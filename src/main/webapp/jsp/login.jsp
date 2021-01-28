@@ -32,7 +32,11 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                            placeholder="<fmt:message key="authorization.passwordPlaceHolder"/>" required>
                     <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
                             key="authorization.invalidPassword"/></div>
-                    <label style="position: absolute; margin-left: 5%; color: red"> ${errorSingIn} </label>
+                    <c:if test="${not empty requestScope.errorSingIn}">
+                        <label style="position: absolute; margin-left: 5%; color: red">
+                            <fmt:message key="authorization.incorrectLoginOrPassword"/>
+                        </label>
+                    </c:if>
                 </div>
                 <input type="submit" name="btnLogin" value="<fmt:message key="authorization.btnLogin"/>" id="btnLogin"
                        class="button-glow-blue">
