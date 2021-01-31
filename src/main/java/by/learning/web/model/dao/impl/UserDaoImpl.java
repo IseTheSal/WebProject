@@ -131,8 +131,6 @@ public class UserDaoImpl extends UserDao {
                 result = true;
                 logger.log(Level.DEBUG, "New user register successfully");
             } catch (SQLException | ConnectionPoolException ex) {
-                //fixme
-                logger.log(Level.DEBUG, ex);
                 throw new DaoException(ex);
             } finally {
                 close(preparedStatement);
