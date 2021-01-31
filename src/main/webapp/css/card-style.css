@@ -6,6 +6,7 @@
 }
 
 .image-card {
-    border-radius: 6%;
+    border-top-left-radius: 6%;
+    border-top-right-radius: 6%;
     height: 350px;
 }

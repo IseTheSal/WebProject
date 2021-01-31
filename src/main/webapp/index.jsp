@@ -5,7 +5,7 @@
     <title>Welcome</title>
 </head>
 <body>
-<jsp:forward page="jsp/main.jsp"></jsp:forward>
+<jsp:forward page="/controller?command=home"></jsp:forward>
 </body>
 </html>
 

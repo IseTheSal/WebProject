@@ -28,15 +28,15 @@ public class UserDaoImpl extends UserDao {
 
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.INSTANCE;
 
-    private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, users.role " +
-            "FROM users WHERE users.login = ?";
+    private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, role " +
+            "FROM user_account WHERE user_account.login = ?";
 
-    private static final String CONTAIN_LOGIN = "SELECT COUNT(*) FROM users WHERE users.login = ?";
+    private static final String CONTAIN_LOGIN = "SELECT COUNT(*) FROM user_account WHERE user_account.login = ?";
 
-    private static final String CONTAIN_EMAIL = "SELECT COUNT(*) FROM users WHERE users.email = ?";
+    private static final String CONTAIN_EMAIL = "SELECT COUNT(*) FROM user_account WHERE user_account.email = ?";
 
-    private static final String ADD_USER = "INSERT INTO users (login, password, firstname, lastname, email, role) " +
-            " VALUES(?,?,?,?,?,?)";
+    private static final String ADD_USER = "INSERT INTO user_account (login, password, firstname, lastname, email, role) " +
+            "VALUES(?,?,?,?,?,?)";
 
     @Override
     public Optional<User> findUser(String login, String password) throws DaoException {
@@ -64,9 +64,9 @@ public class UserDaoImpl extends UserDao {
         } catch (SQLException | ConnectionPoolException ex) {
             throw new DaoException(ex);
         } finally {
+            close(resultSet);
             close(preparedStatement);
             close(connection);
-            close(resultSet);
         }
         return result;
     }
@@ -100,12 +100,11 @@ public class UserDaoImpl extends UserDao {
             }
             result = (counter > 0);
         } catch (SQLException | ConnectionPoolException ex) {
-            logger.log(Level.DEBUG, ex);
             throw new DaoException(ex);
         } finally {
+            close(resultSet);
             close(preparedStatement);
             close(connection);
-            close(resultSet);
         }
         return result;
     }
@@ -132,6 +131,8 @@ public class UserDaoImpl extends UserDao {
                 result = true;
                 logger.log(Level.DEBUG, "New user register successfully");
             } catch (SQLException | ConnectionPoolException ex) {
+                //fixme
+                logger.log(Level.DEBUG, ex);
                 throw new DaoException(ex);
             } finally {
                 close(preparedStatement);

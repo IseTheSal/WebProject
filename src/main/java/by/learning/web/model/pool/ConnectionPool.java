@@ -54,7 +54,7 @@ public enum ConnectionPool {
     public void releaseConnection(ProxyConnection connection) {
         if (engagedConnections.remove(connection)) {
             freeConnections.offer(connection);
-            logger.log(Level.INFO, "Connection was released");
+            logger.log(Level.DEBUG, "Connection was released");
         } else {
             logger.log(Level.WARN, "Connection was not offered");
         }

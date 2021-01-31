@@ -15,4 +15,5 @@ public class RequestParameter {
     public static final String ERROR_SING_IN = "errorSingIn";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String CURRENT_LOCALE = "currentLocale";
+
 }
