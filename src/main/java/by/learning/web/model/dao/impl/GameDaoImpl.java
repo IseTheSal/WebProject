@@ -31,13 +31,13 @@ public class GameDaoImpl implements GameDao {
 
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.INSTANCE;
 
-    private static final String FIND_ALL_GAMES = "SELECT game.game_id, title, description, image_path, price, string_agg(DISTINCT g.name, ','), string_agg(DISTINCT ct.name,',') " +
-            "FROM game " +
-            "         INNER JOIN category_game cg on game.game_id = cg.game_id " +
-            "         INNER JOIN category ct on ct.category_id = cg.category_id " +
-            "         INNER JOIN genre_game gn on game.game_id = gn.game_id " +
-            "         INNER JOIN genre g on gn.genre_id = g.genre_id " +
-            "GROUP BY game.game_id";
+    private static final String FIND_ALL_GAMES = "SELECT games.game_id, title, description, image_path, price, string_agg(DISTINCT g.name, ','), string_agg(DISTINCT ct.name,',') " +
+            "FROM games " +
+            "         INNER JOIN category_game cg on games.game_id = cg.game_id " +
+            "         INNER JOIN categories ct on ct.category_id = cg.category_id " +
+            "         INNER JOIN genre_game gn on games.game_id = gn.game_id " +
+            "         INNER JOIN genres g on gn.genre_id = g.genre_id " +
+            "GROUP BY games.game_id";
 
     @Override
     public List<Game> findAllGames() throws DaoException {

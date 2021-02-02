@@ -29,13 +29,13 @@ public class UserDaoImpl extends UserDao {
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.INSTANCE;
 
     private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, role " +
-            "FROM user_account WHERE user_account.login = ?";
+            "FROM users WHERE users.login = ?";
 
-    private static final String CONTAIN_LOGIN = "SELECT COUNT(*) FROM user_account WHERE user_account.login = ?";
+    private static final String CONTAIN_LOGIN = "SELECT COUNT(*) FROM users WHERE users.login = ?";
 
-    private static final String CONTAIN_EMAIL = "SELECT COUNT(*) FROM user_account WHERE user_account.email = ?";
+    private static final String CONTAIN_EMAIL = "SELECT COUNT(*) FROM users WHERE users.email = ?";
 
-    private static final String ADD_USER = "INSERT INTO user_account (login, password, firstname, lastname, email, role) " +
+    private static final String ADD_USER = "INSERT INTO users (login, password, firstname, lastname, email, role) " +
             "VALUES(?,?,?,?,?,?)";
 
     @Override

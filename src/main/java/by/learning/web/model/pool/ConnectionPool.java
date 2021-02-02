@@ -33,7 +33,7 @@ public enum ConnectionPool {
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 freeConnections.offer(proxyConnection);
             } catch (SQLException exception) {
-                logger.log(Level.ERROR, exception);
+                logger.log(Level.FATAL, exception);
             }
         }
     }
@@ -44,7 +44,7 @@ public enum ConnectionPool {
             connection = freeConnections.take();
             engagedConnections.offer(connection);
         } catch (InterruptedException e) {
-            logger.log(Level.FATAL, e);
+            logger.log(Level.ERROR, e);
             throw new ConnectionPoolException(e);
         }
         return connection;

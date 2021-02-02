@@ -17,7 +17,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <c:forEach items="${sessionScope.gameList}" var="game">
                     <div class="col">
                         <a href="#" class="card custom-card" style="width: 18rem; text-decoration: none">
-                            <img class="image-card" src="${game.imagePath}">
+                            <img class="image-card" src="${pageContext.request.contextPath}${game.imagePath}">
                             <div class="card-body" style="text-align: center">
                                 <p class="card-title neon-title-white">${game.title}</p>
                                 <p class="card-text neon-title-white">${game.price}$</p>

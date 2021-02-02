@@ -17,7 +17,7 @@ public interface CloseableDao {
             try {
                 statement.close();
             } catch (SQLException exception) {
-                logger.log(Level.DEBUG, "Statement was`t closed");
+                logger.log(Level.WARN, "Statement was`t closed");
             }
         }
     }
@@ -28,7 +28,7 @@ public interface CloseableDao {
             try {
                 connection.close();
             } catch (SQLException exception) {
-                logger.log(Level.DEBUG, "Connection was`t closed");
+                logger.log(Level.WARN, "Connection was`t closed");
             }
         }
     }
@@ -39,7 +39,7 @@ public interface CloseableDao {
             try {
                 resultSet.close();
             } catch (SQLException exception) {
-                logger.log(Level.DEBUG, "ResultSet was`t close");
+                logger.log(Level.WARN, "ResultSet was`t close");
             }
         }
     }
