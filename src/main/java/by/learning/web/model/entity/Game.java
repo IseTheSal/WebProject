@@ -69,7 +69,7 @@ public class Game {
         this.id = id;
     }
 
-    public Game(int id, String title, String description, String imagePath, BigDecimal price,String trailer, String genreString, String categoryString) {
+    public Game(int id, String title, String description, String imagePath, BigDecimal price, String trailer, String genreString, String categoryString) {
         this.id = id;
         this.title = title;
         this.description = description;

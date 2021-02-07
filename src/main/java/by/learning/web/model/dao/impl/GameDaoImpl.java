@@ -5,7 +5,6 @@ import by.learning.web.exception.DaoException;
 import by.learning.web.model.dao.GameDao;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.pool.ConnectionPool;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
