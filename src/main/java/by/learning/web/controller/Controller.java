@@ -2,6 +2,8 @@ package by.learning.web.controller;
 
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.controller.command.CommandProvider;
+import by.learning.web.exception.ConnectionPoolException;
+import by.learning.web.model.pool.ConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(urlPatterns = {"/controller", "*.by"})
+@WebServlet(urlPatterns = {"/controller", "*.by"}, name = "controller")
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(Controller.class);
     private final static String COMMAND_PARAM = "command";
@@ -41,9 +43,17 @@ public class Controller extends HttpServlet {
             RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(page);
             dispatcher.forward(req, resp);
         } else {
-            page = PagePath.ERROR;
+            page = PagePath.PAGE_NOT_FOUND;
             resp.sendRedirect(req.getContextPath() + page);
         }
     }
 
+    @Override
+    public void destroy() {
+        try {
+            ConnectionPool.INSTANCE.destroyPool();
+        } catch (ConnectionPoolException e) {
+            logger.log(Level.ERROR, e);
+        }
+    }
 }

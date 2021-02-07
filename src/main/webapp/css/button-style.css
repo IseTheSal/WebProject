@@ -55,5 +55,90 @@
     background-color: #28f08b;
 }
 
+.button-glow-green {
+    width: 570px;
+    color: #000000;
+    letter-spacing: 2px;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 40%;
+}
 
+.button-glow-green:hover {
+    background: #143b07;
+    color: #000;
+    box-shadow: 0 0 10px #143b07, 0 0 40px #143b07, 0 0 80px #143b07;
+}
+
+.button-glow-purple {
+    width: 570px;
+    color: #000000;
+    letter-spacing: 2px;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 40%;
+}
+
+.button-glow-purple:hover {
+    background: #821a98;
+    color: #821a98;
+    box-shadow: 0 0 10px #821a98, 0 0 40px #821a98, 0 0 80px #821a98;
+}
+
+.button-glow-red {
+    width: 570px;
+    color: #3b0707;
+    letter-spacing: 2px;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 40%;
+}
+
+.button-glow-red:hover {
+    background: #3b0707;
+    color: #000;
+    box-shadow: 0 0 10px #3b0707, 0 0 40px #3b0707, 0 0 80px #3b0707;
+}
+
+.button-glow-buy {
+    text-align: center;
+    width: 330px;
+    color: #ffffff;
+    text-shadow: 0 0 5px #f0dfdf,
+    0 0 10px #dfcdcd,
+    0 0 20px #e9d0d0,
+    0 0 40px #e1c6c6;
+    border-color: green;
+    background: linear-gradient(45deg, rgba(38, 112, 32, 0.67) 100%, transparent 10%);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 20%;
+}
+
+.button-glow-buy:hover {
+    background: linear-gradient(45deg, rgba(103, 222, 94, .47) 100%, transparent 10%);
+    box-shadow: 0 0 4px #0b820b, 0 0 10px #0b820b, 0 0 40px #0b820b;
+    color: #f5f3f3;
+    text-shadow: 0 0 5px #f0dfdf,
+    0 0 10px #dfcdcd,
+    0 0 20px #e9d0d0,
+    0 0 40px #e1c6c6;
+}
+
+.button-glow-gray {
+    width: 570px;
+    color: #939393;
+    letter-spacing: 2px;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 40%;
+}
+
+.button-glow-gray:hover {
+    background: #939393;
+    color: #ffffff;
+    box-shadow: 0 0 10px #939393, 0 0 40px #939393, 0 0 80px #939393;
+}
 

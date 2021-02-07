@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 public class RegistrationCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(RegistrationCommand.class);
 
-
     private UserServiceImpl service;
 
     public RegistrationCommand(UserServiceImpl service) {

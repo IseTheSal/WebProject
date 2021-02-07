@@ -40,6 +40,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 </div>
                 <input type="submit" name="btnLogin" value="<fmt:message key="authorization.btnLogin"/>" id="btnLogin"
                        class="button-glow-blue">
+                <input name="clientToken" type="hidden" value="${serverToken}"/>
             </div>
         </form>
     </div>

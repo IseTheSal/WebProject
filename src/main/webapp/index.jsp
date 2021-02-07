@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome</title>
+    <title></title>
 </head>
 <body>
 <jsp:forward page="/controller?command=home"></jsp:forward>

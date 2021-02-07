@@ -1,3 +1,26 @@
+.notcopy {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.green-text-shadow {
+    text-shadow: 0 0 5px #aaabaa,
+    0 0 10px #9fa09f,
+    0 0 20px #7c7d7c,
+    0 0 40px #797979;
+}
+
+.purple-text-shadow {
+    text-shadow: 0 0 5px #b42ae9,
+    0 0 10px #b42ae9,
+    0 0 20px #b42ae9,
+    0 0 40px #b42ae9;
+}
+
 .neon-title-cyan {
     color: #fff;
     text-shadow: 0 0 50px #fff,
@@ -12,6 +35,19 @@
     0 0 10px #dfcdcd,
     0 0 20px #e9d0d0,
     0 0 40px #e1c6c6;
+}
+
+.neon-title-white-light {
+    color: #ffffff;
+    text-shadow: 0 0 5px #f0e7e7,
+    0 0 10px #dfd2d2,
+    0 0 20px #e8d6d6;
+}
+
+.neon-title-white-shadow-light {
+    color: #ffffff;
+    text-shadow: 0 0 5px #f0e7e7,
+    0 0 10px #f0e7e7;
 }
 
 .neon-title-cyan-light {
@@ -129,3 +165,4 @@
         color: #175993;
     }
 }
+

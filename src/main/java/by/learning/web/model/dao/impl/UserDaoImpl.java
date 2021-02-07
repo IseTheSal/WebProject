@@ -17,12 +17,9 @@ public class UserDaoImpl extends UserDao {
 
     private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
-    private static UserDaoImpl INSTANCE;
+    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
 
     public static UserDaoImpl getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new UserDaoImpl();
-        }
         return INSTANCE;
     }
 
@@ -83,8 +80,8 @@ public class UserDaoImpl extends UserDao {
         return result;
     }
 
-
-    public boolean exist(String value, String sqlRequest) throws DaoException {
+    @Override
+    protected boolean exist(String value, String sqlRequest) throws DaoException {
         boolean result;
         Connection connection = null;
         PreparedStatement preparedStatement = null;

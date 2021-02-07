@@ -4,16 +4,16 @@
 <fmt:setBundle basename="property.language"/>
 <html>
 <head>
-    <title>Error</title>
+    <title>Error 404</title>
 </head>
 <body>
 <div style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
-    <%@include file="support/header.jsp"%>
+    <%@include file="../support/header.jsp"%>
     <h1 class="neon-title-cyan-light" style="padding-top: 20%;text-align: center"><fmt:message
             key="error.pageNotFound"/></h1>
     <div style="bottom: 0; position: fixed; width: 100%">
-        <jsp:include page="support/footer.jsp"/>
+        <jsp:include page="../support/footer.jsp"/>
     </div>
 </div>
 </body>

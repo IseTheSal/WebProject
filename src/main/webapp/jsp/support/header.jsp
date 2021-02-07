@@ -13,7 +13,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/text-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form-style.css">
@@ -34,7 +34,13 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
     </div>
 
     <div class="navbar pull-right">
-        <div style="display: inline-grid">
+        <%--        <div style="display: inline">--%>
+
+        <a style="text-decoration: none; color: white;"
+           class="neon-title-white-shadow-light"
+           href="#"><span class="fas fa-shopping-cart"></span>&nbsp(${sessionScope.cartList.size()})</a>
+        <%--        </div>--%>
+        <div style="display: inline-grid; margin-left: 50px">
             <c:if test="${empty sessionScope.currentUser}">
                 <a href="${pageContext.request.contextPath}/jsp/registration.jsp"
                    style="text-decoration: none" class="neon-title-lime">
@@ -53,21 +59,21 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                 <div class="nav-item dropdown">
                     <a class="nav-link neon-title-lime" href="" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true"
-                       style="text-decoration: none; color:#56ff42; margin-left: 6.0em">
+                       style="text-decoration: none; color:#56ff42;">
                         <span class="fas fa-user" style="margin-right:0.40em"></span>
                             ${sessionScope.currentUser.firstname}
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"
                          style="background:  rgba(152,148,148,0.2);
-                          border: none; margin-left: 5%; margin-top: 15px">
+                          border: none; position: fixed; left: 90%; top: 8%; width: 40px">
                         <a class="dropdown-item neon-title-white"
                            style="text-align: center; background-color: transparent"
                            href="${pageContext.request.contextPath}/jsp/profile.jsp"><fmt:message
                                 key="header.profile"/></a>
-                        <a class="dropdown-item neon-title-white"
-                           style="text-align: center; background-color: transparent"
-                           href="#"><fmt:message key="header.cart"/></a>
+                            <%--                        <a class="dropdown-item neon-title-white"--%>
+                            <%--                           style="text-align: center; background-color: transparent"--%>
+                            <%--                           href="#"><fmt:message key="header.cart"/></a>--%>
                         <form method="post" action="/controller" style="height: 15px">
                             <input type="hidden" name="command" value="logout"/>
                             <button class="btn btn-outline-danger neon-title-red button-border-red"
@@ -96,8 +102,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
 </nav>
 <br>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

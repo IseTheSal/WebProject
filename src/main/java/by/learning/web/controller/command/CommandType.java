@@ -9,7 +9,9 @@ public enum CommandType {
     REGISTRATION(new RegistrationCommand(new UserServiceImpl())),
     LOGOUT(new LogoutCommand()),
     CHANGE_LOCALE(new ChangeLocaleCommand()),
-    HOME(new HomeCommand(new GameServiceImpl()));
+    HOME(new HomeCommand(new GameServiceImpl())),
+    OPEN_GAME(new OpenGameCommand(new GameServiceImpl())),
+    ADD_TO_CART(new AddToCartCommand(new GameServiceImpl()));
 
     private ActionCommand command;
 

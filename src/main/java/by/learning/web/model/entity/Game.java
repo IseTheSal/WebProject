@@ -11,6 +11,7 @@ public class Game {
     private String description;
     private String imagePath;
     private BigDecimal price;
+    private String trailer;
     private Set<GameGenre> genres = EnumSet.noneOf(GameGenre.class);
     private Set<GameCategory> categories = EnumSet.noneOf(GameCategory.class);
 
@@ -62,17 +63,26 @@ public class Game {
             }
             return result;
         }
-
     }
 
     public Game(int id) {
         this.id = id;
     }
 
-    public Game(int id, String title, String description, String imagePath, BigDecimal price, String genreString, String categoryString) {
+    public Game(int id, String title, String description, String imagePath, BigDecimal price,String trailer, String genreString, String categoryString) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.imagePath = imagePath;
+        this.price = price;
+        this.trailer = trailer;
+        this.genres = GameGenre.convertFromString(genreString);
+        this.categories = GameCategory.convertFromString(categoryString);
+    }
+
+    public Game(int id, String title, String imagePath, BigDecimal price, String genreString, String categoryString) {
+        this.id = id;
+        this.title = title;
         this.imagePath = imagePath;
         this.price = price;
         this.genres = GameGenre.convertFromString(genreString);
@@ -137,6 +147,14 @@ public class Game {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
     }
 
     @Override

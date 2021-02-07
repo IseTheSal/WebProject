@@ -1,6 +1,7 @@
 package by.learning.web.controller.command.impl;
 
 import by.learning.web.controller.PagePath;
+import by.learning.web.controller.RequestParameter;
 import by.learning.web.controller.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -12,28 +13,37 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.Optional;
 
-public class HomeCommand implements ActionCommand {
+public class OpenGameCommand implements ActionCommand {
 
     private static final Logger logger = LogManager.getLogger();
 
     private GameService service;
 
-    public HomeCommand(GameService service) {
+    public OpenGameCommand(GameService service) {
         this.service = service;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
+        String idString = request.getParameter(RequestParameter.GAME_ID);
+        int id = Integer.parseInt(idString);
+
         try {
-            List<Game> allGames = service.findAllGames();
-            HttpSession session = request.getSession();
-            session.setAttribute(SessionAttribute.GAME_LIST, allGames);
-            page = PagePath.MAIN_PAGE;
+            Optional<Game> gameById = service.findGameById(id);
+            if (gameById.isPresent()) {
+                Game game = gameById.get();
+                HttpSession session = request.getSession();
+                session.setAttribute(SessionAttribute.CURRENT_GAME, game);
+                page = PagePath.GAME_PAGE;
+            } else {
+                logger.log(Level.INFO, "Game with id {} not found", id);
+                page = PagePath.INDEX;
+            }
         } catch (ServiceException e) {
-            logger.log(Level.ERROR, e);
+            logger.log(Level.INFO, e);
             page = PagePath.PAGE_SERVER_ERROR;
         }
         return page;

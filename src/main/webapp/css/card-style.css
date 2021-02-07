@@ -10,3 +10,9 @@
     border-top-right-radius: 6%;
     height: 350px;
 }
+
+.game-card {
+    box-shadow: 0 0 40px #a0bab6;
+    border-radius: 2%;
+    height: 350px;
+}
