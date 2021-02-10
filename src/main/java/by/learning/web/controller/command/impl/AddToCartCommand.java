@@ -43,6 +43,7 @@ public class AddToCartCommand implements ActionCommand {
         } catch (ServiceException e) {
             logger.log(Level.WARN, e);
         }
+
         return page;
     }
 }

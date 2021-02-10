@@ -137,7 +137,7 @@
 }
 
 .button-glow-gray:hover {
-    background: #939393;
+    background: rgba(147, 147, 147, 0.6);
     color: #ffffff;
     box-shadow: 0 0 10px #939393, 0 0 40px #939393, 0 0 80px #939393;
 }

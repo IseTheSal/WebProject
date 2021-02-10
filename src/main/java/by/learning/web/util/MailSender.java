@@ -1,4 +1,4 @@
-package by.learning.web.model.service;
+package by.learning.web.util;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-public class MailSenderService {
+public class MailSender {
     private static final Logger logger = LogManager.getLogger();
     private static final String HOST_MAIL = "gamespot.by@gmail.com";
     private static final String HOST_PASSWORD = "strongpassword";
@@ -20,7 +20,7 @@ public class MailSenderService {
 
     private final Properties properties;
 
-    public MailSenderService() {
+    public MailSender() {
         properties = System.getProperties();
         try {
             properties.load(new FileReader(PROPERTIES_PATH));

@@ -12,7 +12,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 15%">
         <h5 class="neon-title-green" style="text-align: center">${requestScope.registrationComplete}</h5>
-        <form class="needs-validation" novalidate method="post" action="/controller">
+        <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="login"/>
             <div style="max-width: 350px;margin: auto">
                 <h2 class="neon-title-cyan" style="text-align: center"><fmt:message key="authorization.title"/></h2>
@@ -40,7 +40,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 </div>
                 <input type="submit" name="btnLogin" value="<fmt:message key="authorization.btnLogin"/>" id="btnLogin"
                        class="button-glow-blue">
-                <input name="clientToken" type="hidden" value="${serverToken}"/>
             </div>
         </form>
     </div>

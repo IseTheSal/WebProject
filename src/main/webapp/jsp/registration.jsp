@@ -12,12 +12,13 @@
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%">
-        <form class="needs-validation" novalidate method="post" action="/controller">
+        <form class="needs-validation" novalidate method="post" action="register.do">
             <input type="hidden" name="command" value="registration"/>
+            <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <h2 class="neon-title-cyan" style="text-align:center">
                 <fmt:message key="registration.title"/>
             </h2>
-            <div style="max-width: 700px;margin-left: 30%;margin-right:auto; zoom: 0.95">
+            <div style="max-width: 700px;margin-left: 34%;margin-right:auto; zoom: 0.95">
                 <%--            <div style="max-width: 580px;margin-left: auto;margin-right:auto; zoom: 0.95">--%>
                 <div class="form-group" style="margin-bottom: 5px">
                     <label class="neon-title-white" for="txtUsername"
@@ -137,9 +138,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <div class="form-group form-check">
                     <label class="form-check-label" style="color: white">
                         <input class="form-check-input" type="checkbox" name="remember" required/>
-                        <fmt:message key="registration.agreement"/> <a href="/jsp/support/terms.jsp"
-                                                                       target="_blank"
-                                                                       style="text-decoration: none"><fmt:message
+                        <fmt:message key="registration.agreement"/> <a
+                            href="${pageContext.request.contextPath}/jsp/support/terms.jsp"
+                            target="_blank"
+                            style="text-decoration: none"><fmt:message
                             key="registration.condition"/></a>
                         <div class="invalid-feedback"><fmt:message key="registration.invalidCheckBox"/></div>
                     </label>
@@ -148,6 +150,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                        style="color: red"> ${requestScope.registrationFail} </label>
                 <input type="submit" name="btnSignup" value="<fmt:message key="registration.btnSignUp"/>" id="btnSignup"
                        class="button-glow-lime"/>
+                <input name="clientToken" type="hidden" value="${serverToken}"/>
             </div>
         </form>
         <div style="margin-top: 5%">

@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footer-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/card-style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/modal-window.css">
 </head>
 
 <body style="background-image: url(/img/registration-background.jpg);
@@ -27,19 +28,18 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
      style="padding-top: 2px;padding-bottom: 2px; zoom: 0.9;
       background-image: linear-gradient(45deg, rgba(255,255,255,.07) 100%, transparent 10%)">
     <div class="navbar-brand">
-        <a href="/index.jsp" class="texas-blue-animated" style="text-decoration: none"><fmt:message
+        <a href="${pageContext.request.contextPath}/index.jsp" class="texas-blue-animated"
+           style="text-decoration: none"><fmt:message
                 key="header.mainLink"/></a>
-        <a href="/index.jsp" class="texas-purple-animated" style="text-decoration: none;margin-left: 30px"><fmt:message
+        <a href="${pageContext.request.contextPath}/index.jsp" class="texas-purple-animated"
+           style="text-decoration: none;margin-left: 30px"><fmt:message
                 key="header.supportLink1"/></a>
     </div>
 
     <div class="navbar pull-right">
-        <%--        <div style="display: inline">--%>
-
         <a style="text-decoration: none; color: white;"
            class="neon-title-white-shadow-light"
            href="#"><span class="fas fa-shopping-cart"></span>&nbsp(${sessionScope.cartList.size()})</a>
-        <%--        </div>--%>
         <div style="display: inline-grid; margin-left: 50px">
             <c:if test="${empty sessionScope.currentUser}">
                 <a href="${pageContext.request.contextPath}/jsp/registration.jsp"
@@ -71,9 +71,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                            style="text-align: center; background-color: transparent"
                            href="${pageContext.request.contextPath}/jsp/profile.jsp"><fmt:message
                                 key="header.profile"/></a>
-                            <%--                        <a class="dropdown-item neon-title-white"--%>
-                            <%--                           style="text-align: center; background-color: transparent"--%>
-                            <%--                           href="#"><fmt:message key="header.cart"/></a>--%>
                         <form method="post" action="/controller" style="height: 15px">
                             <input type="hidden" name="command" value="logout"/>
                             <button class="btn btn-outline-danger neon-title-red button-border-red"
@@ -85,7 +82,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
             </c:if>
         </div>
     </div>
-    <form method="post" action="/controller" style="position: absolute; top: 80px; left: 20px">
+    <form method="post" action="${pageContext.request.contextPath}/controller"
+          style="position: absolute; top: 80px; left: 20px">
         <input type="hidden" name="command" value="change_locale"/>
         <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
         <button type="submit" name="currentLocale" value="en_US" class="button-locale-change neon-title-white">

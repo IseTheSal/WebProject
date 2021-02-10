@@ -20,7 +20,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <div class="row row-cols-3" style="row-gap: 60px; margin-left: 45px">
                 <c:forEach items="${sessionScope.gameList}" var="game">
                     <div class="col">
-                        <a href="${pageContext.request.contextPath}/controller?command=open_game&gameId=${game.id}" class="card custom-card" style="width: 18rem; text-decoration: none">
+                        <a href="${pageContext.request.contextPath}/toCart.do?command=open_game&gameId=${game.id}"
+                           class="card custom-card" style="width: 18rem; text-decoration: none">
                             <img class="image-card" src="${pageContext.request.contextPath}${game.imagePath}">
                             <div class="card-body" style="text-align: center">
                                 <p class="card-title neon-title-white">${game.title}</p>
