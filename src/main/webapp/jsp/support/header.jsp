@@ -37,9 +37,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
     </div>
 
     <div class="navbar pull-right">
-        <a style="text-decoration: none; color: white;"
+        <a style="text-decoration: none; color: white;" id="shopMap"
            class="neon-title-white-shadow-light"
-           href="#"><span class="fas fa-shopping-cart"></span>&nbsp(${sessionScope.cartList.size()})</a>
+           href="${pageContext.request.contextPath}/jsp/cart.jsp"><span
+                class="fas fa-shopping-cart"></span>&nbsp(${sessionScope.cartAmount})</a>
         <div style="display: inline-grid; margin-left: 50px">
             <c:if test="${empty sessionScope.currentUser}">
                 <a href="${pageContext.request.contextPath}/jsp/registration.jsp"

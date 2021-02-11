@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddToCartCommand implements ActionCommand {
 
@@ -33,10 +33,12 @@ public class AddToCartCommand implements ActionCommand {
             boolean gameInStock = gameService.isGameInStock(id);
             if (gameInStock) {
                 HttpSession session = request.getSession();
-                ArrayList<Game> cartList = (ArrayList<Game>) session.getAttribute(SessionAttribute.CART_LIST);
+                HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
                 Game game = (Game) session.getAttribute(SessionAttribute.CURRENT_GAME);
-                cartList.add(game);
-                session.setAttribute(SessionAttribute.CART_LIST, cartList);
+                gameService.addGameToCart(game, cartMap);
+                session.setAttribute(SessionAttribute.CART_MAP, cartMap);
+                int cartAmount = gameService.countCartAmount(cartMap);
+                session.setAttribute(SessionAttribute.CART_AMOUNT, cartAmount);
             } else {
                 request.setAttribute(RequestParameter.GAME_IN_STOCK, false);
             }

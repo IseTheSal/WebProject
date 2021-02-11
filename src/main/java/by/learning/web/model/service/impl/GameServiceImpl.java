@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,4 +63,25 @@ public class GameServiceImpl implements GameService {
         return result;
     }
 
+    @Override
+    public void addGameToCart(Game game, HashMap<Game, Integer> hashMap) {
+        if (hashMap.containsKey(game)) {
+            Integer amount = hashMap.get(game);
+            amount++;
+            logger.log(Level.INFO, amount + " " + game.getTitle() + " was added to cart");
+            hashMap.put(game, amount);
+        } else {
+            hashMap.put(game, 1);
+        }
+    }
+
+    @Override
+    public int countCartAmount(HashMap<Game, Integer> hashMap) {
+        int totalAmount = 0;
+        Collection<Integer> gameAmount = hashMap.values();
+        for (Integer amount : gameAmount) {
+            totalAmount += amount;
+        }
+        return totalAmount;
+    }
 }

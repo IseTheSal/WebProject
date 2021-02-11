@@ -19,7 +19,7 @@ import java.util.Optional;
 
 public class GameDaoImpl implements GameDao {
 
-    private static final Logger logger = LogManager.getLogger(GameDaoImpl.class);
+    private static final Logger logger = LogManager.getLogger();
 
     private static GameDaoImpl INSTANCE;
 

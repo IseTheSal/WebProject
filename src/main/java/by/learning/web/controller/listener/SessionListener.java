@@ -1,6 +1,7 @@
 package by.learning.web.controller.listener;
 
 import by.learning.web.controller.SessionAttribute;
+import by.learning.web.model.entity.Game;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SessionListener implements HttpSessionListener {
 
@@ -17,7 +18,8 @@ public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session = se.getSession();
-        session.setAttribute(SessionAttribute.CART_LIST, new ArrayList<>());
+        session.setAttribute(SessionAttribute.CART_MAP, new HashMap<Game, Integer>());
+        session.setAttribute(SessionAttribute.CART_AMOUNT, 0);
         logger.log(Level.DEBUG, "Listener works");
     }
 

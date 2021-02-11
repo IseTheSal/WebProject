@@ -18,7 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public enum ConnectionPool {
     INSTANCE;
 
-    private final Logger logger = LogManager.getLogger(ConnectionPool.class);
+    private final Logger logger = LogManager.getLogger();
     private static final int POOL_SIZE = 10;
     private final BlockingQueue<ProxyConnection> freeConnections;
     private final Queue<ProxyConnection> engagedConnections;

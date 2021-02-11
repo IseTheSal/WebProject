@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
@@ -33,10 +33,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             </div>
         </div>
         <div style="margin-top: 10%">
-            <div style="text-align: center; margin-bottom: 5%; font-size: 20px" class="notcopy">
-                <div id="prev" style="cursor: pointer;display: inline;" class="text-center"></div>
+            <div style="text-align: center;margin-bottom: 5%; font-size: 20px" class="notcopy">
+                <div id="prev" style="cursor: pointer;display: inline;" class=""></div>
                 <div id="nav" style="cursor: pointer; display: inline;" class="text-center"></div>
-                <div id="next" style="cursor: pointer;display: inline;" class="text-center"></div>
+                <div id="next" style="cursor: pointer;display: inline;" class=""></div>
             </div>
             <jsp:include page="support/footer.jsp"/>
         </div>
@@ -51,7 +51,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         $('#prev').append('<a id="prevLink"  style="color:#d2d2d2" class="button-glow-gray" rel="' + 1 + '">&emsp;' + '&#60;&#60;Previous' + '&emsp;</a> ');
         for (i = 0; i < numPages; i++) {
             var pageNum = i + 1;
-            $('#nav').append('<a style="color: #f4fffd; border-radius: 20%" class="neon-title-white btn-outline-secondary" rel="' + i + '">&emsp;' + pageNum + '&emsp;</a> ');
+            $('#nav').append('<a style="color: #f4fffd; border-radius: 20%;text-align: center" class="neon-title-white btn-outline-secondary" rel="' + i + '">&emsp;' + pageNum + '&emsp;</a> ');
         }
         $('#next').append('<a id="nextLink" style="color:#d2d2d2" class="button-glow-gray" rel="' + 3 + '">&emsp;' + 'Next>>' + '&emsp;</a> ');
 

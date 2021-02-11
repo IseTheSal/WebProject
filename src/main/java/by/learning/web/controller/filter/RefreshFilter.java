@@ -28,22 +28,18 @@ public class RefreshFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain) throws IOException, ServletException {
         httpServletRequest = (HttpServletRequest) req;
-        logger.log(Level.DEBUG, "here 1");
         logger.log(Level.DEBUG, httpServletRequest.getMethod());
         if (httpServletRequest.getMethod().equals("GET")) {
             session = httpServletRequest.getSession(true);
             session.setAttribute("serverToken", new Random().nextInt(10000));
             chain.doFilter(req, res);
         } else {
-            logger.log(Level.DEBUG, "here 1");
             serverToken = (Integer) session.getAttribute("serverToken");
             clientToken = Integer.parseInt(req.getParameter("clientToken"));
             if (serverToken == clientToken) {
-                logger.log(Level.DEBUG, "here 2");
                 session.setAttribute("serverToken", new Random().nextInt(10000));
                 chain.doFilter(req, res);
             } else {
-                logger.log(Level.DEBUG, "here 3");
                 String page = httpServletRequest.getParameter(RequestParameter.CURRENT_PAGE);
                 RequestDispatcher rd = req.getRequestDispatcher(page);
                 rd.forward(req, res);

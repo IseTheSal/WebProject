@@ -43,6 +43,8 @@
         <url-pattern>/toCart.do</url-pattern>
         <url-pattern>/jsp/registration.jsp</url-pattern>
         <url-pattern>/jsp/register.do</url-pattern>
+        <url-pattern>/jsp/cart.jsp</url-pattern>
+        <url-pattern>/jsp/cart.do</url-pattern>
     </filter-mapping>
 
     <!--    <servlet>-->

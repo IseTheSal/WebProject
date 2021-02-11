@@ -20,20 +20,21 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <c:forEach items="${sessionScope.cartMap}" var="games">
                         <li class="items even" id="gameCheck">
                             <div class="infoWrap">
-                                <div class="cartSection">
+                                <div class="cartSection" style="width: 90%">
                                     <img src="${games.key.imagePath}" alt=""
                                          class="itemImg"/>
                                     <p class="itemNumber">${games.key.title}</p>
                                     <h3>${games.key.title}</h3>
                                     <p id="amount" class="amountClass"
-                                       style="display:inline;">${games.value}</p> x
+                                       style="display:inline">${games.value}</p> x
                                     <p id="price" class="priceClass"
                                        style="display:inline">${games.key.price}$</p>
                                 </div>
-                                <div class="prodTotal cartSection">
-                                    <p id="gameTotalPrice" class="gameTotalPrice">$15.00</p>
+                                <div class="prodTotal cartSection" style="text-align: center">
+                                        <%--                                    <p id="gameTotalPrice" class="gameTotalPrice">$15.00</p>--%>
                                 </div>
                                 <div class="cartSection removeWrap">
+                                    <p id="gameTotalPrice" class="gameTotalPrice">$15.00</p>
                                     <a onclick="" class="remove" style="cursor: pointer;">x</a>
                                 </div>
                             </div>
@@ -59,8 +60,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     </div>
     <script>
         // Remove Items From Cart
-        $('a.remove').click(function () {
-            event.preventDefault();
+        $('a.remove').click(function (e) {
+            e.preventDefault();
             $(this).parent().parent().parent().hide(400);
         })
         // Just for testing, show all items

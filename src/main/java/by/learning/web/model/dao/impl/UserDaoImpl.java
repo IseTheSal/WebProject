@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class UserDaoImpl extends UserDao {
 
-    private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
+    private static final Logger logger = LogManager.getLogger();
 
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
 
