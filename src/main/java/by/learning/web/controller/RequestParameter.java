@@ -19,7 +19,6 @@ public class RequestParameter {
     public static final String COUPON_EXIST = "couponExist";
 
 
-
     private RequestParameter() {
     }
 

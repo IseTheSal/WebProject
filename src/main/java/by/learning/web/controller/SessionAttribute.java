@@ -12,7 +12,6 @@ public class SessionAttribute {
     public static final String COUPON_DISCOUNT = "couponDiscount";
 
 
-
     private SessionAttribute() {
     }
 

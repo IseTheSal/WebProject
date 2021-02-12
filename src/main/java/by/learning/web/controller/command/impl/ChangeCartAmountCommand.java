@@ -5,7 +5,6 @@ import by.learning.web.controller.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Game;
-import by.learning.web.model.service.impl.GameServiceImpl;
 import by.learning.web.model.service.impl.OrderServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

@@ -1,6 +1,5 @@
 package by.learning.web.model.service;
 
-import by.learning.web.exception.DaoException;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Game;
 

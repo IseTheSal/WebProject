@@ -3,7 +3,6 @@ package by.learning.web.model.service;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Game;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
