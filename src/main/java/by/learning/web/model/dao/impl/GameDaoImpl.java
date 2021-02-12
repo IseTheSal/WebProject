@@ -21,12 +21,9 @@ public class GameDaoImpl implements GameDao {
 
     private static final Logger logger = LogManager.getLogger();
 
-    private static GameDaoImpl INSTANCE;
+    private static final GameDaoImpl INSTANCE = new GameDaoImpl();
 
     public static GameDaoImpl getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new GameDaoImpl();
-        }
         return INSTANCE;
     }
 
@@ -55,10 +52,10 @@ public class GameDaoImpl implements GameDao {
             "WHERE games.game_id = ?" +
             "GROUP BY games.game_id;";
 
-    private static final String FIND_GAME_AMOUNT_BY_ID = "select count(*) " +
-            "from codes " +
-            "where (sold is false) " +
-            "  and (game_id = ?)";
+    private static final String FIND_GAME_AMOUNT_BY_ID = "SELECT count(*) " +
+            "FROM codes " +
+            "WHERE (sold IS FALSE) " +
+            "AND (game_id = ?)";
 
 
     @Override

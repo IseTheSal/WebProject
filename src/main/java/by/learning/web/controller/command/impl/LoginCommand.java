@@ -44,6 +44,7 @@ public class LoginCommand implements ActionCommand {
                 logger.log(Level.INFO, "Error in logging");
             }
         } catch (ServiceException e) {
+            logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");
             page = PagePath.LOGIN;
         }

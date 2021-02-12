@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="property.language"/>
 <html>
@@ -18,7 +18,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <div class="modal-dialog center-modal" style="border: none !important;" role="document">
             <div class="modal-content" style="background-color: rgba(105,105,105,0.7); border: none !important;">
                 <div class="modal-header neon-title-white-light" style="border-bottom: 0 none">
-                    <fmt:message key="game.outOfStock1"/> ${sessionScope.currentGame.title} <fmt:message key="game.outOfStock2"/>
+                    <fmt:message key="game.outOfStock1"/> ${sessionScope.currentGame.title} <fmt:message
+                        key="game.outOfStock2"/>
                     <button type="button" id="clsBtn" class="close neon-title-red" data-dismiss="modal"
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -28,7 +29,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         </div>
     </div>
 
-    <div style="padding-top: 5%">
+    <div style="padding-top: 5%; margin-left: 40px">
         <div class="container" style="">
             <div class="row" style="">
                 <div class="col-sm" style="text-align: center">
@@ -41,17 +42,18 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <div class="col-sm"
                      style="margin: 3% 4% 0 3%;position: relative; transform: translateY(75px)">
                     <c:if test="${sessionScope.cartMap.containsKey(sessionScope.currentGame)}">
-                        <small id="orderHelp" style="color: darkgrey;text-align: center;margin-left: 34%"><fmt:message key="game.cart"/>
+                        <small id="orderHelp" style="color: darkgrey;text-align: center;margin-left: 34%"><fmt:message
+                                key="game.cart"/>
                             <span style="color: #0b820b" class="fas fa-check"></span></small>
                     </c:if>
                     <form method="post" action="${pageContext.request.contextPath}/toCart.do">
                         <input type="hidden" name="command" value="add_to_cart"/>
+                        <input name="clientToken" type="hidden" value="${serverToken}"/>
                         <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
                         <input type="hidden" name="gameId" value="${sessionScope.currentGame.id}"/>
                         <input type="submit" name="btnBuy" aria-describedby="orderHelp"
                                value="${sessionScope.currentGame.price}$" id="btnBuy"
                                class="button-glow-buy"/>
-                        <input name="clientToken" type="hidden" value="${serverToken}"/>
                     </form>
                     <button type="button" id="clsButton" class="btn btn-primary invisible" style="position: absolute"
                             data-toggle="modal" data-target="#exampleModal">

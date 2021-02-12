@@ -166,3 +166,10 @@
     }
 }
 
+.neon-box-white {
+    border-color: #fffefe;
+    box-shadow: 0 0 5px #f0dfdf,
+    0 0 10px #dfcdcd,
+    0 0 20px #e9d0d0;
+}
+

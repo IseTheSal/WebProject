@@ -29,6 +29,7 @@ class ConnectionCreator {
             Class.forName(property);
         } catch (IOException | ClassNotFoundException e) {
             logger.log(Level.FATAL, e);
+            throw new RuntimeException(e);
         }
     }
 

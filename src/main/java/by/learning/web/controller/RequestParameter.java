@@ -14,6 +14,10 @@ public class RequestParameter {
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String GAME_ID = "gameId";
     public static final String GAME_IN_STOCK = "gameInStock";
+    public static final String OPERATION = "operation";
+    public static final String COUPON_CODE = "couponCode";
+    public static final String COUPON_EXIST = "couponExist";
+
 
 
     private RequestParameter() {

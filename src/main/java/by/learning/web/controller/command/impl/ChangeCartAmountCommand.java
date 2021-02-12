@@ -15,36 +15,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
-public class AddToCartCommand implements ActionCommand {
-
+public class ChangeCartAmountCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
     private OrderServiceImpl orderService;
 
-    public AddToCartCommand(OrderServiceImpl orderService) {
+    public ChangeCartAmountCommand(OrderServiceImpl orderService) {
         this.orderService = orderService;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
         String page = request.getParameter(RequestParameter.CURRENT_PAGE);
-        String gameId = request.getParameter(RequestParameter.GAME_ID);
-        int id = Integer.parseInt(gameId);
+        String operation = request.getParameter(RequestParameter.OPERATION);
+        String gameIdString = request.getParameter(RequestParameter.GAME_ID);
+        int gameId = Integer.parseInt(gameIdString);
         try {
-            boolean gameInStock = orderService.isGameInStock(id);
-            if (gameInStock) {
-                HttpSession session = request.getSession();
-                HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
-                Game game = (Game) session.getAttribute(SessionAttribute.CURRENT_GAME);
-                orderService.addGameToCart(game, cartMap);
-                session.setAttribute(SessionAttribute.CART_MAP, cartMap);
-                int cartAmount = orderService.countCartAmount(cartMap);
-                session.setAttribute(SessionAttribute.CART_AMOUNT, cartAmount);
-            } else {
-                request.setAttribute(RequestParameter.GAME_IN_STOCK, false);
-            }
+            HttpSession session = request.getSession();
+            HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
+            orderService.changeGameCartAmount(cartMap, gameId, operation);
+            session.setAttribute(SessionAttribute.CART_MAP, cartMap);
+            int cartAmount = orderService.countCartAmount(cartMap);
+            session.setAttribute(SessionAttribute.CART_AMOUNT, cartAmount);
         } catch (ServiceException e) {
-            logger.log(Level.WARN, e);
+            logger.log(Level.ERROR, e);
         }
         return page;
     }

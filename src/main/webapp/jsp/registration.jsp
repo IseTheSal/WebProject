@@ -19,7 +19,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <fmt:message key="registration.title"/>
             </h2>
             <div style="max-width: 700px;margin-left: 34%;margin-right:auto; zoom: 0.95">
-                <%--            <div style="max-width: 580px;margin-left: auto;margin-right:auto; zoom: 0.95">--%>
                 <div class="form-group" style="margin-bottom: 5px">
                     <label class="neon-title-white" for="txtUsername"
                            style="position: relative; margin-bottom: 1px">
