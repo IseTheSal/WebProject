@@ -163,23 +163,6 @@ img {
     right: -10px;
 }
 
-.tableHead {
-    display: table;
-    width: 100%;
-    font-family: "Montserrat", sans-serif;
-    font-size: 0.75em;
-}
-
-.tableHead li {
-    display: table-cell;
-    padding: 1em 0;
-    text-align: center;
-}
-
-.tableHead li.prodHeader {
-    text-align: left;
-}
-
 .cart {
     padding: 1em 0;
 }
@@ -271,26 +254,6 @@ img {
     padding-right: 1em;
 }
 
-.special {
-    display: block;
-    font-family: "Montserrat", sans-serif;
-}
-
-.special .specialContent {
-    padding: 1em 1em 0;
-    display: block;
-    margin-top: 0.5em;
-    border-top: 1px solid #dadada;
-}
-
-.special .specialContent:before {
-    content: "↳";
-    font-size: 1.5em;
-    margin-right: 1em;
-    color: #6f6f6f;
-    font-family: helvetica, arial, sans-serif;
-}
-
 input.remove {
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
@@ -314,13 +277,13 @@ input.remove:hover {
     color: white;
 }
 
-input.remove.increase:hover{
+input.remove.increase:hover {
     background: #32b00c;
     color: white !important;
 }
 
-input.remove.decrease:hover{
-    background: #32b00c;
+input.remove.decrease:hover {
+    background: #ff9a38;
     color: white !important;
 }
 
@@ -397,7 +360,21 @@ input.remove.decrease:hover{
 }
 
 .btn:hover, .btn:focus, .btn:active {
-    background: #f69679;
+    background: #0031e3;
+}
+
+.promo-btn:hover, .promo-btn:focus, .promo-btn:active {
+    color: white;
+    background: #0031e3;
+}
+
+.custom-btn {
+    box-shadow: 0 0 10px #4dda26, 0 0 40px #4dda26;
+}
+
+.custom-btn:hover, .custom-btn:focus, .custom-btn:active {
+    color: white;
+    background: #46b534;
 }
 
 .btn:hover:after, .btn:focus:after, .btn:active:after {
@@ -409,7 +386,7 @@ input.remove.decrease:hover{
     paddding: 0.5em 2em;
 }
 
-/* TOTAL AND CHECKOUT  */
+
 .subtotal {
     float: right;
     width: 35%;
@@ -418,7 +395,7 @@ input.remove.decrease:hover{
 .subtotal .totalRow {
     padding: 0.5em;
     text-align: right;
-    color:white;
+    color: white;
 }
 
 .subtotal .totalRow.final {

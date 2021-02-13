@@ -12,12 +12,12 @@ import java.sql.Statement;
 public interface CloseableDao {
 
     default void close(Statement statement) {
-        final Logger logger = LogManager.getLogger(CloseableDao.class);
+        final Logger logger = LogManager.getLogger();
         if (statement != null) {
             try {
                 statement.close();
             } catch (SQLException exception) {
-                logger.log(Level.WARN, "Statement was`t closed");
+                logger.log(Level.ERROR, "Statement was`t closed");
             }
         }
     }
@@ -28,18 +28,40 @@ public interface CloseableDao {
             try {
                 connection.close();
             } catch (SQLException exception) {
-                logger.log(Level.WARN, "Connection was`t closed");
+                logger.log(Level.ERROR, "Connection was`t closed");
             }
         }
     }
 
     default void close(ResultSet resultSet) {
-        final Logger logger = LogManager.getLogger(CloseableDao.class);
+        final Logger logger = LogManager.getLogger();
         if (resultSet != null) {
             try {
                 resultSet.close();
             } catch (SQLException exception) {
-                logger.log(Level.WARN, "ResultSet was`t close");
+                logger.log(Level.ERROR, "ResultSet was`t close");
+            }
+        }
+    }
+
+    default void rollback(Connection connection) {
+        final Logger logger = LogManager.getLogger();
+        if (connection != null) {
+            try {
+                connection.rollback();
+            } catch (SQLException exception) {
+                logger.log(Level.ERROR, exception);
+            }
+        }
+    }
+
+    default void setAutoCommitTrue(Connection connection) {
+        final Logger logger = LogManager.getLogger();
+        if (connection != null) {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException exception) {
+                logger.log(Level.ERROR, exception);
             }
         }
     }

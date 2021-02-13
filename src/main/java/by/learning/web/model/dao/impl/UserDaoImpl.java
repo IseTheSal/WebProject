@@ -141,5 +141,4 @@ public class UserDaoImpl extends UserDao {
         }
         return result;
     }
-
 }

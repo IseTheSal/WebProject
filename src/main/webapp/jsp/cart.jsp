@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cart-style.css">
 </head>
 <body>
-<div style=" background-image: url(https://wallpaperaccess.com/full/3977333.jpg);
+<div style=" background-image: url(/img/cart-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%">
@@ -53,10 +53,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                                style="cursor: pointer;color: green; width: 25px"/>
                                     </form>
                                 </div>
-                                <div class="prodTotal cartSection" style="text-align: center">
-                                        <%--                                    <p id="gameTotalPrice" class="gameTotalPrice">$15.00</p>--%>
-                                </div>
-                                    <%--                                --%>
                                 <div class="cartSection removeWrap">
                                     <form method="post" action="removeFromCart.do">
                                         <input type="hidden" name="command" value="remove_from_cart"/>
@@ -75,8 +71,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     </c:forEach>
                 </ul>
             </div>
-            <div class="form-group promoCode" style="width: 400px"><label for="promo" style="color:white">Promo
-                code</label>
+            <div class="form-group promoCode" style="width: 400px">
+                <label for="promo" style="color:white"><fmt:message key="cart.promoCode"/></label>
                 <form class="needs-validation" novalidate method="post" action="usePromocode.do">
                     <input type="hidden" name="command" value="use_promocode"/>
                     <input name="clientToken" type="hidden" value="${serverToken}"/>
@@ -86,26 +82,40 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                            style="width: 300px; border-radius: 0" required
                            pattern="[a-zA-Z0-9]{5,10}"
                            minlength="5" maxlength="10" id="promo"/>
-                    <button type="submit" style=";width: 60px; height: 42px; border-radius: 0" class="btn"></button>
+                    <button type="submit" style="width: 60px; height: 42px; border-radius: 0"
+                            class="btn promo-btn"></button>
                     <small class="invalid-feedback" id="promocodeHelp" style="color: red;margin-bottom: 20px">
-                        <fmt:message key="cart.title"/></small>
-                    <c:if test="${requestScope.couponExist==false}"><small
+                        <fmt:message key="cart.notValidPromo"/></small>
+                    <c:if test="${requestScope.couponExist == false}"><small
                             style="color: red;margin-bottom: 20px">
-                        <fmt:message key="cart.title"/></small></c:if>
+                        <fmt:message key="cart.notValidPromo"/></small></c:if>
                 </form>
             </div>
             <div class="subtotal cf">
                 <ul>
-                    <li class="totalRow"><span class="label" style="margin-right: 4%">Price</span><span
-                            class="value totalPriceClass">$35.00</span></li>
-                    <li class="totalRow"><span class="label">Promo</span>
+                    <li class="totalRow"><span class="label" style="margin-right: 4%"><fmt:message
+                            key="cart.price"/></span><span
+                            class="value totalPriceClass"></span></li>
+                    <li class="totalRow"><span class="label"><fmt:message key="cart.promo"/></span>
                         <span class="value promoClass"
-                              id="promoText">0%</span>
+                              id="promoText"></span>
                     </li>
-                    <div style="margin-left: 45%;height: 2px; background-color: #EAEFF5; width: 53%;"><br></div>
-                    <li class="totalRow final"><span class="label">Total</span><span
-                            class="value billClass">$44.00</span></li>
-                    <li class="totalRow"><a href="#" class="btn continue">Checkout</a></li>
+                    <div class="custom-btn"
+                         style="margin-left: 45%;height: 2px; background-color: #EAEFF5; width: 53%;"><br></div>
+                    <li class="totalRow final"><span class="label"><fmt:message key="cart.total"/></span><span
+                            class="value billClass"></span></li>
+
+                    <li class="totalRow">
+                        <form method="post" action="makeOrder.do">
+                            <input type="hidden" name="command" value="make_order"/>
+                            <input name="clientToken" type="hidden" value="${serverToken}"/>
+                            <input type="hidden" name="currentPage"
+                                   value="${pageContext.request.requestURI}">
+                            <input type="submit" value="Check" style="width: 175px"
+                                   class="btn custom-btn"/>
+                        </form>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -160,18 +170,11 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     cardElements.item(i).getElementsByClassName('gameTotalPrice').item(0).innerHTML = gameTotalPrice + '$';
                 }
                 totalPriceHtml.item(0).innerHTML = totalPrice + '$';
-                var discount = 0;
-                console.log(${sessionScope.couponDiscount});
-                if (${not empty sessionScope.couponDiscount}) {
-                    discount = ${sessionScope.couponDiscount};
-                    document.getElementById('promoText').innerHTML = discount + '%';
-                } else {
-                    document.getElementById('promoText').innerHTML = 0 + '%';
-                }
+                var discount = ${sessionScope.couponDiscount};
+                document.getElementById('promoText').innerHTML = discount + '%';
                 billPriceElements.item(0).innerHTML = (totalPrice - totalPrice * discount / 100) + '$';
             }
         )
-
     </script>
 </body>
 </html>

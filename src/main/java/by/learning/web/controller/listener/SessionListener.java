@@ -20,6 +20,7 @@ public class SessionListener implements HttpSessionListener {
         HttpSession session = se.getSession();
         session.setAttribute(SessionAttribute.CART_MAP, new HashMap<Game, Integer>());
         session.setAttribute(SessionAttribute.CART_AMOUNT, 0);
+        session.setAttribute(SessionAttribute.COUPON_DISCOUNT, 0);
         logger.log(Level.DEBUG, "Listener works");
     }
 
