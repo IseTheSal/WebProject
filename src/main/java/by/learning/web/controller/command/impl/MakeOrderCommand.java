@@ -45,7 +45,6 @@ public class MakeOrderCommand implements ActionCommand {
                 logger.log(Level.ERROR, e);
             }
         }
-
         if (isCouponExist) {
             try {
                 int couponAmount = orderService.findAvailableCouponAmount(coupon.getCodeName());
@@ -58,7 +57,6 @@ public class MakeOrderCommand implements ActionCommand {
                 logger.log(Level.ERROR, e);
             }
         }
-
         User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
         HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
         try {
