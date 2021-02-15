@@ -15,5 +15,4 @@ public class SessionAttribute {
 
     private SessionAttribute() {
     }
-
 }

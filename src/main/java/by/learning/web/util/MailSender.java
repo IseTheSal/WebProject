@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -18,15 +17,14 @@ public class MailSender {
     private static final String HOST_PASSWORD = "strongpassword";
     private static final String SUBJECT_NAME = "Order from GameSpot";
     private static final String MESSAGE_FOOTER = "If you have any questions, write to our mail ";
-    //fixme
-    private static final String PROPERTIES_PATH = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\resources\\config\\mail.properties";
+    private static final String PROPERTIES_PATH = "/property/mail.properties";
 
     private final Properties properties;
 
     public MailSender() {
         properties = new Properties();
         try {
-            properties.load(new FileReader(PROPERTIES_PATH));
+            properties.load(MailSender.class.getResourceAsStream(PROPERTIES_PATH));
         } catch (IOException e) {
             logger.log(Level.ERROR, e);
         }

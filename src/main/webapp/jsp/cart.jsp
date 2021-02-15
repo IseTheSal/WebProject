@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
-<fmt:setBundle basename="property.language"/>
+<fmt:setBundle basename="language.language"/>
 <html>
 <head>
     <title><fmt:message key="cart.title"/></title>
@@ -111,11 +111,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                             <input name="clientToken" type="hidden" value="${serverToken}"/>
                             <input type="hidden" name="currentPage"
                                    value="${pageContext.request.requestURI}">
-                            <input type="submit" value="Check" style="width: 175px"
+                            <input type="submit" value="Buy" style="width: 175px"
                                    class="btn custom-btn"/>
                         </form>
                     </li>
-
                 </ul>
             </div>
         </div>

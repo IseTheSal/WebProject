@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class LogoutCommand implements ActionCommand {
-    private static final Logger logger = LogManager.getLogger(LogoutCommand.class);
+    private static final Logger logger = LogManager.getLogger();
 
     @Override
     public String execute(HttpServletRequest request) {

@@ -16,8 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class LoginCommand implements ActionCommand {
-
-    private static final Logger logger = LogManager.getLogger(LoginCommand.class);
+    private static final Logger logger = LogManager.getLogger();
 
     private UserService service;
 

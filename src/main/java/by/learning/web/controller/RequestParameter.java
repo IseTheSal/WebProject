@@ -21,5 +21,4 @@ public class RequestParameter {
 
     private RequestParameter() {
     }
-
 }

@@ -6,8 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class CryptEncoder {
-
-    private static final Logger logger = LogManager.getLogger(CryptEncoder.class);
+    private static final Logger logger = LogManager.getLogger();
 
     private static final int LOG_ROUND = 10;
 

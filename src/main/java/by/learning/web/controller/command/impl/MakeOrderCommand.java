@@ -43,6 +43,7 @@ public class MakeOrderCommand implements ActionCommand {
                 coupon.setDiscount(discount);
             } catch (ServiceException e) {
                 logger.log(Level.ERROR, e);
+                //fixme
             }
         }
         if (isCouponExist) {
@@ -54,6 +55,7 @@ public class MakeOrderCommand implements ActionCommand {
                     orderService.decreaseCouponAmount(coupon.getCodeName(), 1);
                 }
             } catch (ServiceException e) {
+                //fixme
                 logger.log(Level.ERROR, e);
             }
         }
@@ -75,6 +77,7 @@ public class MakeOrderCommand implements ActionCommand {
                 orderService.increaseCouponAmount(coupon.getCodeName(), 1);
             }
         } catch (ServiceException e) {
+            //fixme
             logger.log(Level.ERROR, e);
         }
         return page;

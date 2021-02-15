@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 public class AddToCartCommand implements ActionCommand {
-
     private static final Logger logger = LogManager.getLogger();
 
     private OrderService orderService;

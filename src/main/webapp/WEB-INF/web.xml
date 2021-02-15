@@ -49,17 +49,9 @@
         <url-pattern>/jsp/increaseCart.do</url-pattern>
         <url-pattern>/jsp/decreaseCart.do</url-pattern>
         <url-pattern>/jsp/usePromocode.do</url-pattern>
+        <url-pattern>/jsp/makeOrder.do</url-pattern>
 
     </filter-mapping>
-
-    <!--    <servlet>-->
-    <!--        <servlet-name>Register</servlet-name>-->
-    <!--        <jsp-file>/index.jsp</jsp-file>-->
-    <!--    </servlet>-->
-    <!--    <servlet-mapping>-->
-    <!--        <servlet-name>Register</servlet-name>-->
-    <!--        <url-pattern>/main</url-pattern>-->
-    <!--    </servlet-mapping>-->
 
 
 </web-app>

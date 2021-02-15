@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class OpenGameCommand implements ActionCommand {
-
     private static final Logger logger = LogManager.getLogger();
 
     private GameService service;

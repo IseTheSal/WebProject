@@ -19,8 +19,8 @@ import java.util.Optional;
 
 @WebServlet(urlPatterns = {"/controller", "*.by", "*.do"}, name = "controller")
 public class Controller extends HttpServlet {
-    private static final Logger logger = LogManager.getLogger(Controller.class);
-    private final static String COMMAND_PARAM = "command";
+    private static final Logger logger = LogManager.getLogger();
+    private static final String COMMAND_PARAM = "command";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

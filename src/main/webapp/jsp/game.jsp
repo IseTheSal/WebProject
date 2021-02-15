@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
-<fmt:setBundle basename="property.language"/>
+<fmt:setBundle basename="language.language"/>
 <html>
 <head>
     <title>${sessionScope.currentGame.title}</title>

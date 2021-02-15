@@ -46,8 +46,8 @@ public class OrderDaoImpl implements OrderDao {
             "FROM coupons " +
             "WHERE code = ?;";
     private static final String FIND_LIMITED_GAME_CODE = "SELECT game_code " +
-            "from codes " +
-            "where sold IS FALSE " +
+            "FROM codes " +
+            "WHERE sold IS FALSE " +
             "  AND game_id = ? " +
             "LIMIT ?";
     private static final String SET_CODE_SOLD_TRUE = "UPDATE codes " +

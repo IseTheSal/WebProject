@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSessionListener;
 import java.util.HashMap;
 
 public class SessionListener implements HttpSessionListener {
-
     private static final Logger logger = LogManager.getLogger();
 
     @Override
@@ -24,5 +23,4 @@ public class SessionListener implements HttpSessionListener {
         session.setAttribute(SessionAttribute.COUPON_DISCOUNT, discount);
         logger.log(Level.DEBUG, "Listener works");
     }
-
 }

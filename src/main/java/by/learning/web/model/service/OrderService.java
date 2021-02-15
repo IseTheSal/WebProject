@@ -1,14 +1,11 @@
 package by.learning.web.model.service;
 
-import by.learning.web.exception.DaoException;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.entity.User;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {

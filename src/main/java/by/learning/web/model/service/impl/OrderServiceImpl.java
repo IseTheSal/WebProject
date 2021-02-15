@@ -271,12 +271,10 @@ public class OrderServiceImpl implements OrderService {
                 if (!gameCodeList.isEmpty()) {
                     orderDao.putSoldGameCodeList(gameCodeList);
                 }
-                logger.log(Level.DEBUG, "HERE");
                 MailSender mailSender = new MailSender();
                 String body = convertCodeListToMessage(gameCodeList);
                 String email = user.getEmail();
                 mailSender.sendMessage(email, body);
-                logger.log(Level.DEBUG, "HERE 1");
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }

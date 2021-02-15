@@ -10,7 +10,7 @@ public class ClientOrder {
     private BigDecimal price;
     private Coupon coupon;
 
-    public ClientOrder(int userId,BigDecimal price, Coupon coupon) {
+    public ClientOrder(int userId, BigDecimal price, Coupon coupon) {
         this.userId = userId;
         this.price = price;
         this.coupon = coupon;

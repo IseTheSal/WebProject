@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
-<fmt:setBundle basename="property.language"/>
+<fmt:setBundle basename="language.language"/>
 <head>
     <title>
         <fmt:message key="registration.title"/>
