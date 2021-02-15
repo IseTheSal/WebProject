@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public interface CloseableDao {
+public interface BaseDao {
 
     default void close(Statement statement) {
         final Logger logger = LogManager.getLogger();
@@ -23,7 +23,7 @@ public interface CloseableDao {
     }
 
     default void close(Connection connection) {
-        final Logger logger = LogManager.getLogger(CloseableDao.class);
+        final Logger logger = LogManager.getLogger(BaseDao.class);
         if (connection != null) {
             try {
                 connection.close();

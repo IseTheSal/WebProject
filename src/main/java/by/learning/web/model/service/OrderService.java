@@ -1,10 +1,14 @@
 package by.learning.web.model.service;
 
+import by.learning.web.exception.DaoException;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.entity.Game;
+import by.learning.web.model.entity.User;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {
@@ -20,5 +24,15 @@ public interface OrderService {
 
     void changeGameCartAmount(HashMap<Game, Integer> cartMap, int gameId, String operation) throws ServiceException;
 
-    boolean createOrder(int userId, Coupon coupon, HashMap<Game, Integer> cartMap) throws ServiceException;
+    boolean createOrder(int userId, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException;
+
+    void decreaseCouponAmount(String codeName, int amount) throws ServiceException;
+
+    void increaseCouponAmount(String codeName, int amount) throws ServiceException;
+
+    short findCouponDiscount(String codeName) throws ServiceException;
+
+    int findAvailableCouponAmount(String codeName) throws ServiceException;
+
+    void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException;
 }

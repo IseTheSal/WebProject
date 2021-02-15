@@ -6,7 +6,7 @@ import by.learning.web.model.entity.Game;
 import java.util.List;
 import java.util.Optional;
 
-public interface GameDao extends CloseableDao {
+public interface GameDao extends BaseDao {
 
     Optional<Game> findGameById(int id) throws DaoException;
 

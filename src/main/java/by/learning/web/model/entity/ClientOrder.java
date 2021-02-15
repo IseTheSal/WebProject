@@ -10,9 +10,8 @@ public class ClientOrder {
     private BigDecimal price;
     private Coupon coupon;
 
-    public ClientOrder(int userId, Set<Integer> gameIdSet, BigDecimal price, Coupon coupon) {
+    public ClientOrder(int userId,BigDecimal price, Coupon coupon) {
         this.userId = userId;
-        this.gameIdSet = gameIdSet;
         this.price = price;
         this.coupon = coupon;
     }
@@ -20,6 +19,11 @@ public class ClientOrder {
     public ClientOrder(int userId, Set<Integer> gameIdSet, BigDecimal price) {
         this.userId = userId;
         this.gameIdSet = gameIdSet;
+        this.price = price;
+    }
+
+    public ClientOrder(int userId, BigDecimal price) {
+        this.userId = userId;
         this.price = price;
     }
 

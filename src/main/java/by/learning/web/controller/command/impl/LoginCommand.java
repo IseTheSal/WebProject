@@ -6,7 +6,7 @@ import by.learning.web.controller.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.User;
-import by.learning.web.model.service.impl.UserServiceImpl;
+import by.learning.web.model.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,9 +19,9 @@ public class LoginCommand implements ActionCommand {
 
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);
 
-    private UserServiceImpl service;
+    private UserService service;
 
-    public LoginCommand(UserServiceImpl service) {
+    public LoginCommand(UserService service) {
         this.service = service;
     }
 

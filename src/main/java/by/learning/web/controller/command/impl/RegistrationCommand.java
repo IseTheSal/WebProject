@@ -4,7 +4,7 @@ import by.learning.web.controller.PagePath;
 import by.learning.web.controller.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
-import by.learning.web.model.service.impl.UserServiceImpl;
+import by.learning.web.model.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 public class RegistrationCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private UserServiceImpl service;
+    private UserService service;
 
-    public RegistrationCommand(UserServiceImpl service) {
+    public RegistrationCommand(UserService service) {
         this.service = service;
     }
 

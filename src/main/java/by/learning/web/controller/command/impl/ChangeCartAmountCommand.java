@@ -5,7 +5,7 @@ import by.learning.web.controller.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Game;
-import by.learning.web.model.service.impl.OrderServiceImpl;
+import by.learning.web.model.service.OrderService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,9 +17,9 @@ import java.util.HashMap;
 public class ChangeCartAmountCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private OrderServiceImpl orderService;
+    private OrderService orderService;
 
-    public ChangeCartAmountCommand(OrderServiceImpl orderService) {
+    public ChangeCartAmountCommand(OrderService orderService) {
         this.orderService = orderService;
     }
 

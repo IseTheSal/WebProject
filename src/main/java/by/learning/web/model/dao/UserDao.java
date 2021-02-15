@@ -5,7 +5,7 @@ import by.learning.web.model.entity.User;
 
 import java.util.Optional;
 
-public abstract class UserDao implements CloseableDao {
+public abstract class UserDao implements BaseDao {
 
     protected abstract Optional<User> findUser(String login, String password) throws DaoException;
 

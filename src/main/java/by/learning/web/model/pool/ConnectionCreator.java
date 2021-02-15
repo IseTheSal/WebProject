@@ -14,7 +14,7 @@ import java.util.Properties;
 
 class ConnectionCreator {
 
-    private static final Logger logger = LogManager.getLogger(ConnectionCreator.class);
+    private static final Logger logger = LogManager.getLogger();
     private static final Properties PROPERTY = new Properties();
     //FIXME
     private static final String PROPERTY_PATH = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\resources\\database.properties";

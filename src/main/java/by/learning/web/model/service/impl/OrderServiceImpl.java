@@ -9,7 +9,9 @@ import by.learning.web.model.dao.impl.OrderDaoImpl;
 import by.learning.web.model.entity.ClientOrder;
 import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.entity.Game;
+import by.learning.web.model.entity.User;
 import by.learning.web.model.service.OrderService;
+import by.learning.web.util.MailSender;
 import by.learning.web.validator.OrderValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -140,35 +142,152 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean createOrder(int userId, Coupon coupon, HashMap<Game, Integer> cartMap) throws ServiceException {
-        boolean isCreated;
+    public int findAvailableCouponAmount(String codeName) throws ServiceException {
+        int amount = 0;
+        if (OrderValidator.isCouponValid(codeName)) {
+            try {
+                amount = orderDao.findAvailableCouponAmountByName(codeName);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        } else {
+            logger.log(Level.INFO, "coupon with code {} not valid", codeName);
+        }
+        return amount;
+    }
+
+    @Override
+    public short findCouponDiscount(String codeName) throws ServiceException {
+        short discount = 0;
+        if (OrderValidator.isCouponValid(codeName)) {
+            try {
+                discount = orderDao.findCouponDiscountByName(codeName);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return discount;
+    }
+
+    @Override
+    public void increaseCouponAmount(String codeName, int amount) throws ServiceException {
+        try {
+            orderDao.changeCouponAmountByName(codeName, amount, true);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void decreaseCouponAmount(String codeName, int amount) throws ServiceException {
+        try {
+            orderDao.changeCouponAmountByName(codeName, amount, false);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    private int findAvailableGameAmount(int gameId) throws ServiceException {
+        int amount;
+        try {
+            amount = orderDao.findAvailableGameAmountById(gameId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return amount;
+    }
+
+    private BigDecimal countOrderPrice(HashMap<Game, Integer> cartMap) {
         BigDecimal totalPrice = new BigDecimal("0.0");
-        Set<Integer> gameIdSet = new HashSet<>();
         Set<Game> gameKeySet = cartMap.keySet();
         int size = gameKeySet.size();
         Game[] games = gameKeySet.toArray(new Game[size]);
         for (Game currentGame : games) {
-            gameIdSet.add(currentGame.getId());
             Integer amount = cartMap.get(currentGame);
             BigDecimal gamePrice = currentGame.getPrice();
             BigDecimal totalGamePrice = gamePrice.multiply(new BigDecimal(amount));
             totalPrice = totalPrice.add(totalGamePrice);
         }
-        ClientOrder order;
+        return totalPrice;
+    }
+
+    private BigDecimal countPriceDiscount(BigDecimal price, Coupon coupon) {
+        short discount = 0;
         if (coupon != null) {
-            short discount = coupon.getDiscount();
-            BigDecimal discountPercent = BigDecimal.valueOf((double) discount / 100);
-            totalPrice = totalPrice.subtract(totalPrice.multiply(discountPercent));
-            order = new ClientOrder(userId, gameIdSet, totalPrice, coupon);
-        } else {
-            order = new ClientOrder(userId, gameIdSet, totalPrice);
-            logger.log(Level.INFO, "coupon was not found");
+            discount = coupon.getDiscount();
         }
-        try {
-            isCreated = orderDao.createOrder(order);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
+        BigDecimal totalPrice = new BigDecimal(String.valueOf(price));
+        BigDecimal discountPercent = BigDecimal.valueOf((double) discount / 100);
+        totalPrice = totalPrice.subtract(totalPrice.multiply(discountPercent));
+        return totalPrice;
+    }
+
+    private Set<Integer> createGameIdSet(HashMap<Game, Integer> cartMap) {
+        Set<Integer> gameIdSet = new HashSet<>();
+        Set<Game> gameKeySet = cartMap.keySet();
+        gameKeySet.forEach(game -> gameIdSet.add(game.getId()));
+        return gameIdSet;
+    }
+
+    @Override
+    public boolean createOrder(int userId, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
+        boolean isCreated = false;
+        Set<Integer> gameIdSet = createGameIdSet(cartMap);
+        List<Game> gameList = new ArrayList<>(cartMap.keySet());
+        boolean amountValid = true;
+        for (Game game : gameList) {
+            Integer gameCartAmount = cartMap.get(game);
+            int availableGameAmount = findAvailableGameAmount(game.getId());
+            if (availableGameAmount < gameCartAmount) {
+                amountValid = false;
+                if (availableGameAmount > 0) {
+                    cartMap.put(game, availableGameAmount);
+                } else {
+                    removeGameFromCart(cartMap, game.getId());
+                }
+            }
+        }
+        if (amountValid) {
+            BigDecimal orderPrice = countOrderPrice(cartMap);
+            BigDecimal totalPrice = countPriceDiscount(orderPrice, coupon);
+            ClientOrder order = new ClientOrder(userId, gameIdSet, totalPrice);
+            order.setCoupon(coupon);
+            try {
+                isCreated = orderDao.createOrder(order);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
         }
         return isCreated;
+    }
+
+    @Override
+    public void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException {
+        List<Game> gameList = new ArrayList<>(cartMap.keySet());
+        for (Game game : gameList) {
+            Integer amount = cartMap.get(game);
+            try {
+                List<String> gameCodeList = orderDao.findLimitedGameCodes(game.getId(), amount);
+                if (!gameCodeList.isEmpty()) {
+                    orderDao.putSoldGameCodeList(gameCodeList);
+                }
+                logger.log(Level.DEBUG, "HERE");
+                MailSender mailSender = new MailSender();
+                String body = convertCodeListToMessage(gameCodeList);
+                String email = user.getEmail();
+                mailSender.sendMessage(email, body);
+                logger.log(Level.DEBUG, "HERE 1");
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+    }
+
+    private String convertCodeListToMessage(List<String> codeList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String code : codeList) {
+            stringBuilder.append(code).append("\n");
+        }
+        return stringBuilder.toString();
     }
 }
