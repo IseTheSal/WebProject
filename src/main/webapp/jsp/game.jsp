@@ -78,12 +78,14 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <jsp:include page="support/footer.jsp"/>
         </div>
     </div>
+
+
     <script>
         $(document).ready(function () {
             var gameInStock = ${requestScope.gameInStock};
-            console.log(gameInStock);
             if (!gameInStock) {
                 $("#clsButton").click();
+                funcBtns.alertWarningBody('<fmt:message key='game.outOfStock1'/>' + '<fmt:message key='game.outOfStockToast2'/>');
             }
         });
     </script>

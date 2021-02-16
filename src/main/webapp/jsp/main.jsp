@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
@@ -44,6 +44,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
 </body>
 
 <script>
+
     $(document).ready(function () {
         var colShown = 3;
         var colTotal = $('.t1 .col').length;
@@ -71,7 +72,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 }, 300);
             }
         );
-
 
         $('#next a').bind('click', function (e) {
             $('a.active').removeClass('active').next().addClass('active');
@@ -115,6 +115,14 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             } else {
                 next.style.pointerEvents = "auto";
             }
+        }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var orderCreated = ${requestScope.orderCreated};
+        if (orderCreated) {
+            funcBtns.alertOkOnlyTitle('<fmt:message key='main.orderSuccess'/>');
         }
     });
 </script>

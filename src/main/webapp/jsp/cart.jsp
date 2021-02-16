@@ -122,6 +122,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <jsp:include page="support/footer.jsp"/>
         </div>
     </div>
+
+
     <script>
         // Remove Items From Cart
         $('a.remove').click(function (e) {
@@ -132,6 +134,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         $('a.btn.continue').click(function () {
             $('li.items').show(400);
         });
+
 
         (function () {
             'use strict';
@@ -174,6 +177,15 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 billPriceElements.item(0).innerHTML = (totalPrice - totalPrice * discount / 100) + '$';
             }
         )
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var amountChanged = ${requestScope.cartAmountChanged};
+            if (amountChanged) {
+                funcBtns.alertWarning('<fmt:message key='cart.amountChanged'/>');
+            }
+        });
     </script>
 </body>
 </html>

@@ -20,6 +20,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footer-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/card-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/modal-window.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/toast-window.css">
+
 </head>
 
 <body style="background-image: url(/img/registration-background.jpg);
@@ -111,6 +113,18 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/toast-script.js"></script>
+<script>
+    $(document).ready(function () {
+        var serverError = ${requestScope.serverError};
+        if (serverError) {
+            funcBtns.alertWarning('<fmt:message key='server.error'/>');
+        }
+        var error = ${requestScope.serverError};
+        if (error) {
+            funcBtns.alertWarning('<fmt:message key='authorization.needAuthorization'/>');
+        }
+    });
+</script>
 </body>
 </html>

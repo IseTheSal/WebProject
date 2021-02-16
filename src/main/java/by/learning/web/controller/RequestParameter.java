@@ -17,6 +17,10 @@ public class RequestParameter {
     public static final String OPERATION = "operation";
     public static final String COUPON_CODE = "couponCode";
     public static final String COUPON_EXIST = "couponExist";
+    public static final String NEED_AUTHORIZATION_FIRST = "loginFirst";
+    public static final String SERVER_ERROR = "serverError";
+    public static final String ORDER_CREATED = "orderCreated";
+    public static final String CART_AMOUNT_CHANGED = "cartAmountChanged";
 
 
     private RequestParameter() {
