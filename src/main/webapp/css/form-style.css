@@ -3,3 +3,21 @@
     background-image: inherit !important;
     box-shadow: black !important;
 }
+
+.custom-input {
+    background: rgba(237, 164, 238, 0.1);
+    color: white !important;
+}
+
+
+.custom-input::placeholder {
+    color: white;
+}
+.custom-input::-webkit-input-placeholder {
+    color: white;
+}
+
+.custom-input:focus::placeholder {
+    color: transparent;
+}
+

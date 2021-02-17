@@ -85,7 +85,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
             </c:if>
         </div>
     </div>
-    <form method="post" action="${pageContext.request.contextPath}/controller"
+    <form method="post" action="${pageContext.request.contextPath}/changeLanguage.do"
           style="position: absolute; top: 80px; left: 20px">
         <input type="hidden" name="command" value="change_locale"/>
         <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">

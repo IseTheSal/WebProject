@@ -182,6 +182,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <script>
         $(document).ready(function () {
             var amountChanged = ${requestScope.cartAmountChanged};
+            console.log(amountChanged);
             if (amountChanged) {
                 funcBtns.alertWarning('<fmt:message key='cart.amountChanged'/>');
             }

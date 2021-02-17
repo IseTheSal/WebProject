@@ -75,9 +75,11 @@ public class MakeOrderCommand implements ActionCommand {
                 session.setAttribute(SessionAttribute.COUPON_DISCOUNT, newDiscount);
                 session.removeAttribute(SessionAttribute.COUPON);
                 page = PagePath.INDEX;
-            } else if (isCouponExist) {
+            } else {
                 session.setAttribute(SessionAttribute.CART_AMOUNT, orderService.countCartAmount(cartMap));
                 request.setAttribute(RequestParameter.CART_AMOUNT_CHANGED, true);
+            }
+            if (isCouponExist) {
                 orderService.increaseCouponAmount(coupon.getCodeName(), 1);
             }
         } catch (ServiceException e) {

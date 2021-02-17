@@ -142,3 +142,26 @@
     box-shadow: 0 0 10px #939393, 0 0 40px #939393, 0 0 80px #939393;
 }
 
+.search-button {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgb(145, 92, 182);
+    border-radius: 4px;
+    font-weight: normal;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+
+.search-button:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+
+.search-span {
+    color: #e9e9e9;
+}
+
+.search-span:hover {
+    color: white;
+}
+
