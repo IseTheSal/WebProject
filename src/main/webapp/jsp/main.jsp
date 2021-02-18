@@ -19,17 +19,18 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <form autocomplete="off" method="get" action="${pageContext.request.contextPath}/toCart.do">
             <div style="position: absolute; margin-left: 1%; margin-top: 1%">
                 <input type="hidden" name="command" value="open_game"/>
-                <button type="submit" value="" class="button-glow-blue"
-                        style="display: inline; position: absolute;margin-left: 190px; height: 30px; border-radius: 100%; width: 30px; background: rgba(158,11,175,0.3)">
+                <button type="submit" value="" class="button-search-purple"
+                        style="display: inline; position: absolute;margin-left: 190px; height: 30px; border-radius: 100%; width: 30px; background: rgba(11,79,175,0.5)">
                     <span class="fa fa-search search-span"></span>
                 </button>
                 <div class="autocomplete; neon-title-cyan-light" style="width:300px; cursor: pointer; display: inline;">
-                    <input id="myInput" class="custom-input" type="text" placeholder="Search..."
-                           style="color: black;border-radius: 10%; box-shadow:0 0 10px #b352f3;"/>
+                    <input id="myInput" class="custom-input" type="text" placeholder="<fmt:message key="main.search"/>"
+                           style="color: black;border-radius: 10%; box-shadow:0 0 30px #0B4FAF;"/>
                     <input type="hidden" class="gameIdClass" value="1" name="gameId"/>
                 </div>
             </div>
         </form>
+
         <div class="container t1">
             <div class="row row-cols-3" style="row-gap: 60px; margin-left: 45px">
                 <c:forEach items="${sessionScope.gameList}" var="game">
@@ -152,12 +153,12 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         var colShown = 3;
         var colTotal = $('.t1 .col').length;
         var numPages = colTotal / colShown;
-        $('#prev').append('<a id="prevLink"  style="color:#d2d2d2" class="button-glow-gray" rel="' + 1 + '">&emsp;' + '&#60;&#60;Previous' + '&emsp;</a> ');
+        $('#prev').append('<a id="prevLink"  style="color:#d2d2d2" class="button-glow-gray" rel="' + 1 + '">&emsp;' + '&#60;&#60;<fmt:message key="main.page.previous"/>' + '&emsp;</a> ');
         for (i = 0; i < numPages; i++) {
             var pageNum = i + 1;
             $('#nav').append('<a style="color: #f4fffd; border-radius: 20%;text-align: center" class="neon-title-white btn-outline-secondary" rel="' + i + '">&emsp;' + pageNum + '&emsp;</a> ');
         }
-        $('#next').append('<a id="nextLink" style="color:#d2d2d2" class="button-glow-gray" rel="' + 3 + '">&emsp;' + 'Next>>' + '&emsp;</a> ');
+        $('#next').append('<a id="nextLink" style="color:#d2d2d2" class="button-glow-gray" rel="' + 3 + '">&emsp;' + '<fmt:message key="main.page.next"/>&#62;&#62;' + '&emsp;</a> ');
 
 
         $('.t1 .col').hide();

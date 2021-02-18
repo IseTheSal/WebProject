@@ -157,6 +157,22 @@
     box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
 }
 
+.button-search-purple {
+    width: 350px;
+    color: #000000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 35%;
+}
+
+.button-search-purple:hover {
+    background: #0B4FAF;
+    color: #000;
+    box-shadow: 0 0 15px #0B4FAF;
+}
+
 .search-span {
     color: #e9e9e9;
 }

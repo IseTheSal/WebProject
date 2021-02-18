@@ -35,7 +35,6 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commandValue = req.getParameter(COMMAND_PARAM);
         logger.log(Level.DEBUG, "Command - " + commandValue);
-        logger.log(Level.DEBUG, "URI - " + req.getRequestURI());
         logger.log(Level.DEBUG, "URL - " + req.getRequestURL());
         Optional<ActionCommand> commandOptional = CommandProvider.defineCommand(commandValue);
         ActionCommand command = commandOptional.orElseThrow();

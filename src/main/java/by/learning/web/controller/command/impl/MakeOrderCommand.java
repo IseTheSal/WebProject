@@ -42,20 +42,16 @@ public class MakeOrderCommand implements ActionCommand {
         if (discount != 0) {
             coupon = (Coupon) session.getAttribute(SessionAttribute.COUPON);
             isCouponExist = true;
-            try {
-                discount = orderService.findCouponDiscount(coupon.getCodeName());
-                coupon.setDiscount(discount);
-            } catch (ServiceException e) {
-                request.setAttribute(RequestParameter.SERVER_ERROR, true);
-                logger.log(Level.ERROR, e);
-            }
         }
         if (isCouponExist) {
             try {
                 int couponAmount = orderService.findAvailableCouponAmount(coupon.getCodeName());
                 if (couponAmount <= 0) {
                     isCouponExist = false;
+                    coupon = null;
                 } else {
+                    discount = orderService.findCouponDiscount(coupon.getCodeName());
+                    coupon.setDiscount(discount);
                     orderService.decreaseCouponAmount(coupon.getCodeName(), 1);
                 }
             } catch (ServiceException e) {

@@ -26,12 +26,12 @@ public class ChangeCartAmountCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = request.getParameter(RequestParameter.CURRENT_PAGE);
-        String operation = request.getParameter(RequestParameter.OPERATION);
-        String gameIdString = request.getParameter(RequestParameter.GAME_ID);
-        int gameId = Integer.parseInt(gameIdString);
         try {
             HttpSession session = request.getSession();
             HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
+            String gameIdString = request.getParameter(RequestParameter.GAME_ID);
+            int gameId = Integer.parseInt(gameIdString);
+            String operation = request.getParameter(RequestParameter.OPERATION);
             orderService.changeGameCartAmount(cartMap, gameId, operation);
             session.setAttribute(SessionAttribute.CART_MAP, cartMap);
             int cartAmount = orderService.countCartAmount(cartMap);
