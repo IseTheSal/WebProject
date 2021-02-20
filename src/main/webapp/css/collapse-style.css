@@ -1,0 +1,31 @@
+.collapsible {
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    width: 500px;
+    border: none;
+    text-align: left;
+    outline: none;
+}
+
+.active, .collapsible:hover {
+    background-color: transparent;
+}
+
+.collapsible:after {
+    content: '\1F589';
+    color: white;
+    font-weight: bold;
+    float: right;
+}
+
+.active:after {
+    content: "-";
+}
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: transparent;
+}

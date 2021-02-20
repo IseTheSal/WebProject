@@ -42,7 +42,8 @@ public class AddToCartCommand implements ActionCommand {
                 request.setAttribute(RequestParameter.GAME_IN_STOCK, false);
             }
         } catch (ServiceException e) {
-            logger.log(Level.WARN, e);
+            logger.log(Level.ERROR, e);
+            request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }
         return page;
     }

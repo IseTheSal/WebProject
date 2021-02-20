@@ -23,7 +23,7 @@ public interface BaseDao {
     }
 
     default void close(Connection connection) {
-        final Logger logger = LogManager.getLogger(BaseDao.class);
+        final Logger logger = LogManager.getLogger();
         if (connection != null) {
             try {
                 connection.close();

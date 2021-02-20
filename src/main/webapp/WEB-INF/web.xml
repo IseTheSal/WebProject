@@ -35,6 +35,18 @@
     </filter-mapping>
 
     <filter>
+        <filter-name>UserAccessFilter</filter-name>
+        <filter-class>by.learning.web.controller.filter.UserAccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserAccessFilter</filter-name>
+        <url-pattern>/jsp/profile.jsp</url-pattern>
+        <url-pattern>/logout.do</url-pattern>
+        <url-pattern>/jsp/changeEmail.do</url-pattern>
+        <url-pattern>/jsp/changePassword.do</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>RefreshFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.RefreshFilter</filter-class>
     </filter>
@@ -50,7 +62,9 @@
         <url-pattern>/jsp/decreaseCart.do</url-pattern>
         <url-pattern>/jsp/usePromocode.do</url-pattern>
         <url-pattern>/jsp/makeOrder.do</url-pattern>
-
+        <url-pattern>/jsp/profile.jsp</url-pattern>
+        <url-pattern>/jsp/changeEmail.do</url-pattern>
+        <url-pattern>/jsp/changePassword.do</url-pattern>
     </filter-mapping>
 
 

@@ -14,14 +14,14 @@ import org.apache.logging.log4j.Logger;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-
-    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger();
 
     public UserServiceImpl() {
     }
 
     private static final UserDaoImpl userDao = UserDaoImpl.getInstance();
 
+    @Override
     public Optional<User> singIn(String login, String password) throws ServiceException {
         Optional<User> result = Optional.empty();
         if (UserValidator.isLoginValid(login)
@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    @Override
     public boolean registerUser(String firstname, String lastname, String login,
                                 String password, String repeatPassword, String email) throws ServiceException {
         boolean isValid = true;
@@ -62,5 +63,48 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isRegister;
+    }
+
+    @Override
+    public boolean changeEmail(int userId, String email, String repeatEmail) throws ServiceException {
+        if (!email.equals(repeatEmail) || !UserValidator.isEmailValid(email)) {
+            return false;
+        }
+        boolean isChanged;
+        try {
+            isChanged = userDao.changeUserEmail(userId, email);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return isChanged;
+    }
+
+    @Override
+    public boolean changeUserPassword(int userId, String oldPassword, String newPassword, String newPasswordRepeat) throws ServiceException {
+        if (!newPassword.equals(newPasswordRepeat) || !UserValidator.isPasswordValid(newPassword)) {
+            return false;
+        }
+        Optional<String> userPassword;
+        boolean isValid = false;
+        try {
+            userPassword = userDao.findUserPassword(userId);
+            if (userPassword.isPresent()) {
+                String oldUserPassword = userPassword.get();
+                isValid = CryptEncoder.check(oldPassword, oldUserPassword);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+
+        boolean isChanged = false;
+        if (isValid) {
+            String cryptPassword = CryptEncoder.generateCrypt(newPassword);
+            try {
+                isChanged = userDao.changeUserPassword(userId, cryptPassword);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return isChanged;
     }
 }

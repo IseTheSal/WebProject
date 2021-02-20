@@ -39,10 +39,12 @@ public class OpenGameCommand implements ActionCommand {
                 page = PagePath.GAME_PAGE;
             } else {
                 logger.log(Level.INFO, "Game with id {} not found", id);
+                request.setAttribute(RequestParameter.FAIL, true);
                 page = PagePath.INDEX;
             }
         } catch (ServiceException e) {
             logger.log(Level.INFO, e);
+            request.setAttribute(RequestParameter.SERVER_ERROR, true);
             page = PagePath.PAGE_SERVER_ERROR;
         }
         return page;

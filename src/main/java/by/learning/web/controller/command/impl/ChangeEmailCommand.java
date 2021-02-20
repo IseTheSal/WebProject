@@ -13,39 +13,36 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
-public class LoginCommand implements ActionCommand {
+public class ChangeEmailCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private UserService service;
+    private UserService userService;
 
-    public LoginCommand(UserService service) {
-        this.service = service;
+    public ChangeEmailCommand(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page;
-        String loginValue = request.getParameter(RequestParameter.LOGIN);
-        String passwordValue = request.getParameter(RequestParameter.PASSWORD);
-        Optional<User> user;
+        String page = PagePath.PROFILE;
+        String email = request.getParameter(RequestParameter.EMAIL);
+        String repeatEmail = request.getParameter(RequestParameter.EMAIL_REPEAT);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
+        int userId = user.getId();
         try {
-            user = service.singIn(loginValue, passwordValue);
-            if (user.isPresent()) {
-                User currentUser = user.get();
-                HttpSession session = request.getSession();
-                session.setAttribute(SessionAttribute.CURRENT_USER, currentUser);
-                page = PagePath.INDEX;
+            boolean isChanged = userService.changeEmail(userId, email, repeatEmail);
+            if (isChanged) {
+                request.setAttribute(RequestParameter.SUCCESS, true);
+                user.setEmail(email);
+                session.setAttribute(SessionAttribute.CURRENT_USER, user);
             } else {
-                request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");
-                page = PagePath.LOGIN;
-                logger.log(Level.INFO, "Error in logging");
+                request.setAttribute(RequestParameter.EMAIL_EXIST, true);
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
-            page = PagePath.LOGIN;
         }
         return page;
     }

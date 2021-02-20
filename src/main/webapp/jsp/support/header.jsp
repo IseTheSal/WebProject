@@ -74,7 +74,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                            style="text-align: center; background-color: transparent"
                            href="${pageContext.request.contextPath}/jsp/profile.jsp"><fmt:message
                                 key="header.profile"/></a>
-                        <form method="post" action="/controller" style="height: 15px">
+                        <form method="post" action="logout.do" style="height: 15px">
                             <input type="hidden" name="command" value="logout"/>
                             <button class="btn btn-outline-danger neon-title-red button-border-red"
                                     type="submit"><fmt:message key="header.logout"/>
@@ -116,13 +116,17 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
 <script src="${pageContext.request.contextPath}/js/toast-script.js"></script>
 <script>
     $(document).ready(function () {
-        var serverError = ${requestScope.serverError};
+        var serverError = ${not empty requestScope.serverError};
         if (serverError) {
-            funcBtns.alertWarning('<fmt:message key='server.error'/>');
+            funcBtns.alertError('Error', 'Server error. Try again later')
         }
-        var error = ${requestScope.serverError};
-        if (error) {
-            funcBtns.alertWarning('<fmt:message key='authorization.needAuthorization'/>');
+        var fail = ${not empty requestScope.fail};
+        if (fail) {
+            funcBtns.alertWarning('Fail');
+        }
+        var success = ${not empty requestScope.success};
+        if (success) {
+            funcBtns.alertOkOnlyTitle('Success');
         }
     });
 </script>

@@ -12,15 +12,5 @@ public interface GameService {
 
     List<Game> findAllGames() throws ServiceException;
 
-//    boolean isGameInStock(int gameId) throws ServiceException;
-
-//    void addGameToCart(Game game, HashMap<Game, Integer> hashMap);
-//
-//    int countCartAmount(HashMap<Game, Integer> hashMap);
-//
-//    void removeGameFromCart(HashMap<Game, Integer> cartMap, int gameId) throws ServiceException;
-//
-//    void changeGameCartAmount(HashMap<Game, Integer> cartMap, int gameId, String operation) throws ServiceException;
-
 }
 

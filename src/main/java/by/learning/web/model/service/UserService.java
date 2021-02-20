@@ -11,5 +11,7 @@ public interface UserService {
     boolean registerUser(String name, String lastname, String login,
                          String password, String repeatPassword, String email) throws ServiceException;
 
+    boolean changeEmail(int userId, String email, String repeatEmail) throws ServiceException;
 
+    boolean changeUserPassword(int userId, String oldPassword, String newPassword, String newPasswordRepeat) throws ServiceException;
 }

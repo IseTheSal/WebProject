@@ -16,7 +16,9 @@ public enum CommandType {
     REMOVE_FROM_CART(new RemoveFromCartCommand(new OrderServiceImpl())),
     CHANGE_CART_AMOUNT(new ChangeCartAmountCommand(new OrderServiceImpl())),
     USE_PROMOCODE(new UsePromocodeCommand(new OrderServiceImpl())),
-    MAKE_ORDER(new MakeOrderCommand(new OrderServiceImpl()));
+    MAKE_ORDER(new MakeOrderCommand(new OrderServiceImpl())),
+    CHANGE_EMAIL(new ChangeEmailCommand(new UserServiceImpl())),
+    CHANGE_PASSWORD(new ChangePasswordCommand(new UserServiceImpl()));
 
     private ActionCommand command;
 

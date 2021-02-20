@@ -37,12 +37,13 @@ public class UsePromocodeCommand implements ActionCommand {
                 short discount = availableCoupon.getDiscount();
                 session.setAttribute(SessionAttribute.COUPON_DISCOUNT, discount);
                 request.setAttribute(RequestParameter.COUPON_EXIST, true);
-                logger.log(Level.DEBUG, "TURE");
+                logger.log(Level.DEBUG, "TRUE");
             } else {
                 logger.log(Level.DEBUG, "FALSE");
                 request.setAttribute(RequestParameter.COUPON_EXIST, false);
             }
         } catch (ServiceException e) {
+            request.setAttribute(RequestParameter.SERVER_ERROR, true);
             logger.log(Level.ERROR, e);
         }
         return page;

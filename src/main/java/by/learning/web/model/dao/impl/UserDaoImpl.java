@@ -37,6 +37,12 @@ public class UserDaoImpl extends UserDao {
     private static final String ADD_USER = "INSERT INTO users (login, password, firstname, lastname, email, role) " +
             "VALUES(?,?,?,?,?,?)";
 
+    private static final String UPDATE_EMAIL = "UPDATE users SET email = ? WHERE users.user_id = ?";
+
+    private static final String UPDATE_PASSWORD = "UPDATE users SET password = ? WHERE users.user_id = ?";
+
+    private static final String FIND_USER_PASSWORD = "SELECT password FROM users WHERE users.user_id = ?";
+
     @Override
     public Optional<User> findUser(String login, String password) throws DaoException {
         Optional<User> result = Optional.empty();
@@ -112,12 +118,10 @@ public class UserDaoImpl extends UserDao {
         boolean result = false;
         String login = user.getLogin();
         String email = user.getEmail();
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
         if (!existEmail(email) && !existLogin(login)) {
+            PreparedStatement preparedStatement = null;
             logger.log(Level.DEBUG, "Login and email are available");
-            try {
-                connection = CONNECTION_POOL.getConnection();
+            try (Connection connection = CONNECTION_POOL.getConnection()) {
                 preparedStatement = connection.prepareStatement(ADD_USER);
                 preparedStatement.setString(1, login);
                 preparedStatement.setString(2, cryptPassword);
@@ -133,11 +137,74 @@ public class UserDaoImpl extends UserDao {
                 throw new DaoException(ex);
             } finally {
                 close(preparedStatement);
-                close(connection);
             }
         } else {
             logger.log(Level.DEBUG, "Fail during registration. Login or email exist");
         }
         return result;
+    }
+
+    @Override
+    public boolean changeUserEmail(int userId, String email) throws DaoException {
+        boolean isChanged = false;
+        boolean isExist = existEmail(email);
+        if (!isExist) {
+            PreparedStatement preparedStatement = null;
+            try (Connection connection = CONNECTION_POOL.getConnection()) {
+                preparedStatement = connection.prepareStatement(UPDATE_EMAIL);
+                preparedStatement.setString(1, email);
+                preparedStatement.setInt(2, userId);
+                int executeUpdate = preparedStatement.executeUpdate();
+                if (executeUpdate > 0) {
+                    isChanged = true;
+                }
+            } catch (ConnectionPoolException | SQLException ex) {
+                throw new DaoException(ex);
+            } finally {
+                close(preparedStatement);
+            }
+        }
+        return isChanged;
+    }
+
+    @Override
+    public Optional<String> findUserPassword(int userId) throws DaoException {
+        Optional<String> password = Optional.empty();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.getConnection()) {
+            preparedStatement = connection.prepareStatement(FIND_USER_PASSWORD);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                password = Optional.of(resultSet.getString(1));
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return password;
+    }
+
+    @Override
+    public boolean changeUserPassword(int userId, String cryptPassword) throws DaoException {
+        boolean isChanged = false;
+        PreparedStatement preparedStatement = null;
+        try (Connection connection = CONNECTION_POOL.getConnection()) {
+            preparedStatement = connection.prepareStatement(UPDATE_PASSWORD);
+            preparedStatement.setString(1, cryptPassword);
+            preparedStatement.setInt(2, userId);
+            int executeUpdate = preparedStatement.executeUpdate();
+            if (executeUpdate > 0) {
+                isChanged = true;
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(preparedStatement);
+        }
+        return isChanged;
     }
 }

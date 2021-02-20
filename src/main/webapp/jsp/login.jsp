@@ -50,7 +50,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
-        var needAuthorization = ${requestScope.loginFirst};
+        var needAuthorization = ${not empty requestScope.loginFirst};
         if (needAuthorization) {
             funcBtns.alertWarning('<fmt:message key='authorization.needAuthorization'/>');
         }

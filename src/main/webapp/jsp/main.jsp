@@ -50,7 +50,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <div style="margin-top: 10%">
             <div style="text-align: center;margin-bottom: 5%; font-size: 20px" class="notcopy">
                 <div id="prev" style="cursor: pointer;display: inline;" class="">
-                    <a id="prevLink" style="color:#d2d2d2" class="button-glow-gray" rel="' + 1 + '">&emsp;&#60;&#60;<fmt:message
+                    <a id="prevLink" style="color:#d2d2d2" class="button-glow-gray"
+                       rel="' + 1 + '">&emsp;&#60;&#60;<fmt:message
                             key="main.page.previous"/>&emsp;</a>
                 </div>
                 <div id="nav" style="cursor: pointer; display: inline;" class="text-center"></div>
@@ -65,6 +66,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
 </body>
 
 <script src="${pageContext.request.contextPath}/js/main-page.js"></script>
+
+<script>
+</script>
 
 <script>
     $(document).ready(function () {

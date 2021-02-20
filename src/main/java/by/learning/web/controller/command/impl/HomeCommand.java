@@ -1,6 +1,7 @@
 package by.learning.web.controller.command.impl;
 
 import by.learning.web.controller.PagePath;
+import by.learning.web.controller.RequestParameter;
 import by.learning.web.controller.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -33,6 +34,7 @@ public class HomeCommand implements ActionCommand {
             page = PagePath.MAIN_PAGE;
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            request.setAttribute(RequestParameter.SERVER_ERROR, true);
             page = PagePath.PAGE_SERVER_ERROR;
         }
         return page;

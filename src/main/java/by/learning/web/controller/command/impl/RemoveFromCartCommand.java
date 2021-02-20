@@ -37,6 +37,7 @@ public class RemoveFromCartCommand implements ActionCommand {
             session.setAttribute(SessionAttribute.CART_AMOUNT, cartAmount);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }
         return page;
     }
