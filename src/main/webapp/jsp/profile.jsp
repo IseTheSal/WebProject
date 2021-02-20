@@ -108,14 +108,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     </form>
                 </div>
             </div>
-            <div style="display: inline">
-                <label class="neon-title-white">
-                    Email:
-                </label>
-                <label class="neon-title-white" style="text-align: center">
-                    ${sessionScope.currentUser.email}
-                </label>
-            </div>
         </div>
     </div>
     <%--    <div style="position: relative; transform: translateY(130%); width: 100%;">--%>

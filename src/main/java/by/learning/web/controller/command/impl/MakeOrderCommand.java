@@ -75,7 +75,7 @@ public class MakeOrderCommand implements ActionCommand {
                 session.setAttribute(SessionAttribute.CART_AMOUNT, orderService.countCartAmount(cartMap));
                 request.setAttribute(RequestParameter.CART_AMOUNT_CHANGED, true);
             }
-            if (isCouponExist) {
+            if (isCouponExist && !isOrderCreated) {
                 orderService.increaseCouponAmount(coupon.getCodeName(), 1);
             }
         } catch (ServiceException e) {

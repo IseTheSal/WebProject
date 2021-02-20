@@ -15,7 +15,7 @@ public class MailSender {
     private static final Logger logger = LogManager.getLogger();
     private static final String HOST_MAIL = "gamespot.by@gmail.com";
     private static final String HOST_PASSWORD = "strongpassword";
-    private static final String SUBJECT_NAME = "Order from GameSpot";
+    private static final String SUBJECT_NAME = "Order from GameSpot!";
     private static final String MESSAGE_FOOTER = "If you have any questions, write to our mail ";
     private static final String PROPERTIES_PATH = "/property/mail.properties";
 
@@ -30,13 +30,14 @@ public class MailSender {
         }
     }
 
-    public void sendMessage(String recipient, String body) {
+    public void sendMessage(String recipient, String gameTitle, String body) {
         Session session = init();
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(HOST_MAIL));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject(SUBJECT_NAME);
+            String title = new StringBuilder(SUBJECT_NAME).append(" ").append(gameTitle).toString();
+            message.setSubject(title);
             String messageBody = new StringBuilder(body).append("\n").append(MESSAGE_FOOTER).append(HOST_MAIL).toString();
             message.setText(messageBody);
             Transport.send(message);

@@ -274,7 +274,8 @@ public class OrderServiceImpl implements OrderService {
                 MailSender mailSender = new MailSender();
                 String body = convertCodeListToMessage(gameCodeList);
                 String email = user.getEmail();
-                mailSender.sendMessage(email, body);
+                String title = game.getTitle();
+                mailSender.sendMessage(email, title, body);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }
