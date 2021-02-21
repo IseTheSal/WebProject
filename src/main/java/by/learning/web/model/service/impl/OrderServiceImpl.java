@@ -124,19 +124,17 @@ public class OrderServiceImpl implements OrderService {
             ServiceException {
         Integer amount = cartMap.get(game);
         switch (operation) {
-            case "+": {
+            case "+" -> {
                 amount++;
                 cartMap.put(game, amount);
-                break;
             }
-            case "-": {
+            case "-" -> {
                 if (amount == 1) {
                     removeGameFromCart(cartMap, game.getId());
                 } else {
                     amount--;
                     cartMap.put(game, amount);
                 }
-                break;
             }
         }
     }
@@ -288,5 +286,27 @@ public class OrderServiceImpl implements OrderService {
             stringBuilder.append(code).append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public BigDecimal findOrderPrice(int userId) throws ServiceException {
+        BigDecimal result;
+        try {
+            result = orderDao.findOrderPriceByUserId(userId);
+        } catch (DaoException ex) {
+            throw new ServiceException(ex);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Game> findOrderHistory(int userId) throws ServiceException {
+        List<Game> result;
+        try {
+            result = orderDao.findOrderHistoryByUserId(userId);
+        } catch (DaoException ex) {
+            throw new ServiceException(ex);
+        }
+        return result;
     }
 }

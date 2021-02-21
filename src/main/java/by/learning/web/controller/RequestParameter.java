@@ -27,6 +27,8 @@ public class RequestParameter {
     public static final String SUCCESS = "success";
     public static final String FAIL = "fail";
     public static final String EMAIL_EXIST = "emailExist";
+    public static final String ORDER_HISTORY_LIST = "orderHistoryList";
+    public static final String ORDER_HISTORY_PRICE = "orderHistoryPrice";
 
 
     private RequestParameter() {

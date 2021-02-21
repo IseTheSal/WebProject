@@ -35,7 +35,6 @@ public class GameDaoImpl implements GameDao {
             "         INNER JOIN genre_game gn on games.game_id = gn.game_id " +
             "         INNER JOIN genres g on gn.genre_id = g.genre_id " +
             "GROUP BY games.game_id";
-
     private static final String FIND_GAME_BY_ID = "SELECT title," +
             "       description," +
             "       image_path," +
@@ -50,7 +49,6 @@ public class GameDaoImpl implements GameDao {
             "         INNER JOIN genres g on gn.genre_id = g.genre_id " +
             "WHERE games.game_id = ?" +
             "GROUP BY games.game_id;";
-
     private static final String FIND_GAME_AMOUNT_BY_ID = "SELECT count(*) " +
             "FROM codes " +
             "WHERE (sold IS FALSE) " +

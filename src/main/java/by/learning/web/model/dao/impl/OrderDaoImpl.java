@@ -6,11 +6,13 @@ import by.learning.web.exception.DaoException;
 import by.learning.web.model.dao.OrderDao;
 import by.learning.web.model.entity.ClientOrder;
 import by.learning.web.model.entity.Coupon;
+import by.learning.web.model.entity.Game;
 import by.learning.web.model.pool.ConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +61,17 @@ public class OrderDaoImpl implements OrderDao {
     private static final String DECREASE_COUPON_AMOUNT = "UPDATE coupons " +
             "SET amount = amount - ? " +
             "WHERE code = ?";
+    private static final String FIND_ORDER_HISTORY = "SELECT games.game_id, title, image_path " +
+            "FROM games " +
+            "         INNER JOIN game_order go ON games.game_id = go.game_id " +
+            "         INNER JOIN orders ON go.order_id = orders.order_id " +
+            "WHERE orders.user_id = ?";
+    private static final String FIND_ORDER_PRICE = "SELECT total_price " +
+            "FROM orders " +
+            "where user_id = ?";
 
 
+    @Override
     public Optional<Coupon> findAvailableCouponByCode(String codeName) throws DaoException {
         Optional<Coupon> result = Optional.empty();
         PreparedStatement preparedStatement = null;
@@ -85,6 +96,7 @@ public class OrderDaoImpl implements OrderDao {
         return result;
     }
 
+    @Override
     public int findAvailableCouponAmountByName(String codeName) throws DaoException {
         int amount = 0;
         PreparedStatement preparedStatement = null;
@@ -128,6 +140,7 @@ public class OrderDaoImpl implements OrderDao {
         return discount;
     }
 
+    @Override
     public boolean changeCouponAmountByName(String codeName, int amount, boolean increase) throws DaoException {
         boolean changed = false;
         PreparedStatement preparedStatement = null;
@@ -151,6 +164,53 @@ public class OrderDaoImpl implements OrderDao {
         return changed;
     }
 
+    @Override
+    public List<Game> findOrderHistoryByUserId(int userId) throws DaoException {
+        List<Game> result = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.getConnection()) {
+            preparedStatement = connection.prepareStatement(FIND_ORDER_HISTORY);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int gameId = resultSet.getInt(1);
+                String title = resultSet.getString(2);
+                String imagePath = resultSet.getString(3);
+                Game game = new Game(gameId, title, imagePath);
+                result.add(game);
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return result;
+    }
+
+    @Override
+    public BigDecimal findOrderPriceByUserId(int userId) throws DaoException {
+        BigDecimal totalPrice = new BigDecimal("0.0");
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.getConnection()) {
+            preparedStatement = connection.prepareStatement(FIND_ORDER_PRICE);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                totalPrice = totalPrice.add(resultSet.getBigDecimal(1));
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return totalPrice;
+    }
+
+    @Override
     public int findAvailableGameAmountById(int gameId) throws DaoException {
         int amount = 0;
         PreparedStatement preparedStatement = null;
@@ -231,6 +291,7 @@ public class OrderDaoImpl implements OrderDao {
         return result;
     }
 
+    @Override
     public List<String> findLimitedGameCodes(int gameId, int amount) throws DaoException {
         List<String> result = new ArrayList<>();
         PreparedStatement preparedStatement = null;
@@ -253,6 +314,7 @@ public class OrderDaoImpl implements OrderDao {
         return result;
     }
 
+    @Override
     public void putSoldGameCodeList(List<String> codeList) throws DaoException {
         try (Connection connection = CONNECTION_POOL.getConnection()) {
             for (String codeName : codeList) {

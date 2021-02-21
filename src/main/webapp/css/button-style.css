@@ -10,7 +10,7 @@
 
 .button-glow-lime:hover {
     background: #4dda26;
-    color: #000;
+    color: white;
     box-shadow: 0 0 10px #4dda26, 0 0 40px #4dda26, 0 0 80px #4dda26;
 }
 
@@ -72,16 +72,17 @@
 
 .button-glow-purple {
     width: 570px;
-    color: #000000;
+    color: #b9b9b9;
     letter-spacing: 2px;
     text-decoration: none;
     overflow: hidden;
+    background: rgba(117, 26, 168,0.3);
     border-radius: 40%;
 }
 
 .button-glow-purple:hover {
-    background: #821a98;
-    color: #821a98;
+    background: rgba(130,26,152,0.8);
+    color: #ffffff;
     box-shadow: 0 0 10px #821a98, 0 0 40px #821a98, 0 0 80px #821a98;
 }
 

@@ -23,10 +23,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         style="display: inline; position: absolute;margin-left: 190px; height: 30px; border-radius: 100%; width: 30px; background: rgba(11,79,175,0.5)">
                     <span class="fa fa-search search-span"></span>
                 </button>
-                <div class="autocomplete; neon-title-cyan-light" style="width:300px; cursor: pointer; display: inline;">
+                <div class="autocomplete; neon-title-cyan-light " style="width:300px; cursor: pointer; display: inline;">
                     <input id="myInput" class="custom-input" type="text" placeholder="<fmt:message key="main.search"/>"
                            style="color: black;border-radius: 10%; box-shadow:0 0 30px #0B4FAF;"/>
-                    <input type="hidden" class="gameIdClass" value="1" name="gameId"/>
+                    <input type="hidden" id="gameIdClass" value="1" name="gameId"/>
                 </div>
             </div>
         </form>

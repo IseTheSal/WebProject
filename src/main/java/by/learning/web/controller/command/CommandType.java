@@ -18,7 +18,8 @@ public enum CommandType {
     USE_PROMOCODE(new UsePromocodeCommand(new OrderServiceImpl())),
     MAKE_ORDER(new MakeOrderCommand(new OrderServiceImpl())),
     CHANGE_EMAIL(new ChangeEmailCommand(new UserServiceImpl())),
-    CHANGE_PASSWORD(new ChangePasswordCommand(new UserServiceImpl()));
+    CHANGE_PASSWORD(new ChangePasswordCommand(new UserServiceImpl())),
+    FIND_ORDER_HISTORY(new FindOrderHistoryCommand(new OrderServiceImpl()));
 
     private ActionCommand command;
 

@@ -3,7 +3,9 @@ package by.learning.web.model.dao;
 import by.learning.web.exception.DaoException;
 import by.learning.web.model.entity.ClientOrder;
 import by.learning.web.model.entity.Coupon;
+import by.learning.web.model.entity.Game;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,4 +25,8 @@ public interface OrderDao extends BaseDao {
     void putSoldGameCodeList(List<String> codeList) throws DaoException;
 
     boolean changeCouponAmountByName(String codeName, int amount, boolean increase) throws DaoException;
+
+    List<Game> findOrderHistoryByUserId(int userId) throws DaoException;
+
+    BigDecimal findOrderPriceByUserId(int userId) throws DaoException;
 }

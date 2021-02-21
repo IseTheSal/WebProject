@@ -44,6 +44,7 @@
         <url-pattern>/logout.do</url-pattern>
         <url-pattern>/jsp/changeEmail.do</url-pattern>
         <url-pattern>/jsp/changePassword.do</url-pattern>
+        <url-pattern>/jsp/findOrderHistory.do</url-pattern>
     </filter-mapping>
 
     <filter>

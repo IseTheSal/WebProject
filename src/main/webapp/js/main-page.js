@@ -2,6 +2,7 @@ function autocomplete(inp, arr, idArr) {
     var currentFocus;
     inp.addEventListener("input", function (e) {
         var a, b, i, val = this.value;
+        var c = this.value;
         closeAllLists();
         if (!val) {
             return false;
@@ -16,20 +17,17 @@ function autocomplete(inp, arr, idArr) {
                 b = document.createElement("DIV");
                 b.innerHTML = "<strong class='neon-title-white'>" + arr[i].substr(0, val.length) + "</strong>";
                 b.innerHTML += arr[i].substr(val.length);
-                var list = document.getElementsByClassName('gameIdClass');
-                var n;
-                for (n = 0; n < list.length; ++n) {
-                    list[n].value = idArr[i];
-                }
-                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                b.innerHTML += "<input type='hidden' id='" + idArr[i] + "' value='" + arr[i] + "'>";
                 b.addEventListener("click", function (e) {
                     inp.value = this.getElementsByTagName("input")[0].value;
+                    document.getElementById("gameIdClass").value=this.getElementsByTagName("input")[0].id;
                     closeAllLists();
                 });
                 a.appendChild(b);
             }
         }
     });
+
     inp.addEventListener("keydown", function (e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");

@@ -21,6 +21,10 @@
     0 0 40px #b42ae9;
 }
 
+.autocomplete-active {
+    background: rgba(255, 255, 255, 0.4);
+}
+
 .neon-title-cyan {
     color: #fff;
     text-shadow: 0 0 50px #fff,

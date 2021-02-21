@@ -5,7 +5,9 @@ import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.entity.User;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {
@@ -32,4 +34,8 @@ public interface OrderService {
     int findAvailableCouponAmount(String codeName) throws ServiceException;
 
     void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException;
+
+    List<Game> findOrderHistory(int userId) throws ServiceException;
+
+    BigDecimal findOrderPrice(int userId) throws ServiceException;
 }
