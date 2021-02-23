@@ -35,6 +35,7 @@ public class RegistrationCommand implements ActionCommand {
             if (isRegister) {
                 logger.log(Level.INFO, "Successful registration");
                 request.setAttribute(RequestParameter.REGISTRATION_COMPLETE, "Registration successfully complete");
+                request.setAttribute(RequestParameter.SUCCESS, true);
                 page = PagePath.LOGIN;
             } else {
                 request.setAttribute(RequestParameter.REGISTRATION_FAIL, "Username or email already in use");

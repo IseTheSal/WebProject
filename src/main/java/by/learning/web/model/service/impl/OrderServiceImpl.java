@@ -154,6 +154,18 @@ public class OrderServiceImpl implements OrderService {
         return amount;
     }
 
+    public boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws ServiceException {
+        boolean isDecreased = false;
+        if (OrderValidator.isCouponValid(codeName)) {
+            try {
+                isDecreased = orderDao.decreaseAvailableCouponAmount(codeName, decreaseAmount);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return isDecreased;
+    }
+
     @Override
     public short findCouponDiscount(String codeName) throws ServiceException {
         short discount = 0;

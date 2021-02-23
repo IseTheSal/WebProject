@@ -14,6 +14,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <div style="padding-top: 5%">
         <form class="needs-validation" novalidate method="post" action="register.do">
             <input type="hidden" name="command" value="registration"/>
+            <input name="clientToken" type="hidden" value="${serverToken}"/>
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <h2 class="neon-title-cyan" style="text-align:center">
                 <fmt:message key="registration.title"/>
@@ -149,7 +150,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                        style="color: red"> ${requestScope.registrationFail} </label>
                 <input type="submit" name="btnSignup" value="<fmt:message key="registration.btnSignUp"/>" id="btnSignup"
                        class="button-glow-lime"/>
-                <input name="clientToken" type="hidden" value="${serverToken}"/>
             </div>
         </form>
         <div style="margin-top: 5%">

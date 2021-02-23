@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class UserDaoImpl extends UserDao {
+public class UserDaoImpl implements UserDao {
     private static final Logger logger = LogManager.getLogger();
 
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
@@ -46,50 +46,47 @@ public class UserDaoImpl extends UserDao {
     @Override
     public Optional<User> findUser(String login, String password) throws DaoException {
         Optional<User> result = Optional.empty();
-        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try {
-            connection = CONNECTION_POOL.getConnection();
+        try (Connection connection = CONNECTION_POOL.getConnection()) {
             preparedStatement = connection.prepareStatement(FIND_USER);
             preparedStatement.setString(1, login);
             resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            String cryptPassword = resultSet.getString(2);
-            boolean isMatch = CryptEncoder.check(password, cryptPassword);
-            if (isMatch) {
-                int id = Integer.parseInt(resultSet.getString(1));
-                String firstname = resultSet.getString(3);
-                String lastname = resultSet.getString(4);
-                String email = resultSet.getString(5);
-                String roleString = resultSet.getString(6);
-                User.Role role = User.Role.valueOf(roleString);
-                result = Optional.of(new User(id, login, firstname, lastname, email, role));
+            if (resultSet.next()) {
+                String cryptPassword = resultSet.getString(2);
+                boolean isMatch = CryptEncoder.check(password, cryptPassword);
+                if (isMatch) {
+                    int id = Integer.parseInt(resultSet.getString(1));
+                    String firstname = resultSet.getString(3);
+                    String lastname = resultSet.getString(4);
+                    String email = resultSet.getString(5);
+                    String roleString = resultSet.getString(6);
+                    User.Role role = User.Role.valueOf(roleString);
+                    result = Optional.of(new User(id, login, firstname, lastname, email, role));
+                }
             }
         } catch (SQLException | ConnectionPoolException ex) {
             throw new DaoException(ex);
         } finally {
             close(resultSet);
             close(preparedStatement);
-            close(connection);
         }
         return result;
     }
 
-    public boolean existLogin(String login) throws DaoException {
+    private boolean existLogin(String login) throws DaoException {
         boolean result = exist(login, CONTAIN_LOGIN);
         logger.log(Level.DEBUG, "Is login exist: " + result);
         return result;
     }
 
-    public boolean existEmail(String email) throws DaoException {
+    private boolean existEmail(String email) throws DaoException {
         boolean result = exist(email, CONTAIN_EMAIL);
         logger.log(Level.DEBUG, "Is email exist: " + result);
         return result;
     }
 
-    @Override
-    protected boolean exist(String value, String sqlRequest) throws DaoException {
+    private boolean exist(String value, String sqlRequest) throws DaoException {
         boolean result;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -101,7 +98,7 @@ public class UserDaoImpl extends UserDao {
             resultSet = preparedStatement.executeQuery();
             int counter = 0;
             if (resultSet.next()) {
-                counter = Integer.parseInt(resultSet.getString(1));
+                counter = resultSet.getInt(1);
             }
             result = (counter > 0);
         } catch (SQLException | ConnectionPoolException ex) {
@@ -114,6 +111,7 @@ public class UserDaoImpl extends UserDao {
         return result;
     }
 
+    @Override
     public boolean addUser(User user, String cryptPassword) throws DaoException {
         boolean result = false;
         String login = user.getLogin();

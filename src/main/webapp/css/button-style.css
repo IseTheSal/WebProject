@@ -26,7 +26,7 @@
 
 .button-glow-blue:hover {
     background: #1744f9;
-    color: #000;
+    color: white;
     box-shadow: 0 0 10px #1744f9, 0 0 40px #1744f9, 0 0 80px #1744f9;
 }
 
@@ -66,7 +66,7 @@
 
 .button-glow-green:hover {
     background: #143b07;
-    color: #000;
+    color: white;
     box-shadow: 0 0 10px #143b07, 0 0 40px #143b07, 0 0 80px #143b07;
 }
 
@@ -97,7 +97,7 @@
 
 .button-glow-red:hover {
     background: #3b0707;
-    color: #000;
+    color: white;
     box-shadow: 0 0 10px #3b0707, 0 0 40px #3b0707, 0 0 80px #3b0707;
 }
 
@@ -170,7 +170,7 @@
 
 .button-search-purple:hover {
     background: #0B4FAF;
-    color: #000;
+    color: white;
     box-shadow: 0 0 15px #0B4FAF;
 }
 

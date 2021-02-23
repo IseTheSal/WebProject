@@ -12,8 +12,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 15%">
         <h5 class="neon-title-green" style="text-align: center">${requestScope.registrationComplete}</h5>
-        <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/controller">
+        <form class="needs-validation" novalidate method="post" action="login.do">
             <input type="hidden" name="command" value="login"/>
+            <input name="clientToken" type="hidden" value="${serverToken}"/>
+            <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <div style="max-width: 350px;margin: auto">
                 <h2 class="neon-title-cyan" style="text-align: center"><fmt:message key="authorization.title"/></h2>
                 <div class="form-group" style="margin-bottom: 14px">
@@ -24,7 +26,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
                             key="authorization.invalidLogin"/></div>
                 </div>
-                <div class="form-group" style="margin-bottom: 34px;">
+                <div class="form-group">
                     <label class="neon-title-white" for="txtPasswordAuth"><fmt:message
                             key="authorization.password"/></label>
                     <input name="password" style="border-width: medium" type="password"
@@ -33,9 +35,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
                             key="authorization.invalidPassword"/></div>
                     <c:if test="${not empty requestScope.errorSingIn}">
-                        <label style="position: absolute; margin-left: 5%; color: red">
+                        <p style="text-align: center; color: red">
                             <fmt:message key="authorization.incorrectLoginOrPassword"/>
-                        </label>
+                        </p>
                     </c:if>
                 </div>
                 <input type="submit" name="btnLogin" value="<fmt:message key="authorization.btnLogin"/>" id="btnLogin"

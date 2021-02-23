@@ -30,37 +30,36 @@ public class MakeOrderCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String page = request.getParameter(RequestParameter.CURRENT_PAGE);
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
-        if (user == null) {
-            page = PagePath.LOGIN;
-            request.setAttribute(RequestParameter.NEED_AUTHORIZATION_FIRST, true);
-            return page;
-        }
         short discount = (short) session.getAttribute(SessionAttribute.COUPON_DISCOUNT);
-        boolean isCouponExist = false;
         Coupon coupon = null;
         if (discount != 0) {
             coupon = (Coupon) session.getAttribute(SessionAttribute.COUPON);
-            isCouponExist = true;
         }
-        if (isCouponExist) {
+
+        if (coupon != null) {
+            String codeName = coupon.getCodeName();
             try {
-                int couponAmount = orderService.findAvailableCouponAmount(coupon.getCodeName());
-                if (couponAmount <= 0) {
-                    isCouponExist = false;
-                    coupon = null;
-                } else {
+                boolean isDecreased = orderService.decreaseAvailableCouponAmount(codeName, 1);
+                if (isDecreased) {
                     discount = orderService.findCouponDiscount(coupon.getCodeName());
                     coupon.setDiscount(discount);
-                    orderService.decreaseCouponAmount(coupon.getCodeName(), 1);
+                } else {
+                    page = PagePath.CART;
+                    short newDiscount = 0;
+                    session.setAttribute(SessionAttribute.COUPON_DISCOUNT, newDiscount);
+                    session.removeAttribute(SessionAttribute.COUPON);
+                    request.setAttribute(RequestParameter.COUPON_OUT, true);
+                    return page;
                 }
             } catch (ServiceException e) {
                 request.setAttribute(RequestParameter.SERVER_ERROR, true);
                 logger.log(Level.ERROR, e);
             }
         }
+
         HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
         try {
+            User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
             boolean isOrderCreated = orderService.createOrder(user.getId(), cartMap, coupon);
             if (isOrderCreated) {
                 orderService.sendGameCodeToUser(cartMap, user);
@@ -75,7 +74,7 @@ public class MakeOrderCommand implements ActionCommand {
                 session.setAttribute(SessionAttribute.CART_AMOUNT, orderService.countCartAmount(cartMap));
                 request.setAttribute(RequestParameter.CART_AMOUNT_CHANGED, true);
             }
-            if (isCouponExist && !isOrderCreated) {
+            if ((coupon != null) && !isOrderCreated) {
                 orderService.increaseCouponAmount(coupon.getCodeName(), 1);
             }
         } catch (ServiceException e) {

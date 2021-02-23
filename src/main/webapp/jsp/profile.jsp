@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css"/>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/swiper-style.css">
-
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/collapse-style.css">
 </head>
 <body>
@@ -26,7 +25,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <label class="neon-title-white">
                     <fmt:message key="profile.firstname"/>
                 </label>
-                <label class="neon-title-white" style="text-align: center">
+                <label class="neon-title-white" style="float: right">
                     ${sessionScope.currentUser.firstname}
                 </label>
             </div>
@@ -35,7 +34,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <label class="neon-title-white">
                     <fmt:message key="profile.lastname"/>
                 </label>
-                <label class="neon-title-white" style="text-align: center">
+                <label class="neon-title-white" style="float: right">
                     ${sessionScope.currentUser.lastname}
                 </label>
             </div>
@@ -127,7 +126,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                            value="${pageContext.request.requestURI}">
                     <button class="button-glow-purple" type="submit"
                             style="cursor:pointer; height: 40px; width: 300px;font-size: 20px; border-radius: 15% !important;">
-                        Get your order history
+                        <fmt:message key="profile.buttonHistory"/>
                     </button>
                 </form>
             </div>
@@ -137,7 +136,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <c:if test="${not empty requestScope.orderHistoryPrice}">
         <div style="text-align: center">
             <label class="neon-title-white" style="text-align: center; display: inline">
-                Total order price:
+                <fmt:message key="profile.totalPrice"/>
             </label>
             <label class="neon-title-lime" style="text-align: center; display: inline">
                     ${requestScope.orderHistoryPrice.stripTrailingZeros()}$

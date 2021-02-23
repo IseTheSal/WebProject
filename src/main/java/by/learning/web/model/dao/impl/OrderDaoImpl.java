@@ -61,6 +61,9 @@ public class OrderDaoImpl implements OrderDao {
     private static final String DECREASE_COUPON_AMOUNT = "UPDATE coupons " +
             "SET amount = amount - ? " +
             "WHERE code = ?";
+    private static final String DECREASE_AVAILABLE_COUPON_AMOUNT = "UPDATE coupons " +
+            "SET amount = amount - ? " +
+            "WHERE code = ? AND amount > 0";
     private static final String FIND_ORDER_HISTORY = "SELECT games.game_id, title, image_path " +
             "FROM games " +
             "         INNER JOIN game_order go ON games.game_id = go.game_id " +
@@ -116,6 +119,27 @@ public class OrderDaoImpl implements OrderDao {
         }
         logger.log(Level.INFO, "available amount {}", amount);
         return amount;
+    }
+
+
+    @Override
+    public boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws DaoException {
+        boolean isDecreased = false;
+        PreparedStatement preparedStatement = null;
+        try (Connection connection = CONNECTION_POOL.getConnection()) {
+            preparedStatement = connection.prepareStatement(DECREASE_AVAILABLE_COUPON_AMOUNT);
+            preparedStatement.setInt(1, decreaseAmount);
+            preparedStatement.setString(2, codeName);
+            int executeUpdate = preparedStatement.executeUpdate();
+            if (executeUpdate > 0) {
+                isDecreased = true;
+            }
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            close(preparedStatement);
+        }
+        return isDecreased;
     }
 
     @Override
@@ -270,7 +294,6 @@ public class OrderDaoImpl implements OrderDao {
             setAutoCommitTrue(connection);
             close(generatedKeys);
             close(preparedStatement);
-            close(connection);
         }
         return isCreated;
     }

@@ -9,6 +9,7 @@ public class PagePath {
     public static final String PAGE_SERVER_ERROR = "/jsp/error/error500.jsp";
     public static final String GAME_PAGE = "/jsp/game.jsp";
     public static final String PROFILE = "/jsp/profile.jsp";
+    public static final String CART = "/jsp/cart.jsp";
 
     private PagePath() {
     }

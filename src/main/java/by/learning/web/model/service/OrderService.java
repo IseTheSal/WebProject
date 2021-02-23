@@ -31,6 +31,9 @@ public interface OrderService {
 
     short findCouponDiscount(String codeName) throws ServiceException;
 
+    boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws ServiceException;
+
+    //fixme
     int findAvailableCouponAmount(String codeName) throws ServiceException;
 
     void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException;

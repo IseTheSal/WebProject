@@ -144,7 +144,7 @@ $(function () {
                     containerId: "toast-container",
                     debug: !1,
                     showMethod: "fadeIn",
-                    showDuration: 300,
+                    showDuration: 1000,
                     showEasing: "swing",
                     onShown: void 0,
                     hideMethod: "fadeOut",

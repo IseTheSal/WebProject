@@ -42,6 +42,7 @@
         <filter-name>UserAccessFilter</filter-name>
         <url-pattern>/jsp/profile.jsp</url-pattern>
         <url-pattern>/logout.do</url-pattern>
+        <url-pattern>/jsp/makeOrder.do</url-pattern>
         <url-pattern>/jsp/changeEmail.do</url-pattern>
         <url-pattern>/jsp/changePassword.do</url-pattern>
         <url-pattern>/jsp/findOrderHistory.do</url-pattern>
@@ -54,6 +55,8 @@
     <filter-mapping>
         <filter-name>RefreshFilter</filter-name>
         <url-pattern>/toCart.do</url-pattern>
+        <url-pattern>/jsp/login.jsp</url-pattern>
+        <url-pattern>/jsp/login.do</url-pattern>
         <url-pattern>/jsp/registration.jsp</url-pattern>
         <url-pattern>/jsp/register.do</url-pattern>
         <url-pattern>/jsp/cart.jsp</url-pattern>

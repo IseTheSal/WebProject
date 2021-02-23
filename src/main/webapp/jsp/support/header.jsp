@@ -118,7 +118,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
     $(document).ready(function () {
         var serverError = ${not empty requestScope.serverError};
         if (serverError) {
-            funcBtns.alertError('Error', 'Server error. Try again later')
+            funcBtns.alertError('Error', '<fmt:message key="server.error"/>')
         }
         var fail = ${not empty requestScope.fail};
         if (fail) {
