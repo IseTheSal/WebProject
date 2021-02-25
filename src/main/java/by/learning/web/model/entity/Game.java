@@ -174,6 +174,8 @@ public class Game {
         if (title != null ? !title.equals(game.title) : game.title != null) return false;
         if (description != null ? !description.equals(game.description) : game.description != null) return false;
         if (imagePath != null ? !imagePath.equals(game.imagePath) : game.imagePath != null) return false;
+        if (price != null ? !price.equals(game.price) : game.price != null) return false;
+        if (trailer != null ? !trailer.equals(game.trailer) : game.trailer != null) return false;
         if (genres != null ? !genres.equals(game.genres) : game.genres != null) return false;
         return categories != null ? categories.equals(game.categories) : game.categories == null;
     }
@@ -184,6 +186,8 @@ public class Game {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (imagePath != null ? imagePath.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (trailer != null ? trailer.hashCode() : 0);
         result = 31 * result + (genres != null ? genres.hashCode() : 0);
         result = 31 * result + (categories != null ? categories.hashCode() : 0);
         return result;
@@ -196,6 +200,8 @@ public class Game {
         sb.append(", title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", imagePath='").append(imagePath).append('\'');
+        sb.append(", price=").append(price);
+        sb.append(", trailer='").append(trailer).append('\'');
         sb.append(", genres=").append(genres);
         sb.append(", categories=").append(categories);
         sb.append('}');

@@ -15,6 +15,8 @@ public interface OrderService {
 
     boolean isGameInStock(int gameId) throws ServiceException;
 
+    int findCodeAmount(int gameId) throws ServiceException;
+
     void addGameToCart(Game game, HashMap<Game, Integer> hashMap);
 
     int countCartAmount(HashMap<Game, Integer> hashMap);

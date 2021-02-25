@@ -1,5 +1,4 @@
 var funcBtns = {
-    // Display a warning toast, with no title
     alertWarning: function (title) {
         toastr.warning(title, {timeOut: 7000});
     }, alertWarningBody: function (title, body) {
@@ -15,7 +14,6 @@ var funcBtns = {
         toastr.error(title, body);
     },
     alertOK: function (title, body) {
-        // Override global options
         toastr.success(body, title, {timeOut: 5000});
     }
 };

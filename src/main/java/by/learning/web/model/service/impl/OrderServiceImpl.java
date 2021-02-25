@@ -63,6 +63,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public int findCodeAmount(int gameId) throws ServiceException {
+        int amount;
+        try {
+            amount = gameDao.findGameCount(gameId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return amount;
+    }
+
+    @Override
     public void addGameToCart(Game game, HashMap<Game, Integer> hashMap) {
         if (hashMap.containsKey(game)) {
             Integer amount = hashMap.get(game);

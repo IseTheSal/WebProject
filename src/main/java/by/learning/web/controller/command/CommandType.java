@@ -19,7 +19,8 @@ public enum CommandType {
     MAKE_ORDER(new MakeOrderCommand(new OrderServiceImpl())),
     CHANGE_EMAIL(new ChangeEmailCommand(new UserServiceImpl())),
     CHANGE_PASSWORD(new ChangePasswordCommand(new UserServiceImpl())),
-    FIND_ORDER_HISTORY(new FindOrderHistoryCommand(new OrderServiceImpl()));
+    FIND_ORDER_HISTORY(new FindOrderHistoryCommand(new OrderServiceImpl())),
+    FIND_CODE_AMOUNT(new FindGameCodeAmount(new OrderServiceImpl()));
 
     private ActionCommand command;
 
