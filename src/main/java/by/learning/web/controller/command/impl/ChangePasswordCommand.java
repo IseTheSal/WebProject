@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ChangePasswordCommand implements ActionCommand {
@@ -23,7 +24,7 @@ public class ChangePasswordCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = request.getParameter(RequestParameter.CURRENT_PAGE);
         String oldPassword = request.getParameter(RequestParameter.OLD_PASSWORD);
         String newPassword = request.getParameter(RequestParameter.PASSWORD);

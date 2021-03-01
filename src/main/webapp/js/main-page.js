@@ -20,7 +20,7 @@ function autocomplete(inp, arr, idArr) {
                 b.innerHTML += "<input type='hidden' id='" + idArr[i] + "' value='" + arr[i] + "'>";
                 b.addEventListener("click", function (e) {
                     inp.value = this.getElementsByTagName("input")[0].value;
-                    document.getElementById("gameIdClass").value=this.getElementsByTagName("input")[0].id;
+                    document.getElementById("gameIdClass").value = this.getElementsByTagName("input")[0].id;
                     closeAllLists();
                 });
                 a.appendChild(b);

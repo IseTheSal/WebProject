@@ -15,7 +15,7 @@ public class Game {
     private Set<GameGenre> genres = EnumSet.noneOf(GameGenre.class);
     private Set<GameCategory> categories = EnumSet.noneOf(GameCategory.class);
 
-    private enum GameGenre {
+    public enum GameGenre {
         ACTION,
         ADVENTURE,
         ARCADE,
@@ -45,7 +45,7 @@ public class Game {
         }
     }
 
-    private enum GameCategory {
+    public enum GameCategory {
         SINGLEPLAYER,
         MULTIPLAYER,
         COOPERATIVE,
@@ -73,6 +73,14 @@ public class Game {
         this.id = id;
         this.title = title;
         this.imagePath = imagePath;
+    }
+
+    public Game(String title, String imagePath, String description, BigDecimal price, String trailer) {
+        this.title = title;
+        this.imagePath = imagePath;
+        this.description = description;
+        this.price = price;
+        this.trailer = trailer;
     }
 
     public Game(int id, String title, String description, String imagePath, BigDecimal price, String trailer, String genreString, String categoryString) {

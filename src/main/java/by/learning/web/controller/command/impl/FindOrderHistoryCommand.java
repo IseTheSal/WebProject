@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,7 +27,7 @@ public class FindOrderHistoryCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = request.getParameter(RequestParameter.CURRENT_PAGE);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);

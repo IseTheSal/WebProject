@@ -33,7 +33,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         <a href="${pageContext.request.contextPath}/index.jsp" class="texas-blue-animated"
            style="text-decoration: none"><fmt:message
                 key="header.mainLink"/></a>
-        <a href="${pageContext.request.contextPath}/jsp/about.jsp" class="texas-purple-animated"
+        <a href="${pageContext.request.contextPath}/jsp/support/about.jsp" class="texas-purple-animated"
            style="text-decoration: none;margin-left: 30px"><fmt:message
                 key="header.supportLink"/></a>
     </div>

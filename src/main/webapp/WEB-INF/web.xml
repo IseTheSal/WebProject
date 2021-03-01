@@ -71,6 +71,5 @@
         <url-pattern>/jsp/changePassword.do</url-pattern>
     </filter-mapping>
 
-
 </web-app>
 

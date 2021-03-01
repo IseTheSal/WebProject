@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class UsePromocodeCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = request.getParameter(RequestParameter.CURRENT_PAGE);
         String code = request.getParameter(RequestParameter.COUPON_CODE);
         try {
@@ -37,9 +38,7 @@ public class UsePromocodeCommand implements ActionCommand {
                 short discount = availableCoupon.getDiscount();
                 session.setAttribute(SessionAttribute.COUPON_DISCOUNT, discount);
                 request.setAttribute(RequestParameter.COUPON_EXIST, true);
-                logger.log(Level.DEBUG, "TRUE");
             } else {
-                logger.log(Level.DEBUG, "FALSE");
                 request.setAttribute(RequestParameter.COUPON_EXIST, false);
             }
         } catch (ServiceException e) {

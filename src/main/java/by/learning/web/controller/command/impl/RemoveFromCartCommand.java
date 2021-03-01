@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
@@ -24,7 +25,7 @@ public class RemoveFromCartCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = request.getParameter(RequestParameter.CURRENT_PAGE);
         String gameIdString = request.getParameter(RequestParameter.GAME_ID);
         int gameId = Integer.parseInt(gameIdString);

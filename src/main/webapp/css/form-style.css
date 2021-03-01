@@ -5,7 +5,7 @@
 }
 
 .custom-input {
-    background: rgba(114, 155, 237,0.3);
+    background: rgba(114, 155, 237, 0.3);
     color: white !important;
 }
 
@@ -13,6 +13,7 @@
 .custom-input::placeholder {
     color: white;
 }
+
 .custom-input::-webkit-input-placeholder {
     color: white;
 }

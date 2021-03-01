@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.Random;
 
 public class RefreshFilter implements Filter {
-
     private final static Logger logger = LogManager.getLogger();
 
     @Override

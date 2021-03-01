@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ChangeEmailCommand implements ActionCommand {
@@ -24,8 +25,8 @@ public class ChangeEmailCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
-        String page = PagePath.PROFILE;
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
+        String page = PagePath.PROFILE_PAGE;
         String email = request.getParameter(RequestParameter.EMAIL);
         String repeatEmail = request.getParameter(RequestParameter.EMAIL_REPEAT);
         HttpSession session = request.getSession();

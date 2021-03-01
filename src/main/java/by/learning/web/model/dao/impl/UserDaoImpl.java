@@ -29,18 +29,12 @@ public class UserDaoImpl implements UserDao {
 
     private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, role " +
             "FROM users WHERE users.login = ?";
-
     private static final String CONTAIN_LOGIN = "SELECT COUNT(*) FROM users WHERE users.login = ?";
-
     private static final String CONTAIN_EMAIL = "SELECT COUNT(*) FROM users WHERE users.email = ?";
-
     private static final String ADD_USER = "INSERT INTO users (login, password, firstname, lastname, email, role) " +
             "VALUES(?,?,?,?,?,?)";
-
     private static final String UPDATE_EMAIL = "UPDATE users SET email = ? WHERE users.user_id = ?";
-
     private static final String UPDATE_PASSWORD = "UPDATE users SET password = ? WHERE users.user_id = ?";
-
     private static final String FIND_USER_PASSWORD = "SELECT password FROM users WHERE users.user_id = ?";
 
     @Override

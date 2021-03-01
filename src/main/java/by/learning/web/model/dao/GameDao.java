@@ -14,4 +14,6 @@ public interface GameDao extends BaseDao {
 
     int findGameCount(int gameId) throws DaoException;
 
+    boolean createGame(Game game, int[] genresId, int[] categoriesId) throws DaoException;
+
 }

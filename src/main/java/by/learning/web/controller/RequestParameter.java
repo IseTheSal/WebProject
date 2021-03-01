@@ -32,6 +32,15 @@ public class RequestParameter {
     public static final String ORDER_HISTORY_LIST = "orderHistoryList";
     public static final String ORDER_HISTORY_PRICE = "orderHistoryPrice";
 
+    public static final String GAME_TITLE = "gameTitle";
+    public static final String GAME_IMAGE_PATH = "imagePath";
+    public static final String GAME_DESCRIPTION = "gameDescription";
+    public static final String GAME_PRICE = "gamePrice";
+    public static final String GAME_TRAILER_LINK = "gameTrailerLink";
+    public static final String GAME_GENRES = "gameGenres";
+    public static final String GAME_CATEGORIES = "gameCategories";
+    public static final String GAME_VALID_ISSUES = "gameValidIssues";
+
 
     private RequestParameter() {
     }

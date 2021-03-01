@@ -282,7 +282,7 @@ public class OrderDaoImpl implements OrderDao {
                 int[] gameIdArray = order.getGameIdSet().stream().mapToInt(Integer::intValue).toArray();
                 int i = 0;
                 while (i < gameIdArray.length && executed) {
-                    executed = createGameOrderRelation(connection, gameIdArray[i], orderId);
+                    executed = relateGameOrder(connection, gameIdArray[i], orderId);
                     i++;
                 }
                 isCreated = executed;
@@ -298,20 +298,13 @@ public class OrderDaoImpl implements OrderDao {
         return isCreated;
     }
 
-    private boolean createGameOrderRelation(Connection connection, int gameId, int orderId) throws DaoException {
-        boolean result = false;
+    private boolean relateGameOrder(Connection connection, int gameId, int orderId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GAME_ORDER)) {
             preparedStatement.setInt(1, gameId);
             preparedStatement.setInt(2, orderId);
             int executeUpdate = preparedStatement.executeUpdate();
-            if (executeUpdate > 0) {
-                result = true;
-            }
-        } catch (SQLException exception) {
-            logger.log(Level.ERROR, exception);
-            throw new DaoException(exception);
+            return (executeUpdate > 0);
         }
-        return result;
     }
 
     @Override

@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
@@ -27,7 +28,7 @@ public class MakeOrderCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = request.getParameter(RequestParameter.CURRENT_PAGE);
         HttpSession session = request.getSession();
         short discount = (short) session.getAttribute(SessionAttribute.COUPON_DISCOUNT);
@@ -44,7 +45,7 @@ public class MakeOrderCommand implements ActionCommand {
                     discount = orderService.findCouponDiscount(coupon.getCodeName());
                     coupon.setDiscount(discount);
                 } else {
-                    page = PagePath.CART;
+                    page = PagePath.CART_PAGE;
                     short newDiscount = 0;
                     session.setAttribute(SessionAttribute.COUPON_DISCOUNT, newDiscount);
                     session.removeAttribute(SessionAttribute.COUPON);

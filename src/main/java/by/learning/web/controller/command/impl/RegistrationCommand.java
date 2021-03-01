@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class RegistrationCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -21,7 +22,7 @@ public class RegistrationCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         String nameValue = request.getParameter(RequestParameter.FIRSTNAME);
         String lastnameValue = request.getParameter(RequestParameter.LASTNAME);
@@ -36,14 +37,14 @@ public class RegistrationCommand implements ActionCommand {
                 logger.log(Level.INFO, "Successful registration");
                 request.setAttribute(RequestParameter.REGISTRATION_COMPLETE, "Registration successfully complete");
                 request.setAttribute(RequestParameter.SUCCESS, true);
-                page = PagePath.LOGIN;
+                page = PagePath.LOGIN_PAGE;
             } else {
                 request.setAttribute(RequestParameter.REGISTRATION_FAIL, "Username or email already in use");
-                page = PagePath.REGISTRATION;
+                page = PagePath.REGISTRATION_PAGE;
             }
         } catch (ServiceException e) {
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
-            page = PagePath.REGISTRATION;
+            page = PagePath.REGISTRATION_PAGE;
         }
         return page;
     }

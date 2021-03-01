@@ -9,10 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +50,12 @@ public class GameDaoImpl implements GameDao {
             "FROM codes " +
             "WHERE (sold IS FALSE) " +
             "AND (game_id = ?)";
-
+    private static final String CREATE_GAME = "INSERT INTO games(game_id, title, image_path, description, price, trailer) " +
+            "VALUES (default, ?, ?, ?, ?, ?)";
+    private static final String RELATE_GAME_CATEGORY = "INSERT INTO category_game(game_id, category_id) " +
+            "VALUES (?, ?)";
+    private static final String RELATE_GAME_GENRE = "INSERT INTO genre_game(game_id, genre_id) " +
+            "VALUES (?, ?)";
 
     @Override
     public List<Game> findAllGames() throws DaoException {
@@ -103,6 +105,62 @@ public class GameDaoImpl implements GameDao {
             close(preparedStatement);
         }
         return amount;
+    }
+
+    //TODO
+    @Override
+    public boolean createGame(Game game, int[] genresId, int[] categoriesId) throws DaoException {
+        boolean isCreated = false;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet generatedKeys = null;
+        try {
+            connection = CONNECTION_POOL.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(CREATE_GAME, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, game.getTitle());
+            preparedStatement.setString(2, game.getImagePath());
+            preparedStatement.setString(3, game.getDescription());
+            preparedStatement.setBigDecimal(4, game.getPrice());
+            preparedStatement.setString(5, game.getTrailer());
+            int executeUpdate = preparedStatement.executeUpdate();
+            if (executeUpdate > 0) {
+                generatedKeys = preparedStatement.getGeneratedKeys();
+                generatedKeys.next();
+                int gameId = generatedKeys.getInt(1);
+                for (int categoryId : categoriesId) {
+                    relateGameCategories(connection, gameId, categoryId);
+                }
+                for (int genreId : genresId) {
+                    relateGameGenres(connection, gameId, genreId);
+                }
+                isCreated = true;
+            }
+        } catch (ConnectionPoolException | SQLException ex) {
+            rollback(connection);
+            throw new DaoException(ex);
+        } finally {
+            setAutoCommitTrue(connection);
+            close(generatedKeys);
+            close(preparedStatement);
+        }
+        return isCreated;
+    }
+
+    private void relateGameCategories(Connection connection, int gameId, int categoryId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(RELATE_GAME_CATEGORY)) {
+            preparedStatement.setInt(1, gameId);
+            preparedStatement.setInt(2, categoryId);
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    private void relateGameGenres(Connection connection, int gameId, int genreId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(RELATE_GAME_GENRE)) {
+            preparedStatement.setInt(1, gameId);
+            preparedStatement.setInt(2, genreId);
+            preparedStatement.executeUpdate();
+        }
     }
 
     @Override

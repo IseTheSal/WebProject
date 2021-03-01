@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class LoginCommand implements ActionCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         String loginValue = request.getParameter(RequestParameter.LOGIN);
         String passwordValue = request.getParameter(RequestParameter.PASSWORD);
@@ -39,13 +40,13 @@ public class LoginCommand implements ActionCommand {
                 page = PagePath.INDEX;
             } else {
                 request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");
-                page = PagePath.LOGIN;
+                page = PagePath.LOGIN_PAGE;
                 logger.log(Level.INFO, "Error in logging");
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
-            page = PagePath.LOGIN;
+            page = PagePath.LOGIN_PAGE;
         }
         return page;
     }

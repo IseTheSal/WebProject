@@ -26,7 +26,7 @@ public class UserAccessFilter implements Filter {
         if (user == null) {
             logger.log(Level.INFO, "user is null");
             request.setAttribute(RequestParameter.NEED_AUTHORIZATION_FIRST, true);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(PagePath.LOGIN);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(PagePath.LOGIN_PAGE);
             requestDispatcher.forward(req, resp);
         } else {
             chain.doFilter(req, resp);

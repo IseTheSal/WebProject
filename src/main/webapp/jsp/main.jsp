@@ -23,7 +23,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         style="display: inline; position: absolute;margin-left: 190px; height: 30px; border-radius: 100%; width: 30px; background: rgba(11,79,175,0.5)">
                     <span class="fa fa-search search-span"></span>
                 </button>
-                <div class="autocomplete; neon-title-cyan-light " style="width:300px; cursor: pointer; display: inline;">
+                <div class="autocomplete; neon-title-cyan-light "
+                     style="width:300px; cursor: pointer; display: inline;">
                     <input id="myInput" class="custom-input" type="text" placeholder="<fmt:message key="main.search"/>"
                            style="color: black;border-radius: 10%; box-shadow:0 0 30px #0B4FAF;"/>
                     <input type="hidden" id="gameIdClass" value="1" name="gameId"/>
@@ -37,7 +38,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="col">
                         <a href="${pageContext.request.contextPath}/toCart.do?command=open_game&gameId=${game.id}"
                            class="card custom-card" style="width: 18rem; text-decoration: none">
-                            <img class="image-card" src="${pageContext.request.contextPath}${game.imagePath}">
+                            <img class="image-card" src="${pageContext.request.contextPath}${game.imagePath}"
+                                 onerror="this.onerror = null; this.src='${pageContext.request.contextPath}/img/IMAGE_UNAVAILABLE.jpg'"
+                                 alt="game">
                             <div class="card-body" style="text-align: center">
                                 <p class="card-title neon-title-white">${game.title}</p>
                                 <p class="card-text neon-title-white">${game.price}$</p>
