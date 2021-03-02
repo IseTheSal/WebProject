@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public class GameValidator {
-    //todo
     private static final String TITLE_REGEX = "^[A-z0-9`\\s:]{2,35}$";
     private static final String DESCRIPTION_REGEX = "^[A-z0-9.,?!;:\\-()№'\"\\s®’“”]{10,300}";
     private static final String PRICE_REGEX = "^(\\d)*(\\.\\d{1,2})?$";
@@ -60,7 +59,6 @@ public class GameValidator {
         if (!isTitleValid(gameTitle)) {
             issues.add(ValidationInformation.TITLE_INCORRECT);
         }
-        //fixme
         String diskPath = IMAGE_FOLDER_PATH + imagePath;
         String projectPath = IMAGE_PROJECT_PATH + imagePath;
         if (!isPathValid(diskPath) && isPathValid(projectPath)) {

@@ -34,7 +34,6 @@ public class GameServiceImpl implements GameService {
         return result;
     }
 
-    //fixme create Validator
     @Override
     public Set<String> createGame(String gameTitle, String imagePath,
                                   String description, String price, String trailerLink,

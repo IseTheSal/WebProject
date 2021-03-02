@@ -110,7 +110,6 @@ public class GameDaoImpl implements GameDao {
         return amount;
     }
 
-    //TODO
     @Override
     public boolean createGame(Game game, int[] genresId, int[] categoriesId) throws DaoException {
         boolean isCreated = false;

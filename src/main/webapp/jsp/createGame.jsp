@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
@@ -31,7 +31,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="form-inline">
                         <input name="gameTitle" id="txtGameTitle"
                                type="text" style="width: 420px; border-width: medium"
-                               class="form-control" placeholder="game title"
+                               class="form-control"
+                               placeholder="<fmt:message key="creategame.game.title"/>"
                                required
                                pattern="^[A-z0-9`\s:]{2,35}$"
                                minlength="1" maxlength="35"/>
@@ -62,7 +63,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                   style="width: 420px; border-width: medium; min-height: 80px; max-height: 500px"
                                   class="form-control"
                                   id="txtDescription"
-                                  placeholder="Description"
+                                  placeholder="<fmt:message key="creategame.page.title"/>"
                                   required
                                   minlength="8" maxlength="300"></textarea>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
