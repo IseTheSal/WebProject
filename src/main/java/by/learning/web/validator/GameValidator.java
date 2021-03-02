@@ -12,6 +12,7 @@ public class GameValidator {
     private static final String TRAILER_LINK_REGEX = "^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$";
 
     private static final String IMAGE_FOLDER_PATH = "D:\\logo\\";
+    private static final String IMAGE_PROJECT_PATH = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\webapp\\img\\logo";
 
     public static boolean isTitleValid(String title) {
         boolean isValid = true;
@@ -60,10 +61,11 @@ public class GameValidator {
             issues.add(ValidationInformation.TITLE_INCORRECT);
         }
         //fixme
-//        String pathCheck = IMAGE_FOLDER_PATH + imagePath;
-//        if (!isPathValid(pathCheck)) {
-//            issues.add(ValidationInformation.IMAGE_PATH_INCORRECT);
-//        }
+        String diskPath = IMAGE_FOLDER_PATH + imagePath;
+        String projectPath = IMAGE_PROJECT_PATH + imagePath;
+        if (!isPathValid(diskPath) && isPathValid(projectPath)) {
+            issues.add(ValidationInformation.IMAGE_PATH_INCORRECT);
+        }
         if (!isDescriptionValid(description)) {
             issues.add(ValidationInformation.DESCRIPTION_INCORRECT);
         }

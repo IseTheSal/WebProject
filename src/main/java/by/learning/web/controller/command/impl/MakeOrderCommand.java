@@ -36,7 +36,6 @@ public class MakeOrderCommand implements ActionCommand {
         if (discount != 0) {
             coupon = (Coupon) session.getAttribute(SessionAttribute.COUPON);
         }
-
         if (coupon != null) {
             String codeName = coupon.getCodeName();
             try {
@@ -57,7 +56,6 @@ public class MakeOrderCommand implements ActionCommand {
                 logger.log(Level.ERROR, e);
             }
         }
-
         HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
         try {
             User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);

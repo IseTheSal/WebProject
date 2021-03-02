@@ -11,7 +11,9 @@ public class PagePath {
     public static final String GAME_PAGE = "/jsp/game.jsp";
     public static final String PROFILE_PAGE = "/jsp/profile.jsp";
     public static final String CART_PAGE = "/jsp/cart.jsp";
-    public static final String UPLOAD_PATH = "/index.jsp";
+    public static final String UPLOAD_VALUE = "upload";
+    public static final String ADMIN_MENU_PAGE = "/jsp/adminMenu.jsp";
+    public static final String CREATE_GAME_PAGE = "/jsp/createGame.jsp";
 
     private PagePath() {
     }

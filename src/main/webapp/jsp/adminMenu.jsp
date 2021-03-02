@@ -20,9 +20,11 @@
             </div>
         </div>
         <div class="face face2">
-            <div class="content-admin">
-                <a class="custom-admin-a" href="#" type="button">Add game</a>
-                <a class="custom-admin-a" href="#" type="button">Add code</a>
+            <div class="content-admin" style="text-align: center">
+                <a class="custom-admin-a"
+                   href="${pageContext.request.contextPath}/createGame.do?command=open_game_creator" type="button">Add
+                    game</a>
+                <a class="custom-admin-a" href="#" type="button">Add gamecode</a>
                 <a class="custom-admin-a" href="#" type="button">Game list</a>
             </div>
         </div>
@@ -36,7 +38,7 @@
             </div>
         </div>
         <div class="face face2">
-            <div class="content-admin">
+            <div class="content-admin" style="text-align: center">
                 <a class="custom-admin-a" href="#" type="button">Order list</a>
                 <a class="custom-admin-a" href="#" type="button">Coupon list</a>
             </div>
@@ -51,7 +53,7 @@
             </div>
         </div>
         <div class="face face2">
-            <div class="content-admin">
+            <div class="content-admin" style="text-align: center">
                 <a class="custom-admin-a" href="#" type="button">User list</a>
                 <a class="custom-admin-a" href="#" type="button">Add admin</a>
             </div>

@@ -27,6 +27,7 @@ public interface OrderService {
 
     boolean createOrder(int userId, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException;
 
+    //fixme
     void decreaseCouponAmount(String codeName, int amount) throws ServiceException;
 
     void increaseCouponAmount(String codeName, int amount) throws ServiceException;

@@ -6,12 +6,12 @@
 <body>
 <h1 style="text-align: center">Terms and Conditions</h1>
 <small style="left: 0;position: absolute;text-align: left;margin-left: 30%; white-space: pre-line">
-    Welcome to webtask!
+    Welcome to gamestop!
 
     These terms and conditions outline the rules and regulations for the use of IseTheSal's Website, located at
     local:8080.
 
-    By accessing this website we assume you accept these terms and conditions. Do not continue to use webtask if you do
+    By accessing this website we assume you accept these terms and conditions. Do not continue to use gamestop if you do
     not agree to take all of the terms and conditions stated on this page.
 
     The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all
@@ -25,7 +25,7 @@
     to same.
 
     Cookies
-    We employ the use of cookies. By accessing webtask, you agreed to use cookies in agreement with the IseTheSal's
+    We employ the use of cookies. By accessing gamestop, you agreed to use cookies in agreement with the IseTheSal's
     Privacy Policy.
 
     Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our
@@ -34,15 +34,15 @@
 
     License
     Unless otherwise stated, IseTheSal and/or its licensors own the intellectual property rights for all material on
-    webtask. All intellectual property rights are reserved. You may access this from webtask for your own personal use
+    gamestop. All intellectual property rights are reserved. You may access this from gamestop for your own personal use
     subjected to restrictions set in these terms and conditions.
 
     You must not:
 
-    Republish material from webtask
-    Sell, rent or sub-license material from webtask
-    Reproduce, duplicate or copy material from webtask
-    Redistribute content from webtask
+    Republish material from gamestop
+    Sell, rent or sub-license material from gamestop
+    Reproduce, duplicate or copy material from gamestop
+    Redistribute content from gamestop
     This Agreement shall begin on the date hereof. Our Terms and Conditions were created with the help of the Terms And
     Conditions Generator and the Privacy Policy Generator.
 

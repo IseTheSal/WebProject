@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,8 @@ public class GameDaoImpl implements GameDao {
             "VALUES (?, ?)";
     private static final String RELATE_GAME_GENRE = "INSERT INTO genre_game(game_id, genre_id) " +
             "VALUES (?, ?)";
+    private static final String FIND_ALL_CATEGORIES = "SELECT category_id, name FROM categories";
+    private static final String FIND_ALL_GENRES = "SELECT genre_id, name FROM genres";
 
     @Override
     public List<Game> findAllGames() throws DaoException {
@@ -185,6 +188,37 @@ public class GameDaoImpl implements GameDao {
             }
         } catch (ConnectionPoolException | SQLException e) {
             throw new DaoException(e);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return result;
+    }
+
+    @Override
+    public HashMap<Integer, String> findAllCategories() throws DaoException {
+        return findGameCharacteristics(FIND_ALL_CATEGORIES);
+    }
+
+    @Override
+    public HashMap<Integer, String> findAllGenres() throws DaoException {
+        return findGameCharacteristics(FIND_ALL_GENRES);
+    }
+
+    private HashMap<Integer, String> findGameCharacteristics(String characteristic) throws DaoException {
+        HashMap<Integer, String> result = new HashMap<>();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.getConnection()) {
+            preparedStatement = connection.prepareStatement(characteristic);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                result.put(id, name);
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
         } finally {
             close(resultSet);
             close(preparedStatement);

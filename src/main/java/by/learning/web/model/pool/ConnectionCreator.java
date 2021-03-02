@@ -32,7 +32,7 @@ class ConnectionCreator {
     private ConnectionCreator() {
     }
 
-    public static Connection createConnection() throws SQLException {
+    static Connection createConnection() throws SQLException {
         return DriverManager.getConnection(PROPERTY.getProperty(URL), PROPERTY);
     }
 }

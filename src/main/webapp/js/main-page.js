@@ -79,14 +79,14 @@ var col1 = $('.custom-card');
 var gameId = [];
 for (i = 0; i < col.length; i++) {
     gameNames.push(col[i].innerHTML);
-    gameId.push(col1[i].href.slice(-1));
+    gameId.push(col1[i].href.slice(col1[i].href.lastIndexOf('=') + 1));
 }
 autocomplete(document.getElementById("myInput"), gameNames, gameId);
 
 //PAGINATION
 
 $(document).ready(function () {
-    var colShown = 3;
+    var colShown = 9;
     var colTotal = $('.t1 .col').length;
     var numPages = colTotal / colShown;
     for (i = 0; i < numPages; i++) {

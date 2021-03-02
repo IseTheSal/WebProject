@@ -13,10 +13,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class GameServiceImpl implements GameService {
     private static final Logger logger = LogManager.getLogger();
@@ -38,12 +36,13 @@ public class GameServiceImpl implements GameService {
 
     //fixme create Validator
     @Override
-    public Set<ValidationInformation> createGame(String gameTitle, String imagePath,
-                                                 String description, String price, String trailerLink,
-                                                 String[] genres, String[] categories) throws ServiceException {
+    public Set<String> createGame(String gameTitle, String imagePath,
+                                  String description, String price, String trailerLink,
+                                  String[] genres, String[] categories) throws ServiceException {
         Set<ValidationInformation> validInfo = GameValidator.findGameValidationIssues(gameTitle, imagePath, description, price, trailerLink);
-        if (!validInfo.isEmpty()) {
-            return validInfo;
+        Set<String> valueValidInfo = validInfo.stream().map(ValidationInformation::getIssueValue).collect(Collectors.toSet());
+        if (!valueValidInfo.isEmpty()) {
+            return valueValidInfo;
         }
         int[] genresId = Arrays.stream(genres).mapToInt(Integer::parseInt).toArray();
         int[] categoriesId = Arrays.stream(categories).mapToInt(Integer::parseInt).toArray();
@@ -55,15 +54,14 @@ public class GameServiceImpl implements GameService {
         try {
             boolean isCreated = gameDao.createGame(game, genresId, categoriesId);
             if (isCreated) {
-                validInfo.add(ValidationInformation.SUCCESS);
-
+                valueValidInfo.add(ValidationInformation.SUCCESS.getIssueValue());
             } else {
-                validInfo.add(ValidationInformation.FAIL);
+                valueValidInfo.add(ValidationInformation.FAIL.getIssueValue());
             }
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-        return validInfo;
+        return valueValidInfo;
     }
 
     @Override
@@ -77,6 +75,26 @@ public class GameServiceImpl implements GameService {
             }
         } else {
             logger.log(Level.INFO, "Id {} less than zero", id);
+        }
+        return result;
+    }
+
+    public HashMap<Integer, String> findAllCategories() throws ServiceException {
+        HashMap<Integer, String> result;
+        try {
+            result = gameDao.findAllCategories();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return result;
+    }
+
+    public HashMap<Integer, String> findAllGenres() throws ServiceException {
+        HashMap<Integer, String> result;
+        try {
+            result = gameDao.findAllGenres();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
         return result;
     }

@@ -21,7 +21,8 @@ public enum CommandType {
     CHANGE_PASSWORD(new ChangePasswordCommand(new UserServiceImpl())),
     FIND_ORDER_HISTORY(new FindOrderHistoryCommand(new OrderServiceImpl())),
     FIND_CODE_AMOUNT(new FindGameCodeAmount(new OrderServiceImpl())),
-    CREATE_GAME(new CreateGameCommand(new GameServiceImpl()));
+    CREATE_GAME(new CreateGameCommand(new GameServiceImpl())),
+    OPEN_GAME_CREATOR(new OpenGameCreatorCommand(new GameServiceImpl()));
 
     private ActionCommand command;
 

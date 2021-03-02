@@ -40,7 +40,7 @@ public class Controller extends HttpServlet {
         String page = command.execute(req, resp);
         logger.log(Level.DEBUG, "to page - " + page);
         if (page != null) {
-            if (!page.equals(PagePath.UPLOAD_PATH)) {
+            if (!page.equals(PagePath.UPLOAD_VALUE)) {
                 RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(page);
                 dispatcher.forward(req, resp);
             }

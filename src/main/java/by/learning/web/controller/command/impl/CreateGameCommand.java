@@ -28,7 +28,7 @@ public class CreateGameCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.INDEX;
+        String page = PagePath.ADMIN_MENU_PAGE;
         String gameTitle = request.getParameter(RequestParameter.GAME_TITLE);
         String imagePath = request.getParameter(RequestParameter.GAME_IMAGE_PATH);
         String description = request.getParameter(RequestParameter.GAME_DESCRIPTION);
@@ -38,21 +38,20 @@ public class CreateGameCommand implements ActionCommand {
         String[] categories = request.getParameterValues(RequestParameter.GAME_CATEGORIES);
 
         try {
-            Set<ValidationInformation> informationSet = gameService.createGame(gameTitle, imagePath, description, price, trailerLink, genres, categories);
-            if (informationSet.remove(ValidationInformation.SUCCESS)) {
-                request.setAttribute(RequestParameter.SUCCESS, true);
+            Set<String> informationSet = gameService.createGame(gameTitle, imagePath, description, price, trailerLink, genres, categories);
+            if (informationSet.remove(ValidationInformation.SUCCESS.getIssueValue())) {
                 if (!imagePath.isEmpty()) {
                     try (ServletOutputStream outputStream = response.getOutputStream()) {
                         response.sendRedirect(request.getContextPath() + page);
                         CustomFileReader customFileReader = CustomFileReader.getInstance();
                         outputStream.write(customFileReader.readAndWriteImage(imagePath));
-                        page = PagePath.UPLOAD_PATH;
+                        page = PagePath.UPLOAD_VALUE;
                         return page;
                     } catch (IOException | ServiceException e) {
                         logger.log(Level.ERROR, e);
                     }
                 }
-            } else if (informationSet.remove(ValidationInformation.FAIL)) {
+            } else if (informationSet.remove(ValidationInformation.FAIL.getIssueValue())) {
                 logger.log(Level.DEBUG, informationSet.toString());
                 request.setAttribute(RequestParameter.GAME_VALID_ISSUES, informationSet);
                 request.setAttribute(RequestParameter.FAIL, true);

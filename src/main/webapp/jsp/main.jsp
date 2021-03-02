@@ -71,9 +71,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
 <script src="${pageContext.request.contextPath}/js/main-page.js"></script>
 
 <script>
-</script>
-
-<script>
     $(document).ready(function () {
         var orderCreated = ${requestScope.orderCreated};
         if (orderCreated) {

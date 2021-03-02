@@ -11,7 +11,8 @@ public class SessionAttribute {
     public static final String CART_AMOUNT = "cartAmount";
     public static final String COUPON = "coupon";
     public static final String COUPON_DISCOUNT = "couponDiscount";
-
+    public static final String CATEGORIES_MAP = "categoriesMap";
+    public static final String GENRES_MAP = "genresMap";
 
     private SessionAttribute() {
     }
