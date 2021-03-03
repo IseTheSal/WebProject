@@ -5,14 +5,14 @@
 <html>
 <head>
     <title><fmt:message
-            key="error.internalServerError.title"/></title>
+            key="error.badRequest.title"/></title>
 </head>
 <body>
 <div style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="../support/header.jsp"/>
     <h1 class="neon-title-cyan-light" style="padding-top: 20%;text-align: center"><fmt:message
-            key="error.internalServerError"/></h1>
+            key="error.badRequest"/></h1>
     <div style="bottom: 0; position: fixed; width: 100%">
         <jsp:include page="../support/footer.jsp"/>
     </div>

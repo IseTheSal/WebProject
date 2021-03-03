@@ -74,6 +74,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                            style="text-align: center; background-color: transparent"
                            href="${pageContext.request.contextPath}/jsp/profile.jsp"><fmt:message
                                 key="header.profile"/></a>
+                        <a class="dropdown-item neon-title-white"
+                           style="text-align: center; background-color: transparent"
+                           href="${pageContext.request.contextPath}/jsp/admin/adminMenu.jsp"><fmt:message
+                                key="header.admin.menu"/></a>
                         <form method="post" action="logout.do" style="height: 15px">
                             <input type="hidden" name="command" value="logout"/>
                             <button class="btn btn-outline-danger neon-title-red button-border-red"

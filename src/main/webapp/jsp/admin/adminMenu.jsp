@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin-menu-style.css">
 </head>
 <body class="custom-admin-body">
-<jsp:include page="support/header.jsp"/>
+<jsp:include page="../support/header.jsp"/>
 
 <div class="custom-admin-container">
     <div class="custom-admin-card">

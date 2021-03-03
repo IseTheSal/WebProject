@@ -46,7 +46,7 @@ public class OpenGameCommand implements ActionCommand {
         } catch (ServiceException e) {
             logger.log(Level.INFO, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
-            page = PagePath.PAGE_SERVER_ERROR;
+            page = PagePath.SERVER_ERROR_PAGE;
         }
         return page;
     }

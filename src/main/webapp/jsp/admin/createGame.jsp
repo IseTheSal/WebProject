@@ -12,7 +12,7 @@
 <body>
 <div style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
-    <jsp:include page="support/header.jsp"/>
+    <jsp:include page="../support/header.jsp"/>
     <div style="padding-top: 5%">
         <form class="needs-validation" novalidate method="post" action="createGame.do">
             <input type="hidden" name="command" value="create_game"/>
@@ -148,7 +148,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             </div>
         </form>
         <div style="margin-top: 5%">
-            <jsp:include page="support/footer.jsp"/>
+            <jsp:include page="../support/footer.jsp"/>
         </div>
     </div>
     <script>

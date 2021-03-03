@@ -10,7 +10,7 @@
 <body>
 <div style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
-    <jsp:include page="support/header.jsp"/>
+    <jsp:include page="../support/header.jsp"/>
     <div style="padding-top: 5%; margin-left: 10%; margin-right: 10%">
         <table class="table table-bordered">
             <thead class="thead-light">

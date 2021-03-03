@@ -79,7 +79,7 @@ var col1 = $('.custom-card');
 var gameId = [];
 for (i = 0; i < col.length; i++) {
     gameNames.push(col[i].innerHTML);
-    gameId.push(col1[i].href.slice(col1[i].href.lastIndexOf('=') + 1));
+    gameId.push(col1[i].href.slice(col1[i].href.lastIndexOf('gameId=') + 7));
 }
 autocomplete(document.getElementById("myInput"), gameNames, gameId);
 

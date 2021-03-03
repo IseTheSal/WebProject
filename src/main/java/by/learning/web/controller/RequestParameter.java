@@ -23,6 +23,7 @@ public class RequestParameter {
     public static final String COUPON_EXIST = "couponExist";
     public static final String COUPON_OUT = "couponDismiss";
     public static final String NEED_AUTHORIZATION_FIRST = "loginFirst";
+    public static final String ACCESS_DENIED = "accessDenied";
     public static final String SERVER_ERROR = "serverError";
     public static final String ORDER_CREATED = "orderCreated";
     public static final String CART_AMOUNT_CHANGED = "cartAmountChanged";
