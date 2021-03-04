@@ -32,12 +32,8 @@ public class RefreshFilter implements Filter {
             session.setAttribute("serverToken", new Random().nextInt(10000));
             chain.doFilter(req, res);
         } else {
-            try {
                 serverToken = (Integer) session.getAttribute("serverToken");
                 clientToken = Integer.parseInt(req.getParameter("clientToken"));
-            } catch (Exception e) {
-                logger.log(Level.ERROR, e);
-            }
             if (serverToken == clientToken) {
                 session.setAttribute("serverToken", new Random().nextInt(10000));
                 chain.doFilter(req, res);
