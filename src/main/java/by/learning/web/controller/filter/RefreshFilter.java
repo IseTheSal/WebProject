@@ -18,23 +18,26 @@ public class RefreshFilter implements Filter {
     public void init(FilterConfig fg) throws ServletException {
     }
 
-    HttpSession session = null;
-    HttpServletRequest httpServletRequest = null;
-    int serverToken = 0;
-    int clientToken = 0;
+    private HttpSession session = null;
+    private HttpServletRequest httpServletRequest = null;
+    private int serverToken = 0;
+    private int clientToken = 0;
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain) throws IOException, ServletException {
         httpServletRequest = (HttpServletRequest) req;
-        logger.log(Level.DEBUG, httpServletRequest.getMethod());
+        session = httpServletRequest.getSession(true);
         if (httpServletRequest.getMethod().equals("GET")) {
-            session = httpServletRequest.getSession(true);
             session.setAttribute("serverToken", new Random().nextInt(10000));
             chain.doFilter(req, res);
         } else {
-            serverToken = (Integer) session.getAttribute("serverToken");
-            clientToken = Integer.parseInt(req.getParameter("clientToken"));
+            try {
+                serverToken = (Integer) session.getAttribute("serverToken");
+                clientToken = Integer.parseInt(req.getParameter("clientToken"));
+            } catch (Exception e) {
+                logger.log(Level.ERROR, e);
+            }
             if (serverToken == clientToken) {
                 session.setAttribute("serverToken", new Random().nextInt(10000));
                 chain.doFilter(req, res);

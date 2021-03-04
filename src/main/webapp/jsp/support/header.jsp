@@ -10,7 +10,6 @@
 
     <script src="https://kit.fontawesome.com/c1f7a487ad.js" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
@@ -39,10 +38,12 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
     </div>
 
     <div class="navbar pull-right">
-        <a style="text-decoration: none; color: white;" id="shopMap"
-           class="neon-title-white-shadow-light"
-           href="${pageContext.request.contextPath}/jsp/cart.jsp"><span
-                class="fas fa-shopping-cart"></span>&nbsp(${sessionScope.cartAmount})</a>
+        <c:if test="${sessionScope.currentUser.role != 'ADMIN'}">
+            <a style="text-decoration: none; color: white;" id="shopMap"
+               class="neon-title-white-shadow-light"
+               href="${pageContext.request.contextPath}/jsp/cart.jsp"><span
+                    class="fas fa-shopping-cart"></span>&nbsp(${sessionScope.cartAmount})</a>
+        </c:if>
         <div style="display: inline-grid; margin-left: 50px">
             <c:if test="${empty sessionScope.currentUser}">
                 <a href="${pageContext.request.contextPath}/jsp/registration.jsp"
@@ -66,7 +67,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                         <span class="fas fa-user" style="margin-right:0.40em"></span>
                             ${sessionScope.currentUser.firstname}
                     </a>
-
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"
                          style="background:  rgba(152,148,148,0.2);
                           border: none; position: fixed; left: 90%; top: 8%; width: 40px">
@@ -74,11 +74,14 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                            style="text-align: center; background-color: transparent"
                            href="${pageContext.request.contextPath}/jsp/profile.jsp"><fmt:message
                                 key="header.profile"/></a>
-                        <a class="dropdown-item neon-title-white"
-                           style="text-align: center; background-color: transparent"
-                           href="${pageContext.request.contextPath}/jsp/admin/adminMenu.jsp"><fmt:message
-                                key="header.admin.menu"/></a>
-                        <form method="post" action="logout.do" style="height: 15px">
+                        <c:if test="${sessionScope.currentUser.role == 'ADMIN'}">
+                            <a class="dropdown-item neon-title-white"
+                               style="text-align: center; background-color: transparent"
+                               href="${pageContext.request.contextPath}/jsp/admin/adminMenu.jsp"><fmt:message
+                                    key="header.admin.menu"/></a>
+                        </c:if>
+                        <form method="post" action="${pageContext.request.contextPath}/logout.do" style="height: 15px">
+                            <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                             <input type="hidden" name="command" value="logout"/>
                             <button class="btn btn-outline-danger neon-title-red button-border-red"
                                     type="submit"><fmt:message key="header.logout"/>
@@ -131,6 +134,24 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         var success = ${not empty requestScope.success};
         if (success) {
             funcBtns.alertOkOnlyTitle('Success');
+        }
+        var validIssues = ${not empty requestScope.validIssues};
+        if(validIssues){
+            let jsArray = [
+                <c:forEach items="${requestScope.validIssues}" var="elem" varStatus="currentStatus">
+                "${elem}"
+                <c:if test="${not currentStatus.last}">
+                ,
+                </c:if>
+                </c:forEach>
+            ];
+            for (let i = 0; i < jsArray.length; i++) {
+                funcBtns.alertWarning(jsArray[i]);
+            }
+        }
+        var codeExist = ${not empty requestScope.gameCodeExists};
+        if (codeExist) {
+            funcBtns.alertWarning("This code probably exists");
         }
     });
 </script>

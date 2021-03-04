@@ -14,9 +14,9 @@
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="../support/header.jsp"/>
     <div style="padding-top: 5%">
-        <form class="needs-validation" novalidate method="post" action="createGame.do">
+        <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/createGame.do">
             <input type="hidden" name="command" value="create_game"/>
-            <input name="clientToken" type="hidden" value="${serverToken}"/>
+            <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <h2 class="neon-title-cyan" style="text-align:center">
                 <fmt:message key="creategame.page.title"/>
@@ -139,7 +139,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         </select>
                     </div>
                 </div>
-                <c:forEach items="${requestScope.gameValidIssues}" var="issue">
+                <c:forEach items="${requestScope.validIssues}" var="issue">
                     <label class="form-inline"
                            style="color: red"> ${issue} </label>
                 </c:forEach>

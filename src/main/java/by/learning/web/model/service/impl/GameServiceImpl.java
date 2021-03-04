@@ -39,7 +39,7 @@ public class GameServiceImpl implements GameService {
                                   String description, String price, String trailerLink,
                                   String[] genres, String[] categories) throws ServiceException {
         Set<ValidationInformation> validInfo = GameValidator.findGameValidationIssues(gameTitle, imagePath, description, price, trailerLink);
-        Set<String> valueValidInfo = validInfo.stream().map(ValidationInformation::getIssueValue).collect(Collectors.toSet());
+        Set<String> valueValidInfo = validInfo.stream().map(ValidationInformation::getInfoValue).collect(Collectors.toSet());
         if (!valueValidInfo.isEmpty()) {
             return valueValidInfo;
         }
@@ -53,9 +53,9 @@ public class GameServiceImpl implements GameService {
         try {
             boolean isCreated = gameDao.createGame(game, genresId, categoriesId);
             if (isCreated) {
-                valueValidInfo.add(ValidationInformation.SUCCESS.getIssueValue());
+                valueValidInfo.add(ValidationInformation.SUCCESS.getInfoValue());
             } else {
-                valueValidInfo.add(ValidationInformation.FAIL.getIssueValue());
+                valueValidInfo.add(ValidationInformation.FAIL.getInfoValue());
             }
         } catch (DaoException e) {
             throw new ServiceException(e);

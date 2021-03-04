@@ -12,9 +12,9 @@
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%">
-        <form class="needs-validation" novalidate method="post" action="register.do">
+        <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/register.do">
             <input type="hidden" name="command" value="registration"/>
-            <input name="clientToken" type="hidden" value="${serverToken}"/>
+            <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <h2 class="neon-title-cyan" style="text-align:center">
                 <fmt:message key="registration.title"/>
@@ -157,7 +157,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         </div>
     </div>
 </body>
-
 
 <script>
     (function () {

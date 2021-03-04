@@ -71,7 +71,9 @@ public class OrderDaoImpl implements OrderDao {
             "WHERE orders.user_id = ?";
     private static final String FIND_ORDER_PRICE = "SELECT total_price " +
             "FROM orders " +
-            "where user_id = ?";
+            "WHERE user_id = ?";
+    private static final String ADD_GAMECODE = "INSERT INTO codes(code_id, game_code, sold, game_id)\n" +
+            "VALUES (default, ?, default, ?);";
 
 
     @Override
@@ -348,5 +350,23 @@ public class OrderDaoImpl implements OrderDao {
         } catch (SQLException ex) {
             throw new DaoException(ex);
         }
+    }
+
+    @Override
+    public boolean addGameCode(int gameId, String code) throws DaoException {
+        boolean codeAdded;
+        PreparedStatement preparedStatement = null;
+        try (Connection connection = CONNECTION_POOL.getConnection()) {
+            preparedStatement = connection.prepareStatement(ADD_GAMECODE);
+            preparedStatement.setString(1, code);
+            preparedStatement.setInt(2, gameId);
+            int executeUpdate = preparedStatement.executeUpdate();
+            codeAdded = (executeUpdate > 0);
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(preparedStatement);
+        }
+        return codeAdded;
     }
 }

@@ -28,9 +28,9 @@ $(function () {
 
     toastr.options.positionClass = 'toast-top-right';
     toastr.options.extendedTimeOut = 0; //1000;
-    toastr.options.timeOut = 1000;
-    toastr.options.fadeOut = 250;
-    toastr.options.fadeIn = 250;
+    toastr.options.timeOut = 2000;
+    toastr.options.fadeOut = 550;
+    toastr.options.fadeIn = 550;
 
     var i = 0;
 

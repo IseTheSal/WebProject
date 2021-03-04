@@ -4,6 +4,7 @@
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language.language"/>
 <head>
+<%--    fixme--%>
     <title>Main</title>
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
@@ -16,7 +17,7 @@
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%">
-        <form autocomplete="off" method="get" action="${pageContext.request.contextPath}/toCart.do">
+        <form autocomplete="off" method="get" action="${pageContext.request.contextPath}/game.do">
             <div style="position: fixed; margin-left: 1%; margin-top: 1%">
                 <input type="hidden" name="command" value="open_game"/>
                 <button type="submit" value="" class="button-search-purple"
@@ -36,7 +37,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <div class="row row-cols-3" style="row-gap: 60px; margin-left: 45px">
                 <c:forEach items="${sessionScope.gameList}" var="game">
                     <div class="col">
-                        <a href="${pageContext.request.contextPath}/toCart.do?command=open_game&gameId=${game.id}"
+                        <a href="${pageContext.request.contextPath}/game.do?command=open_game&gameId=${game.id}"
                            class="card custom-card" style="width: 18rem; text-decoration: none">
                             <img class="image-card" src="${pageContext.request.contextPath}${game.imagePath}"
                                  onerror="this.onerror = null; this.src='${pageContext.request.contextPath}/img/IMAGE_UNAVAILABLE.jpg'"
@@ -68,6 +69,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     </div>
 </body>
 
+<script src="${pageContext.request.contextPath}/js/custom-search.js"></script>
 <script src="${pageContext.request.contextPath}/js/main-page.js"></script>
 
 <script>

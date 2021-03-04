@@ -44,9 +44,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <button class="collapsible neon-title-white" style="width: 100%;padding: 0 !important;">
                     <fmt:message key="profile.email"/> ${sessionScope.currentUser.email}</button>
                 <div class="content">
-                    <form class="needs-validation" novalidate method="post" action="changeEmail.do">
+                    <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/changeEmail.do">
                         <input type="hidden" name="command" value="change_email"/>
-                        <input type="hidden" name="clientToken" value="${serverToken}"/>
+                        <input type="hidden" name="clientToken" value="${sessionScope.serverToken}"/>
                         <input type="hidden" name="currentPage"
                                value="${pageContext.request.requestURI}">
                         <br>
@@ -78,9 +78,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <fmt:message key="profile.password"/>
                 </button>
                 <div class="content">
-                    <form class="needs-validation" novalidate method="post" action="changePassword.do">
+                    <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/changePassword.do">
                         <input type="hidden" name="command" value="change_password"/>
-                        <input type="hidden" name="clientToken" value="${serverToken}"/>
+                        <input type="hidden" name="clientToken" value="${sessionScope.serverToken}"/>
                         <input type="hidden" name="currentPage"
                                value="${pageContext.request.requestURI}">
                         <br>
@@ -117,11 +117,11 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 </div>
             </div>
         </div>
-        <c:if test="${empty requestScope.orderHistoryList}">
+        <c:if test="${empty requestScope.orderHistoryList and sessionScope.currentUser.role != 'ADMIN'}">
             <div style="text-align: center; margin-top: 2%">
-                <form method="get" action="findOrderHistory.do">
+                <form method="get" action="${pageContext.request.contextPath}/findOrderHistory.do">
                     <input type="hidden" name="command" value="find_order_history">
-                    <input type="hidden" name="clientToken" value="${serverToken}"/>
+                    <input type="hidden" name="clientToken" value="${sessionScope.serverToken}"/>
                     <input type="hidden" name="currentPage"
                            value="${pageContext.request.requestURI}">
                     <button class="button-glow-purple" type="submit"
@@ -150,10 +150,12 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <div class="swiper-wrapper" style="zoom: 0.6;">
                 <c:forEach items="${requestScope.orderHistoryList}" var="game">
                     <div class="swiper-slide" style="background: transparent; height: 400px !important;">
-                        <a href="${pageContext.request.contextPath}/toCart.do?command=open_game&gameId=${game.id}"
+                        <a href="${pageContext.request.contextPath}/game.do?command=open_game&gameId=${game.id}"
                            class="card custom-card"
                            style="width: 18rem; text-decoration: none; height: 425px !important;">
-                            <img class="image-card" src="${pageContext.request.contextPath}${game.imagePath}">
+                            <img class="image-card"
+                                 onerror="this.onerror = null; this.src='${pageContext.request.contextPath}/img/IMAGE_UNAVAILABLE.jpg'"
+                                 src="${pageContext.request.contextPath}${game.imagePath}">
                             <div class="card-body" style="text-align: center">
                                 <p class="card-title neon-title-white">${game.title}</p>
                             </div>

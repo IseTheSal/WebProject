@@ -33,6 +33,15 @@
         <location>/jsp/error/error500.jsp</location>
     </error-page>
 
+
+    <filter>
+        <filter-name>XSSAttackFilter</filter-name>
+        <filter-class>by.learning.web.controller.filter.XSSAttackFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>XSSAttackFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter>
         <filter-name>CharacterSetFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.CharacterSetFilter</filter-class>
@@ -66,21 +75,29 @@
     </filter>
     <filter-mapping>
         <filter-name>RefreshFilter</filter-name>
-        <url-pattern>/toCart.do</url-pattern>
-        <url-pattern>/jsp/login.jsp</url-pattern>
-        <url-pattern>/jsp/login.do</url-pattern>
-        <url-pattern>/jsp/registration.jsp</url-pattern>
-        <url-pattern>/jsp/register.do</url-pattern>
-        <url-pattern>/jsp/cart.jsp</url-pattern>
-        <url-pattern>/jsp/cart.do</url-pattern>
-        <url-pattern>/jsp/removeFromCart.do</url-pattern>
-        <url-pattern>/jsp/increaseCart.do</url-pattern>
-        <url-pattern>/jsp/decreaseCart.do</url-pattern>
-        <url-pattern>/jsp/usePromocode.do</url-pattern>
-        <url-pattern>/jsp/makeOrder.do</url-pattern>
-        <url-pattern>/jsp/profile.jsp</url-pattern>
-        <url-pattern>/jsp/changeEmail.do</url-pattern>
-        <url-pattern>/jsp/changePassword.do</url-pattern>
+        <url-pattern>/cart.jsp</url-pattern>
+        <url-pattern>/increaseCart.do</url-pattern>
+        <url-pattern>/decreaseCart.do</url-pattern>
+        <url-pattern>/removeFromCart.do</url-pattern>
+        <url-pattern>/usePromocode.do</url-pattern>
+        <url-pattern>/makeOrder.do</url-pattern>
+        <url-pattern>/addToCart.do</url-pattern>
+        <url-pattern>/login.jsp</url-pattern>
+        <url-pattern>/login.do</url-pattern>
+        <url-pattern>/main.jsp</url-pattern>
+        <url-pattern>/game.do</url-pattern>
+        <url-pattern>/profile.jsp</url-pattern>
+        <url-pattern>/changeEmail.do</url-pattern>
+        <url-pattern>/changePassword.do</url-pattern>
+        <url-pattern>/findOrderHistory.do</url-pattern>
+        <url-pattern>/registration.jsp</url-pattern>
+        <url-pattern>/register.do</url-pattern>
+        <url-pattern>/adminMenu.jsp</url-pattern>
+        <url-pattern>/createGame.do</url-pattern>
+        <url-pattern>/addGameCode.do</url-pattern>
+
+        <url-pattern>/createGame.jsp</url-pattern>
+        <url-pattern>/createGame.do</url-pattern>
     </filter-mapping>
 
 </web-app>

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface OrderService {
     Optional<Coupon> findAvailableCouponByCode(String code) throws ServiceException;
@@ -44,4 +45,6 @@ public interface OrderService {
     List<Game> findOrderHistory(int userId) throws ServiceException;
 
     BigDecimal findOrderPrice(int userId) throws ServiceException;
+
+    Set<String> addGameCode(String gameId, String code) throws ServiceException;
 }

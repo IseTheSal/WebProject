@@ -38,6 +38,9 @@ public class LoginCommand implements ActionCommand {
                 HttpSession session = request.getSession();
                 session.setAttribute(SessionAttribute.CURRENT_USER, currentUser);
                 if (currentUser.getRole() == User.Role.ADMIN) {
+                    session.removeAttribute(SessionAttribute.CART_MAP);
+                    session.removeAttribute(SessionAttribute.CART_AMOUNT);
+                    session.removeAttribute(SessionAttribute.COUPON_DISCOUNT);
                     page = PagePath.ADMIN_MENU_PAGE;
                 } else {
                     page = PagePath.INDEX;

@@ -7,7 +7,10 @@ public enum ValidationInformation {
     IMAGE_PATH_INCORRECT("incorrect path"),
     DESCRIPTION_INCORRECT("incorrect description"),
     PRICE_INCORRECT("incorrect price"),
-    TRAILER_LINK_INCORRECT("incorrect link");
+    TRAILER_LINK_INCORRECT("incorrect link"),
+    GAME_CODE_INCORRECT("incorrect game code"),
+    CODE_EXISTS("code exists"),
+    GAME_ID_DOES_NOT_EXIST("incorrect game");
 
     private final String value;
 
@@ -15,7 +18,7 @@ public enum ValidationInformation {
         this.value = value;
     }
 
-    public String getIssueValue() {
+    public String getInfoValue() {
         return value;
     }
 }

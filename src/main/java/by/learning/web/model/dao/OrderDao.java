@@ -31,4 +31,6 @@ public interface OrderDao extends BaseDao {
     List<Game> findOrderHistoryByUserId(int userId) throws DaoException;
 
     BigDecimal findOrderPriceByUserId(int userId) throws DaoException;
+
+    boolean addGameCode(int gameId, String code) throws DaoException;
 }

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
-//fixme
 public class PageAccessFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
 
@@ -30,7 +29,9 @@ public class PageAccessFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         commonPageAccess = Set.of(PagePath.INDEX,
                 PagePath.MAIN_PAGE,
-                PagePath.GAME_PAGE);
+                PagePath.GAME_PAGE,
+                PagePath.ABOUT_PAGE,
+                PagePath.TERMS_PAGE);
         guestPageAccess = Set.of(PagePath.CART_PAGE,
                 PagePath.LOGIN_PAGE,
                 PagePath.REGISTRATION_PAGE);

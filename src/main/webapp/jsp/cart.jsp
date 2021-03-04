@@ -32,9 +32,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                         <p id="price" class="priceClass"
                                            style="display:inline; color: black; font-size: 18px">${games.key.price}$</p>
                                     </div>
-                                    <form style="display: inline" method="post" action="decreaseCart.do">
+                                    <form style="display: inline" method="post" action="${pageContext.request.contextPath}/decreaseCart.do">
                                         <input type="hidden" name="command" value="change_cart_amount"/>
-                                        <input name="clientToken" type="hidden" value="${serverToken}"/>
+                                        <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                                         <input type="hidden" name="operation" value="-">
                                         <input type="hidden" name="currentPage"
                                                value="${pageContext.request.requestURI}">
@@ -42,9 +42,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                         <input type="submit" value="-" class="remove decrease"
                                                style="cursor: pointer;color: red; width: 25px"/>
                                     </form>
-                                    <form style="display: inline" method="post" action="increaseCart.do">
+                                    <form style="display: inline" method="post" action="${pageContext.request.contextPath}/increaseCart.do">
                                         <input type="hidden" name="command" value="change_cart_amount"/>
-                                        <input name="clientToken" type="hidden" value="${serverToken}"/>
+                                        <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                                         <input type="hidden" name="operation" value="+">
                                         <input type="hidden" name="currentPage"
                                                value="${pageContext.request.requestURI}">
@@ -54,9 +54,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                     </form>
                                 </div>
                                 <div class="cartSection removeWrap">
-                                    <form method="post" action="removeFromCart.do">
+                                    <form method="post" action="${pageContext.request.contextPath}/removeFromCart.do">
                                         <input type="hidden" name="command" value="remove_from_cart"/>
-                                        <input name="clientToken" type="hidden" value="${serverToken}"/>
+                                        <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                                         <input type="hidden" name="currentPage"
                                                value="${pageContext.request.requestURI}">
                                         <input name="gameId" type="hidden" value="${games.key.id}"/>
@@ -73,9 +73,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             </div>
             <div class="form-group promoCode" style="width: 400px">
                 <label for="promo" style="color:white"><fmt:message key="cart.promoCode"/></label>
-                <form class="needs-validation" novalidate method="post" action="usePromocode.do">
+                <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/usePromocode.do">
                     <input type="hidden" name="command" value="use_promocode"/>
-                    <input name="clientToken" type="hidden" value="${serverToken}"/>
+                    <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                     <input type="hidden" name="currentPage"
                            value="${pageContext.request.requestURI}">
                     <input class="form-control" type="text" aria-describedby="promocodeHelp" name="couponCode"
@@ -106,9 +106,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                             class="value billClass"></span></li>
 
                     <li class="totalRow">
-                        <form method="post" action="makeOrder.do">
+                        <form method="post" action="${pageContext.request.contextPath}/makeOrder.do">
                             <input type="hidden" name="command" value="make_order"/>
-                            <input name="clientToken" type="hidden" value="${serverToken}"/>
+                            <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                             <input type="hidden" name="currentPage"
                                    value="${pageContext.request.requestURI}">
                             <input type="submit" value="Buy" style="width: 175px"

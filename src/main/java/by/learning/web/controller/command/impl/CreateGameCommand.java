@@ -39,7 +39,7 @@ public class CreateGameCommand implements ActionCommand {
 
         try {
             Set<String> informationSet = gameService.createGame(gameTitle, imagePath, description, price, trailerLink, genres, categories);
-            if (informationSet.remove(ValidationInformation.SUCCESS.getIssueValue())) {
+            if (informationSet.remove(ValidationInformation.SUCCESS.getInfoValue())) {
                 if (!imagePath.isEmpty()) {
                     try (ServletOutputStream outputStream = response.getOutputStream()) {
                         response.sendRedirect(request.getContextPath() + page);
@@ -51,9 +51,9 @@ public class CreateGameCommand implements ActionCommand {
                         logger.log(Level.ERROR, e);
                     }
                 }
-            } else if (informationSet.remove(ValidationInformation.FAIL.getIssueValue())) {
+            } else if (informationSet.remove(ValidationInformation.FAIL.getInfoValue())) {
                 logger.log(Level.DEBUG, informationSet.toString());
-                request.setAttribute(RequestParameter.GAME_VALID_ISSUES, informationSet);
+                request.setAttribute(RequestParameter.VALID_ISSUES, informationSet);
                 request.setAttribute(RequestParameter.FAIL, true);
                 page = request.getParameter(RequestParameter.CURRENT_PAGE);
             }

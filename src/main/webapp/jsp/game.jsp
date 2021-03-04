@@ -11,7 +11,7 @@
 <div style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
-    <div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important;" id="exampleModal"
+    <div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important;" id="gameModal"
          tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -46,9 +46,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                 key="game.cart"/>
                             <span style="color: #0b820b" class="fas fa-check"></span></small>
                     </c:if>
-                    <form method="post" action="${pageContext.request.contextPath}/toCart.do">
+                    <form method="post" action="${pageContext.request.contextPath}/addToCart.do">
                         <input type="hidden" name="command" value="add_to_cart"/>
-                        <input name="clientToken" type="hidden" value="${serverToken}"/>
+                        <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                         <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
                         <input type="hidden" name="gameId" value="${sessionScope.currentGame.id}"/>
                         <input type="submit" name="btnBuy" aria-describedby="orderHelp"

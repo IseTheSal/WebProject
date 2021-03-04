@@ -12,9 +12,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 15%">
         <h5 class="neon-title-green" style="text-align: center">${requestScope.registrationComplete}</h5>
-        <form class="needs-validation" novalidate method="post" action="login.do">
+        <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/login.do">
             <input type="hidden" name="command" value="login"/>
-            <input name="clientToken" type="hidden" value="${serverToken}"/>
+            <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <div style="max-width: 350px;margin: auto">
                 <h2 class="neon-title-cyan" style="text-align: center"><fmt:message key="authorization.title"/></h2>
@@ -57,7 +57,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             funcBtns.alertWarning('<fmt:message key='authorization.needAuthorization'/>');
         }
     });
-
     (function () {
         'use strict';
         window.addEventListener('load', function () {

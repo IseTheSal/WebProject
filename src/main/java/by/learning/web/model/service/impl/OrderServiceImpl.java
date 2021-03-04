@@ -13,6 +13,7 @@ import by.learning.web.model.entity.User;
 import by.learning.web.model.service.OrderService;
 import by.learning.web.util.MailSender;
 import by.learning.web.validator.OrderValidator;
+import by.learning.web.validator.ValidationInformation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -331,5 +332,49 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException(ex);
         }
         return result;
+    }
+
+    @Override
+    public Set<String> addGameCode(String gameIdValue, String code) throws ServiceException {
+        boolean isCodeValid = OrderValidator.isGameCodeValid(code);
+        Set<String> validInfo = new HashSet<>();
+        boolean dataValid = true;
+        if (!isCodeValid) {
+            validInfo.add(ValidationInformation.GAME_CODE_INCORRECT.getInfoValue());
+            dataValid = false;
+        }
+        int gameId = Integer.parseInt(gameIdValue);
+        if (gameId < 0) {
+            validInfo.add(ValidationInformation.GAME_ID_DOES_NOT_EXIST.getInfoValue());
+            dataValid = false;
+        }
+        if (dataValid) {
+            Optional<Game> gameById;
+            try {
+                gameById = gameDao.findGameById(gameId);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+            if (gameById.isEmpty()) {
+                validInfo.add(ValidationInformation.GAME_ID_DOES_NOT_EXIST.getInfoValue());
+                dataValid = false;
+            }
+        }
+        if (!dataValid) {
+            validInfo.add(ValidationInformation.FAIL.getInfoValue());
+            return validInfo;
+        }
+        try {
+            boolean codeAdded = orderDao.addGameCode(gameId, code);
+            if (codeAdded) {
+                validInfo.add(ValidationInformation.SUCCESS.getInfoValue());
+            } else {
+                validInfo.add(ValidationInformation.FAIL.getInfoValue());
+                validInfo.add(ValidationInformation.CODE_EXISTS.getInfoValue());
+            }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return validInfo;
     }
 }

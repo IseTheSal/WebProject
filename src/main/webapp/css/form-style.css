@@ -22,3 +22,21 @@
     color: transparent;
 }
 
+.custom-admin-input {
+    background: rgba(0, 0, 0, 0.3);
+    color: white !important;
+}
+
+
+.custom-admin-input::placeholder {
+    color: #cccccc;
+}
+
+.custom-admin-input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.custom-admin-input:focus::placeholder {
+    color: transparent;
+}
+

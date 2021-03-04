@@ -18,7 +18,6 @@ import java.util.EnumSet;
 import java.util.Locale;
 import java.util.Set;
 
-//fixme
 public class CommandAccessFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
     private static final String COMMAND_PARAMETER = "command";
@@ -37,17 +36,21 @@ public class CommandAccessFilter implements Filter {
                 CommandType.CHANGE_CART_AMOUNT,
                 CommandType.USE_PROMOCODE,
                 CommandType.LOGIN,
-                CommandType.REGISTRATION);
+                CommandType.REGISTRATION,
+                CommandType.CHANGE_LOCALE);
         adminCommands = EnumSet.of(CommandType.CREATE_GAME,
                 CommandType.OPEN_GAME,
                 CommandType.OPEN_GAME_CREATOR,
-                CommandType.FIND_CODE_AMOUNT);
+                CommandType.FIND_CODE_AMOUNT,
+                CommandType.CHANGE_LOCALE,
+                CommandType.ADD_GAME_CODE);
         clientCommands = EnumSet.of(CommandType.ADD_TO_CART,
                 CommandType.OPEN_GAME,
                 CommandType.REMOVE_FROM_CART,
                 CommandType.CHANGE_CART_AMOUNT,
                 CommandType.USE_PROMOCODE,
-                CommandType.MAKE_ORDER);
+                CommandType.MAKE_ORDER,
+                CommandType.CHANGE_LOCALE);
         authorizedUserCommands = EnumSet.of(CommandType.LOGOUT,
                 CommandType.CHANGE_EMAIL,
                 CommandType.CHANGE_PASSWORD,
