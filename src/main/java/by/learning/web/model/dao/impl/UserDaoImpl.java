@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
         Optional<User> result = Optional.empty();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_USER);
             preparedStatement.setString(1, login);
             resultSet = preparedStatement.executeQuery();
@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = CONNECTION_POOL.getConnection();
+            connection = CONNECTION_POOL.takeConnection();
             preparedStatement = connection.prepareStatement(sqlRequest);
             preparedStatement.setString(1, value);
             resultSet = preparedStatement.executeQuery();
@@ -113,7 +113,7 @@ public class UserDaoImpl implements UserDao {
         if (!existEmail(email) && !existLogin(login)) {
             PreparedStatement preparedStatement = null;
             logger.log(Level.DEBUG, "Login and email are available");
-            try (Connection connection = CONNECTION_POOL.getConnection()) {
+            try (Connection connection = CONNECTION_POOL.takeConnection()) {
                 preparedStatement = connection.prepareStatement(ADD_USER);
                 preparedStatement.setString(1, login);
                 preparedStatement.setString(2, cryptPassword);
@@ -142,7 +142,7 @@ public class UserDaoImpl implements UserDao {
         boolean isExist = existEmail(email);
         if (!isExist) {
             PreparedStatement preparedStatement = null;
-            try (Connection connection = CONNECTION_POOL.getConnection()) {
+            try (Connection connection = CONNECTION_POOL.takeConnection()) {
                 preparedStatement = connection.prepareStatement(UPDATE_EMAIL);
                 preparedStatement.setString(1, email);
                 preparedStatement.setInt(2, userId);
@@ -164,7 +164,7 @@ public class UserDaoImpl implements UserDao {
         Optional<String> password = Optional.empty();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_USER_PASSWORD);
             preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
@@ -184,7 +184,7 @@ public class UserDaoImpl implements UserDao {
     public boolean changeUserPassword(int userId, String cryptPassword) throws DaoException {
         boolean isChanged = false;
         PreparedStatement preparedStatement = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(UPDATE_PASSWORD);
             preparedStatement.setString(1, cryptPassword);
             preparedStatement.setInt(2, userId);

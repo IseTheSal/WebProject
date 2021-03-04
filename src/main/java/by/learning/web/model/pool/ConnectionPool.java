@@ -37,7 +37,7 @@ public enum ConnectionPool {
         }
     }
 
-    public Connection getConnection() throws ConnectionPoolException {
+    public Connection takeConnection() throws ConnectionPoolException {
         ProxyConnection connection;
         try {
             connection = freeConnections.take();

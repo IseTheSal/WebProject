@@ -67,7 +67,7 @@ public class GameDaoImpl implements GameDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = CONNECTION_POOL.getConnection();
+            connection = CONNECTION_POOL.takeConnection();
             preparedStatement = connection.prepareStatement(FIND_ALL_GAMES);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -95,7 +95,7 @@ public class GameDaoImpl implements GameDao {
         int amount;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_GAME_AMOUNT_BY_ID);
             preparedStatement.setInt(1, gameId);
             resultSet = preparedStatement.executeQuery();
@@ -117,7 +117,7 @@ public class GameDaoImpl implements GameDao {
         PreparedStatement preparedStatement = null;
         ResultSet generatedKeys = null;
         try {
-            connection = CONNECTION_POOL.getConnection();
+            connection = CONNECTION_POOL.takeConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(CREATE_GAME, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, game.getTitle());
@@ -170,7 +170,7 @@ public class GameDaoImpl implements GameDao {
         Optional<Game> result = Optional.empty();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_GAME_BY_ID);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -208,7 +208,7 @@ public class GameDaoImpl implements GameDao {
         HashMap<Integer, String> result = new HashMap<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(characteristic);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

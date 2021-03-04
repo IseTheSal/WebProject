@@ -8,7 +8,7 @@
   * View and search games
 * GUEST
   * Authentication & authorization
-  * Resistration
+  * Registration
   * Manage cart
   * Use promocode
 * ADMIN

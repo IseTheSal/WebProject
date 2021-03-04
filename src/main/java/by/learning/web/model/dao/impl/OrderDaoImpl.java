@@ -81,7 +81,7 @@ public class OrderDaoImpl implements OrderDao {
         Optional<Coupon> result = Optional.empty();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_AVAILABLE_COUPON_DISCOUNT);
             preparedStatement.setString(1, codeName);
             resultSet = preparedStatement.executeQuery();
@@ -106,7 +106,7 @@ public class OrderDaoImpl implements OrderDao {
         int amount = 0;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_AVAILABLE_COUPONS_AMOUNT);
             preparedStatement.setString(1, codeName);
             resultSet = preparedStatement.executeQuery();
@@ -128,7 +128,7 @@ public class OrderDaoImpl implements OrderDao {
     public boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws DaoException {
         boolean isDecreased = false;
         PreparedStatement preparedStatement = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(DECREASE_AVAILABLE_COUPON_AMOUNT);
             preparedStatement.setInt(1, decreaseAmount);
             preparedStatement.setString(2, codeName);
@@ -149,7 +149,7 @@ public class OrderDaoImpl implements OrderDao {
         short discount = 0;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_COUPON_DISCOUNT);
             preparedStatement.setString(1, codeName);
             resultSet = preparedStatement.executeQuery();
@@ -170,7 +170,7 @@ public class OrderDaoImpl implements OrderDao {
     public boolean changeCouponAmountByName(String codeName, int amount, boolean increase) throws DaoException {
         boolean changed = false;
         PreparedStatement preparedStatement = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             if (increase) {
                 preparedStatement = connection.prepareStatement(INCREASE_COUPON_AMOUNT);
             } else {
@@ -195,7 +195,7 @@ public class OrderDaoImpl implements OrderDao {
         List<Game> result = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_ORDER_HISTORY);
             preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
@@ -220,7 +220,7 @@ public class OrderDaoImpl implements OrderDao {
         BigDecimal totalPrice = new BigDecimal("0.0");
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_ORDER_PRICE);
             preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
@@ -241,7 +241,7 @@ public class OrderDaoImpl implements OrderDao {
         int amount = 0;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_AVAILABLE_GAME_CODE_AMOUNT);
             preparedStatement.setInt(1, gameId);
             resultSet = preparedStatement.executeQuery();
@@ -265,7 +265,7 @@ public class OrderDaoImpl implements OrderDao {
         PreparedStatement preparedStatement = null;
         ResultSet generatedKeys = null;
         try {
-            connection = CONNECTION_POOL.getConnection();
+            connection = CONNECTION_POOL.takeConnection();
             connection.setAutoCommit(false);
             if (order.getCoupon() == null) {
                 preparedStatement = connection.prepareStatement(INSERT_ORDER_WITHOUT_COUPON, Statement.RETURN_GENERATED_KEYS);
@@ -314,7 +314,7 @@ public class OrderDaoImpl implements OrderDao {
         List<String> result = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_LIMITED_GAME_CODE);
             preparedStatement.setInt(1, gameId);
             preparedStatement.setInt(2, amount);
@@ -334,7 +334,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void putSoldGameCodeList(List<String> codeList) throws DaoException {
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             for (String codeName : codeList) {
                 putSoldOnGameCode(connection, codeName);
             }
@@ -356,7 +356,7 @@ public class OrderDaoImpl implements OrderDao {
     public boolean addGameCode(int gameId, String code) throws DaoException {
         boolean codeAdded;
         PreparedStatement preparedStatement = null;
-        try (Connection connection = CONNECTION_POOL.getConnection()) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(ADD_GAMECODE);
             preparedStatement.setString(1, code);
             preparedStatement.setInt(2, gameId);
