@@ -1,5 +1,5 @@
 # GAMESTOP
->The system allows you to buy games from a digital online store. Works like a regular store with a well-thought UI / UX.
+>The system allows clients buy games from a digital online-store. Works like a regular store with a well-thought UI/UX.
 >Customers can make purchases, use various coupons, edit their cart. Upon successful payment receive a gamecode to the gmail specified during registration.
 
 ## Roles & commands
