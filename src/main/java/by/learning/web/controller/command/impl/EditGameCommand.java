@@ -24,16 +24,12 @@ public class EditGameCommand implements ActionCommand {
         this.gameService = gameService;
     }
 
-
-    //fixme
-    // save changes
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = PagePath.ADMIN_GAME_LIST_PAGE;
         String gameIdValue = request.getParameter(RequestParameter.GAME_ID);
         String title = request.getParameter(RequestParameter.GAME_TITLE);
         String imagePath = request.getParameter(RequestParameter.GAME_IMAGE_PATH);
-        //fixme
         if (imagePath.isBlank()) {
             imagePath = request.getParameter(RequestParameter.GAME_IMAGE_PATH_COPY);
         }

@@ -5,7 +5,7 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
-    <title>Edit game</title>
+    <title><fmt:message key="edit.game.name"/></title>
     <link rel="stylesheet"
           href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006288/BBBootstrap/choices.min.css?version=7.0.0">
 </head>
@@ -21,7 +21,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <input type="hidden" name="gameId" value="${sessionScope.currentGame.id}">
             <h2 class="neon-title-cyan" style="text-align:center">
-                <fmt:message key="creategame.page.title"/>
+                <fmt:message key="edit.game.page.name"/>
             </h2>
             <br>
             <div style="max-width: 900px;margin-left: 36%">
@@ -34,10 +34,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <input name="gameTitle" id="txtGameTitle"
                                type="text" style="width: 420px; border-width: medium"
                                class="form-control"
-                               placeholder="Enter game title"
+                               placeholder="<fmt:message key="edit.game.title.placeholder"/>"
                                required
                                pattern="^[A-z0-9`\s:]{2,35}$"
-                               minlength="1" maxlength="35"
+                               minlength="2" maxlength="35"
                                value="${sessionScope.currentGame.title}"/>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
@@ -54,7 +54,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="custom-file" style="width: 420px !important;">
                         <input id="customFile" type="text" name="imagePath"
                                value="${sessionScope.currentGame.imagePath}" class="form-control"
-                               minlength="10" maxlength="100" placeholder="Enter image link">
+                               minlength="10" maxlength="100"
+                               placeholder="<fmt:message key="edit.game.image.placeholder"/>">
                         <input type="hidden" name="imagePathCopy" value="${sessionScope.currentGame.imagePath}">
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
@@ -73,7 +74,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                   style="width: 420px; border-width: medium; min-height: 80px; max-height: 500px"
                                   class="form-control"
                                   id="txtDescription"
-                                  placeholder="Enter information about the game"
+                                  placeholder="<fmt:message key="edit.game.description.placeholder"/>"
                                   required
                                   minlength="8" maxlength="300">${sessionScope.currentGame.description}</textarea>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
@@ -90,7 +91,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="form-inline">
                         <input name="gamePrice" id="txtPrice"
                                type="text" style="width: 420px; border-width: medium"
-                               class="form-control" placeholder="Enter the price"
+                               class="form-control" placeholder="<fmt:message key="edit.game.price.placeholder"/>"
                                required
                                pattern="^(\d)*(\.\d{1,2})?$"
                                minlength="1"
@@ -112,7 +113,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="form-inline">
                         <input name="gameTrailerLink" id="txtYoutube"
                                type="text" style="width: 420px; border-width: medium"
-                               class="form-control" placeholder="Enter game trailer link"
+                               class="form-control" placeholder="<fmt:message key="edit.game.link.placeholder"/>"
                                required
                                pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
                                minlength="5" maxlength="150"
@@ -126,7 +127,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <div class="form-group" style="">
                     <label class="neon-title-white" for="select-genres"
                            style="position: relative; margin-bottom: 1px">
-                        <fmt:message key="creategame.genres"/>*
+                        <fmt:message key="creategame.genres"/>&#42;
                     </label>
                     <div style="width: 420px;">
                         <select id="select-genres" class="select-form" name="gameGenres" required
@@ -146,7 +147,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div style="width: 420px;">
                         <label class="neon-title-white" for="select-categories"
                                style="position: relative; margin-bottom: 1px">
-                            <fmt:message key="creategame.categories"/>*
+                            <fmt:message key="creategame.categories"/>&#42;
                         </label>
                         <select id="select-categories" name="gameCategories" required
                                 multiple>
@@ -166,7 +167,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                            style="color: red"> ${issue} </label>
                 </c:forEach>
                 <input type="submit" style="width: 420px" class="button-glow-purple"
-                       value="<fmt:message key="creategame.btnSub"/>" id="btnCreate"/>
+                       value="<fmt:message key="edit.game.button"/>" id="btnCreate"/>
             </div>
         </form>
         <div style="margin-top: 5%">

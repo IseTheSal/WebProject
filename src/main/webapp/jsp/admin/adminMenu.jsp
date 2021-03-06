@@ -5,6 +5,7 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
+    <%--    fixme fmt--%>
     <title>Admin menu</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin-menu-style.css">
 </head>
@@ -69,7 +70,6 @@
                 <a class="custom-admin-a"
                    href="${pageContext.request.contextPath}/createGame.do?command=open_game_creator" type="button">Add
                     game</a>
-                <%--                fixme--%>
                 <a class="custom-admin-a" style="cursor: pointer" onclick="$('#codeBtn').click();" type="button">Add
                     code</a>
                 <a class="custom-admin-a" href="${pageContext.request.contextPath}/jsp/admin/gameList.jsp"

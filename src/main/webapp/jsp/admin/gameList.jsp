@@ -53,7 +53,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <form method="get" action="${pageContext.request.contextPath}/findAmount.do">
                             <input type="hidden" name="command" value="find_code_amount">
                             <input type="hidden" name="gameId" value="${game.id}"/>
-                                <%--                            todo gameCodeAmount--%>
                             <button type="submit" style="margin-top: 20px" class="btn btn-primary" value="">
                                 <i class="fas fa-search"></i></button>
                         </form>
