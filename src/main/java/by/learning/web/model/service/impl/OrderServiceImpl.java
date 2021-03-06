@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
     public boolean isGameInStock(int gameId) throws ServiceException {
         boolean result;
         try {
-            int gameAmount = gameDao.findGameCount(gameId);
+            int gameAmount = gameDao.findGameAmount(gameId);
             if (gameAmount > 0) {
                 result = true;
             } else {
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
     public int findCodeAmount(int gameId) throws ServiceException {
         int amount;
         try {
-            amount = gameDao.findGameCount(gameId);
+            amount = gameDao.findGameAmount(gameId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

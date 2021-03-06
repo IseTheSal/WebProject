@@ -5,7 +5,7 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
-    <title>Create game</title>
+    <title>Edit game</title>
     <link rel="stylesheet"
           href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006288/BBBootstrap/choices.min.css?version=7.0.0">
 </head>
@@ -15,10 +15,11 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <jsp:include page="../support/header.jsp"/>
     <div style="padding-top: 5%">
         <form class="needs-validation" novalidate method="post"
-              action="${pageContext.request.contextPath}/createGame.do">
-            <input type="hidden" name="command" value="create_game"/>
+              action="${pageContext.request.contextPath}/editGame.do">
+            <input type="hidden" name="command" value="edit_game"/>
             <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
+            <input type="hidden" name="gameId" value="${sessionScope.currentGame.id}">
             <h2 class="neon-title-cyan" style="text-align:center">
                 <fmt:message key="creategame.page.title"/>
             </h2>
@@ -36,7 +37,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                placeholder="Enter game title"
                                required
                                pattern="^[A-z0-9`\s:]{2,35}$"
-                               minlength="1" maxlength="35"/>
+                               minlength="1" maxlength="35"
+                               value="${sessionScope.currentGame.title}"/>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
                         <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
@@ -44,15 +46,16 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     </div>
                 </div>
                 <div class="form-group" style="">
-                    <label class="neon-title-white"
+                    <label class="neon-title-white" for="customFile"
                            style="">
                         <fmt:message key="creategame.imagepath"/>
                     </label>
                     <br>
                     <div class="custom-file" style="width: 420px !important;">
-                        <input type="file" required name="imagePath" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" style=""
-                               for="customFile"><fmt:message key="creategame.choose.image"/></label>
+                        <input id="customFile" type="text" name="imagePath"
+                               value="${sessionScope.currentGame.imagePath}" class="form-control"
+                               minlength="10" maxlength="100" placeholder="Enter image link">
+                        <input type="hidden" name="imagePathCopy" value="${sessionScope.currentGame.imagePath}">
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
                         <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
@@ -72,7 +75,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                   id="txtDescription"
                                   placeholder="Enter information about the game"
                                   required
-                                  minlength="8" maxlength="300"></textarea>
+                                  minlength="8" maxlength="300">${sessionScope.currentGame.description}</textarea>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
                         <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
@@ -82,7 +85,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <div class="form-group" style="">
                     <label class="neon-title-white" for="txtPrice"
                            style="position: relative; margin-bottom: 1px">
-                        <fmt:message key="creategame.price"/> $
+                        <fmt:message key="creategame.price"/>&#36;
                     </label>
                     <div class="form-inline">
                         <input name="gamePrice" id="txtPrice"
@@ -91,7 +94,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                required
                                pattern="^(\d)*(\.\d{1,2})?$"
                                minlength="1"
-                               maxlength="7"/>
+                               maxlength="7"
+                               value="${sessionScope.currentGame.price}"/>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
                         <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
@@ -111,7 +115,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                class="form-control" placeholder="Enter game trailer link"
                                required
                                pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
-                               minlength="5" maxlength="150"/>
+                               minlength="5" maxlength="150"
+                               value="${sessionScope.currentGame.trailer}"/>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
                         <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
@@ -127,7 +132,12 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <select id="select-genres" class="select-form" name="gameGenres" required
                                 multiple>
                             <c:forEach items="${sessionScope.genresMap}" var="genre">
-                                <option value="${genre.key}">${genre.value}</option>
+                                <c:if test="${sessionScope.gameGenresMap.containsKey(genre.key)}">
+                                    <option selected value="${genre.key}">${genre.value}</option>
+                                </c:if>
+                                <c:if test="${!sessionScope.gameGenresMap.containsKey(genre.key)}">
+                                    <option value="${genre.key}">${genre.value}</option>
+                                </c:if>
                             </c:forEach>
                         </select>
                         <div class="valid-feedback"><span class="fas fa-check"></span></div>
@@ -141,7 +151,12 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <select id="select-categories" name="gameCategories" required
                                 multiple>
                             <c:forEach items="${sessionScope.categoriesMap}" var="category">
-                                <option value="${category.key}">${category.value}</option>
+                                <c:if test="${sessionScope.gameCategoriesMap.containsKey(category.key)}">
+                                    <option selected value="${category.key}">${category.value}</option>
+                                </c:if>
+                                <c:if test="${!sessionScope.gameCategoriesMap.containsKey(category.key)}">
+                                    <option value="${category.key}">${category.value}</option>
+                                </c:if>
                             </c:forEach>
                         </select>
                     </div>
@@ -193,6 +208,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         });
     </script>
     <script>
+        console.log(${sessionScope.gameCategoriesMap})
+        console.log(${sessionScope.gameGenresMap})
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

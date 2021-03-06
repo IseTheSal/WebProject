@@ -1,7 +1,6 @@
 package by.learning.web.controller.filter;
 
 import by.learning.web.controller.RequestParameter;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,21 +18,18 @@ public class RefreshFilter implements Filter {
     }
 
     private HttpSession session = null;
-    private HttpServletRequest httpServletRequest = null;
-    private int serverToken = 0;
-    private int clientToken = 0;
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain) throws IOException, ServletException {
-        httpServletRequest = (HttpServletRequest) req;
-        session = httpServletRequest.getSession(true);
+        HttpServletRequest httpServletRequest = (HttpServletRequest) req;
         if (httpServletRequest.getMethod().equals("GET")) {
+            session = httpServletRequest.getSession(true);
             session.setAttribute("serverToken", new Random().nextInt(10000));
             chain.doFilter(req, res);
         } else {
-                serverToken = (Integer) session.getAttribute("serverToken");
-                clientToken = Integer.parseInt(req.getParameter("clientToken"));
+            int serverToken = (Integer) session.getAttribute("serverToken");
+            int clientToken = Integer.parseInt(req.getParameter("clientToken"));
             if (serverToken == clientToken) {
                 session.setAttribute("serverToken", new Random().nextInt(10000));
                 chain.doFilter(req, res);

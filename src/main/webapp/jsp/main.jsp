@@ -4,7 +4,7 @@
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language.language"/>
 <head>
-<%--    fixme--%>
+    <%--    fixme--%>
     <title>Main</title>
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">

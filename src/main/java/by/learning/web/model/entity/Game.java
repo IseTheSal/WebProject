@@ -75,6 +75,15 @@ public class Game {
         this.imagePath = imagePath;
     }
 
+    public Game(int id, String title, String imagePath, String description, BigDecimal price, String trailer) {
+        this.id = id;
+        this.title = title;
+        this.imagePath = imagePath;
+        this.description = description;
+        this.price = price;
+        this.trailer = trailer;
+    }
+
     public Game(String title, String imagePath, String description, BigDecimal price, String trailer) {
         this.title = title;
         this.imagePath = imagePath;

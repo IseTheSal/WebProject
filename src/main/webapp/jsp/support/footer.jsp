@@ -6,7 +6,7 @@
 <head>
 </head>
 <body>
-<footer class="mainfooter" role="contentinfo">
+<footer class="mainfooter notcopy" role="contentinfo">
     <div class="footer-middle">
         <div class="container">
             <div class="row" style="margin-bottom: 1%; margin-left: 45%">

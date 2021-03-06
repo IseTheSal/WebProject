@@ -44,7 +44,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <button class="collapsible neon-title-white" style="width: 100%;padding: 0 !important;">
                     <fmt:message key="profile.email"/> ${sessionScope.currentUser.email}</button>
                 <div class="content">
-                    <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/changeEmail.do">
+                    <form class="needs-validation" novalidate method="post"
+                          action="${pageContext.request.contextPath}/changeEmail.do">
                         <input type="hidden" name="command" value="change_email"/>
                         <input type="hidden" name="clientToken" value="${sessionScope.serverToken}"/>
                         <input type="hidden" name="currentPage"
@@ -78,7 +79,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <fmt:message key="profile.password"/>
                 </button>
                 <div class="content">
-                    <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/changePassword.do">
+                    <form class="needs-validation" novalidate method="post"
+                          action="${pageContext.request.contextPath}/changePassword.do">
                         <input type="hidden" name="command" value="change_password"/>
                         <input type="hidden" name="clientToken" value="${sessionScope.serverToken}"/>
                         <input type="hidden" name="currentPage"

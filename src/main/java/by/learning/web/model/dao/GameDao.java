@@ -13,12 +13,18 @@ public interface GameDao extends BaseDao {
 
     List<Game> findAllGames() throws DaoException;
 
-    int findGameCount(int gameId) throws DaoException;
+    int findGameAmount(int gameId) throws DaoException;
 
     boolean createGame(Game game, int[] genresId, int[] categoriesId) throws DaoException;
 
     HashMap<Integer, String> findAllCategories() throws DaoException;
 
     HashMap<Integer, String> findAllGenres() throws DaoException;
+
+    HashMap<Integer, String> findGameCategories(int gameId) throws DaoException;
+
+    HashMap<Integer, String> findGameGenres(int gameId) throws DaoException;
+
+    boolean editGame(Game game, int[] genresId, int[] categoriesId) throws DaoException;
 
 }

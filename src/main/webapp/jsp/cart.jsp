@@ -32,7 +32,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                         <p id="price" class="priceClass"
                                            style="display:inline; color: black; font-size: 18px">${games.key.price}$</p>
                                     </div>
-                                    <form style="display: inline" method="post" action="${pageContext.request.contextPath}/decreaseCart.do">
+                                    <form style="display: inline" method="post"
+                                          action="${pageContext.request.contextPath}/decreaseCart.do">
                                         <input type="hidden" name="command" value="change_cart_amount"/>
                                         <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                                         <input type="hidden" name="operation" value="-">
@@ -42,7 +43,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                         <input type="submit" value="-" class="remove decrease"
                                                style="cursor: pointer;color: red; width: 25px"/>
                                     </form>
-                                    <form style="display: inline" method="post" action="${pageContext.request.contextPath}/increaseCart.do">
+                                    <form style="display: inline" method="post"
+                                          action="${pageContext.request.contextPath}/increaseCart.do">
                                         <input type="hidden" name="command" value="change_cart_amount"/>
                                         <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                                         <input type="hidden" name="operation" value="+">
@@ -73,7 +75,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             </div>
             <div class="form-group promoCode" style="width: 400px">
                 <label for="promo" style="color:white"><fmt:message key="cart.promoCode"/></label>
-                <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/usePromocode.do">
+                <form class="needs-validation" novalidate method="post"
+                      action="${pageContext.request.contextPath}/usePromocode.do">
                     <input type="hidden" name="command" value="use_promocode"/>
                     <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                     <input type="hidden" name="currentPage"

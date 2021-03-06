@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
@@ -48,7 +48,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -73,7 +72,8 @@
                 <%--                fixme--%>
                 <a class="custom-admin-a" style="cursor: pointer" onclick="$('#codeBtn').click();" type="button">Add
                     code</a>
-                <a class="custom-admin-a" href="#" type="button">Game list</a>
+                <a class="custom-admin-a" href="${pageContext.request.contextPath}/jsp/admin/gameList.jsp"
+                   type="button">Game list</a>
             </div>
         </div>
     </div>

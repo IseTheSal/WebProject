@@ -22,5 +22,12 @@ public interface GameService {
 
     HashMap<Integer, String> findAllCategories() throws ServiceException;
 
+    HashMap<Integer, String> findGameCategories(int gameId) throws ServiceException;
+
+    HashMap<Integer, String> findGameGenres(int gameId) throws ServiceException;
+
+    Set<String> editGame(String gameIdValue, String gameTitle, String imagePath,
+                         String description, String priceValue, String trailerLink,
+                         String[] genres, String[] categories) throws ServiceException;
 }
 

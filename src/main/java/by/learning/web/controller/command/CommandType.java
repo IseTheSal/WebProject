@@ -23,7 +23,9 @@ public enum CommandType {
     FIND_CODE_AMOUNT(new FindGameCodeAmount(new OrderServiceImpl())),
     CREATE_GAME(new CreateGameCommand(new GameServiceImpl())),
     OPEN_GAME_CREATOR(new OpenGameCreatorCommand(new GameServiceImpl())),
-    ADD_GAME_CODE(new AddGameCodeCommand(new OrderServiceImpl()));
+    ADD_GAME_CODE(new AddGameCodeCommand(new OrderServiceImpl())),
+    OPEN_GAME_EDITOR(new OpenEditGameCommand(new GameServiceImpl())),
+    EDIT_GAME(new EditGameCommand(new GameServiceImpl()));
 
     private ActionCommand command;
 

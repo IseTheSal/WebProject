@@ -34,6 +34,7 @@ public class RequestParameter {
     public static final String ORDER_HISTORY_PRICE = "orderHistoryPrice";
     public static final String GAME_TITLE = "gameTitle";
     public static final String GAME_IMAGE_PATH = "imagePath";
+    public static final String GAME_IMAGE_PATH_COPY = "imagePathCopy";
     public static final String GAME_DESCRIPTION = "gameDescription";
     public static final String GAME_PRICE = "gamePrice";
     public static final String GAME_TRAILER_LINK = "gameTrailerLink";

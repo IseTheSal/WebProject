@@ -75,28 +75,29 @@
     </filter>
     <filter-mapping>
         <filter-name>RefreshFilter</filter-name>
-        <url-pattern>/cart.jsp</url-pattern>
+        <url-pattern>/jsp/cart.jsp</url-pattern>
         <url-pattern>/increaseCart.do</url-pattern>
         <url-pattern>/decreaseCart.do</url-pattern>
         <url-pattern>/removeFromCart.do</url-pattern>
         <url-pattern>/usePromocode.do</url-pattern>
         <url-pattern>/makeOrder.do</url-pattern>
         <url-pattern>/addToCart.do</url-pattern>
-        <url-pattern>/login.jsp</url-pattern>
-        <url-pattern>/login.do</url-pattern>
-        <url-pattern>/main.jsp</url-pattern>
+        <!--        <url-pattern>/jsp/login.jsp</url-pattern>-->
+        <!--        <url-pattern>/login.do</url-pattern>-->
+        <url-pattern>/jsp/main.jsp</url-pattern>
         <url-pattern>/game.do</url-pattern>
-        <url-pattern>/profile.jsp</url-pattern>
+        <url-pattern>/jsp/profile.jsp</url-pattern>
         <url-pattern>/changeEmail.do</url-pattern>
         <url-pattern>/changePassword.do</url-pattern>
         <url-pattern>/findOrderHistory.do</url-pattern>
-        <url-pattern>/registration.jsp</url-pattern>
+        <url-pattern>/jsp/registration.jsp</url-pattern>
         <url-pattern>/register.do</url-pattern>
-        <url-pattern>/adminMenu.jsp</url-pattern>
+        <url-pattern>/jsp/admin/adminMenu.jsp</url-pattern>
         <url-pattern>/createGame.do</url-pattern>
         <url-pattern>/addGameCode.do</url-pattern>
-
-        <url-pattern>/createGame.jsp</url-pattern>
+        <url-pattern>/editGame.do</url-pattern>
+        <url-pattern>/jsp/admin/editGame.do</url-pattern>
+        <url-pattern>/jsp/admin/createGame.jsp</url-pattern>
         <url-pattern>/createGame.do</url-pattern>
     </filter-mapping>
 

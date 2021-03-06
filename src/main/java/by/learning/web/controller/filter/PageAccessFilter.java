@@ -40,7 +40,8 @@ public class PageAccessFilter implements Filter {
         adminPageAccess = Set.of(PagePath.PROFILE_PAGE,
                 PagePath.ADMIN_MENU_PAGE,
                 PagePath.CREATE_GAME_PAGE,
-                PagePath.ADMIN_GAME_LIST_PAGE);
+                PagePath.ADMIN_GAME_LIST_PAGE,
+                PagePath.EDIT_GAME_PAGE);
     }
 
     @Override

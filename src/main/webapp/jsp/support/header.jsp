@@ -136,7 +136,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
             funcBtns.alertOkOnlyTitle('Success');
         }
         var validIssues = ${not empty requestScope.validIssues};
-        if(validIssues){
+        if (validIssues) {
             let jsArray = [
                 <c:forEach items="${requestScope.validIssues}" var="elem" varStatus="currentStatus">
                 "${elem}"

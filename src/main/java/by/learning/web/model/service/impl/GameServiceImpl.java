@@ -45,18 +45,12 @@ public class GameServiceImpl implements GameService {
         }
         int[] genresId = Arrays.stream(genres).mapToInt(Integer::parseInt).toArray();
         int[] categoriesId = Arrays.stream(categories).mapToInt(Integer::parseInt).toArray();
-        logger.log(Level.DEBUG, genresId);
-        logger.log(Level.DEBUG, categoriesId);
         BigDecimal priceValue = new BigDecimal(price);
         imagePath = IMG_PROJECT_PATH + imagePath;
         Game game = new Game(gameTitle, imagePath, description, priceValue, trailerLink);
         try {
             boolean isCreated = gameDao.createGame(game, genresId, categoriesId);
-            if (isCreated) {
-                valueValidInfo.add(ValidationInformation.SUCCESS.getInfoValue());
-            } else {
-                valueValidInfo.add(ValidationInformation.FAIL.getInfoValue());
-            }
+            valueValidInfo.add(isCreated ? ValidationInformation.SUCCESS.getInfoValue() : ValidationInformation.FAIL.getInfoValue());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -78,6 +72,7 @@ public class GameServiceImpl implements GameService {
         return result;
     }
 
+    @Override
     public HashMap<Integer, String> findAllCategories() throws ServiceException {
         HashMap<Integer, String> result;
         try {
@@ -88,6 +83,18 @@ public class GameServiceImpl implements GameService {
         return result;
     }
 
+    @Override
+    public HashMap<Integer, String> findGameCategories(int gameId) throws ServiceException {
+        HashMap<Integer, String> result;
+        try {
+            result = gameDao.findGameCategories(gameId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return result;
+    }
+
+    @Override
     public HashMap<Integer, String> findAllGenres() throws ServiceException {
         HashMap<Integer, String> result;
         try {
@@ -96,5 +103,41 @@ public class GameServiceImpl implements GameService {
             throw new ServiceException(e);
         }
         return result;
+    }
+
+    @Override
+    public HashMap<Integer, String> findGameGenres(int gameId) throws ServiceException {
+        HashMap<Integer, String> result;
+        try {
+            result = gameDao.findGameGenres(gameId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return result;
+    }
+
+    public Set<String> editGame(String gameIdValue, String gameTitle, String imagePath,
+                                String description, String priceValue, String trailerLink,
+                                String[] genres, String[] categories) throws ServiceException {
+        Set<ValidationInformation> validInfo = GameValidator.findGameValidationIssues(gameTitle, imagePath, description, priceValue, trailerLink);
+        Set<String> valueValidInfo = validInfo.stream().map(ValidationInformation::getInfoValue).collect(Collectors.toSet());
+        if (!valueValidInfo.isEmpty()) {
+            return valueValidInfo;
+        }
+        int gameId = Integer.parseInt(gameIdValue);
+        Optional<Game> gameById = findGameById(gameId);
+        if (gameById.isPresent()) {
+            BigDecimal price = new BigDecimal(priceValue);
+            int[] genresId = Arrays.stream(genres).mapToInt(Integer::parseInt).toArray();
+            int[] categoriesId = Arrays.stream(categories).mapToInt(Integer::parseInt).toArray();
+            Game game = new Game(gameId, gameTitle, imagePath, description, price, trailerLink);
+            try {
+                boolean gameEdited = gameDao.editGame(game, genresId, categoriesId);
+                valueValidInfo.add(gameEdited ? ValidationInformation.SUCCESS.getInfoValue() : ValidationInformation.FAIL.getInfoValue());
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return valueValidInfo;
     }
 }

@@ -29,6 +29,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         </div>
     </div>
 
+    <button type="button" id="clsButton" class="btn btn-primary invisible" style="position: absolute"
+            data-toggle="modal" data-target="#gameModal">
+    </button>
+
     <div style="padding-top: 5%; margin-left: 40px">
         <div class="container" style="">
             <div class="row" style="">
@@ -55,9 +59,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                value="${sessionScope.currentGame.price}$" id="btnBuy"
                                class="button-glow-buy"/>
                     </form>
-                    <button type="button" id="clsButton" class="btn btn-primary invisible" style="position: absolute"
-                            data-toggle="modal" data-target="#exampleModal">
-                    </button>
                     <p style="margin-top: 10px" class="neon-title-purple"><fmt:message key="game.genre"/>:
                         <c:forEach items="${sessionScope.currentGame.genres}" var="genre">
                             <h style="font-size: 15px;" class="neon-title-white-light">${genre}</h>
@@ -78,8 +79,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <jsp:include page="support/footer.jsp"/>
         </div>
     </div>
-
-
     <script>
         $(document).ready(function () {
             var gameInStock = ${requestScope.gameInStock};

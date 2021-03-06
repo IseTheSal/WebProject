@@ -1,5 +1,6 @@
 package by.learning.web.controller.command.impl;
 
+import by.learning.web.controller.PagePath;
 import by.learning.web.controller.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -22,7 +23,7 @@ public class FindGameCodeAmount implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = request.getParameter(RequestParameter.CURRENT_PAGE);
+        String page = PagePath.ADMIN_GAME_LIST_PAGE;
         String gameIdString = request.getParameter(RequestParameter.GAME_ID);
         int gameId = Integer.parseInt(gameIdString);
         try {
@@ -30,7 +31,7 @@ public class FindGameCodeAmount implements ActionCommand {
             request.setAttribute(RequestParameter.GAME_CODE_AMOUNT, codeAmount);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            request.setAttribute(RequestParameter.SERVER_ERROR, e);
+            request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }
         return page;
     }
