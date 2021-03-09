@@ -17,7 +17,7 @@ public interface BaseDao {
             try {
                 statement.close();
             } catch (SQLException exception) {
-                logger.log(Level.ERROR, "Statement was`t closed");
+                logger.log(Level.ERROR, "Statement was`t closed", exception);
             }
         }
     }
@@ -28,7 +28,7 @@ public interface BaseDao {
             try {
                 connection.close();
             } catch (SQLException exception) {
-                logger.log(Level.ERROR, "Connection was`t closed");
+                logger.log(Level.ERROR, "Connection was`t closed", exception);
             }
         }
     }
@@ -39,7 +39,7 @@ public interface BaseDao {
             try {
                 resultSet.close();
             } catch (SQLException exception) {
-                logger.log(Level.ERROR, "ResultSet was`t close");
+                logger.log(Level.ERROR, "ResultSet was`t close", exception);
             }
         }
     }

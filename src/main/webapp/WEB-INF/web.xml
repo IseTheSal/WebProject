@@ -53,23 +53,6 @@
 
 
     <filter>
-        <filter-name>PageAccessFilter</filter-name>
-        <filter-class>by.learning.web.controller.filter.PageAccessFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>PageAccessFilter</filter-name>
-        <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
-    <filter>
-        <filter-name>CommandAccessFilter</filter-name>
-        <filter-class>by.learning.web.controller.filter.CommandAccessFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>CommandAccessFilter</filter-name>
-        <url-pattern>*.do</url-pattern>
-    </filter-mapping>
-
-    <filter>
         <filter-name>RefreshFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.RefreshFilter</filter-class>
     </filter>
@@ -95,11 +78,32 @@
         <url-pattern>/jsp/admin/adminMenu.jsp</url-pattern>
         <url-pattern>/createGame.do</url-pattern>
         <url-pattern>/addGameCode.do</url-pattern>
+        <url-pattern>/createCoupon.do</url-pattern>
+        <url-pattern>/editCoupon.do</url-pattern>
+        <url-pattern>/deleteCoupon.do</url-pattern>
         <url-pattern>/editGame.do</url-pattern>
         <url-pattern>/jsp/admin/editGame.do</url-pattern>
         <url-pattern>/jsp/admin/createGame.jsp</url-pattern>
         <url-pattern>/createGame.do</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>PageAccessFilter</filter-name>
+        <filter-class>by.learning.web.controller.filter.PageAccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PageAccessFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>CommandAccessFilter</filter-name>
+        <filter-class>by.learning.web.controller.filter.CommandAccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CommandAccessFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+
 
 </web-app>
 

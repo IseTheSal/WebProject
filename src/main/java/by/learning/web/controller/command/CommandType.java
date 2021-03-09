@@ -25,7 +25,11 @@ public enum CommandType {
     OPEN_GAME_CREATOR(new OpenGameCreatorCommand(new GameServiceImpl())),
     ADD_GAME_CODE(new AddGameCodeCommand(new OrderServiceImpl())),
     OPEN_GAME_EDITOR(new OpenEditGameCommand(new GameServiceImpl())),
-    EDIT_GAME(new EditGameCommand(new GameServiceImpl()));
+    EDIT_GAME(new EditGameCommand(new GameServiceImpl())),
+    OPEN_COUPON_LIST(new OpenCouponListCommand(new OrderServiceImpl())),
+    CREATE_COUPON(new CreateCouponCommand(new OrderServiceImpl())),
+    EDIT_COUPON_AMOUNT(new EditCouponAmountCommand(new OrderServiceImpl())),
+    DELETE_COUPON(new DeleteCouponCommand(new OrderServiceImpl()));
 
     private ActionCommand command;
 

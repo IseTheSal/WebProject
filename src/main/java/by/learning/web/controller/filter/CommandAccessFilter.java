@@ -46,7 +46,11 @@ public class CommandAccessFilter implements Filter {
                 CommandType.ADD_GAME_CODE,
                 CommandType.OPEN_GAME_EDITOR,
                 CommandType.EDIT_GAME,
-                CommandType.FIND_CODE_AMOUNT);
+                CommandType.FIND_CODE_AMOUNT,
+                CommandType.OPEN_COUPON_LIST,
+                CommandType.CREATE_COUPON,
+                CommandType.EDIT_COUPON_AMOUNT,
+                CommandType.DELETE_COUPON);
         clientCommands = EnumSet.of(CommandType.ADD_TO_CART,
                 CommandType.OPEN_GAME,
                 CommandType.REMOVE_FROM_CART,

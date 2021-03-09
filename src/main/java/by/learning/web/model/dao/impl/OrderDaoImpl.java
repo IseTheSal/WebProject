@@ -32,6 +32,9 @@ public class OrderDaoImpl implements OrderDao {
     private static final String FIND_AVAILABLE_COUPON_DISCOUNT = "SELECT coupon_id, discount " +
             "FROM coupons " +
             "WHERE code = ? AND amount > 0";
+    private static final String FIND_COUPON_BY_CODE = "SELECT coupon_id, discount, amount " +
+            "FROM coupons " +
+            "WHERE code = ?";
     private static final String INSERT_ORDER_WITH_COUPON = "INSERT INTO orders(order_id, user_id, total_price, coupon_id) " +
             "VALUES (default, ?, ?, ?)";
     private static final String INSERT_ORDER_WITHOUT_COUPON = "INSERT INTO orders(order_id, user_id, total_price, coupon_id) " +
@@ -72,25 +75,27 @@ public class OrderDaoImpl implements OrderDao {
     private static final String FIND_ORDER_PRICE = "SELECT total_price " +
             "FROM orders " +
             "WHERE user_id = ?";
-    private static final String ADD_GAMECODE = "INSERT INTO codes(code_id, game_code, sold, game_id)\n" +
-            "VALUES (default, ?, default, ?);";
+    private static final String ADD_GAMECODE = "INSERT INTO codes(code_id, game_code, sold, game_id) " +
+            "VALUES (default, ?, default, ?)";
+    private static final String FIND_ALL_COUPONS = "SELECT coupon_id, code, discount, amount FROM coupons";
+    private static final String CREATE_COUPON = "INSERT INTO coupons(coupon_id, code, discount, amount) VALUES (default, ?, ?, ?)";
+    private static final String DELETE_COUPON = "DELETE FROM coupons WHERE code = ?";
 
 
     @Override
-    public Optional<Coupon> findAvailableCouponByCode(String codeName) throws DaoException {
+    public Optional<Coupon> findAvailableCouponDiscount(String code) throws DaoException {
         Optional<Coupon> result = Optional.empty();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_AVAILABLE_COUPON_DISCOUNT);
-            preparedStatement.setString(1, codeName);
+            preparedStatement.setString(1, code);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 int couponId = resultSet.getInt(1);
                 short discount = resultSet.getShort(2);
-                Coupon coupon = new Coupon(couponId, discount, codeName);
+                Coupon coupon = new Coupon(couponId, discount, code);
                 result = Optional.of(coupon);
-                logger.log(Level.DEBUG, "dis {}", discount);
             }
         } catch (ConnectionPoolException | SQLException e) {
             throw new DaoException(e);
@@ -312,10 +317,9 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<String> findLimitedGameCodes(int gameId, int amount) throws DaoException {
         List<String> result = new ArrayList<>();
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.takeConnection()) {
-            preparedStatement = connection.prepareStatement(FIND_LIMITED_GAME_CODE);
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_LIMITED_GAME_CODE)) {
             preparedStatement.setInt(1, gameId);
             preparedStatement.setInt(2, amount);
             resultSet = preparedStatement.executeQuery();
@@ -327,7 +331,6 @@ public class OrderDaoImpl implements OrderDao {
             throw new DaoException(ex);
         } finally {
             close(resultSet);
-            close(preparedStatement);
         }
         return result;
     }
@@ -355,18 +358,85 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean addGameCode(int gameId, String code) throws DaoException {
         boolean codeAdded;
-        PreparedStatement preparedStatement = null;
-        try (Connection connection = CONNECTION_POOL.takeConnection()) {
-            preparedStatement = connection.prepareStatement(ADD_GAMECODE);
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_GAMECODE)) {
             preparedStatement.setString(1, code);
             preparedStatement.setInt(2, gameId);
             int executeUpdate = preparedStatement.executeUpdate();
             codeAdded = (executeUpdate > 0);
         } catch (SQLException | ConnectionPoolException ex) {
             throw new DaoException(ex);
-        } finally {
-            close(preparedStatement);
         }
         return codeAdded;
+    }
+
+    @Override
+    public List<Coupon> findAllCoupons() throws DaoException {
+        List<Coupon> result = new ArrayList<>();
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_COUPONS);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                int couponId = resultSet.getInt(1);
+                String code = resultSet.getString(2);
+                short discount = resultSet.getShort(3);
+                int amount = resultSet.getInt(4);
+                Coupon coupon = new Coupon(couponId, discount, code, amount);
+                result.add(coupon);
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean createCoupon(Coupon coupon) throws DaoException {
+        boolean isCreated;
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_COUPON)) {
+            preparedStatement.setString(1, coupon.getCodeName());
+            preparedStatement.setShort(2, coupon.getDiscount());
+            preparedStatement.setInt(3, coupon.getAmount());
+            isCreated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        }
+        return isCreated;
+    }
+
+    @Override
+    public Optional<Coupon> findCouponByCode(String code) throws DaoException {
+        Optional<Coupon> coupon = Optional.empty();
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_COUPON_BY_CODE)) {
+            preparedStatement.setString(1, code);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int couponId = resultSet.getInt(1);
+                short discount = resultSet.getShort(2);
+                int amount = resultSet.getInt(3);
+                coupon = Optional.of(new Coupon(couponId, discount, code, amount));
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+        }
+        return coupon;
+    }
+
+    @Override
+    public boolean deleteCoupon(String code) throws DaoException {
+        boolean isDeleted;
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_COUPON)) {
+            preparedStatement.setString(1, code);
+            isDeleted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        }
+        return isDeleted;
     }
 }

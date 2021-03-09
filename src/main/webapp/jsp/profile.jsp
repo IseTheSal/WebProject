@@ -214,6 +214,11 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             if (emailExist) {
                 funcBtns.alertWarningBody('Fail', 'Email exists');
             }
+
+            let wrongOldPassword = ${not empty requestScope.incorrectOldPassword};
+            if (wrongOldPassword) {
+                funcBtns.alertWarningBody('Fail', 'Old password is incorrect');
+            }
         });
 
     window.onload = function () {

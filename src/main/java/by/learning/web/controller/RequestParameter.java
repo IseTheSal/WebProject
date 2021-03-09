@@ -20,6 +20,8 @@ public class RequestParameter {
     public static final String GAME_CODE_AMOUNT = "gameCodeAmount";
     public static final String OPERATION = "operation";
     public static final String COUPON_CODE = "couponCode";
+    public static final String COUPON_DISCOUNT = "couponDiscount";
+    public static final String COUPON_AMOUNT = "couponAmount";
     public static final String COUPON_EXIST = "couponExist";
     public static final String COUPON_OUT = "couponDismiss";
     public static final String NEED_AUTHORIZATION_FIRST = "loginFirst";
@@ -30,6 +32,7 @@ public class RequestParameter {
     public static final String SUCCESS = "success";
     public static final String FAIL = "fail";
     public static final String EMAIL_EXIST = "emailExist";
+    public static final String INCORRECT_OLD_PASSWORD = "incorrectOldPassword";
     public static final String ORDER_HISTORY_LIST = "orderHistoryList";
     public static final String ORDER_HISTORY_PRICE = "orderHistoryPrice";
     public static final String GAME_TITLE = "gameTitle";

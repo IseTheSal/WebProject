@@ -37,6 +37,7 @@ public class ChangePasswordCommand implements ActionCommand {
             if (isChanged) {
                 request.setAttribute(RequestParameter.SUCCESS, true);
             } else {
+                request.setAttribute(RequestParameter.INCORRECT_OLD_PASSWORD, true);
                 request.setAttribute(RequestParameter.FAIL, true);
             }
         } catch (ServiceException e) {

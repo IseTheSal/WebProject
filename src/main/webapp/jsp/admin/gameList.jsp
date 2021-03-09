@@ -5,6 +5,7 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
+<%--    fixme--%>
     <title>Game list</title>
 </head>
 <body>
@@ -33,7 +34,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     </button>
 
     <div style="padding-top: 5%; margin-left: 10%; margin-right: 10%">
-        <table class="table table-bordered table-striped text-center">
+        <table class="table table-bordered text-center">
             <thead class="thead-light">
             <tr>
                 <th scope="col">ID</th>

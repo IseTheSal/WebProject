@@ -1,22 +1,31 @@
 package by.learning.web.model.entity;
 
+import java.util.Locale;
+
 public class Coupon {
+
     private int id;
     private short discount;
     private String codeName;
     private int amount;
 
+    public Coupon(short discount, String codeName, int amount) {
+        this.discount = discount;
+        this.codeName = codeName.toUpperCase(Locale.ROOT);
+        this.amount = amount;
+    }
+
     public Coupon(int id, short discount, String codeName, int amount) {
         this.id = id;
         this.discount = discount;
-        this.codeName = codeName;
+        this.codeName = codeName.toUpperCase(Locale.ROOT);
         this.amount = amount;
     }
 
     public Coupon(int id, short discount, String codeName) {
         this.id = id;
         this.discount = discount;
-        this.codeName = codeName;
+        this.codeName = codeName.toUpperCase(Locale.ROOT);
     }
 
     public int getId() {

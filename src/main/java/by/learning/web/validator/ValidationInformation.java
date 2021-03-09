@@ -10,7 +10,10 @@ public enum ValidationInformation {
     TRAILER_LINK_INCORRECT("incorrect link"),
     GAME_CODE_INCORRECT("incorrect game code"),
     CODE_EXISTS("code exists"),
-    GAME_ID_DOES_NOT_EXIST("incorrect game");
+    GAME_ID_DOES_NOT_EXIST("incorrect game"),
+    COUPON_DISCOUNT_INCORRECT("discount incorrect"),
+    COUPON_CODE_INCORRECT("coupon code incorrect"),
+    COUPON_AMOUNT_INCORRECT("coupon amount incorrect");
 
     private final String value;
 

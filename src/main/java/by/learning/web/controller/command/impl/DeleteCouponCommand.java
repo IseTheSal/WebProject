@@ -2,44 +2,43 @@ package by.learning.web.controller.command.impl;
 
 import by.learning.web.controller.PagePath;
 import by.learning.web.controller.RequestParameter;
+import by.learning.web.controller.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
+import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.service.OrderService;
-import by.learning.web.validator.ValidationInformation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Locale;
-import java.util.Set;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
-public class AddGameCodeCommand implements ActionCommand {
+public class DeleteCouponCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
     private OrderService orderService;
 
-    public AddGameCodeCommand(OrderService orderService) {
+    public DeleteCouponCommand(OrderService orderService) {
         this.orderService = orderService;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_MENU_PAGE;
-        String gameId = request.getParameter(RequestParameter.GAME_ID);
-        String gameCode = request.getParameter(RequestParameter.GAME_CODE).toUpperCase(Locale.ROOT);
+        String page = PagePath.ADMIN_COUPON_LIST_PAGE;
+        String code = request.getParameter(RequestParameter.COUPON_CODE);
         try {
-            Set<String> validInfo = orderService.addGameCode(gameId, gameCode);
-            if (validInfo.remove(ValidationInformation.SUCCESS.getInfoValue())) {
-                request.setAttribute(RequestParameter.SUCCESS, true);
-            } else if (validInfo.remove(ValidationInformation.FAIL.getInfoValue())) {
-                request.setAttribute(RequestParameter.FAIL, true);
-                request.setAttribute(RequestParameter.VALID_ISSUES, validInfo);
+            boolean isDeleted = orderService.deleteCoupon(code);
+            request.setAttribute(isDeleted ? RequestParameter.SUCCESS : RequestParameter.FAIL, true);
+            if (isDeleted) {
+                HttpSession session = request.getSession();
+                List<Coupon> couponList = (List<Coupon>) session.getAttribute(SessionAttribute.COUPON_LIST);
+                couponList.removeIf(coupon -> coupon.getCodeName().equals(code));
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            request.setAttribute(RequestParameter.CODE_EXISTS, true);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }
         return page;

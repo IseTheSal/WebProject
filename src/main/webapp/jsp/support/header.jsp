@@ -153,6 +153,11 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         if (codeExist) {
             funcBtns.alertWarning("This code probably exists");
         }
+
+        var couponExist = ${not empty requestScope.couponExist};
+        if (couponExist) {
+            funcBtns.alertWarning("This coupon exists");
+        }
     });
 </script>
 </body>

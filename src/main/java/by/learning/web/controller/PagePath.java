@@ -12,6 +12,7 @@ public class PagePath {
     public static final String PAGE_NOT_FOUND = "/jsp/error/error404.jsp";
     public static final String SERVER_ERROR_PAGE = "/jsp/error/error500.jsp";
     public static final String ADMIN_GAME_LIST_PAGE = "/jsp/admin/gameList.jsp";
+    public static final String ADMIN_COUPON_LIST_PAGE = "/jsp/admin/couponList.jsp";
     public static final String ADMIN_MENU_PAGE = "/jsp/admin/adminMenu.jsp";
     public static final String CREATE_GAME_PAGE = "/jsp/admin/createGame.jsp";
     public static final String EDIT_GAME_PAGE = "/jsp/admin/editGame.jsp";

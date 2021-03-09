@@ -20,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
     private static final Logger logger = LogManager.getLogger();
@@ -27,18 +28,27 @@ public class OrderServiceImpl implements OrderService {
     private final GameDao gameDao = GameDaoImpl.getInstance();
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
 
-
     public Optional<Coupon> findAvailableCouponByCode(String code) throws ServiceException {
         Optional<Coupon> result = Optional.empty();
-        boolean couponValid = OrderValidator.isCouponValid(code);
-        logger.log(Level.DEBUG, " VALID {}", couponValid);
-        logger.log(Level.DEBUG, " CODE {}", code);
+        boolean couponValid = OrderValidator.isCouponCodeValid(code);
         if (couponValid) {
+            code = code.toUpperCase(Locale.ROOT);
             try {
-                result = orderDao.findAvailableCouponByCode(code);
-                if (result.isPresent()) {
-                    logger.log(Level.INFO, "coupon with name {} exist", code);
-                }
+                result = orderDao.findAvailableCouponDiscount(code);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return result;
+    }
+
+    public Optional<Coupon> findCouponByCode(String code) throws ServiceException {
+        Optional<Coupon> result = Optional.empty();
+        boolean couponValid = OrderValidator.isCouponCodeValid(code);
+        if (couponValid) {
+            code = code.toUpperCase(Locale.ROOT);
+            try {
+                result = orderDao.findCouponByCode(code);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }
@@ -154,7 +164,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int findAvailableCouponAmount(String codeName) throws ServiceException {
         int amount = 0;
-        if (OrderValidator.isCouponValid(codeName)) {
+        if (OrderValidator.isCouponCodeValid(codeName)) {
             try {
                 amount = orderDao.findAvailableCouponAmountByName(codeName);
             } catch (DaoException e) {
@@ -168,7 +178,7 @@ public class OrderServiceImpl implements OrderService {
 
     public boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws ServiceException {
         boolean isDecreased = false;
-        if (OrderValidator.isCouponValid(codeName)) {
+        if (OrderValidator.isCouponCodeValid(codeName)) {
             try {
                 isDecreased = orderDao.decreaseAvailableCouponAmount(codeName, decreaseAmount);
             } catch (DaoException e) {
@@ -181,7 +191,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public short findCouponDiscount(String codeName) throws ServiceException {
         short discount = 0;
-        if (OrderValidator.isCouponValid(codeName)) {
+        if (OrderValidator.isCouponCodeValid(codeName)) {
             try {
                 discount = orderDao.findCouponDiscountByName(codeName);
             } catch (DaoException e) {
@@ -376,5 +386,49 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException(e);
         }
         return validInfo;
+    }
+
+    @Override
+    public List<Coupon> findAllCoupons() throws ServiceException {
+        List<Coupon> allCoupons;
+        try {
+            allCoupons = orderDao.findAllCoupons();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return allCoupons;
+    }
+
+    @Override
+    public Set<String> createCoupon(String discountValue, String code, String amountValue) throws ServiceException {
+        Set<ValidationInformation> validationInformation = OrderValidator.isCouponValid(code, discountValue, amountValue);
+        Set<String> valueValidInfo = validationInformation.stream().map(ValidationInformation::getInfoValue).collect(Collectors.toSet());
+        if (!valueValidInfo.isEmpty()) {
+            return valueValidInfo;
+        }
+        short discount = Short.parseShort(discountValue);
+        int amount = Integer.parseInt(amountValue);
+        code = code.toUpperCase(Locale.ROOT);
+        Coupon coupon = new Coupon(discount, code, amount);
+        try {
+            boolean isCreated = orderDao.createCoupon(coupon);
+            valueValidInfo.add(isCreated ? ValidationInformation.SUCCESS.getInfoValue() : ValidationInformation.FAIL.getInfoValue());
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return valueValidInfo;
+    }
+
+    @Override
+    public boolean deleteCoupon(String code) throws ServiceException {
+        boolean isDeleted = false;
+        if (OrderValidator.isCouponCodeValid(code)) {
+            try {
+                isDeleted = orderDao.deleteCoupon(code);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return isDeleted;
     }
 }

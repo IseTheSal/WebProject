@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderDao extends BaseDao {
-    Optional<Coupon> findAvailableCouponByCode(String codeName) throws DaoException;
+    Optional<Coupon> findAvailableCouponDiscount(String code) throws DaoException;
+
+    Optional<Coupon> findCouponByCode(String codeName) throws DaoException;
 
     int findAvailableCouponAmountByName(String codeName) throws DaoException;
 
@@ -33,4 +35,10 @@ public interface OrderDao extends BaseDao {
     BigDecimal findOrderPriceByUserId(int userId) throws DaoException;
 
     boolean addGameCode(int gameId, String code) throws DaoException;
+
+    List<Coupon> findAllCoupons() throws DaoException;
+
+    boolean createCoupon(Coupon coupon) throws DaoException;
+
+    boolean deleteCoupon(String code) throws DaoException;
 }

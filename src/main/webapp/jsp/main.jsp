@@ -4,8 +4,7 @@
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language.language"/>
 <head>
-    <%--    fixme--%>
-    <title>Main</title>
+    <title><fmt:message key="main.page.title"/></title>
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -14,7 +13,7 @@
 <html>
 <body>
 <div style="background-image: url(/img/registration-background.jpg);
-background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
+    background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%">
         <form autocomplete="off" method="get" action="${pageContext.request.contextPath}/game.do">

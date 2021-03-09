@@ -14,6 +14,8 @@ import java.util.Set;
 public interface OrderService {
     Optional<Coupon> findAvailableCouponByCode(String code) throws ServiceException;
 
+    Optional<Coupon> findCouponByCode(String code) throws ServiceException;
+
     boolean isGameInStock(int gameId) throws ServiceException;
 
     int findCodeAmount(int gameId) throws ServiceException;
@@ -47,4 +49,10 @@ public interface OrderService {
     BigDecimal findOrderPrice(int userId) throws ServiceException;
 
     Set<String> addGameCode(String gameId, String code) throws ServiceException;
+
+    List<Coupon> findAllCoupons() throws ServiceException;
+
+    Set<String> createCoupon(String discount, String code, String amount) throws ServiceException;
+
+    boolean deleteCoupon(String code) throws ServiceException;
 }
