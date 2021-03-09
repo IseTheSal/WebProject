@@ -1,6 +1,6 @@
 package by.learning.web.controller.filter;
 
-import by.learning.web.controller.RequestParameter;
+import by.learning.web.controller.attribute.RequestParameter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -45,7 +45,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             </div>
         </form>
     </div>
-    <div style="margin-top: 15%">
+    <div style="margin-top: 18%">
         <jsp:include page="support/footer.jsp"/>
     </div>
 </div>

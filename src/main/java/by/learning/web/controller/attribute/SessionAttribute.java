@@ -1,4 +1,4 @@
-package by.learning.web.controller;
+package by.learning.web.controller.attribute;
 
 public class SessionAttribute {
 

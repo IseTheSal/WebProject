@@ -1,7 +1,7 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.RequestParameter;
-import by.learning.web.controller.SessionAttribute;
+import by.learning.web.controller.attribute.RequestParameter;
+import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

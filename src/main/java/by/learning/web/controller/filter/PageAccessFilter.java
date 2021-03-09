@@ -1,8 +1,8 @@
 package by.learning.web.controller.filter;
 
-import by.learning.web.controller.PagePath;
-import by.learning.web.controller.RequestParameter;
-import by.learning.web.controller.SessionAttribute;
+import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.RequestParameter;
+import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.model.entity.User;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -42,7 +42,8 @@ public class PageAccessFilter implements Filter {
                 PagePath.CREATE_GAME_PAGE,
                 PagePath.ADMIN_GAME_LIST_PAGE,
                 PagePath.EDIT_GAME_PAGE,
-                PagePath.ADMIN_COUPON_LIST_PAGE);
+                PagePath.ADMIN_COUPON_LIST_PAGE,
+                PagePath.ADMIN_ORDER_LIST_PAGE);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package by.learning.web.controller.listener;
 
-import by.learning.web.controller.SessionAttribute;
+import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.model.entity.Game;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

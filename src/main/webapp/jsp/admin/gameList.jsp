@@ -5,8 +5,8 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
-<%--    fixme--%>
-    <title>Game list</title>
+    <%--    fixme--%>
+    <title>Games</title>
 </head>
 <body>
 <div style="background-image: url(/img/registration-background.jpg);

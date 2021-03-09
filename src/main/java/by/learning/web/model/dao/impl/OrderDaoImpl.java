@@ -14,9 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class OrderDaoImpl implements OrderDao {
     private static final Logger logger = LogManager.getLogger();
@@ -284,13 +282,17 @@ public class OrderDaoImpl implements OrderDao {
             if (executeUpdate > 0) {
                 generatedKeys = preparedStatement.getGeneratedKeys();
                 generatedKeys.next();
-                int orderId = generatedKeys.getInt(1);
                 boolean executed = true;
-                int[] gameIdArray = order.getGameIdSet().stream().mapToInt(Integer::intValue).toArray();
-                int i = 0;
-                while (i < gameIdArray.length && executed) {
-                    executed = relateGameOrder(connection, gameIdArray[i], orderId);
-                    i++;
+                HashMap<Game, Integer> gameMap = order.getGameMap();
+                Set<Game> keySet = new HashSet<>(gameMap.keySet());
+                int orderId = generatedKeys.getInt(1);
+                for (Game game : keySet) {
+                    int value = gameMap.get(game);
+                    int i = 0;
+                    while (i < value && executed) {
+                        executed = relateGameOrder(connection, game.getId(), orderId);
+                        i++;
+                    }
                 }
                 isCreated = executed;
             }

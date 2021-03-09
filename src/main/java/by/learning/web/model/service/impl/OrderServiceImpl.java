@@ -254,6 +254,7 @@ public class OrderServiceImpl implements OrderService {
         return totalPrice;
     }
 
+    //fixme
     private Set<Integer> createGameIdSet(HashMap<Game, Integer> cartMap) {
         Set<Integer> gameIdSet = new HashSet<>();
         Set<Game> gameKeySet = cartMap.keySet();
@@ -264,7 +265,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean createOrder(int userId, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
         boolean isCreated = false;
-        Set<Integer> gameIdSet = createGameIdSet(cartMap);
+//        Set<Integer> gameIdSet = createGameIdSet(cartMap);
         List<Game> gameList = new ArrayList<>(cartMap.keySet());
         boolean amountValid = true;
         for (Game game : gameList) {
@@ -282,7 +283,7 @@ public class OrderServiceImpl implements OrderService {
         if (amountValid) {
             BigDecimal orderPrice = countOrderPrice(cartMap);
             BigDecimal totalPrice = countPriceDiscount(orderPrice, coupon);
-            ClientOrder order = new ClientOrder(userId, gameIdSet, totalPrice);
+            ClientOrder order = new ClientOrder(userId, cartMap, totalPrice);
             order.setCoupon(coupon);
             try {
                 isCreated = orderDao.createOrder(order);

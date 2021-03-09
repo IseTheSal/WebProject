@@ -1,7 +1,7 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.PagePath;
-import by.learning.web.controller.RequestParameter;
+import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.service.GameService;
