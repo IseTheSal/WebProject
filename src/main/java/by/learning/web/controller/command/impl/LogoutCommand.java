@@ -15,7 +15,7 @@ public class LogoutCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.INDEX;
+        String page = PagePath.LOGIN_PAGE;
         HttpSession session = request.getSession();
         session.invalidate();
         logger.log(Level.INFO, "Session was invalidate");

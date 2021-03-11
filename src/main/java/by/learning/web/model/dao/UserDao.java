@@ -4,6 +4,7 @@ import by.learning.web.exception.DaoException;
 import by.learning.web.model.entity.User;
 
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserDao extends BaseDao {
 
@@ -16,4 +17,6 @@ public interface UserDao extends BaseDao {
     Optional<String> findUserPassword(int userId) throws DaoException;
 
     boolean changeUserPassword(int userId, String newPassword) throws DaoException;
+
+    Set<User> findAllClients() throws DaoException;
 }

@@ -16,6 +16,7 @@ public class SessionAttribute {
     public static final String GENRES_MAP = "genresMap";
     public static final String GAME_GENRES_MAP = "gameGenresMap";
     public static final String COUPON_LIST = "couponList";
+    public static final String CLIENT_ORDERS_MAP = "clientOrders";
 
     private SessionAttribute() {
     }

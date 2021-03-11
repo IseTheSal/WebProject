@@ -1,6 +1,7 @@
 package by.learning.web.model.service;
 
 import by.learning.web.exception.ServiceException;
+import by.learning.web.model.entity.ClientOrder;
 import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.entity.User;
@@ -54,4 +55,6 @@ public interface OrderService {
     Set<String> createCoupon(String discount, String code, String amount) throws ServiceException;
 
     boolean deleteCoupon(String code) throws ServiceException;
+
+    HashMap<User, ClientOrder> findAllOrders() throws ServiceException;
 }

@@ -5,7 +5,7 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
-    <title>Coupons</title>
+    <title><fmt:message key="admin.coupon.list.title"/></title>
     <link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css rel=stylesheet>
     <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap4.min.css
           rel=stylesheet>
@@ -18,10 +18,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <table id="dtBasicExample" class="table table-dark table-bordered text-center">
             <thead class="">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Codename</th>
-                <th scope="col">Discount</th>
-                <th scope="col">Amount</th>
+                <th scope="col"><fmt:message key="admin.coupon.list.game.id"/></th>
+                <th scope="col"><fmt:message key="admin.coupon.list.game.code"/></th>
+                <th scope="col"><fmt:message key="admin.coupon.list.game.discount"/></th>
+                <th scope="col"><fmt:message key="admin.coupon.list.game.amount"/></th>
                 <th scope="col" data-sortable="false"></th>
             </tr>
             </thead>
@@ -46,7 +46,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                             <div class="modal-content"
                                  style="background-color: rgba(105,105,105,0.7); border: none !important;">
                                 <div class="modal-header neon-title-white-light" style="border-bottom: 0 none">
-                                    EDIT COUPON
+                                    <fmt:message key="admin.coupon.list.game.edit.coupon"/>
                                     <button type="button" id="clsBtn" class="close neon-title-red" data-dismiss="modal"
                                             aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -65,15 +65,17 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                             <div class="neon-title-white-shadow-light"
                                                  style="width:300px; cursor: pointer; display: inline;">
                                                 <label id="codeInput" class=""
-                                                       style="float: left;">Code: ${coupon.codeName}</label>
+                                                       style="float: left;"><fmt:message key="admin.coupon.game.code"/>&#8282; ${coupon.codeName}</label>
                                                 <label id="discountInput" class=""
-                                                       style="float: right">Discount: ${coupon.discount}%</label>
+                                                       style="float: right"><fmt:message
+                                                        key="admin.coupon.list.game.discount"/>&#8282; ${coupon.discount}%</label>
                                                 <br>
                                                 <div style="margin-top: 3%; margin-left: 30%; ">
-                                                    <label style="margin-left: 20%">Amount</label>
+                                                    <label style="margin-left: 20%"><fmt:message
+                                                            key="admin.coupon.list.game.amount"/></label>
                                                     <br>
                                                     <input type="text" id="amountInput" class="custom-admin-input"
-                                                           placeholder="Amount"
+                                                           placeholder="<fmt:message key="admin.coupon.list.game.amount"/>"
                                                            name="couponAmount" required
                                                            pattern="^[1-9][0-9]{0,4}$"
                                                            value="${coupon.amount}"
@@ -81,7 +83,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                                            maxlength="5"
                                                            style=" box-shadow:0 0 30px #ffffff;text-align: center">
                                                 </div>
-                                                <input type="submit" class="button-search-purple" value="EDIT AMOUNT"
+                                                <input type="submit" class="button-search-purple"
+                                                       value="<fmt:message key="admin.coupon.list.game.edit.amount"/>"
                                                        style="position: relative;color: white; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                                             </div>
                                         </div>
@@ -105,7 +108,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         </div>
                     </div>
                 </tr>
-
             </c:forEach>
             </tbody>
         </table>
@@ -119,8 +121,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             "paging": false,
             "bInfo": false,
             "oLanguage": {
-                "sSearch": "<label style='color:white'>Search</label>"
-                //    fixme
+                "sSearch": "<label style='color:white'><fmt:message key="admin.table.search"/></label>"
             }
         });
         //fixme

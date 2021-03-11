@@ -20,20 +20,20 @@
             <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <h2 class="neon-title-cyan" style="text-align:center">
-                <fmt:message key="creategame.page.title"/>
+                <fmt:message key="create.game.page.title"/>
             </h2>
             <br>
             <div style="max-width: 900px;margin-left: 36%">
                 <div class="form-group">
                     <label class="neon-title-white" for="txtGameTitle"
                            style="">
-                        <fmt:message key="creategame.game.title"/>
+                        <fmt:message key="create.game.game.title"/>
                     </label>
                     <div class="form-inline">
                         <input name="gameTitle" id="txtGameTitle"
                                type="text" style="width: 420px; border-width: medium"
                                class="form-control"
-                               placeholder="Enter game title"
+                               placeholder="<fmt:message key="create.game.title.placeholder"/>"
                                required
                                pattern="^[A-z0-9`\s:]{2,35}$"
                                minlength="1" maxlength="35"/>
@@ -70,7 +70,7 @@
               style="width: 420px; border-width: medium; min-height: 80px; max-height: 500px"
               class="form-control"
               id="txtDescription"
-              placeholder="Enter information about the game"
+              placeholder="<fmt:message key="create.game.description.placeholder"/>"
               required
               minlength="8" maxlength="300"></textarea>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
@@ -87,7 +87,7 @@
                     <div class="form-inline">
                         <input name="gamePrice" id="txtPrice"
                                type="text" style="width: 420px; border-width: medium"
-                               class="form-control" placeholder="Enter the price"
+                               class="form-control" placeholder="<fmt:message key="create.game.price.placeholder"/>"
                                required
                                pattern="^(\d)*(\.\d{1,2})?$"
                                minlength="1"
@@ -108,7 +108,7 @@
                     <div class="form-inline">
                         <input name="gameTrailerLink" id="txtYoutube"
                                type="text" style="width: 420px; border-width: medium"
-                               class="form-control" placeholder="Enter game trailer link"
+                               class="form-control" placeholder="<fmt:message key="create.game.trailer.placeholder"/>"
                                required
                                pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
                                minlength="5" maxlength="150"/>
@@ -121,7 +121,7 @@
                 <div class="form-group" style="">
                     <label class="neon-title-white" for="select-genres"
                            style="position: relative; margin-bottom: 1px">
-                        <fmt:message key="creategame.genres"/>*
+                        <fmt:message key="creategame.genres"/>&times;
                     </label>
                     <div style="width: 420px;">
                         <select id="select-genres" class="select-form" name="gameGenres" required

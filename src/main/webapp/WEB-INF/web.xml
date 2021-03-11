@@ -101,7 +101,5 @@
         <filter-name>CommandAccessFilter</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
-
-
 </web-app>
 

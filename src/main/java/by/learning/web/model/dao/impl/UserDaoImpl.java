@@ -14,7 +14,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public class UserDaoImpl implements UserDao {
     private static final Logger logger = LogManager.getLogger();
@@ -36,6 +38,7 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_EMAIL = "UPDATE users SET email = ? WHERE users.user_id = ?";
     private static final String UPDATE_PASSWORD = "UPDATE users SET password = ? WHERE users.user_id = ?";
     private static final String FIND_USER_PASSWORD = "SELECT password FROM users WHERE users.user_id = ?";
+    private static final String FIND_ALL_CLIENTS = "SELECT user_id, login, email, firstname, lastname FROM users WHERE users.role = 'CLIENT'";
 
     @Override
     public Optional<User> findUser(String login, String password) throws DaoException {
@@ -198,5 +201,32 @@ public class UserDaoImpl implements UserDao {
             close(preparedStatement);
         }
         return isChanged;
+    }
+
+    @Override
+    public Set<User> findAllClients() throws DaoException {
+        return findAllUsers(FIND_ALL_CLIENTS);
+    }
+
+    //fixme
+
+    private Set<User> findAllUsers(String sqlQuery) throws DaoException {
+        Set<User> result = new HashSet<>();
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                int userId = resultSet.getInt(1);
+                String login = resultSet.getString(2);
+                String email = resultSet.getString(3);
+                String firstname = resultSet.getString(4);
+                String lastname = resultSet.getString(5);
+                User user = new User(userId, login, firstname, lastname, email, User.Role.CLIENT);
+                result.add(user);
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        }
+        return result;
     }
 }

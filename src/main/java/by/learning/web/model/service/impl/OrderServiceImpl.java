@@ -4,8 +4,10 @@ import by.learning.web.exception.DaoException;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.dao.GameDao;
 import by.learning.web.model.dao.OrderDao;
+import by.learning.web.model.dao.UserDao;
 import by.learning.web.model.dao.impl.GameDaoImpl;
 import by.learning.web.model.dao.impl.OrderDaoImpl;
+import by.learning.web.model.dao.impl.UserDaoImpl;
 import by.learning.web.model.entity.ClientOrder;
 import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.entity.Game;
@@ -27,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final GameDao gameDao = GameDaoImpl.getInstance();
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
+    private final UserDao userDao = UserDaoImpl.getInstance();
 
     public Optional<Coupon> findAvailableCouponByCode(String code) throws ServiceException {
         Optional<Coupon> result = Optional.empty();
@@ -431,5 +434,35 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return isDeleted;
+    }
+
+    @Override
+    public HashMap<User, ClientOrder> findAllOrders() throws ServiceException {
+        HashMap<User, ClientOrder> result = new HashMap<>();
+        try {
+            Set<User> allClients = userDao.findAllClients();
+            for (User client : allClients) {
+                List<Game> clientGames = orderDao.findOrderHistoryByUserId(client.getId());
+                BigDecimal price = orderDao.findOrderPriceByUserId(client.getId());
+                HashMap<Game, Integer> gameMap = gameListToMap(clientGames);
+                ClientOrder clientOrder = new ClientOrder(client.getId(), gameMap, price);
+                result.put(client, clientOrder);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return result;
+    }
+
+    private HashMap<Game, Integer> gameListToMap(List<Game> gameList) {
+        HashMap<Game, Integer> result = new HashMap<>();
+        for (Game game : gameList) {
+            if (result.containsKey(game)) {
+                result.put(game, result.get(game) + 1);
+            } else {
+                result.put(game, 1);
+            }
+        }
+        return result;
     }
 }

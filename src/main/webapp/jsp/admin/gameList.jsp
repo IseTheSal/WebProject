@@ -5,14 +5,12 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
-    <%--    fixme--%>
-    <title>Games</title>
+    <title><fmt:message key="admin.games.list.title"/></title>
 </head>
 <body>
 <div style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="../support/header.jsp"/>
-
     <div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important;" id="amountModal"
          tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel"
@@ -20,7 +18,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <div class="modal-dialog center-modal" style="border: none !important;" role="document">
             <div class="modal-content" style="background-color: rgba(105,105,105,0.7); border: none !important;">
                 <div class="modal-header neon-title-white-light" style="border-bottom: 0 none">
-                    Amount of this game - ${requestScope.gameCodeAmount}
+                    <fmt:message key="admin.games.amount"/> ${requestScope.gameCodeAmount}
                     <button type="button" id="clsBtn" class="close neon-title-red" data-dismiss="modal"
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -37,10 +35,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <table class="table table-bordered text-center">
             <thead class="thead-light">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Amount</th>
+                <th scope="col"><fmt:message key="admin.games.list.game.id"/></th>
+                <th scope="col"><fmt:message key="admin.games.list.game.title"/></th>
+                <th scope="col"><fmt:message key="admin.games.list.game.price"/></th>
+                <th scope="col"><fmt:message key="admin.games.list.game.amount"/></th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -78,7 +76,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         if (gameAmount != null) {
             $("#clsButton").click();
             if (gameAmount != 0) {
-                funcBtns.alertOK("Amount - " + gameAmount);
+                funcBtns.alertOK("<fmt:message key="admin.games.list.game.amount.script"/>" + gameAmount);
             }
         }
     });

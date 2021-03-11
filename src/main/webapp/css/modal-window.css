@@ -6,3 +6,26 @@
     transform: translate(-50%, -50%);
 }
 
+.toc p {
+    display: flex;
+}
+
+.toc p .title {
+    order: 1;
+}
+
+.toc p .chapter {
+    order: 3;
+}
+
+.toc p::after {
+    background-image: radial-gradient(circle, currentcolor 1px, transparent 1.5px);
+    background-position: bottom;
+    margin-top: 4px;
+    background-size: 1ex 4.5px;
+    background-repeat: space no-repeat;
+    content: "";
+    flex-grow: 1;
+    height: 1em;
+    order: 2;
+}

@@ -5,13 +5,11 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
-    <%--    fixme fmt--%>
-    <title>Admin menu</title>
+    <title><fmt:message key="admin.menu.title"/></title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin-menu-style.css">
 </head>
 <body class="custom-admin-body">
 <jsp:include page="../support/header.jsp"/>
-
 <div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important;" id="adminCodeModal"
      tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel"
@@ -19,7 +17,7 @@
     <div class="modal-dialog center-modal" style="border: none !important;" role="document">
         <div class="modal-content" style="background-color: rgba(105,105,105,0.7); border: none !important;">
             <div class="modal-header neon-title-white-light" style="border-bottom: 0 none">
-                Add gamecode
+                <fmt:message key="admin.menu.add.gamecode"/>
                 <button type="button" id="clsBtn" class="close neon-title-red" data-dismiss="modal"
                         aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -34,17 +32,20 @@
                         <div class="autocomplete; neon-title-cyan-light "
                              style="width:300px; cursor: pointer; display: inline;">
                             <input id="adminInputSearch" class="custom-admin-input" type="text"
-                                   placeholder="Game" required pattern="^[A-z0-9`\s:]{2,35}$"
+                                   placeholder="<fmt:message key="admin.menu.game.placeholder"/>" required
+                                   pattern="^[A-z0-9`\s:]{2,35}$"
                                    minlength="2" maxlength="35"
                                    style="color: #ff2525; box-shadow:0 0 30px #ffffff;float: left"/>
                             <input type="hidden" id="gameIdClass" value="-1" name="gameId"/>
-                            <input type="text" class="custom-admin-input" placeholder="AAAAA-BBBBB-33333"
+                            <input type="text" class="custom-admin-input"
+                                   placeholder="<fmt:message key="admin.menu.code.placeholder"/>"
                                    name="gameCode" required
                                    pattern="^([A-z0-9]{5}-)([A-z0-9]{5}-)([A-z0-9]{5})$"
                                    maxlength="17"
                                    minlength="17"
                                    style=" box-shadow:0 0 30px #ffffff; float: right;text-transform:uppercase">
-                            <input type="submit" class="button-search-purple" value="ADD GAMECODE"
+                            <input type="submit" class="button-search-purple"
+                                   value="<fmt:message key="admin.menu.add.gamecode"/>"
                                    style="position: relative; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                         </div>
                     </div>
@@ -65,7 +66,7 @@
     <div class="modal-dialog center-modal" style="border: none !important" role="document">
         <div class="modal-content" style="background-color: rgba(105,105,105,0.7); border: none !important">
             <div class="modal-header neon-title-white-light" style="border-bottom: 0 none;">
-                Add coupon
+                <fmt:message key="admin.menu.add.coupon"/>
                 <button type="button" id="clsCouponBtn" class="close neon-title-red" data-dismiss="modal"
                         aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -80,21 +81,25 @@
                         <div class="autocomplete; neon-title-cyan-light "
                              style="width:300px; cursor: pointer; display: inline;">
                             <input id="couponCode" class="custom-admin-input" type="text"
-                                   placeholder="Coupon code" name="couponCode" required pattern="[a-zA-Z0-9]{5,10}"
+                                   placeholder="<fmt:message key="admin.menu.coupon.code.placeholder"/>"
+                                   name="couponCode" required pattern="[a-zA-Z0-9]{5,10}"
                                    minlength="5" maxlength="10"
                                    style="color: #ff2525; box-shadow:0 0 30px #ffffff;float: left; text-transform: uppercase"/>
                             <input id="discount" class="custom-admin-input" type="text"
-                                   placeholder="Discount %" required pattern="^[1-9][0-9]?$"
+                                   placeholder="<fmt:message key="admin.menu.coupon.discount.placeholder"/>" required
+                                   pattern="^[1-9][0-9]?$"
                                    minlength="1" maxlength="2"
                                    name="couponDiscount"
                                    style="color: #ff2525; box-shadow:0 0 30px #ffffff;float: right"/>
-                            <input type="text" class="custom-admin-input" placeholder="Amount"
+                            <input type="text" class="custom-admin-input"
+                                   placeholder="<fmt:message key="admin.menu.coupon.amount.placeholder"/>"
                                    name="couponAmount" required
                                    pattern="^[1-9][0-9]{0,4}$"
                                    minlength="1"
                                    maxlength="5"
                                    style=" box-shadow:0 0 30px #ffffff; text-transform:uppercase; margin-top: 3%; margin-left: 30%">
-                            <input type="submit" class="button-search-purple" value="ADD COUPON"
+                            <input type="submit" class="button-search-purple"
+                                   value="<fmt:message key="admin.menu.add.coupon"/>"
                                    style="position: relative; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                         </div>
                     </div>
@@ -106,11 +111,11 @@
 <button type="button" id="couponBtn" class="btn btn-primary invisible" style="position: absolute"
         data-toggle="modal" data-target="#adminCouponModal">
 </button>
-<div style="position:fixed; color: transparent !important;  -webkit-touch-callout: none;
-    -webkit-user-select: none;
-       -moz-user-select: none;
+<div style="position:fixed; color: transparent !important; -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
         -ms-user-select: none;
-            user-select: none">
+        user-select: none">
     <c:forEach items="${sessionScope.gameList}" var="element">
         <label class="gameIdText" style="color: transparent !important;">${element.id}</label>
         <label class="gameTitleText" style="color: transparent !important;">${element.title}</label>
@@ -122,18 +127,18 @@
         <div class="face face1">
             <div class="content-admin">
                 <i class="fab fa-jedi-order"></i>
-                <h3>Games</h3>
+                <h3><fmt:message key="admin.menu.games"/></h3>
             </div>
         </div>
         <div class="face face2">
             <div class="content-admin" style="text-align: center">
                 <a class="custom-admin-a"
-                   href="${pageContext.request.contextPath}/createGame.do?command=open_game_creator" type="button">Add
-                    game</a>
-                <a class="custom-admin-a" style="cursor: pointer" onclick="$('#codeBtn').click();" type="button">Add
-                    code</a>
+                   href="${pageContext.request.contextPath}/createGame.do?command=open_game_creator"
+                   type="button"><fmt:message key="admin.menu.add.game"/></a>
+                <a class="custom-admin-a" style="cursor: pointer" onclick="$('#codeBtn').click();"
+                   type="button"><fmt:message key="admin.menu.add.code"/></a>
                 <a class="custom-admin-a" href="${pageContext.request.contextPath}/jsp/admin/gameList.jsp"
-                   type="button">Game list</a>
+                   type="button"><fmt:message key="admin.menu.game.list"/></a>
             </div>
         </div>
     </div>
@@ -141,17 +146,19 @@
         <div class="face face1">
             <div class="content-admin">
                 <i class="fas fa-tags"></i>
-                <h3>Orders</h3>
+                <h3><fmt:message key="admin.menu.orders"/></h3>
             </div>
         </div>
         <div class="face face2">
             <div class="content-admin" style="text-align: center">
-                <a class="custom-admin-a" href="#" type="button">Order list</a>
                 <a class="custom-admin-a"
-                   href="${pageContext.request.contextPath}/openCoupons.do?command=open_coupon_list" type="button">Coupon
-                    list</a>
-                <a class="custom-admin-a" style="cursor: pointer" onclick="$('#couponBtn').click();" type="button">Add
-                    coupon</a>
+                   href="${pageContext.request.contextPath}/openCoupons.do?command=open_order_list"
+                   type="button"><fmt:message key="admin.menu.order.list"/></a>
+                <a class="custom-admin-a"
+                   href="${pageContext.request.contextPath}/openCoupons.do?command=open_coupon_list"
+                   type="button"><fmt:message key="admin.menu.coupon.list"/></a>
+                <a class="custom-admin-a" style="cursor: pointer" onclick="$('#couponBtn').click();"
+                   type="button"><fmt:message key="admin.menu.add.coupon"/></a>
             </div>
         </div>
     </div>
@@ -159,13 +166,13 @@
         <div class="face face1">
             <div class="content-admin">
                 <i class="fas fa-users"></i>
-                <h3>Users</h3>
+                <h3><fmt:message key="admin.menu.users"/></h3>
             </div>
         </div>
         <div class="face face2">
             <div class="content-admin" style="text-align: center">
-                <a class="custom-admin-a" href="#" type="button">User list</a>
-                <a class="custom-admin-a" href="#" type="button">Add admin</a>
+                <a class="custom-admin-a" href="#" type="button"><fmt:message key="admin.menu.user.list"/></a>
+                <a class="custom-admin-a" href="#" type="button"><fmt:message key="admin.menu.add.admin"/></a>
             </div>
         </div>
     </div>

@@ -28,7 +28,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <div class="form-group">
                     <label class="neon-title-white" for="txtGameTitle"
                            style="">
-                        <fmt:message key="creategame.game.title"/>
+                        <fmt:message key="create.game.game.title"/>
                     </label>
                     <div class="form-inline">
                         <input name="gameTitle" id="txtGameTitle"

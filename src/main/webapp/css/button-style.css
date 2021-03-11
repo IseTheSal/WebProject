@@ -158,6 +158,22 @@
     box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
 }
 
+.button-search-blue {
+    width: 350px;
+    color: #000000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 35%;
+}
+
+.button-search-blue:hover {
+    background: #ffffff;
+    color: white;
+    box-shadow: 0 0 15px #ffffff;
+}
+
 .button-search-purple {
     width: 350px;
     color: #000000;
@@ -195,5 +211,13 @@
 
 .trash-span {
     color: red;
+}
+
+.close-red-button {
+    color: #ff0000;
+}
+
+.close-red-button:hover {
+    color: white;
 }
 
