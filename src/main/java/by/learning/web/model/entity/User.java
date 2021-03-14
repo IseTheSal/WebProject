@@ -6,7 +6,7 @@ public class User {
     private String firstname;
     private String lastname;
     private String email;
-    private Role role = Role.CLIENT;
+    private Role role;
 
     public enum Role {
         ADMIN,
@@ -22,11 +22,12 @@ public class User {
         this.role = role;
     }
 
-    public User(String login, String firstname, String lastname, String email) {
+    public User(String login, String firstname, String lastname, String email, User.Role role) {
         this.login = login;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.role = role;
     }
 
     public String getLastname() {

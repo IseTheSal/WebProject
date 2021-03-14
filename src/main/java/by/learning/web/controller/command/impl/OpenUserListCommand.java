@@ -5,9 +5,8 @@ import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
-import by.learning.web.model.entity.ClientOrder;
 import by.learning.web.model.entity.User;
-import by.learning.web.model.service.OrderService;
+import by.learning.web.model.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,29 +14,28 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import java.util.Set;
 
-public class OpenOrderListCommand implements ActionCommand {
+public class OpenUserListCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private OrderService orderService;
+    private UserService userService;
 
-    public OpenOrderListCommand(OrderService orderService) {
-        this.orderService = orderService;
+    public OpenUserListCommand(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_ORDER_LIST_PAGE;
+        String page = PagePath.ADMIN_USER_LIST_PAGE;
         try {
-            HashMap<User, ClientOrder> allOrders = orderService.findAllOrders();
+            Set<User> allUsers = userService.findAllUsers();
             HttpSession session = request.getSession();
-            session.setAttribute(SessionAttribute.CLIENT_ORDERS_MAP, allOrders);
+            session.setAttribute(SessionAttribute.USER_LIST, allUsers);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }
-
         return page;
     }
 }

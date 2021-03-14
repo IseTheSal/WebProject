@@ -124,7 +124,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 "sSearch": "<label style='color:white'><fmt:message key="admin.table.search"/></label>"
             }
         });
-        //fixme
         $('.dataTables_length').addClass('bs-select');
     });
 </script>

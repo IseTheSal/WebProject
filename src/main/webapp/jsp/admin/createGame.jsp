@@ -121,7 +121,7 @@
                 <div class="form-group" style="">
                     <label class="neon-title-white" for="select-genres"
                            style="position: relative; margin-bottom: 1px">
-                        <fmt:message key="creategame.genres"/>&times;
+                        <fmt:message key="creategame.genres"/>&#42;
                     </label>
                     <div style="width: 420px;">
                         <select id="select-genres" class="select-form" name="gameGenres" required
@@ -136,7 +136,7 @@
                     <div style="width: 420px;">
                         <label class="neon-title-white" for="select-categories"
                                style="position: relative; margin-bottom: 1px">
-                            <fmt:message key="creategame.categories"/>*
+                            <fmt:message key="creategame.categories"/>&#42;
                         </label>
                         <select id="select-categories" name="gameCategories" required
                                 multiple>

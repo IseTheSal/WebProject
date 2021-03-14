@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language.language"/>
+<%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
 <html>
 <head>
     <title><fmt:message key="admin.menu.title"/></title>
@@ -171,16 +172,219 @@
         </div>
         <div class="face face2">
             <div class="content-admin" style="text-align: center">
-                <a class="custom-admin-a" href="#" type="button"><fmt:message key="admin.menu.user.list"/></a>
-                <a class="custom-admin-a" href="#" type="button"><fmt:message key="admin.menu.add.admin"/></a>
+                <a class="custom-admin-a" href="${pageContext.request.contextPath}/openUsers.do?command=open_user_list"
+                   type="button"><fmt:message key="admin.menu.user.list"/></a>
+                <a class="custom-admin-a" onclick="$('#adminBtn').click()" style="cursor: pointer"
+                   type="button"><fmt:message
+                        key="admin.menu.add.admin"/></a>
             </div>
         </div>
     </div>
 </div>
 
-
+<div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important" id="adminUserModal"
+     tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="border: none !important" role="document">
+        <div class="modal-content"
+             style="background-color: rgba(105,105,105,0.7); border: none !important;margin-left: -15%; width: 145% !important;">
+            <div class="modal-header neon-title-white-light" style="border-bottom: 0 none">
+                Add admin
+                <button type="button" id="clsAdminAddButton" class="close neon-title-red" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="">
+                <form class="needs-validation" novalidate method="post"
+                      action="${pageContext.request.contextPath}/addAdmin.do">
+                    <div style="position: relative; margin-left: 1%; margin-top: 1%">
+                        <input type="hidden" name="command" value="add_admin"/>
+                        <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
+                        <div class=" "
+                             style="width:300px; cursor: pointer; display: inline;">
+                            <div style="">
+                                <div class="form-group" style="margin-bottom: 14px">
+                                    <label class="neon-title-white" for="txtUsername">
+                                        <fmt:message key="registration.username"/>
+                                    </label>
+                                    <div class="form-inline">
+                                        <input name="login" id="txtUsername"
+                                               type="text" style="width: 300px; border-width: medium"
+                                               class="form-control" aria-describedby="usernameHelp"
+                                               placeholder="<fmt:message key="registration.usernamePlaceHolder"/>"
+                                               required pattern="^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$"
+                                               minlength="6" maxlength="12"/>
+                                        <small id="usernameHelp"
+                                               style="margin-left: 20px;margin-top: -5%; white-space: pre-line; color: white">
+                                            <fmt:message key="registration.helpUsername"/>
+                                        </small>
+                                        <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
+                                                key="registration.validInput"/></div>
+                                        <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
+                                                key="registration.invalidInput"/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 14px">
+                                    <label class="neon-title-white" for="txtPassword"><fmt:message
+                                            key="registration.password"/>
+                                    </label>
+                                    <div class="form-inline">
+                                        <input name="password" style="width: 300px; border-width: medium"
+                                               type="password"
+                                               class="form-control" id="txtPassword"
+                                               placeholder="<fmt:message key="registration.passwordPlaceHolder"/>"
+                                               aria-describedby="passwordHelp"
+                                               required pattern="[a-zA-Z0-9]{8,20}"
+                                               minlength="8" maxlength="20">
+                                        <small id="passwordHelp" style="margin-left: 20px; color: white;
+                                   white-space: pre-line"> <fmt:message key="registration.helpPassword"/>
+                                        </small>
+                                        <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
+                                                key="registration.validInput"/></div>
+                                        <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
+                                                key="registration.invalidInput"/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 14px">
+                                    <label class="neon-title-white" for="txtConfirmPassword">
+                                        <fmt:message key="registration.passwordConfirm"/>
+                                    </label>
+                                    <div class="form-inline">
+                                        <input name="repeatPassword" style="width: 300px; border-width: medium"
+                                               type="password"
+                                               class="form-control"
+                                               id="txtConfirmPassword"
+                                               placeholder="<fmt:message key="registration.confirmPlaceHolder"/>"
+                                               aria-describedby="passwordHelp" required pattern="^[a-zA-Z0-9]{8,20}$"
+                                               minlength="8" maxlength="20">
+                                        <div class="valid-feedback"><span class="fas fa-check"></span></div>
+                                        <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
+                                                key="registration.invalidPasswordMatch"/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 14px">
+                                    <label class="neon-title-white" for="txtFirstname">
+                                        <fmt:message key="registration.firstname"/>
+                                    </label>
+                                    <div class="form-inline">
+                                        <input name="firstname" style="width: 300px; border-width: medium" type="text"
+                                               class="form-control"
+                                               id="txtFirstname"
+                                               placeholder="<fmt:message key="registration.firstnamePlaceHolder"/>"
+                                               aria-describedby="firstnameHelp" required pattern="^[A-Za-z|А-я]{2,20}$"
+                                               minlength="2" maxlength="20">
+                                        <small id="firstnameHelp" style="margin-left: 20px; color: white;
+                         white-space: pre-line"> <fmt:message key="registration.helpFirstname"/>
+                                        </small>
+                                        <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
+                                                key="registration.validInput"/></div>
+                                        <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
+                                                key="registration.invalidInput"/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 14px">
+                                    <label class="neon-title-white" for="txtLastname">
+                                        <fmt:message key="registration.lastname"/>
+                                    </label>
+                                    <div class="form-inline">
+                                        <input name="lastname" style="width: 300px; border-width: medium" type="text"
+                                               class="form-control"
+                                               id="txtLastname"
+                                               placeholder="<fmt:message key="registration.lastnamePlaceHolder"/>"
+                                               aria-describedby="lastnameHelp" required pattern="^[A-Za-z|А-я]{2,20}$"
+                                               minlength="2" maxlength="20">
+                                        <small id="lastnameHelp" style="margin-left: 20px; color: white;
+                         white-space: pre-line"> <fmt:message key="registration.helpFirstname"/>
+                                        </small>
+                                        <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
+                                                key="registration.validInput"/></div>
+                                        <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
+                                                key="registration.invalidInput"/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 14px">
+                                    <label class="neon-title-white" for="txtEmail">
+                                        <fmt:message key="registration.email"/>
+                                    </label>
+                                    <div class="form-inline">
+                                        <input name="email" style="width: 300px;border-width: medium"
+                                               class="form-control" id="txtEmail"
+                                               placeholder="<fmt:message key="registration.emailPlaceHolder"/>"
+                                               aria-describedby="emailHelp" required type="email"
+                                               maxlength="320">
+                                        <small id="emailHelp" style="margin-left: 20px; color: white">
+                                            <fmt:message key="registration.helpEmail"/>
+                                        </small>
+                                        <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
+                                                key="registration.validInput"/></div>
+                                        <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
+                                                key="registration.invalidInput"/></div>
+                                    </div>
+                                </div>
+                                <c:forEach items="${requestScope.registrationFail}" var="info">
+                                    <label class="form-inline"
+                                           style="color: red">${info}</label>
+                                </c:forEach>
+                            </div>
+                            <input type="submit" class="button-search-purple"
+                                   value="Register admin"
+                                   style="position: relative; margin-top: 5%; margin-left: 18%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" id="adminBtn" class="btn btn-primary invisible" style="position: absolute"
+        data-toggle="modal" data-target="#adminUserModal">
+</button>
+<div style="position: fixed; bottom: 0" class="neon-title-white">
+    <ctg:adminAccess/>
+</div>
 <script src="${pageContext.request.contextPath}/js/custom-search.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin-menu.js"></script>
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
+<script type="text/javascript">
+    window.onload = function () {
+        var txtPassword = document.getElementById("txtPassword");
+        var txtConfirmPassword = document.getElementById("txtConfirmPassword");
+        txtPassword.onchange = ConfirmPassword;
+        txtConfirmPassword.onkeyup = ConfirmPassword;
+
+        function ConfirmPassword() {
+            txtConfirmPassword.setCustomValidity("");
+            if (txtPassword.value !== txtConfirmPassword.value) {
+                txtConfirmPassword.setCustomValidity("Passwords do not match.");
+            }
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (${requestScope.couponExist}) {
+            funcBtns.alertWarning("This coupon exists");
+        }
+    });
+</script>
 </body>
 </html>

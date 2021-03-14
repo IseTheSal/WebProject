@@ -1,5 +1,8 @@
 package by.learning.web.validator;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public class UserValidator {
 
     private static final String LOGIN_REGEX = "^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$";
@@ -38,5 +41,31 @@ public class UserValidator {
             isValid = false;
         }
         return isValid;
+    }
+
+    public static Set<ValidationInformation> isUserValid(String firstName, String lastName, String login, String password, String repeatPassword, String email) {
+        Set<ValidationInformation> issues = EnumSet.noneOf(ValidationInformation.class);
+        if (!password.equals(repeatPassword)) {
+            issues.add(ValidationInformation.PASSWORDS_NOT_EQUAL);
+        }
+        if (!isPasswordValid(password)) {
+            issues.add(ValidationInformation.PASSWORD_INCORRECT);
+        }
+        if (!isLoginValid(login)) {
+            issues.add(ValidationInformation.LOGIN_INCORRECT);
+        }
+        if (!isEmailValid(email)) {
+            issues.add(ValidationInformation.EMAIL_INCORRECT);
+        }
+        if (!isNameValid(firstName)) {
+            issues.add(ValidationInformation.FIRSTNAME_INCORRECT);
+        }
+        if (!isNameValid(lastName)) {
+            issues.add(ValidationInformation.SECONDNAME_INCORRECT);
+        }
+        if (!issues.isEmpty()) {
+            issues.add(ValidationInformation.FAIL);
+        }
+        return issues;
     }
 }

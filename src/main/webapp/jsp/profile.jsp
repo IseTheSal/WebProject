@@ -50,6 +50,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <input type="hidden" name="clientToken" value="${sessionScope.serverToken}"/>
                         <input type="hidden" name="currentPage"
                                value="${pageContext.request.requestURI}">
+                        <input type="hidden" name="userId" value="${sessionScope.currentUser.id}">
                         <br>
                         <input name="email" id="newEmail" style="width: 300px; height: 40px; border-width: medium"
                                class="form-control"

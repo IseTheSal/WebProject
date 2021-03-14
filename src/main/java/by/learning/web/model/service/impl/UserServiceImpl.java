@@ -7,11 +7,14 @@ import by.learning.web.model.entity.User;
 import by.learning.web.model.service.UserService;
 import by.learning.web.util.CryptEncoder;
 import by.learning.web.validator.UserValidator;
+import by.learning.web.validator.ValidationInformation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger();
@@ -36,33 +39,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registerUser(String firstname, String lastname, String login,
-                                String password, String repeatPassword, String email) throws ServiceException {
-        boolean isValid = true;
-        if (!repeatPassword.equals(password)) {
-            logger.log(Level.WARN, "Passwords not equal");
-            isValid = false;
+    public Set<String> registerUser(String firstname, String lastname, String login,
+                                    String password, String repeatPassword, String email, User.Role role) throws ServiceException {
+        Set<ValidationInformation> validationInformation = UserValidator.isUserValid(firstname, lastname, login, password, repeatPassword, email);
+        Set<String> valueValidInfo = validationInformation.stream().map(ValidationInformation::getInfoValue).collect(Collectors.toSet());
+        if (!valueValidInfo.isEmpty()) {
+            return valueValidInfo;
+        }
+        logger.log(Level.DEBUG, "All user fields are valid");
+        User user = new User(login, firstname, lastname, email, role);
+        try {
+            String cryptPassword = CryptEncoder.generateCrypt(password);
+            boolean isRegistered = userDao.addUser(user, cryptPassword);
+            valueValidInfo.add(isRegistered ? ValidationInformation.SUCCESS.getInfoValue() : ValidationInformation.FAIL.getInfoValue());
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
 
-        if (!(UserValidator.isLoginValid(login) && UserValidator.isPasswordValid(password)
-                && UserValidator.isNameValid(firstname) && UserValidator.isNameValid(lastname)
-                && UserValidator.isEmailValid(email))) {
-            logger.log(Level.WARN, "Not valid");
-            isValid = false;
-        }
-
-        boolean isRegister = false;
-        if (isValid) {
-            logger.log(Level.DEBUG, "All user fields are valid");
-            User user = new User(login, firstname, lastname, email);
-            try {
-                String cryptPassword = CryptEncoder.generateCrypt(password);
-                isRegister = userDao.addUser(user, cryptPassword);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
-        }
-        return isRegister;
+        return valueValidInfo;
     }
 
     @Override
@@ -106,5 +100,16 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isChanged;
+    }
+
+    @Override
+    public Set<User> findAllUsers() throws ServiceException {
+        Set<User> result;
+        try {
+            result = userDao.findAllUsers();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return result;
     }
 }

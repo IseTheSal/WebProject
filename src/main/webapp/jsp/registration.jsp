@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language.language"/>
 <html>
@@ -33,7 +34,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                placeholder="<fmt:message key="registration.usernamePlaceHolder"/>"
                                required pattern="^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$"
                                minlength="6" maxlength="12"/>
-                        <small id="usernameHelp" style="margin-left: 20px;
+                        <small id="usernameHelp" style="margin-left: 20px;margin-top: -2%;
                  white-space: pre-line; color: darkgrey"> <fmt:message key="registration.helpUsername"/>
                         </small>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
@@ -147,8 +148,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <div class="invalid-feedback"><fmt:message key="registration.invalidCheckBox"/></div>
                     </label>
                 </div>
-                <label class="form-inline"
-                       style="color: red"> ${requestScope.registrationFail} </label>
+                <c:forEach items="${requestScope.registrationFail}" var="info">
+                    <label class="form-inline"
+                           style="color: red">${info}</label>
+                </c:forEach>
                 <input type="submit" name="btnSignup" value="<fmt:message key="registration.btnSignUp"/>" id="btnSignup"
                        class="button-glow-lime"/>
             </div>

@@ -26,18 +26,14 @@ public class ChangeEmailCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.PROFILE_PAGE;
+        String page;
         String email = request.getParameter(RequestParameter.EMAIL);
         String repeatEmail = request.getParameter(RequestParameter.EMAIL_REPEAT);
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
-        int userId = user.getId();
+        int userId = Integer.parseInt(request.getParameter(RequestParameter.USER_ID));
         try {
             boolean isChanged = userService.changeEmail(userId, email, repeatEmail);
             if (isChanged) {
                 request.setAttribute(RequestParameter.SUCCESS, true);
-                user.setEmail(email);
-                session.setAttribute(SessionAttribute.CURRENT_USER, user);
             } else {
                 request.setAttribute(RequestParameter.EMAIL_EXIST, true);
             }
@@ -45,6 +41,9 @@ public class ChangeEmailCommand implements ActionCommand {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
+        page = (user.getRole() == User.Role.ADMIN) ? PagePath.ADMIN_USER_LIST_PAGE : PagePath.PROFILE_PAGE;
         return page;
     }
 }

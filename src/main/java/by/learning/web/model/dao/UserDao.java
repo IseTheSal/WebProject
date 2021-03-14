@@ -19,4 +19,6 @@ public interface UserDao extends BaseDao {
     boolean changeUserPassword(int userId, String newPassword) throws DaoException;
 
     Set<User> findAllClients() throws DaoException;
+
+    Set<User> findAllUsers() throws DaoException;
 }

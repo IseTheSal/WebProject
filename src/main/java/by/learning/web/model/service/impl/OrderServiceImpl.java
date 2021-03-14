@@ -257,18 +257,9 @@ public class OrderServiceImpl implements OrderService {
         return totalPrice;
     }
 
-    //fixme
-    private Set<Integer> createGameIdSet(HashMap<Game, Integer> cartMap) {
-        Set<Integer> gameIdSet = new HashSet<>();
-        Set<Game> gameKeySet = cartMap.keySet();
-        gameKeySet.forEach(game -> gameIdSet.add(game.getId()));
-        return gameIdSet;
-    }
-
     @Override
     public boolean createOrder(int userId, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
         boolean isCreated = false;
-//        Set<Integer> gameIdSet = createGameIdSet(cartMap);
         List<Game> gameList = new ArrayList<>(cartMap.keySet());
         boolean amountValid = true;
         for (Game game : gameList) {
@@ -416,7 +407,12 @@ public class OrderServiceImpl implements OrderService {
         Coupon coupon = new Coupon(discount, code, amount);
         try {
             boolean isCreated = orderDao.createCoupon(coupon);
-            valueValidInfo.add(isCreated ? ValidationInformation.SUCCESS.getInfoValue() : ValidationInformation.FAIL.getInfoValue());
+            if (isCreated) {
+                valueValidInfo.add(ValidationInformation.SUCCESS.getInfoValue());
+            } else {
+                valueValidInfo.add(ValidationInformation.LOGIN_OR_EMAIL_EXIST.getInfoValue());
+                valueValidInfo.add(ValidationInformation.FAIL.getInfoValue());
+            }
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

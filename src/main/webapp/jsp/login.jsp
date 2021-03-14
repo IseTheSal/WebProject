@@ -11,7 +11,9 @@
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 15%">
-        <h5 class="neon-title-green" style="text-align: center">${requestScope.registrationComplete}</h5>
+        <c:if test="${requestScope.registrationComplete}">
+            <h5 class="neon-title-green" style="text-align: center">Registration complete</h5>
+        </c:if>
         <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/login.do">
             <input type="hidden" name="command" value="login"/>
             <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>

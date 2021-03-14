@@ -38,7 +38,8 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_EMAIL = "UPDATE users SET email = ? WHERE users.user_id = ?";
     private static final String UPDATE_PASSWORD = "UPDATE users SET password = ? WHERE users.user_id = ?";
     private static final String FIND_USER_PASSWORD = "SELECT password FROM users WHERE users.user_id = ?";
-    private static final String FIND_ALL_CLIENTS = "SELECT user_id, login, email, firstname, lastname FROM users WHERE users.role = 'CLIENT'";
+    private static final String FIND_ALL_CLIENTS = "SELECT user_id, login, email, firstname, lastname, users.role FROM users WHERE users.role = 'CLIENT'";
+    private static final String FIND_ALL_USERS = "SELECT user_id, login, email, firstname, lastname, users.role FROM users";
 
     @Override
     public Optional<User> findUser(String login, String password) throws DaoException {
@@ -205,12 +206,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Set<User> findAllClients() throws DaoException {
-        return findAllUsers(FIND_ALL_CLIENTS);
+        return findUsers(FIND_ALL_CLIENTS);
     }
 
-    //fixme
+    @Override
+    public Set<User> findAllUsers() throws DaoException {
+        return findUsers(FIND_ALL_USERS);
+    }
 
-    private Set<User> findAllUsers(String sqlQuery) throws DaoException {
+    private Set<User> findUsers(String sqlQuery) throws DaoException {
         Set<User> result = new HashSet<>();
         try (Connection connection = CONNECTION_POOL.takeConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
@@ -221,7 +225,8 @@ public class UserDaoImpl implements UserDao {
                 String email = resultSet.getString(3);
                 String firstname = resultSet.getString(4);
                 String lastname = resultSet.getString(5);
-                User user = new User(userId, login, firstname, lastname, email, User.Role.CLIENT);
+                User.Role role = User.Role.valueOf(resultSet.getString(6));
+                User user = new User(userId, login, firstname, lastname, email, role);
                 result.add(user);
             }
         } catch (SQLException | ConnectionPoolException ex) {

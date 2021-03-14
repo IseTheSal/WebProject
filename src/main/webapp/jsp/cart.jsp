@@ -194,5 +194,12 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             }
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            if (!${requestScope.couponExist}) {
+                funcBtns.alertWarning("This coupon does not exist");
+            }
+        });
+    </script>
 </body>
 </html>

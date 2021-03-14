@@ -82,6 +82,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                         </c:if>
                         <form method="post" action="${pageContext.request.contextPath}/logout.do" style="height: 15px">
                             <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
+                            <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
                             <input type="hidden" name="command" value="logout"/>
                             <button class="btn btn-outline-danger neon-title-red button-border-red"
                                     type="submit"><fmt:message key="header.logout"/>
@@ -120,9 +121,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/toast-script.js"></script>
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/toast-script.js"></script>
+<script type="text/javascript">
     $(document).ready(function () {
+        console.log("there");
         var serverError = ${not empty requestScope.serverError};
         if (serverError) {
             funcBtns.alertError('Error', '<fmt:message key="server.error"/>')
@@ -131,7 +133,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         if (fail) {
             funcBtns.alertWarning('Fail');
         }
-        var success = ${not empty requestScope.success};
+        let success = ${not empty requestScope.success};
+        console.log(success);
         if (success) {
             funcBtns.alertOkOnlyTitle('Success');
         }
@@ -153,14 +156,14 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         if (codeExist) {
             funcBtns.alertWarning("This code probably exists");
         }
-
-        var couponExist = ${requestScope.couponExist};
-        if (couponExist) {
-            funcBtns.alertWarning("This coupon exists");
-        } else {
-            funcBtns.alertWarning("This coupon does not exist");
-        }
+        <%--var couponExist = ${requestScope.couponExist};--%>
+        <%--if (${requestScope.couponExist}) {--%>
+        <%--    funcBtns.alertWarning("This coupon exists");--%>
+        <%--} else {--%>
+        <%--    funcBtns.alertWarning("This coupon does not exist");--%>
+        <%--}--%>
     });
 </script>
+
 </body>
 </html>

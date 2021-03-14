@@ -16,7 +16,7 @@ public class MailSender {
     private static final String HOST_MAIL = "gamespot.by@gmail.com";
     private static final String HOST_PASSWORD = "strongpassword";
     private static final String SUBJECT_NAME = "Order from GameSpot!";
-    private static final String MESSAGE_FOOTER = "If you have any questions, write to our mail ";
+    private static final String MESSAGE_FOOTER = "If you have any questions, write to our email";
     private static final String PROPERTIES_PATH = "/property/mail.properties";
 
     private final Properties properties;
@@ -36,7 +36,7 @@ public class MailSender {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(HOST_MAIL));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            String title = new StringBuilder(SUBJECT_NAME).append(" ").append(gameTitle).toString();
+            String title = new StringBuilder(SUBJECT_NAME).append("\s").append(gameTitle).toString();
             message.setSubject(title);
             String messageBody = new StringBuilder(body).append("\n").append(MESSAGE_FOOTER).append(HOST_MAIL).toString();
             message.setText(messageBody);

@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<jsp:forward page="/home.do?command=home"></jsp:forward>
+<jsp:forward page="/home.do?command=home"/>
 </body>
 </html>
 

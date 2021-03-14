@@ -15,36 +15,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
-public class RegistrationCommand implements ActionCommand {
+public class AddAdminCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
     private UserService userService;
 
-    public RegistrationCommand(UserService userService) {
+    public AddAdminCommand(UserService userService) {
         this.userService = userService;
     }
 
-    //    fixme add tests check if working
+    //    fixme add admin modal
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.REGISTRATION_PAGE;
-        String nameValue = request.getParameter(RequestParameter.FIRSTNAME);
-        String lastnameValue = request.getParameter(RequestParameter.LASTNAME);
-        String loginValue = request.getParameter(RequestParameter.LOGIN);
-        String passwordValue = request.getParameter(RequestParameter.PASSWORD);
-        String repeatPasswordValue = request.getParameter(RequestParameter.REPEAT_PASSWORD);
-        String emailValue = request.getParameter(RequestParameter.EMAIL);
+        String page = PagePath.ADMIN_MENU_PAGE;
+        String firstName = request.getParameter(RequestParameter.FIRSTNAME);
+        String lastName = request.getParameter(RequestParameter.LASTNAME);
+        String login = request.getParameter(RequestParameter.LOGIN);
+        String password = request.getParameter(RequestParameter.PASSWORD);
+        String repeatPassword = request.getParameter(RequestParameter.REPEAT_PASSWORD);
+        String email = request.getParameter(RequestParameter.EMAIL);
         try {
-            Set<String> registrationInfo = userService.registerUser(nameValue, lastnameValue, loginValue, passwordValue, repeatPasswordValue, emailValue, User.Role.CLIENT);
+            Set<String> registrationInfo = userService.registerUser(firstName, lastName, login, password, repeatPassword, email, User.Role.ADMIN);
             if (registrationInfo.remove(ValidationInformation.SUCCESS.getInfoValue())) {
-                logger.log(Level.INFO, "Successful registration");
-                request.setAttribute(RequestParameter.REGISTRATION_COMPLETE, true);
                 request.setAttribute(RequestParameter.SUCCESS, true);
-                page = PagePath.LOGIN_PAGE;
             } else if (registrationInfo.remove(ValidationInformation.FAIL.getInfoValue())) {
                 request.setAttribute(RequestParameter.REGISTRATION_FAIL, registrationInfo);
                 request.setAttribute(RequestParameter.FAIL, true);
-                page = PagePath.REGISTRATION_PAGE;
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

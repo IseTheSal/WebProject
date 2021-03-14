@@ -35,16 +35,14 @@ public class LoginCommand implements ActionCommand {
             user = service.singIn(loginValue, passwordValue);
             if (user.isPresent()) {
                 User currentUser = user.get();
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 session.setAttribute(SessionAttribute.CURRENT_USER, currentUser);
                 if (currentUser.getRole() == User.Role.ADMIN) {
                     session.removeAttribute(SessionAttribute.CART_MAP);
                     session.removeAttribute(SessionAttribute.CART_AMOUNT);
                     session.removeAttribute(SessionAttribute.COUPON_DISCOUNT);
-                    page = PagePath.ADMIN_MENU_PAGE;
-                } else {
-                    page = PagePath.INDEX;
                 }
+                page = PagePath.INDEX;
             } else {
                 request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");
                 page = PagePath.LOGIN_PAGE;

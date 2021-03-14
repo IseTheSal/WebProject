@@ -30,7 +30,9 @@ public enum CommandType {
     CREATE_COUPON(new CreateCouponCommand(new OrderServiceImpl())),
     EDIT_COUPON_AMOUNT(new EditCouponAmountCommand(new OrderServiceImpl())),
     DELETE_COUPON(new DeleteCouponCommand(new OrderServiceImpl())),
-    OPEN_ORDER_LIST(new OpenOrderListCommand(new OrderServiceImpl()));
+    OPEN_ORDER_LIST(new OpenOrderListCommand(new OrderServiceImpl())),
+    OPEN_USER_LIST(new OpenUserListCommand(new UserServiceImpl())),
+    ADD_ADMIN(new AddAdminCommand(new UserServiceImpl()));
 
     private ActionCommand command;
 
