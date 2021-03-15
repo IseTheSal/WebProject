@@ -3,6 +3,7 @@ package by.learning.web.controller.attribute;
 public class SessionAttribute {
 
     public static final String CURRENT_LOCALE = "currentLocale";
+    public static final String SERVER_TOKEN = "serverToken";
     public static final String DEFAULT_LOCALE = "en_US";
     public static final String CURRENT_USER = "currentUser";
     public static final String GAME_LIST = "gameList";
@@ -17,7 +18,7 @@ public class SessionAttribute {
     public static final String GAME_GENRES_MAP = "gameGenresMap";
     public static final String COUPON_LIST = "couponList";
     public static final String CLIENT_ORDERS_MAP = "clientOrders";
-    public static final String USER_LIST = "userList";
+    public static final String USER_SET = "userSet";
 
     private SessionAttribute() {
     }

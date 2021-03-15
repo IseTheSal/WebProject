@@ -24,7 +24,6 @@ public class AddAdminCommand implements ActionCommand {
         this.userService = userService;
     }
 
-    //    fixme add admin modal
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = PagePath.ADMIN_MENU_PAGE;

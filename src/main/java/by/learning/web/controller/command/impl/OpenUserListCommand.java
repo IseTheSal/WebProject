@@ -31,7 +31,7 @@ public class OpenUserListCommand implements ActionCommand {
         try {
             Set<User> allUsers = userService.findAllUsers();
             HttpSession session = request.getSession();
-            session.setAttribute(SessionAttribute.USER_LIST, allUsers);
+            session.setAttribute(SessionAttribute.USER_SET, allUsers);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);

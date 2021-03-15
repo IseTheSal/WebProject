@@ -1,7 +1,8 @@
 package by.learning.web.controller.attribute;
 
 public class RequestParameter {
-
+    public static final String COMMAND_PARAM = "command";
+    public static final String CLIENT_TOKEN = "clientToken";
     public static final String USER_ID = "userId";
     public static final String FIRSTNAME = "firstname";
     public static final String LASTNAME = "lastname";
@@ -47,7 +48,6 @@ public class RequestParameter {
     public static final String VALID_ISSUES = "validIssues";
     public static final String GAME_CODE = "gameCode";
     public static final String CODE_EXISTS = "gameCodeExists";
-
 
     private RequestParameter() {
     }

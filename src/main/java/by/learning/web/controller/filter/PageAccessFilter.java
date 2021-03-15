@@ -41,7 +41,6 @@ public class PageAccessFilter implements Filter {
                 PagePath.ADMIN_MENU_PAGE,
                 PagePath.CREATE_GAME_PAGE,
                 PagePath.ADMIN_GAME_LIST_PAGE,
-                PagePath.EDIT_GAME_PAGE,
                 PagePath.ADMIN_COUPON_LIST_PAGE,
                 PagePath.ADMIN_ORDER_LIST_PAGE,
                 PagePath.ADMIN_USER_LIST_PAGE);

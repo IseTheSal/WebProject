@@ -1,6 +1,7 @@
 package by.learning.web.controller;
 
 import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.controller.command.CommandProvider;
 import by.learning.web.exception.ConnectionPoolException;
@@ -21,7 +22,6 @@ import java.util.Optional;
 @WebServlet(urlPatterns = {"/controller", "*.do"}, name = "controller")
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
-    private static final String COMMAND_PARAM = "command";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class Controller extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String commandValue = req.getParameter(COMMAND_PARAM);
+        String commandValue = req.getParameter(RequestParameter.COMMAND_PARAM);
         logger.log(Level.DEBUG, "Command - " + commandValue);
         Optional<ActionCommand> commandOptional = CommandProvider.defineCommand(commandValue);
         ActionCommand command = commandOptional.orElseThrow();

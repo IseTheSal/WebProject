@@ -14,8 +14,6 @@ public interface OrderDao extends BaseDao {
 
     Optional<Coupon> findCouponByCode(String codeName) throws DaoException;
 
-    int findAvailableCouponAmountByName(String codeName) throws DaoException;
-
     boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws DaoException;
 
     short findCouponDiscountByName(String codeName) throws DaoException;

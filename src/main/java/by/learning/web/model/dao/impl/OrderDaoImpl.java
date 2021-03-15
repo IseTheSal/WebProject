@@ -105,29 +105,6 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public int findAvailableCouponAmountByName(String codeName) throws DaoException {
-        int amount = 0;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.takeConnection()) {
-            preparedStatement = connection.prepareStatement(FIND_AVAILABLE_COUPONS_AMOUNT);
-            preparedStatement.setString(1, codeName);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                amount = resultSet.getInt(1);
-            }
-        } catch (ConnectionPoolException | SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            close(resultSet);
-            close(preparedStatement);
-        }
-        logger.log(Level.INFO, "available amount {}", amount);
-        return amount;
-    }
-
-
-    @Override
     public boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws DaoException {
         boolean isDecreased = false;
         PreparedStatement preparedStatement = null;

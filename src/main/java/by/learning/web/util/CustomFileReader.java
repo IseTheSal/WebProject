@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class CustomFileReader {
-    private static final String UPLOAD_DIRECTORY = "D:\\logo";
+    private static final String UPLOAD_DIRECTORY = "C:\\logo";
     private static final String UPLOAD_PROJECT_DIRECTORY = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\webapp\\img\\logo";
     private static final String JPG_FORMAT = "jpg";
     private static CustomFileReader instance;

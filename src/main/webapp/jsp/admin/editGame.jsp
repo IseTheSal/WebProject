@@ -174,23 +174,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <jsp:include page="../support/footer.jsp"/>
         </div>
     </div>
-    <script>
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
+    <script src="${pageContext.request.contextPath}/js/custom-validation.js" type="text/javascript"></script>
     <script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006273/BBBootstrap/choices.min.js?version=7.0.0"></script>
     <script>
         $(document).ready(function () {

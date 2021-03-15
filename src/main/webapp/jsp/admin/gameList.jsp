@@ -6,6 +6,9 @@
 <html>
 <head>
     <title><fmt:message key="admin.games.list.title"/></title>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css rel=stylesheet>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap4.min.css
+          rel=stylesheet>
 </head>
 <body>
 <div style="background-image: url(/img/registration-background.jpg);
@@ -32,17 +35,17 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     </button>
 
     <div style="padding-top: 5%; margin-left: 10%; margin-right: 10%">
-        <table class="table table-bordered text-center">
-            <thead class="thead-light">
+        <table id="dtBasicExample" class="table table-dark table-bordered text-center">
+            <thead class="">
             <tr>
                 <th scope="col"><fmt:message key="admin.games.list.game.id"/></th>
                 <th scope="col"><fmt:message key="admin.games.list.game.title"/></th>
                 <th scope="col"><fmt:message key="admin.games.list.game.price"/></th>
                 <th scope="col"><fmt:message key="admin.games.list.game.amount"/></th>
-                <th scope="col"></th>
+                <th scope="col" data-sortable="false"></th>
             </tr>
             </thead>
-            <tbody class="table-light">
+            <tbody class="">
             <c:forEach items="${sessionScope.gameList}" var="game">
                 <tr>
                     <th scope="row" style="width: 3%; text-align: center; vertical-align: middle">${game.id}</th>
@@ -70,6 +73,20 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         </table>
     </div>
 </div>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/jquery.dataTables.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/dataTables.bootstrap4.min.js></script>
+<script>
+    $(document).ready(function () {
+        $('#dtBasicExample').dataTable({
+            "paging": false,
+            "bInfo": false,
+            "oLanguage": {
+                "sSearch": "<label style='color:white'><fmt:message key="admin.table.search"/></label>"
+            }
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 <script>
     $(document).ready(function () {
         var gameAmount = ${requestScope.gameCodeAmount};

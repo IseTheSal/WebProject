@@ -126,6 +126,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         </div>
     </div>
 
+    <script src="${pageContext.request.contextPath}/js/custom-validation.js" type="text/javascript"></script>
 
     <script>
         // Remove Items From Cart
@@ -137,23 +138,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         $('a.btn.continue').click(function () {
             $('li.items').show(400);
         });
-
-
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
 
         var cardElements = document.getElementsByClassName("items");
         var size = cardElements.length;
@@ -177,7 +161,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 totalPriceHtml.item(0).innerHTML = totalPrice + '$';
                 var discount = ${sessionScope.couponDiscount};
                 document.getElementById('promoText').innerHTML = discount + '%';
-                billPriceElements.item(0).innerHTML = (totalPrice - totalPrice * discount / 100) + '$';
+                billPriceElements.item(0).innerHTML = (totalPrice - totalPrice * discount / 100).toPrecision(4) + '$';
             }
         )
     </script>

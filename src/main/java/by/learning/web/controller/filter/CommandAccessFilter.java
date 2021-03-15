@@ -20,13 +20,12 @@ import java.util.Set;
 
 public class CommandAccessFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
-    private static final String COMMAND_PARAMETER = "command";
 
-    Set<CommandType> guestCommands;
-    Set<CommandType> adminCommands;
-    Set<CommandType> clientCommands;
-    Set<CommandType> authorizedUserCommands;
-    Set<CommandType> allCommands;
+    private Set<CommandType> guestCommands;
+    private Set<CommandType> adminCommands;
+    private Set<CommandType> clientCommands;
+    private Set<CommandType> authorizedUserCommands;
+    private Set<CommandType> allCommands;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -74,7 +73,7 @@ public class CommandAccessFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
-        String commandValue = req.getParameter(COMMAND_PARAMETER);
+        String commandValue = req.getParameter(RequestParameter.COMMAND_PARAM);
         CommandType command = CommandType.valueOf(commandValue.toUpperCase(Locale.ROOT));
         if (guestCommands.contains(command) && user == null) {
             chain.doFilter(request, response);

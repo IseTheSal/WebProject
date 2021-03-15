@@ -165,20 +165,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int findAvailableCouponAmount(String codeName) throws ServiceException {
-        int amount = 0;
-        if (OrderValidator.isCouponCodeValid(codeName)) {
-            try {
-                amount = orderDao.findAvailableCouponAmountByName(codeName);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
-        } else {
-            logger.log(Level.INFO, "coupon with code {} not valid", codeName);
-        }
-        return amount;
-    }
-
     public boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws ServiceException {
         boolean isDecreased = false;
         if (OrderValidator.isCouponCodeValid(codeName)) {

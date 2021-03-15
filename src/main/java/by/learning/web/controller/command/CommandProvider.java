@@ -19,7 +19,7 @@ public class CommandProvider {
             CommandType type = CommandType.valueOf(commandName.toUpperCase());
             current = Optional.of(type.getCommand());
         } catch (IllegalArgumentException ex) {
-            logger.log(Level.ERROR, "Incorrect command was provided");
+            logger.log(Level.ERROR, "Incorrect command was provided", ex);
         }
         return current;
     }

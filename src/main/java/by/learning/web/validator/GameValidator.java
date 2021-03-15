@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class GameValidator {
     private static final String TITLE_REGEX = "^[A-z0-9`\\s:]{2,35}$";
-    private static final String DESCRIPTION_REGEX = "^[A-z0-9.,?!;:\\-()№'\"\\s®’“”]{10,300}";
+    private static final String DESCRIPTION_REGEX = "^[A-z0-9.,?!;:\\-()№'\"\\s®*’“”]{10,300}";
     private static final String PRICE_REGEX = "^(\\d)*(\\.\\d{1,2})?$";
     private static final String TRAILER_LINK_REGEX = "^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$";
 

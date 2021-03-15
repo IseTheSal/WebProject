@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language.language"/>
+<html>
 <head>
     <title><fmt:message key="authorization.title"/></title>
 </head>
@@ -51,7 +52,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <jsp:include page="support/footer.jsp"/>
     </div>
 </div>
-</body>
+
+<script src="${pageContext.request.contextPath}/js/custom-validation.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var needAuthorization = ${not empty requestScope.loginFirst};
@@ -59,19 +61,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             funcBtns.alertWarning('<fmt:message key='authorization.needAuthorization'/>');
         }
     });
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
 </script>
+</body>
+</html>

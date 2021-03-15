@@ -190,20 +190,19 @@
         <div class="modal-content"
              style="background-color: rgba(105,105,105,0.7); border: none !important;margin-left: -15%; width: 145% !important;">
             <div class="modal-header neon-title-white-light" style="border-bottom: 0 none">
-                Add admin
+                <fmt:message key="admin.menu.add.admin"/>
                 <button type="button" id="clsAdminAddButton" class="close neon-title-red" data-dismiss="modal"
                         aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style="">
+            <div class="modal-body">
                 <form class="needs-validation" novalidate method="post"
                       action="${pageContext.request.contextPath}/addAdmin.do">
                     <div style="position: relative; margin-left: 1%; margin-top: 1%">
                         <input type="hidden" name="command" value="add_admin"/>
                         <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
-                        <div class=" "
-                             style="width:300px; cursor: pointer; display: inline;">
+                        <div style="width:300px; cursor: pointer; display: inline;">
                             <div style="">
                                 <div class="form-group" style="margin-bottom: 14px">
                                     <label class="neon-title-white" for="txtUsername">
@@ -329,7 +328,7 @@
                                 </c:forEach>
                             </div>
                             <input type="submit" class="button-search-purple"
-                                   value="Register admin"
+                                   value="<fmt:message key="admin.menu.add.admin"/>"
                                    style="position: relative; margin-top: 5%; margin-left: 18%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                         </div>
                     </div>
@@ -346,23 +345,7 @@
 </div>
 <script src="${pageContext.request.contextPath}/js/custom-search.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin-menu.js"></script>
-<script>
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
+<script src="${pageContext.request.contextPath}/js/custom-validation.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     window.onload = function () {

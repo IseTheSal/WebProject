@@ -63,12 +63,6 @@
         <url-pattern>/usePromocode.do</url-pattern>
         <url-pattern>/makeOrder.do</url-pattern>
         <url-pattern>/addToCart.do</url-pattern>
-
-        <!--        <url-pattern>/jsp/login.jsp</url-pattern>-->
-        <!--        <url-pattern>/login.do</url-pattern>-->
-
-        <!--        <url-pattern>/logout.do</url-pattern>-->
-
         <url-pattern>/jsp/main.jsp</url-pattern>
         <url-pattern>/game.do</url-pattern>
         <url-pattern>/jsp/profile.jsp</url-pattern>
@@ -86,7 +80,8 @@
         <url-pattern>/editGame.do</url-pattern>
         <url-pattern>/addAdmin.do</url-pattern>
         <url-pattern>/changeEmail.do</url-pattern>
-        <url-pattern>/jsp/admin/editGame.do</url-pattern>
+
+        <url-pattern>/editGame.do</url-pattern>
         <url-pattern>/jsp/admin/createGame.jsp</url-pattern>
         <url-pattern>/createGame.do</url-pattern>
     </filter-mapping>

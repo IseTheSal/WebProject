@@ -22,7 +22,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 <fmt:message key="registration.title"/>
             </h2>
             <div style="max-width: 700px;margin-left: 34%;margin-right:auto; zoom: 0.95">
-                <div class="form-group" style="margin-bottom: 5px">
+                <div class="form-group" style="margin-bottom: 15px">
                     <label class="neon-title-white" for="txtUsername"
                            style="position: relative; margin-bottom: 1px">
                         <fmt:message key="registration.username"/>
@@ -162,23 +162,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     </div>
 </body>
 
-<script>
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
+<script src="${pageContext.request.contextPath}/js/custom-validation.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     window.onload = function () {

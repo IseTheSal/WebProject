@@ -24,7 +24,6 @@ public class RegistrationCommand implements ActionCommand {
         this.userService = userService;
     }
 
-    //    fixme add tests check if working
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = PagePath.REGISTRATION_PAGE;

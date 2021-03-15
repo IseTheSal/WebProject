@@ -21,6 +21,6 @@ public class SessionListener implements HttpSessionListener {
         session.setAttribute(SessionAttribute.CART_AMOUNT, 0);
         short discount = 0;
         session.setAttribute(SessionAttribute.COUPON_DISCOUNT, discount);
-        logger.log(Level.DEBUG, "Listener works");
+        logger.log(Level.DEBUG, "Listener worked");
     }
 }
