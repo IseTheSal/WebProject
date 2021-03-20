@@ -21,4 +21,18 @@ public interface UserDao extends BaseDao {
     Set<User> findAllClients() throws DaoException;
 
     Set<User> findAllUsers() throws DaoException;
+
+    String createResetToken(String email) throws DaoException;
+
+    int findUserIdByResetToken(String token) throws DaoException;
+
+    void clearResetTokens() throws DaoException;
+
+    String findResetToken(String userAttribute) throws DaoException;
+
+    boolean removeResetToken(String token) throws DaoException;
+
+    boolean isTokenExist(String resetToken) throws DaoException;
+
+    Optional<String> findUserEmail(String login) throws DaoException;
 }

@@ -40,6 +40,21 @@ public class UserDaoImpl implements UserDao {
     private static final String FIND_USER_PASSWORD = "SELECT password FROM users WHERE users.user_id = ?";
     private static final String FIND_ALL_CLIENTS = "SELECT user_id, login, email, firstname, lastname, users.role FROM users WHERE users.role = 'CLIENT'";
     private static final String FIND_ALL_USERS = "SELECT user_id, login, email, firstname, lastname, users.role FROM users";
+    private static final String CREATE_RESET_TOKEN = "INSERT INTO password_tokens(token_id, user_id, reset_token, creation_date) " +
+            "VALUES (default, (SELECT user_id FROM users WHERE email = ?), default, default) " +
+            "RETURNING reset_token ";
+    private static final String CLEAR_RESET_TOKENS = "DELETE FROM password_tokens WHERE creation_date <= (now() - '30 minutes'::interval)";
+    private static final String FIND_EMAIL_BY_LOGIN = "SELECT email FROM users WHERE users.login = ?";
+    private static final String FIND_RESET_TOKEN_BY_EMAIL = "SELECT reset_token " +
+            "FROM password_tokens " +
+            "INNER JOIN users u on u.user_id = password_tokens.user_id " +
+            "where email = ?";
+    private static final String FIND_TOKEN_ID = "SELECT token_id FROM password_tokens p WHERE p.reset_token = ?";
+    private static final String REMOVE_RESET_TOKEN = "DELETE FROM password_tokens WHERE reset_token = ?";
+    private static final String FIND_USER_TOKEN_ID = "SELECT users.user_id " +
+            "from users " +
+            "inner join password_tokens pt on users.user_id = pt.user_id " +
+            "where reset_token = ?";
 
     @Override
     public Optional<User> findUser(String login, String password) throws DaoException {
@@ -233,5 +248,117 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(ex);
         }
         return result;
+    }
+
+    @Override
+    public String createResetToken(String email) throws DaoException {
+        return findToken(email, CREATE_RESET_TOKEN);
+    }
+
+    @Override
+    public String findResetToken(String email) throws DaoException {
+        return findToken(email, FIND_RESET_TOKEN_BY_EMAIL);
+    }
+
+    private String findToken(String email, String findCondition) throws DaoException {
+        String token = "";
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
+            preparedStatement = connection.prepareStatement(findCondition);
+            preparedStatement.setString(1, email);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                token = resultSet.getString(1);
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return token;
+    }
+
+    @Override
+    public void clearResetTokens() throws DaoException {
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CLEAR_RESET_TOKENS)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        }
+    }
+
+    @Override
+    public Optional<String> findUserEmail(String login) throws DaoException {
+        Optional<String> result = Optional.empty();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
+            preparedStatement = connection.prepareStatement(FIND_EMAIL_BY_LOGIN);
+            preparedStatement.setString(1, login);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                result = Optional.of(resultSet.getString(1));
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isTokenExist(String resetToken) throws DaoException {
+        boolean exist;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
+            preparedStatement = connection.prepareStatement(FIND_TOKEN_ID);
+            preparedStatement.setString(1, resetToken);
+            resultSet = preparedStatement.executeQuery();
+            exist = resultSet.next();
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return exist;
+    }
+
+    @Override
+    public int findUserIdByResetToken(String token) throws DaoException {
+        int id;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.takeConnection();) {
+            preparedStatement = connection.prepareStatement(FIND_USER_TOKEN_ID);
+            preparedStatement.setString(1, token);
+            resultSet = preparedStatement.executeQuery();
+            id = resultSet.next() ? resultSet.getInt(1) : -1;
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return id;
+    }
+
+    @Override
+    public boolean removeResetToken(String token) throws DaoException {
+        boolean isRemoved;
+        try (Connection connection = CONNECTION_POOL.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_RESET_TOKEN)) {
+            preparedStatement.setString(1, token);
+            isRemoved = (preparedStatement.executeUpdate() > 0);
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        }
+        return isRemoved;
     }
 }

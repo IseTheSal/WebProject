@@ -3,6 +3,7 @@ package by.learning.web.validator;
 public enum ValidationInformation {
     SUCCESS("success"),
     FAIL("fail"),
+    INPUT_INCORRECT("incorrect input"),
     TITLE_INCORRECT("title is incorrect"),
     IMAGE_PATH_INCORRECT("path is incorrect"),
     DESCRIPTION_INCORRECT("description is incorrect"),
@@ -20,7 +21,8 @@ public enum ValidationInformation {
     LOGIN_INCORRECT("login is incorrect"),
     FIRSTNAME_INCORRECT("firstname is incorrect"),
     SECONDNAME_INCORRECT("secondname is incorrect"),
-    LOGIN_OR_EMAIL_EXIST("This login or email already exists");
+    LOGIN_OR_EMAIL_EXIST("This login or email already exists"),
+    USER_NOT_FOUND("User not found");
 
     private final String value;
 

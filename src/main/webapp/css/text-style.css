@@ -78,6 +78,18 @@
     0 0 40px #370000;
 }
 
+.neon-title-blue {
+    color: #3acce9;
+    text-shadow: 0 0 5px #32b4cd,
+    0 0 10px #2890a4;
+}
+
+.neon-title-blue:hover {
+    color: #cceff3;
+    text-shadow: 0 0 5px #17aac6,
+    0 0 10px #169ab3;
+}
+
 .neon-title-green {
     color: #50ab00;
     text-shadow: 0 0 5px #387900,

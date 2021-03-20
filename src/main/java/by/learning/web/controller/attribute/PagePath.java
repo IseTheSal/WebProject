@@ -21,6 +21,7 @@ public class PagePath {
     public static final String UPLOAD_VALUE = "upload";
     public static final String TERMS_PAGE = "/jsp/support/terms.jsp";
     public static final String ABOUT_PAGE = "/jsp/support/about.jsp";
+    public static final String FORGOT_PASSWORD_PAGE = "/jsp/forgotPassword.jsp";
 
     private PagePath() {
     }

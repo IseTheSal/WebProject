@@ -42,7 +42,7 @@
 
     <filter>
         <filter-name>XSSAttackFilter</filter-name>
-        <filter-class>by.learning.web.controller.filter.XSSAttackFilter</filter-class>
+        <filter-class>by.learning.web.controller.filter.XSSFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>XSSAttackFilter</filter-name>

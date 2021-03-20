@@ -75,9 +75,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 </div>
             </div>
         </div>
-        <div style="position: fixed; bottom: 0; width: 100%">
-            <jsp:include page="support/footer.jsp"/>
-        </div>
+    </div>
+    <div style="position: fixed; bottom: 0; width: 100%">
+        <jsp:include page="support/footer.jsp"/>
     </div>
     <script>
         $(document).ready(function () {

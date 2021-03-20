@@ -36,7 +36,10 @@ public class CommandAccessFilter implements Filter {
                 CommandType.USE_PROMOCODE,
                 CommandType.LOGIN,
                 CommandType.REGISTRATION,
-                CommandType.CHANGE_LOCALE);
+                CommandType.CHANGE_LOCALE,
+                CommandType.FORGOT_PASSWORD,
+                CommandType.OPEN_RESET_PASSWORD,
+                CommandType.RESET_PASSWORD);
         adminCommands = EnumSet.of(CommandType.CREATE_GAME,
                 CommandType.OPEN_GAME,
                 CommandType.OPEN_GAME_CREATOR,

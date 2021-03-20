@@ -12,7 +12,7 @@
         <Console name="console">
             <PatternLayout pattern="${pattern_console}"/>
         </Console>
-        <File name="txt_file" filename="D:\project logs\log.txt">
+        <File name="txt_file" filename="C:\project logs\log.txt">
             <PatternLayout pattern="${pattern_file}"/>
         </File>
     </Appenders>

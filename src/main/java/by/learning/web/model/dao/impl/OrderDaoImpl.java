@@ -42,9 +42,6 @@ public class OrderDaoImpl implements OrderDao {
     private static final String FIND_AVAILABLE_GAME_CODE_AMOUNT = "SELECT count(game_code) AS amount " +
             "FROM codes " +
             "WHERE sold IS FALSE AND game_id = ?";
-    private static final String FIND_AVAILABLE_COUPONS_AMOUNT = "SELECT amount " +
-            "FROM coupons " +
-            "WHERE code = ? AND amount > 0 ";
     private static final String FIND_COUPON_DISCOUNT = "SELECT discount " +
             "FROM coupons " +
             "WHERE code = ?;";

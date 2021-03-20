@@ -23,7 +23,7 @@ public class DateTag extends TagSupport {
             if (user.getRole() == User.Role.ADMIN) {
                 try {
                     JspWriter out = pageContext.getOut();
-                    out.write("<label>" + user.getRole() + ". " + LocalDate.now() + "</label>");
+                    out.write("<label>" + user.getRole() + ".\s" + LocalDate.now() + "</label>");
                 } catch (IOException e) {
                     logger.log(Level.ERROR, e);
                 }

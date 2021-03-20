@@ -31,6 +31,7 @@
             </div>
         </form>
 
+
         <div class="container t1">
             <div class="row row-cols-3" style="row-gap: 60px; margin-left: 45px">
                 <c:forEach items="${sessionScope.gameList}" var="game">

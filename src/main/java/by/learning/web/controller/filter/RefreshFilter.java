@@ -15,7 +15,6 @@ public class RefreshFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
     private HttpSession session = null;
 
-
     @Override
     public void init(FilterConfig fg) throws ServletException {
     }

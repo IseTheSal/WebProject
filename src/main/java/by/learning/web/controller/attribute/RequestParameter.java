@@ -48,6 +48,11 @@ public class RequestParameter {
     public static final String VALID_ISSUES = "validIssues";
     public static final String GAME_CODE = "gameCode";
     public static final String CODE_EXISTS = "gameCodeExists";
+    public static final String REESTABLISH_VALUE = "reestablishValue";
+    public static final String CHECK_EMAIL = "checkEmail";
+    public static final String RESET_TOKEN = "resetToken";
+    public static final String TOKEN_NOT_EXIST = "tokenNotExist";
+    public static final String PASSWORD_CHANGED = "passwordChanged";
 
     private RequestParameter() {
     }

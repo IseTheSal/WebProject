@@ -37,9 +37,19 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                            placeholder="<fmt:message key="authorization.passwordPlaceHolder"/>" required>
                     <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
                             key="authorization.invalidPassword"/></div>
+                    <a href="#" id="codeBtn" class="neon-title-blue"
+                       style="float: left; text-align: center; margin-bottom: 3%; text-decoration: none; cursor: pointer"
+                       data-toggle="modal" data-target="#forgotPasswordModal">Forgot password?
+                    </a>
                     <c:if test="${not empty requestScope.errorSingIn}">
-                        <p style="text-align: center; color: red">
+                        <p class="neon-title-red" style="text-align: center;float: right">
                             <fmt:message key="authorization.incorrectLoginOrPassword"/>
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty requestScope.checkEmail}">
+                        <p class="neon-title-green" style="text-align: center;float: right">
+                                <%--                            fixme language--%>
+                            Check your email
                         </p>
                     </c:if>
                 </div>
@@ -52,6 +62,44 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <jsp:include page="support/footer.jsp"/>
     </div>
 </div>
+
+<div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important;"
+     id="forgotPasswordModal"
+     tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog center-modal" style="border: none !important;" role="document">
+        <div class="modal-content text-center" style="background-color: rgba(161,161,161,0.9)">
+            <div class="modal-header neon-title-white-light" style="border-bottom: 0 none;">
+                ENTER YOUR LOGIN OR EMAIL
+                <button type="button" id="clsBtn" class="close neon-title-red" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="${pageContext.request.contextPath}/forgotPassword.do">
+                    <div style="position: relative; margin-left: 1%; margin-top: 1%">
+                        <input type="hidden" name="command" value="forgot_password"/>
+                        <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
+                        <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
+                        <div class="neon-title-cyan-light"
+                             style="width:300px; cursor: pointer; display: inline">
+                            <input name="reestablishValue" class="custom-user-input" type="text"
+                                   placeholder="email or login" required
+                                   pattern="(^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$)|(^[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$)"
+                                   minlength="6" maxlength="320"
+                                   style="box-shadow:0 0 30px #ffffff;"/>
+                            <input type="submit" class="button-search-purple"
+                                   value="NEXT"
+                                   style="position: relative; margin-top: 5%;border-radius: 5%; height: 40px; background: rgba(154,154,154,0.5)"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="${pageContext.request.contextPath}/js/custom-validation.js" type="text/javascript"></script>
 <script type="text/javascript">

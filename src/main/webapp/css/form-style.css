@@ -40,3 +40,21 @@
     color: transparent;
 }
 
+.custom-user-input {
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff !important;
+}
+
+
+.custom-user-input::placeholder {
+    color: #ffffff;
+}
+
+.custom-user-input::-webkit-input-placeholder {
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.custom-user-input:focus::placeholder {
+    color: transparent;
+}

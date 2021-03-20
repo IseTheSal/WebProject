@@ -32,7 +32,10 @@ public enum CommandType {
     DELETE_COUPON(new DeleteCouponCommand(new OrderServiceImpl())),
     OPEN_ORDER_LIST(new OpenOrderListCommand(new OrderServiceImpl())),
     OPEN_USER_LIST(new OpenUserListCommand(new UserServiceImpl())),
-    ADD_ADMIN(new AddAdminCommand(new UserServiceImpl()));
+    ADD_ADMIN(new AddAdminCommand(new UserServiceImpl())),
+    FORGOT_PASSWORD(new ForgotPasswordCommand(new UserServiceImpl())),
+    OPEN_RESET_PASSWORD(new OpenResetPasswordCommand(new UserServiceImpl())),
+    RESET_PASSWORD(new ResetPasswordCommand(new UserServiceImpl()));
 
     private ActionCommand command;
 

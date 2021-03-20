@@ -16,5 +16,13 @@ public interface UserService {
 
     boolean changeUserPassword(int userId, String oldPassword, String newPassword, String newPasswordRepeat) throws ServiceException;
 
+    Set<String> resetPassword(String resetToken, String newPassword, String newPasswordRepeat) throws ServiceException;
+
+    Set<String> sentResetPasswordLink(String reestablishParameter) throws ServiceException;
+
     Set<User> findAllUsers() throws ServiceException;
+
+    Optional<String> findUserEmailByLogin(String login) throws ServiceException;
+
+    boolean isTokenExist(String resetToken) throws ServiceException;
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 
-public class XSSAttackFilter implements Filter {
+public class XSSFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
 
     @Override

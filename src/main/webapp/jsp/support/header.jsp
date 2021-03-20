@@ -156,6 +156,16 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         if (codeExist) {
             funcBtns.alertWarning("This code probably exists");
         }
+
+        var passwordChanged = ${not empty requestScope.passwordChanged};
+        if (passwordChanged) {
+            funcBtns.alertOkOnlyTitle('Password changed');
+        }
+
+        var tokenNotExist = ${not empty requestScope.tokenNotExist};
+        if (tokenNotExist) {
+            funcBtns.alertWarning('Token is not exist or timeout');
+        }
         <%--var couponExist = ${requestScope.couponExist};--%>
         <%--if (${requestScope.couponExist}) {--%>
         <%--    funcBtns.alertWarning("This coupon exists");--%>
