@@ -5,8 +5,7 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
-    <%--    fixme fmt language--%>
-    <title>Password</title>
+    <title><fmt:message key="password.reset.page.title"/></title>
 </head>
 <body>
 <div style="background-image: url(/img/login-background-blur.jpg);
@@ -20,9 +19,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
             <input type="hidden" name="resetToken" value="${requestScope.resetToken}">
             <div style="max-width: 350px; margin: auto">
-                <h2 class="neon-title-cyan" style="text-align: center">Set new password</h2>
+                <h2 class="neon-title-cyan" style="text-align: center"><fmt:message key="password.reset.title"/></h2>
                 <div class="form-group" style="margin-bottom: 14px">
-                    <label class="neon-title-white" for="txtPassword">New password</label>
+                    <label class="neon-title-white" for="txtPassword"><fmt:message key="password.reset.new.password"/></label>
                     <input name="password" style="border-width: medium" type="password"
                            class="form-control" id="txtPassword"
                            placeholder="<fmt:message key="registration.passwordPlaceHolder"/>"
@@ -33,7 +32,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <fmt:message key="registration.helpPassword"/></div>
                 </div>
                 <div class="form-group">
-                    <label class="neon-title-white" for="txtConfirmPassword">Repeat new password</label>
+                    <label class="neon-title-white" for="txtConfirmPassword"><fmt:message key="password.reset.repeat.password"/></label>
                     <input name="repeatPassword" style="border-width: medium" type="password"
                            class="form-control"
                            id="txtConfirmPassword"
@@ -43,7 +42,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
                             key="registration.invalidPasswordMatch"/></div>
                 </div>
-                <input type="submit" name="btnLogin" value="CHANGE OLD" id="btnLogin"
+                <input type="submit" name="btnLogin" value="<fmt:message key="password.reset.btn"/>" id="btnLogin"
                        class="button-glow-blue">
             </div>
         </form>
@@ -64,7 +63,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         function ConfirmPassword() {
             txtConfirmPassword.setCustomValidity("");
             if (txtPassword.value !== txtConfirmPassword.value) {
-                txtConfirmPassword.setCustomValidity("Passwords do not match.");
+                txtConfirmPassword.setCustomValidity("<fmt:message key="password.reset.alert"/>");
             }
         }
     }

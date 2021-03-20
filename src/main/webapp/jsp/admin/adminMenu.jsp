@@ -357,7 +357,7 @@
         function ConfirmPassword() {
             txtConfirmPassword.setCustomValidity("");
             if (txtPassword.value !== txtConfirmPassword.value) {
-                txtConfirmPassword.setCustomValidity("Passwords do not match.");
+                txtConfirmPassword.setCustomValidity("<fmt:message key="password.reset.alert"/>");
             }
         }
     }
@@ -365,7 +365,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         if (${requestScope.couponExist}) {
-            funcBtns.alertWarning("This coupon exists");
+            funcBtns.alertWarning("<fmt:message key="alert.header.code.exist"/>");
         }
     });
 </script>

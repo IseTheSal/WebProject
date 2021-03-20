@@ -197,12 +197,12 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         function () {
             let emailExist =  ${not empty requestScope.emailExist};
             if (emailExist) {
-                funcBtns.alertWarningBody('Fail', 'Email exists');
+                funcBtns.alertWarningBody('<fmt:message key="alert.header.fail"/>', '<fmt:message key="alert.header.email.exist"/>');
             }
 
             let wrongOldPassword = ${not empty requestScope.incorrectOldPassword};
             if (wrongOldPassword) {
-                funcBtns.alertWarningBody('Fail', 'Old password is incorrect');
+                funcBtns.alertWarningBody('<fmt:message key="alert.header.fail"/>', '<fmt:message key="alert.header.old.password.match"/>');
             }
         });
 
@@ -215,7 +215,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         function ConfirmEmail() {
             txtConfirmEmail.setCustomValidity("");
             if (txtEmail.value !== txtConfirmEmail.value) {
-                txtConfirmEmail.setCustomValidity("Emails don`t match");
+                txtConfirmEmail.setCustomValidity("<fmt:message key="alert.header.email.match"/>");
             }
         }
 
@@ -227,7 +227,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         function ConfirmPassword() {
             txtConfirmPassword.setCustomValidity("");
             if (txtPassword.value !== txtConfirmPassword.value) {
-                txtConfirmPassword.setCustomValidity("Passwords don`t match");
+                txtConfirmPassword.setCustomValidity("<fmt:message key="alert.header.passwords.not.match"/>");
             }
         }
     }

@@ -127,16 +127,16 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         console.log("there");
         var serverError = ${not empty requestScope.serverError};
         if (serverError) {
-            funcBtns.alertError('Error', '<fmt:message key="server.error"/>')
+            funcBtns.alertError('<fmt:message key="alert.header.error"/>', '<fmt:message key="server.error"/>')
         }
         var fail = ${not empty requestScope.fail};
         if (fail) {
-            funcBtns.alertWarning('Fail');
+            funcBtns.alertWarning('<fmt:message key="alert.header.fail"/>');
         }
         let success = ${not empty requestScope.success};
         console.log(success);
         if (success) {
-            funcBtns.alertOkOnlyTitle('Success');
+            funcBtns.alertOkOnlyTitle('<fmt:message key="alert.header.done"/>');
         }
         var validIssues = ${not empty requestScope.validIssues};
         if (validIssues) {
@@ -154,24 +154,18 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         }
         var codeExist = ${not empty requestScope.gameCodeExists};
         if (codeExist) {
-            funcBtns.alertWarning("This code probably exists");
+            funcBtns.alertWarning("<fmt:message key="alert.header.code.exist"/>");
         }
 
         var passwordChanged = ${not empty requestScope.passwordChanged};
         if (passwordChanged) {
-            funcBtns.alertOkOnlyTitle('Password changed');
+            funcBtns.alertOkOnlyTitle('<fmt:message key="alert.header.password.changed"/>');
         }
 
         var tokenNotExist = ${not empty requestScope.tokenNotExist};
         if (tokenNotExist) {
-            funcBtns.alertWarning('Token is not exist or timeout');
+            funcBtns.alertWarning('<fmt:message key="alert.header.token.fail"/>');
         }
-        <%--var couponExist = ${requestScope.couponExist};--%>
-        <%--if (${requestScope.couponExist}) {--%>
-        <%--    funcBtns.alertWarning("This coupon exists");--%>
-        <%--} else {--%>
-        <%--    funcBtns.alertWarning("This coupon does not exist");--%>
-        <%--}--%>
     });
 </script>
 

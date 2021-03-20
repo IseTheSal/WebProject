@@ -127,7 +127,7 @@
         function () {
             let emailExist =  ${not empty requestScope.emailExist};
             if (emailExist) {
-                funcBtns.alertWarningBody('Fail', 'Email exists');
+                funcBtns.alertWarningBody('<fmt:message key="alert.header.fail"/>', '<fmt:message key="alert.header.email.exist"/>');
             }
         });
 
@@ -136,8 +136,8 @@
         console.log(email.value)
         repeatEmail.setCustomValidity("");
         if (repeatEmail.value != email.value) {
-            repeatEmail.setCustomValidity('Emails dont match');
-            funcBtns.alertError("Emails dont match");
+            repeatEmail.setCustomValidity('<fmt:message key="alert.header.email.match"/>');
+            funcBtns.alertError("<fmt:message key="alert.header.email.match"/>");
         }
     }
 </script>

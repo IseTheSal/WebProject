@@ -174,7 +174,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         function ConfirmPassword() {
             txtConfirmPassword.setCustomValidity("");
             if (txtPassword.value !== txtConfirmPassword.value) {
-                txtConfirmPassword.setCustomValidity("Passwords do not match.");
+                txtConfirmPassword.setCustomValidity("<fmt:message key="password.reset.alert"/>");
             }
         }
     }

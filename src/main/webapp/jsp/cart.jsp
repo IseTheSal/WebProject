@@ -28,7 +28,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                     <div>
                                         <p id="amount" class="amountClass"
                                            style="display:inline; color: black; font-size: 18px; margin-left: 20px">${games.value}</p>
-                                        x
+                                        &#120;
                                         <p id="price" class="priceClass"
                                            style="display:inline; color: black; font-size: 18px">${games.key.price}$</p>
                                     </div>
@@ -63,7 +63,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                                value="${pageContext.request.requestURI}">
                                         <input name="gameId" type="hidden" value="${games.key.id}"/>
                                         <p id="gameTotalPrice" class="gameTotalPrice"
-                                           style="color: black; font-size: 18px">0.00$</p>
+                                           style="color: black; font-size: 18px">&#48;&dollar;</p>
                                         <input type="submit" value="x" class="remove" style="cursor: pointer"/>
                                     </form>
                                 </div>
@@ -129,15 +129,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <script src="${pageContext.request.contextPath}/js/custom-validation.js" type="text/javascript"></script>
 
     <script>
-        // Remove Items From Cart
         $('a.remove').click(function (e) {
             e.preventDefault();
             $(this).parent().parent().parent().hide(400);
         })
-        // Just for testing, show all items
-        $('a.btn.continue').click(function () {
-            $('li.items').show(400);
-        });
 
         var cardElements = document.getElementsByClassName("items");
         var size = cardElements.length;
@@ -181,7 +176,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <script>
         $(document).ready(function () {
             if (!${requestScope.couponExist}) {
-                funcBtns.alertWarning("This coupon does not exist");
+                funcBtns.alertWarning("<fmt:message key="alert.header.coupon.not.exist"/>");
             }
         });
     </script>

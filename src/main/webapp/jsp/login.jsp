@@ -48,8 +48,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     </c:if>
                     <c:if test="${not empty requestScope.checkEmail}">
                         <p class="neon-title-green" style="text-align: center;float: right">
-                                <%--                            fixme language--%>
-                            Check your email
+                            <fmt:message key="authorization.check"/>
                         </p>
                     </c:if>
                 </div>
