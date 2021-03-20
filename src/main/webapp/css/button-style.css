@@ -174,8 +174,7 @@
     box-shadow: 0 0 15px #ffffff;
 }
 
-/*fixme*/
-.button-search-purple {
+.button-search-gray {
     width: 350px;
     color: #000000;
     letter-spacing: 2px;
@@ -185,7 +184,7 @@
     border-radius: 35%;
 }
 
-.button-search-purple:hover {
+.button-search-gray:hover {
     background: #939393;
     color: white;
     box-shadow: 0 0 15px #888888;

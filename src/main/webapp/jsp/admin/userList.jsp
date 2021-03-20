@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <input type="submit" class="button-search-purple"
+                                    <input type="submit" class="button-search-gray"
                                            value="<fmt:message key="admin.user.list.edit.btn"/>"
                                            style="position: relative;color: white; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                                 </form>

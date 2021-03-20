@@ -89,7 +89,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                    pattern="(^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$)|(^[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$)"
                                    minlength="6" maxlength="320"
                                    style="box-shadow:0 0 30px #ffffff;"/>
-                            <input type="submit" class="button-search-purple"
+                            <input type="submit" class="button-search-gray"
                                    value="NEXT"
                                    style="position: relative; margin-top: 5%;border-radius: 5%; height: 40px; background: rgba(154,154,154,0.5)"/>
                         </div>

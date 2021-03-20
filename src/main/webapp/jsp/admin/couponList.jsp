@@ -83,7 +83,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                                            maxlength="5"
                                                            style=" box-shadow:0 0 30px #ffffff;text-align: center">
                                                 </div>
-                                                <input type="submit" class="button-search-purple"
+                                                <input type="submit" class="button-search-gray"
                                                        value="<fmt:message key="admin.coupon.list.game.edit.amount"/>"
                                                        style="position: relative;color: white; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                                             </div>

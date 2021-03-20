@@ -45,7 +45,7 @@
                                    maxlength="17"
                                    minlength="17"
                                    style=" box-shadow:0 0 30px #ffffff; float: right;text-transform:uppercase">
-                            <input type="submit" class="button-search-purple"
+                            <input type="submit" class="button-search-gray"
                                    value="<fmt:message key="admin.menu.add.gamecode"/>"
                                    style="position: relative; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                         </div>
@@ -99,7 +99,7 @@
                                    minlength="1"
                                    maxlength="5"
                                    style=" box-shadow:0 0 30px #ffffff; text-transform:uppercase; margin-top: 3%; margin-left: 30%">
-                            <input type="submit" class="button-search-purple"
+                            <input type="submit" class="button-search-gray"
                                    value="<fmt:message key="admin.menu.add.coupon"/>"
                                    style="position: relative; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                         </div>
@@ -327,7 +327,7 @@
                                            style="color: red">${info}</label>
                                 </c:forEach>
                             </div>
-                            <input type="submit" class="button-search-purple"
+                            <input type="submit" class="button-search-gray"
                                    value="<fmt:message key="admin.menu.add.admin"/>"
                                    style="position: relative; margin-top: 5%; margin-left: 18%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
                         </div>
