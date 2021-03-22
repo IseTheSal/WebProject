@@ -21,7 +21,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <div style="max-width: 350px; margin: auto">
                 <h2 class="neon-title-cyan" style="text-align: center"><fmt:message key="password.reset.title"/></h2>
                 <div class="form-group" style="margin-bottom: 14px">
-                    <label class="neon-title-white" for="txtPassword"><fmt:message key="password.reset.new.password"/></label>
+                    <label class="neon-title-white" for="txtPassword"><fmt:message
+                            key="password.reset.new.password"/></label>
                     <input name="password" style="border-width: medium" type="password"
                            class="form-control" id="txtPassword"
                            placeholder="<fmt:message key="registration.passwordPlaceHolder"/>"
@@ -32,7 +33,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <fmt:message key="registration.helpPassword"/></div>
                 </div>
                 <div class="form-group">
-                    <label class="neon-title-white" for="txtConfirmPassword"><fmt:message key="password.reset.repeat.password"/></label>
+                    <label class="neon-title-white" for="txtConfirmPassword"><fmt:message
+                            key="password.reset.repeat.password"/></label>
                     <input name="repeatPassword" style="border-width: medium" type="password"
                            class="form-control"
                            id="txtConfirmPassword"
