@@ -1,12 +1,15 @@
 package by.learning.web.controller.filter;
 
+import by.learning.web.controller.attribute.PagePath;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Random;
@@ -28,15 +31,21 @@ public class RefreshFilter implements Filter {
             session.setAttribute(SessionAttribute.SERVER_TOKEN, new Random().nextInt(10000));
             chain.doFilter(req, res);
         } else {
-            int serverToken = (Integer) session.getAttribute(SessionAttribute.SERVER_TOKEN);
-            int clientToken = Integer.parseInt(req.getParameter(RequestParameter.CLIENT_TOKEN));
-            if (serverToken == clientToken) {
-                session.setAttribute(SessionAttribute.SERVER_TOKEN, new Random().nextInt(10000));
-                chain.doFilter(req, res);
-            } else {
-                String page = httpServletRequest.getParameter(RequestParameter.CURRENT_PAGE);
-                RequestDispatcher rd = req.getRequestDispatcher(page);
-                rd.forward(req, res);
+            try {
+                int serverToken = (Integer) session.getAttribute(SessionAttribute.SERVER_TOKEN);
+                int clientToken = Integer.parseInt(req.getParameter(RequestParameter.CLIENT_TOKEN));
+                if (serverToken == clientToken) {
+                    session.setAttribute(SessionAttribute.SERVER_TOKEN, new Random().nextInt(10000));
+                    chain.doFilter(req, res);
+                } else {
+                    String page = httpServletRequest.getParameter(RequestParameter.CURRENT_PAGE);
+                    HttpServletResponse httpServletResponse = (HttpServletResponse) res;
+                    httpServletResponse.sendRedirect(page);
+                }
+            } catch (IllegalStateException | NumberFormatException ex) {
+                logger.log(Level.ERROR, ex);
+                HttpServletResponse httpServletResponse = (HttpServletResponse) res;
+                httpServletResponse.sendRedirect(PagePath.INDEX);
             }
         }
     }

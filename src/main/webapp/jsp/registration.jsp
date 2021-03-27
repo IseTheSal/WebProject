@@ -5,9 +5,7 @@
 <fmt:setBundle basename="language.language"/>
 <html>
 <head>
-    <title>
-        <fmt:message key="registration.title"/>
-    </title>
+    <title><fmt:message key="registration.title"/></title>
 </head>
 <body>
 <div style="background-image: url(/img/registration-background.jpg);

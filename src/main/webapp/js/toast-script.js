@@ -26,8 +26,8 @@ $(function () {
         this.msg = 'This is positioned in the ' + msg + '. You can also style the icon any way you like.';
     }
 
-    toastr.options.positionClass = 'toast-top-right';
-    toastr.options.extendedTimeOut = 0; //1000;
+    toastr.options.positionClass = 'toast-bottom-left';
+    toastr.options.extendedTimeOut = 0;
     toastr.options.timeOut = 2000;
     toastr.options.fadeOut = 550;
     toastr.options.fadeIn = 550;

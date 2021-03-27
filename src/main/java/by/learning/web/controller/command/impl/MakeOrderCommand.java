@@ -29,8 +29,13 @@ public class MakeOrderCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = request.getParameter(RequestParameter.CURRENT_PAGE);
+        String page = PagePath.CART_PAGE;
         HttpSession session = request.getSession();
+        HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
+        if (cartMap.isEmpty()) {
+            request.setAttribute(RequestParameter.CART_IS_EMPTY, true);
+            return page;
+        }
         short discount = (short) session.getAttribute(SessionAttribute.COUPON_DISCOUNT);
         Coupon coupon = null;
         if (discount != 0) {
@@ -56,7 +61,6 @@ public class MakeOrderCommand implements ActionCommand {
                 logger.log(Level.ERROR, e);
             }
         }
-        HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
         try {
             User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
             boolean isOrderCreated = orderService.createOrder(user.getId(), cartMap, coupon);

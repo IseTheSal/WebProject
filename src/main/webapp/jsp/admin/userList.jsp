@@ -18,7 +18,6 @@
         <table id="dtBasicExample" class="table table-dark table-bordered text-center">
             <thead class="">
             <tr>
-                <th scope="col"><fmt:message key="admin.user.list.id"/></th>
                 <th scope="col"><fmt:message key="admin.user.list.login"/></th>
                 <th scope="col"><fmt:message key="admin.user.list.firstname"/></th>
                 <th scope="col"><fmt:message key="admin.user.list.secondname"/></th>
@@ -30,8 +29,7 @@
             <tbody>
             <c:forEach items="${sessionScope.userSet}" var="user">
                 <tr>
-                    <th scope="row" style="cursor: pointer">${user.id}</th>
-                    <td>${user.login}</td>
+                    <th scope="row">${user.login}</th>
                     <td> ${user.firstname}</td>
                     <td>${user.lastname}</td>
                     <td>${user.email}</td>

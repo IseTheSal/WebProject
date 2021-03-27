@@ -6,6 +6,7 @@
 <html>
 <head>
     <title><fmt:message key="cart.title"/></title>
+    <link rel="icon" href="${pageContext.request.contextPath}/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cart-style.css">
 </head>
 <body>
@@ -114,14 +115,16 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                             <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
                             <input type="hidden" name="currentPage"
                                    value="${pageContext.request.requestURI}">
-                            <input type="submit" value="Buy" style="width: 175px"
-                                   class="btn custom-btn"/>
+                            <c:if test="${not empty sessionScope.cartMap}">
+                                <input type="submit" value="Buy" style="width: 175px"
+                                       class="btn custom-btn"/>
+                            </c:if>
                         </form>
                     </li>
                 </ul>
             </div>
         </div>
-        <div style="margin-top: 5%">
+        <div style="margin-top: 6%">
             <jsp:include page="support/footer.jsp"/>
         </div>
     </div>
@@ -166,6 +169,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             var amountChanged = ${not empty requestScope.cartAmountChanged};
             if (amountChanged) {
                 funcBtns.alertWarning('<fmt:message key='cart.amountChanged'/>');
+            }
+            var cartIsEmpty = ${not empty requestScope.cartIsEmpty};
+            if (cartIsEmpty) {
+                funcBtns.alertWarning('<fmt:message key='cart.empty'/>');
             }
             var couponDismissed = ${not empty requestScope.couponDismiss};
             if (couponDismissed) {

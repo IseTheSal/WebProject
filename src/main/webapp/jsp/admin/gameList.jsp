@@ -38,7 +38,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <table id="dtBasicExample" class="table table-dark table-bordered text-center">
             <thead class="">
             <tr>
-                <th scope="col"><fmt:message key="admin.games.list.game.id"/></th>
                 <th scope="col"><fmt:message key="admin.games.list.game.title"/></th>
                 <th scope="col"><fmt:message key="admin.games.list.game.price"/></th>
                 <th scope="col"><fmt:message key="admin.games.list.game.amount"/></th>
@@ -48,8 +47,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <tbody class="">
             <c:forEach items="${sessionScope.gameList}" var="game">
                 <tr>
-                    <th scope="row" style="width: 3%; text-align: center; vertical-align: middle">${game.id}</th>
-                    <td style="text-align: center; vertical-align: middle">${game.title}</td>
+                    <th scope="row" style="text-align: center; vertical-align: middle">${game.title}</th>
                     <td style="width: 5%; text-align: center; vertical-align: middle">${game.price}$</td>
                     <td style="width: 10%;text-align: center; vertical-align: middle">
                         <form method="get" action="${pageContext.request.contextPath}/findAmount.do">

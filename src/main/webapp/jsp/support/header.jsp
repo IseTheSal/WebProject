@@ -7,9 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <script src="https://kit.fontawesome.com/c1f7a487ad.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
@@ -20,7 +18,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/card-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/modal-window.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/toast-window.css">
-
 </head>
 
 <body style="background-image: url(/img/registration-background.jpg);

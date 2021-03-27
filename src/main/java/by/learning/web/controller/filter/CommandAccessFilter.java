@@ -77,6 +77,10 @@ public class CommandAccessFilter implements Filter {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
         String commandValue = req.getParameter(RequestParameter.COMMAND_PARAM);
+        if (commandValue == null) {
+            ((HttpServletResponse) response).sendRedirect(PagePath.INDEX);
+            return;
+        }
         CommandType command = CommandType.valueOf(commandValue.toUpperCase(Locale.ROOT));
         if (guestCommands.contains(command) && user == null) {
             chain.doFilter(request, response);

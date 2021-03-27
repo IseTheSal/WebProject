@@ -18,7 +18,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         <table id="dtBasicExample" class="table table-dark table-bordered text-center">
             <thead class="">
             <tr>
-                <th scope="col"><fmt:message key="admin.coupon.list.game.id"/></th>
                 <th scope="col"><fmt:message key="admin.coupon.list.game.code"/></th>
                 <th scope="col"><fmt:message key="admin.coupon.list.game.discount"/></th>
                 <th scope="col"><fmt:message key="admin.coupon.list.game.amount"/></th>
@@ -28,8 +27,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <tbody>
             <c:forEach items="${sessionScope.couponList}" var="coupon">
                 <tr>
-                    <th scope="row">${coupon.id}</th>
-                    <td>${coupon.codeName}</td>
+                    <th scope="row">${coupon.codeName}</th>
                     <td>${coupon.discount}&#37;</td>
                     <td>${coupon.amount}</td>
                     <td>
@@ -65,10 +63,11 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                             <div class="neon-title-white-shadow-light"
                                                  style="width:300px; cursor: pointer; display: inline;">
                                                 <label id="codeInput" class=""
-                                                       style="float: left;"><fmt:message key="admin.coupon.game.code"/>&#8282; ${coupon.codeName}</label>
+                                                       style="float: left;"><fmt:message
+                                                        key="admin.coupon.game.code"/>&colon;${coupon.codeName}</label>
                                                 <label id="discountInput" class=""
                                                        style="float: right"><fmt:message
-                                                        key="admin.coupon.list.game.discount"/>&#8282; ${coupon.discount}%</label>
+                                                        key="admin.coupon.list.game.discount"/>&colon;${coupon.discount}%</label>
                                                 <br>
                                                 <div style="margin-top: 3%; margin-left: 30%; ">
                                                     <label style="margin-left: 20%"><fmt:message

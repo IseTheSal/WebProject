@@ -13,7 +13,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 15%">
         <c:if test="${requestScope.registrationComplete}">
-            <h5 class="neon-title-green" style="text-align: center">Registration complete</h5>
+            <h5 class="neon-title-green" style="text-align: center"><fmt:message
+                    key="authorization.registration.complete"/></h5>
         </c:if>
         <form class="needs-validation" novalidate method="post" action="${pageContext.request.contextPath}/login.do">
             <input type="hidden" name="command" value="login"/>
@@ -39,7 +40,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                             key="authorization.invalidPassword"/></div>
                     <a href="#" id="codeBtn" class="neon-title-blue"
                        style="float: left; text-align: center; margin-bottom: 3%; text-decoration: none; cursor: pointer"
-                       data-toggle="modal" data-target="#forgotPasswordModal">Forgot password?
+                       data-toggle="modal" data-target="#forgotPasswordModal"><fmt:message key="authorization.forgot"/>
                     </a>
                     <c:if test="${not empty requestScope.errorSingIn}">
                         <p class="neon-title-red" style="text-align: center;float: right">
@@ -69,7 +70,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
     <div class="modal-dialog center-modal" style="border: none !important;" role="document">
         <div class="modal-content text-center" style="background-color: rgba(161,161,161,0.9)">
             <div class="modal-header neon-title-white-light" style="border-bottom: 0 none;">
-                ENTER YOUR LOGIN OR EMAIL
+                <fmt:message key="authorization.reset.title"/>
                 <button type="button" id="clsBtn" class="close neon-title-red" data-dismiss="modal"
                         aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -84,12 +85,12 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                         <div class="neon-title-cyan-light"
                              style="width:300px; cursor: pointer; display: inline">
                             <input name="reestablishValue" class="custom-user-input" type="text"
-                                   placeholder="email or login" required
+                                   placeholder="<fmt:message key="authorization.email.or.login"/>" required
                                    pattern="(^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$)|(^[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$)"
                                    minlength="6" maxlength="320"
                                    style="box-shadow:0 0 30px #ffffff;"/>
                             <input type="submit" class="button-search-gray"
-                                   value="NEXT"
+                                   value="<fmt:message key="authorization.reset.btn"/>"
                                    style="position: relative; margin-top: 5%;border-radius: 5%; height: 40px; background: rgba(154,154,154,0.5)"/>
                         </div>
                     </div>

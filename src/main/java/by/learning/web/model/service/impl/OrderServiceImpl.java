@@ -245,6 +245,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean createOrder(int userId, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
+        if (cartMap.isEmpty()) {
+            return false;
+        }
         boolean isCreated = false;
         List<Game> gameList = new ArrayList<>(cartMap.keySet());
         boolean amountValid = true;

@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>${sessionScope.currentGame.title}</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/favicon.png"/>
 </head>
 <body>
 <div style="background-image: url(/img/registration-background.jpg);

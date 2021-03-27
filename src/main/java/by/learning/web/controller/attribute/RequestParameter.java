@@ -53,6 +53,7 @@ public class RequestParameter {
     public static final String RESET_TOKEN = "resetToken";
     public static final String TOKEN_NOT_EXIST = "tokenNotExist";
     public static final String PASSWORD_CHANGED = "passwordChanged";
+    public static final String CART_IS_EMPTY = "cartIsEmpty";
 
     private RequestParameter() {
     }

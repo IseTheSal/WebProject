@@ -8,7 +8,7 @@ for (i = 0; i < col.length; i++) {
 }
 autocomplete(document.getElementById("myInput"), gameNames, gameId);
 
-//PAGINATION
+// PAGINATION
 $(document).ready(function () {
     var colShown = 9;
     var colTotal = $('.t1 .col').length;
