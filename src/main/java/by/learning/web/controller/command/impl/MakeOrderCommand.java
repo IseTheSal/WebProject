@@ -18,6 +18,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
+/**
+ * <pre>Command provides users with role Client process their order and send gamecodes to their emails.</pre>
+ * <p>Cases when the order will not be processed:</p>
+ * <p>
+ * If cart is empty.
+ * <br></br>
+ * If {@link by.learning.web.model.entity.Game game} is unavailable, decrease amount or delete from cart.
+ * <br></br>
+ * If {@link by.learning.web.model.entity.Coupon coupon} is invalid anymore, remove discount.
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.ClientOrder
+ * @see by.learning.web.model.entity.Coupon
+ */
 public class MakeOrderCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

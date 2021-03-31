@@ -17,6 +17,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <pre>Command allows users with role Admin edit (increase/decrease) discount coupon amount.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Coupon
+ */
 public class EditCouponAmountCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
@@ -46,6 +52,8 @@ public class EditCouponAmountCommand implements ActionCommand {
                     List<Coupon> couponList = (List<Coupon>) session.getAttribute(SessionAttribute.COUPON_LIST);
                     couponList.stream().filter(coupon -> coupon.getCodeName().equals(code)).findFirst().ifPresent(coupon -> coupon.setAmount(amount));
                     request.setAttribute(RequestParameter.SUCCESS, true);
+                } else {
+                    request.setAttribute(RequestParameter.COUPON_AMOUNT_ZERO, true);
                 }
             }
         } catch (ServiceException e) {

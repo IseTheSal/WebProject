@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
+/**
+ * <pre>Command provides users with role Guest registration.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.User
+ */
 public class RegistrationCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

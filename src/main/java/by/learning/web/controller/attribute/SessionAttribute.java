@@ -1,7 +1,11 @@
 package by.learning.web.controller.attribute;
 
+/**
+ * <pre>Contains session attributes constants</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class SessionAttribute {
-
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String SERVER_TOKEN = "serverToken";
     public static final String DEFAULT_LOCALE = "en_US";

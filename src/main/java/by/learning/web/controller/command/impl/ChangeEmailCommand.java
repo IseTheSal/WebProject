@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Set;
 
+/**
+ * <pre>Command allows users with roles Admin or Client change their email.<br></br>Admin can also change email of other users.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class ChangeEmailCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

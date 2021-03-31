@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <pre>Command provides users with roles Admin or Client logout.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class LogoutCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

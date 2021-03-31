@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
+/**
+ * <pre>Command allows users with role Admin edit existing {@link by.learning.web.model.entity.Game games}.<pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Game
+ */
 public class EditGameCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

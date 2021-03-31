@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * <p>Command allows users with Admin role add gamecode of existing game</p>
+ *
+ * @author Illia Aheyeu
+ */
 public class AddGameCodeCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

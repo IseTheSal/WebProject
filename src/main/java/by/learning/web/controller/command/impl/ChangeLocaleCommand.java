@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <pre>Command allows users with all roles change language(PL, RU, EN).</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class ChangeLocaleCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

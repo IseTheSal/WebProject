@@ -9,8 +9,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Base dao interface with default methods
+ *
+ * @author Illia Aheyeu
+ */
 public interface BaseDao {
 
+
+    /**
+     * Close statement.
+     *
+     * @param statement database statement
+     */
     default void close(Statement statement) {
         final Logger logger = LogManager.getLogger();
         if (statement != null) {
@@ -22,6 +33,12 @@ public interface BaseDao {
         }
     }
 
+
+    /**
+     * Close database connection.
+     *
+     * @param connection database connection
+     */
     default void close(Connection connection) {
         final Logger logger = LogManager.getLogger();
         if (connection != null) {
@@ -33,6 +50,11 @@ public interface BaseDao {
         }
     }
 
+    /**
+     * Close statement resultSet.
+     *
+     * @param resultSet database resultSet
+     */
     default void close(ResultSet resultSet) {
         final Logger logger = LogManager.getLogger();
         if (resultSet != null) {
@@ -44,6 +66,11 @@ public interface BaseDao {
         }
     }
 
+    /**
+     * Rollback.
+     *
+     * @param connection database connection
+     */
     default void rollback(Connection connection) {
         final Logger logger = LogManager.getLogger();
         if (connection != null) {
@@ -55,6 +82,11 @@ public interface BaseDao {
         }
     }
 
+    /**
+     * Set <code>true</code> to connection auto commit.
+     *
+     * @param connection database connection
+     */
     default void setAutoCommitTrue(Connection connection) {
         final Logger logger = LogManager.getLogger();
         if (connection != null) {

@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+/**
+ * <pre>Command provides users with role Guest authentication and in case of success authorization.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.User
+ */
 public class LoginCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

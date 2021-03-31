@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
+/**
+ * <pre>Command sends reset password link by user`s email.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class ForgotPasswordCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

@@ -5,6 +5,11 @@ import by.learning.web.model.service.impl.GameServiceImpl;
 import by.learning.web.model.service.impl.OrderServiceImpl;
 import by.learning.web.model.service.impl.UserServiceImpl;
 
+/**
+ * <pre>Enum represents all commands.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public enum CommandType {
     LOGIN(new LoginCommand(new UserServiceImpl())),
     REGISTRATION(new RegistrationCommand(new UserServiceImpl())),
@@ -37,12 +42,18 @@ public enum CommandType {
     OPEN_RESET_PASSWORD(new OpenResetPasswordCommand(new UserServiceImpl())),
     RESET_PASSWORD(new ResetPasswordCommand(new UserServiceImpl()));
 
-    private ActionCommand command;
+    private final ActionCommand command;
 
     CommandType(ActionCommand command) {
         this.command = command;
     }
 
+
+    /**
+     * Get commands.
+     *
+     * @return command.
+     */
     public ActionCommand getCommand() {
         return command;
     }

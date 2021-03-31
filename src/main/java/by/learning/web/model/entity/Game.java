@@ -65,10 +65,6 @@ public class Game {
         }
     }
 
-    public Game(int id) {
-        this.id = id;
-    }
-
     public Game(int id, String title, String imagePath) {
         this.id = id;
         this.title = title;

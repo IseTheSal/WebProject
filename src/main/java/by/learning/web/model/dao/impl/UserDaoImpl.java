@@ -21,12 +21,6 @@ import java.util.Set;
 public class UserDaoImpl implements UserDao {
     private static final Logger logger = LogManager.getLogger();
 
-    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
-
-    public static UserDaoImpl getInstance() {
-        return INSTANCE;
-    }
-
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.INSTANCE;
 
     private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, role " +
@@ -55,6 +49,10 @@ public class UserDaoImpl implements UserDao {
             "from users " +
             "inner join password_tokens pt on users.user_id = pt.user_id " +
             "where reset_token = ?";
+
+
+    UserDaoImpl() {
+    }
 
     @Override
     public Optional<User> findUser(String login, String password) throws DaoException {

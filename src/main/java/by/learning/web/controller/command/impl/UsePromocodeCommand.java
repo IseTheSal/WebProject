@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+/**
+ * <pre>Command provides users with role Guest or Client use discount {@link Coupon coupon} promocode.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Coupon
+ */
 public class UsePromocodeCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

@@ -3,7 +3,7 @@ package by.learning.web.model.service.impl;
 import by.learning.web.exception.DaoException;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.dao.GameDao;
-import by.learning.web.model.dao.impl.GameDaoImpl;
+import by.learning.web.model.dao.impl.DaoInstance;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.service.GameService;
 import by.learning.web.validator.GameValidator;
@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 public class GameServiceImpl implements GameService {
     private static final Logger logger = LogManager.getLogger();
 
-    private static final String IMG_PROJECT_PATH = "/img/logo/";
+    private final GameDao gameDao = DaoInstance.INSTANCE.getGameDao();
 
-    private final GameDao gameDao = GameDaoImpl.getInstance();
+    private static final String IMG_PROJECT_PATH = "/img/logo/";
 
     @Override
     public List<Game> findAllGames() throws ServiceException {

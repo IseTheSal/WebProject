@@ -153,7 +153,7 @@
         <div class="face face2">
             <div class="content-admin" style="text-align: center">
                 <a class="custom-admin-a"
-                   href="${pageContext.request.contextPath}/openCoupons.do?command=open_order_list"
+                   href="${pageContext.request.contextPath}/openOrders.do?command=open_order_list"
                    type="button"><fmt:message key="admin.menu.order.list"/></a>
                 <a class="custom-admin-a"
                    href="${pageContext.request.contextPath}/openCoupons.do?command=open_coupon_list"

@@ -15,9 +15,15 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * <pre>Filter checks possibility of page access for certain user`s role.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class PageAccessFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
 
+    //Page`s set for different user`s roles.
     private Set<String> guestPageAccess;
     private Set<String> userPageAccess;
     private Set<String> adminPageAccess;

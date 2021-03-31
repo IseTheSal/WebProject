@@ -1,5 +1,10 @@
 package by.learning.web.controller.attribute;
 
+/**
+ * <pre>Contains page paths and values constants</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class PagePath {
     public static final String INDEX = "/index.jsp";
     public static final String MAIN_PAGE = "/jsp/main.jsp";
@@ -18,10 +23,10 @@ public class PagePath {
     public static final String ADMIN_MENU_PAGE = "/jsp/admin/adminMenu.jsp";
     public static final String CREATE_GAME_PAGE = "/jsp/admin/createGame.jsp";
     public static final String EDIT_GAME_PAGE = "/jsp/admin/editGame.jsp";
-    public static final String UPLOAD_VALUE = "upload";
     public static final String TERMS_PAGE = "/jsp/support/terms.jsp";
     public static final String ABOUT_PAGE = "/jsp/support/about.jsp";
     public static final String FORGOT_PASSWORD_PAGE = "/jsp/forgotPassword.jsp";
+    public static final String UPLOAD_VALUE = "upload";
 
     private PagePath() {
     }

@@ -1,15 +1,15 @@
 package by.learning.web.controller.filter;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.servlet.*;
 import java.io.IOException;
 import java.util.Enumeration;
 
-
+/**
+ * Filter prevents cross site scripting attack
+ *
+ * @author Illia Aheyeu
+ */
 public class XSSFilter implements Filter {
-    private static final Logger logger = LogManager.getLogger();
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -21,10 +21,13 @@ public class XSSFilter implements Filter {
                 if (paramValues[i] != null) {
                     paramValues[i] = paramValues[i].replaceAll("<", "&lt;")
                             .replaceAll(">", "&gt;")
-                            .replaceAll("\"", "&quot")
-                            .replaceAll("'", "&#x27")
-                            .replaceAll("&", "&amp")
-                            .replaceAll("/", "&#x2F");
+                            .replaceAll("\"", "&quot;")
+                            .replaceAll("'", "&#x27;")
+                            .replaceAll("&", "&amp;")
+                            .replaceAll("/", "&#x2F;")
+                            .replaceAll("\\(", "&#40;")
+                            .replaceAll("\\)", "&#41;")
+                            .replaceAll(":", "&#58;");
                 }
             }
             request.setAttribute(paramName, paramValues);

@@ -11,6 +11,11 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import java.util.HashMap;
 
+/**
+ * Listener initialized session starting attributes
+ *
+ * @author Illia Aheyeu
+ */
 public class SessionListener implements HttpSessionListener {
     private static final Logger logger = LogManager.getLogger();
 

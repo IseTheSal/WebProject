@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
+/**
+ * <p>Command allows users with roles Guest or Client change (increase/decrease) game from their cart.</p>
+ *
+ * @author Illia Aheyeu
+ */
 public class ChangeCartAmountCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

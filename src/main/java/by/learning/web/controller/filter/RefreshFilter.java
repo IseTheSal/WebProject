@@ -14,8 +14,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * Filter prevents double-post (refresh) actions
+ *
+ * @author Illia Aheyeu
+ */
 public class RefreshFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
+    private static final String GET_METHOD = "GET";
     private HttpSession session = null;
 
     @Override
@@ -26,7 +32,7 @@ public class RefreshFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) req;
-        if (httpServletRequest.getMethod().equals("GET")) {
+        if (httpServletRequest.getMethod().equals(GET_METHOD)) {
             session = httpServletRequest.getSession(true);
             session.setAttribute(SessionAttribute.SERVER_TOKEN, new Random().nextInt(10000));
             chain.doFilter(req, res);

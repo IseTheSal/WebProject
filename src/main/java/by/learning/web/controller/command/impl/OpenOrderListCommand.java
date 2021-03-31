@@ -17,6 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
+/**
+ * <pre>Command allows users with role Admin find all {@link by.learning.web.model.entity.ClientOrder orders}.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.ClientOrder
+ */
 public class OpenOrderListCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

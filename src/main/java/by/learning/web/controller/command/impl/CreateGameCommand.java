@@ -17,6 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * <pre>Command allows users with role Admin add new Game.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Game
+ */
 public class CreateGameCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

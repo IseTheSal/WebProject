@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
+/**
+ * <p>Command allows users with Admin role add new admin.</p>
+ *
+ * @author Illia Aheyeu
+ */
 public class AddAdminCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

@@ -17,6 +17,12 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * <pre>Command allows users with role Client find their order history and total price of all orders.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.ClientOrder
+ */
 public class FindOrderHistoryCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

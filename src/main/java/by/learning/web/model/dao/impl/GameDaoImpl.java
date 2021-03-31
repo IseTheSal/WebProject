@@ -16,13 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *
+ */
 public class GameDaoImpl implements GameDao {
     private static final Logger logger = LogManager.getLogger();
 
-    private static final GameDaoImpl INSTANCE = new GameDaoImpl();
-
-    public static GameDaoImpl getInstance() {
-        return INSTANCE;
+    GameDaoImpl() {
     }
 
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.INSTANCE;
@@ -188,13 +188,13 @@ public class GameDaoImpl implements GameDao {
     }
 
     @Override
-    public Optional<Game> findGameById(int id) throws DaoException {
+    public Optional<Game> findGameById(int gameId) throws DaoException {
         Optional<Game> result = Optional.empty();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_GAME_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, gameId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String title = resultSet.getString(1);
@@ -204,7 +204,7 @@ public class GameDaoImpl implements GameDao {
                 String trailer = resultSet.getString(5);
                 String genreString = resultSet.getString(6);
                 String categoryString = resultSet.getString(7);
-                Game game = new Game(id, title, description, imagePath, price, trailer, genreString, categoryString);
+                Game game = new Game(gameId, title, description, imagePath, price, trailer, genreString, categoryString);
                 result = Optional.of(game);
             }
         } catch (ConnectionPoolException | SQLException e) {

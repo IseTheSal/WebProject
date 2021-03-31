@@ -12,6 +12,11 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <pre>Command allows users with role Guest open reset password page.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class OpenResetPasswordCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

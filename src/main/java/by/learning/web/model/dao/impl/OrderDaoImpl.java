@@ -19,12 +19,6 @@ import java.util.*;
 public class OrderDaoImpl implements OrderDao {
     private static final Logger logger = LogManager.getLogger();
 
-    private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
-
-    public static OrderDaoImpl getInstance() {
-        return INSTANCE;
-    }
-
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.INSTANCE;
 
     private static final String FIND_AVAILABLE_COUPON_DISCOUNT = "SELECT coupon_id, discount " +
@@ -77,19 +71,22 @@ public class OrderDaoImpl implements OrderDao {
     private static final String DELETE_COUPON = "DELETE FROM coupons WHERE code = ?";
 
 
+    OrderDaoImpl() {
+    }
+
     @Override
-    public Optional<Coupon> findAvailableCouponDiscount(String code) throws DaoException {
+    public Optional<Coupon> findAvailableCouponDiscount(String codeName) throws DaoException {
         Optional<Coupon> result = Optional.empty();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_AVAILABLE_COUPON_DISCOUNT);
-            preparedStatement.setString(1, code);
+            preparedStatement.setString(1, codeName);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 int couponId = resultSet.getInt(1);
                 short discount = resultSet.getShort(2);
-                Coupon coupon = new Coupon(couponId, discount, code);
+                Coupon coupon = new Coupon(couponId, discount, codeName);
                 result = Optional.of(coupon);
             }
         } catch (ConnectionPoolException | SQLException e) {

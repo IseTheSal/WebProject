@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * <pre>Command allows users with role Admin delete discount coupon.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Coupon
+ */
 public class DeleteCouponCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

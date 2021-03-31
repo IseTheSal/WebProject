@@ -18,9 +18,15 @@ import java.util.EnumSet;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * <pre>Filter checks possibility of processing command for certain user`s role.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class CommandAccessFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
 
+    //Command`s set for different user`s roles.
     private Set<CommandType> guestCommands;
     private Set<CommandType> adminCommands;
     private Set<CommandType> clientCommands;

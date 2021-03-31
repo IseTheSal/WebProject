@@ -3,7 +3,7 @@ package by.learning.web.model.service.impl;
 import by.learning.web.exception.DaoException;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.dao.UserDao;
-import by.learning.web.model.dao.impl.UserDaoImpl;
+import by.learning.web.model.dao.impl.DaoInstance;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.UserService;
 import by.learning.web.util.CryptEncoder;
@@ -22,10 +22,8 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger();
 
-    public UserServiceImpl() {
-    }
-
-    private static final UserDao userDao = UserDaoImpl.getInstance();
+    private static final UserDao userDao = DaoInstance.INSTANCE.getUserDao();
+    ;
 
     private static final String PASSWORD_RESET_TITLE = "RESET YOUR PASSWORD";
     private static final String MAIL_BODY_TITLE = "Your link to reset password";

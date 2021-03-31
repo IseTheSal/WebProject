@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * <pre>Command allows users with role Admin create new discount coupon.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Coupon
+ */
 public class CreateCouponCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

@@ -5,9 +5,7 @@ import by.learning.web.exception.ServiceException;
 import by.learning.web.model.dao.GameDao;
 import by.learning.web.model.dao.OrderDao;
 import by.learning.web.model.dao.UserDao;
-import by.learning.web.model.dao.impl.GameDaoImpl;
-import by.learning.web.model.dao.impl.OrderDaoImpl;
-import by.learning.web.model.dao.impl.UserDaoImpl;
+import by.learning.web.model.dao.impl.DaoInstance;
 import by.learning.web.model.entity.ClientOrder;
 import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.entity.Game;
@@ -27,9 +25,9 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
     private static final Logger logger = LogManager.getLogger();
 
-    private final GameDao gameDao = GameDaoImpl.getInstance();
-    private final OrderDao orderDao = OrderDaoImpl.getInstance();
-    private final UserDao userDao = UserDaoImpl.getInstance();
+    private final GameDao gameDao = DaoInstance.INSTANCE.getGameDao();
+    private final OrderDao orderDao = DaoInstance.INSTANCE.getOrderDao();
+    private final UserDao userDao = DaoInstance.INSTANCE.getUserDao();
 
     public Optional<Coupon> findAvailableCouponByCode(String code) throws ServiceException {
         Optional<Coupon> result = Optional.empty();

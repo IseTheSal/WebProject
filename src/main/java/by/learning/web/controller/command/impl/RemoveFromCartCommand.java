@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
+/**
+ * <pre>Command provides users with role Guest or Client remove {@link Game game} from cart.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Game
+ */
 public class RemoveFromCartCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

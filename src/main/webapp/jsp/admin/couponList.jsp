@@ -64,27 +64,36 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                                  style="width:300px; cursor: pointer; display: inline;">
                                                 <label id="codeInput" class=""
                                                        style="float: left;"><fmt:message
-                                                        key="admin.coupon.game.code"/>&colon;${coupon.codeName}</label>
+                                                        key="admin.coupon.game.code"/>&colon; ${coupon.codeName}</label>
                                                 <label id="discountInput" class=""
                                                        style="float: right"><fmt:message
-                                                        key="admin.coupon.list.game.discount"/>&colon;${coupon.discount}%</label>
+                                                        key="admin.coupon.list.game.discount"/>&colon; ${coupon.discount}%</label>
                                                 <br>
                                                 <div style="margin-top: 3%; margin-left: 30%; ">
-                                                    <label style="margin-left: 20%"><fmt:message
+                                                    <label for="amountInput" style="margin-left: 20%"><fmt:message
                                                             key="admin.coupon.list.game.amount"/></label>
                                                     <br>
-                                                    <input type="text" id="amountInput" class="custom-admin-input"
-                                                           placeholder="<fmt:message key="admin.coupon.list.game.amount"/>"
-                                                           name="couponAmount" required
-                                                           pattern="^[1-9][0-9]{0,4}$"
-                                                           value="${coupon.amount}"
-                                                           minlength="1"
-                                                           maxlength="5"
-                                                           style=" box-shadow:0 0 30px #ffffff;text-align: center">
+                                                    <c:if test="${coupon.amount > 0}">
+                                                        <input type="text" id="amountInput" class="custom-admin-input"
+                                                               placeholder="<fmt:message key="admin.coupon.list.game.amount"/>"
+                                                               name="couponAmount" required
+                                                               pattern="^[1-9][0-9]{0,4}$"
+                                                               value="${coupon.amount}"
+                                                               minlength="1"
+                                                               maxlength="5"
+                                                               style=" box-shadow:0 0 30px #ffffff;text-align: center">
+                                                    </c:if>
+                                                    <c:if test="${coupon.amount <= 0}">
+                                                        <label for="amountInput"
+                                                               style="margin-left: 28% ;text-align: center">${coupon.amount}</label>
+                                                    </c:if>
                                                 </div>
-                                                <input type="submit" class="button-search-gray"
-                                                       value="<fmt:message key="admin.coupon.list.game.edit.amount"/>"
-                                                       style="position: relative;color: white; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
+                                                <c:if test="${coupon.amount > 0}">
+                                                    <input type="submit" class="button-search-gray"
+                                                           value="<fmt:message key="admin.coupon.list.game.edit.amount"/>"
+                                                           style="position: relative;color: white; margin-left: 13%;margin-top: 5%;border-radius: 0; margin-bottom: 3%; height: 40px; background: rgba(154,154,154,0.5)"/>
+                                                </c:if>
+
                                             </div>
                                         </div>
                                     </form>
@@ -124,6 +133,13 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             }
         });
         $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (${requestScope.couponAmountZero}) {
+            funcBtns.alertWarning("<fmt:message key="alert.header.coupon.zero"/>");
+        }
     });
 </script>
 </body>

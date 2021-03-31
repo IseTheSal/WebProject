@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
+/**
+ * <p>Command allows users with roles Guest or Client add game to cart</p>
+ *
+ * @author Illia Aheyeu
+ */
 public class AddToCartCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

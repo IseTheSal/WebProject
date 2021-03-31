@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <pre>Command allows users with role Admin find gamecode amount of existing game.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Game
+ */
 public class FindGameCodeAmount implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 

@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * <pre>Main application controller witch process every user`s request</pre>
+ *
+ * @author Illia Aheyeu
+ */
 @WebServlet(urlPatterns = {"/controller", "*.do"}, name = "controller")
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();

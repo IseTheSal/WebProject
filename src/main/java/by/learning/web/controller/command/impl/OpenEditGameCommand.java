@@ -17,6 +17,12 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Optional;
 
+/**
+ * <pre>Command allows users with role Admin open {@link by.learning.web.model.entity.Game game} editor page.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Game
+ */
 public class OpenEditGameCommand implements ActionCommand {
     public static final Logger logger = LogManager.getLogger();
 

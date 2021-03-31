@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Set;
 
+/**
+ * <pre>Command allows users with role Admin find all {@link by.learning.web.model.entity.User users}.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see by.learning.web.model.entity.Game
+ */
 public class OpenUserListCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
