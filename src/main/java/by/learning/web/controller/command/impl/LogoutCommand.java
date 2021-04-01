@@ -9,9 +9,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
- * <pre>Command provides users with roles Admin or Client logout.</pre>
+ * <pre>Command provides users with roles Admin or Client logout and redirect to login page</pre>
  *
  * @author Illia Aheyeu
  */
@@ -20,10 +21,15 @@ public class LogoutCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.LOGIN_PAGE;
+        String page = PagePath.UPLOAD_VALUE;
         HttpSession session = request.getSession();
         session.invalidate();
         logger.log(Level.INFO, "Session was invalidate");
+        try {
+            response.sendRedirect(PagePath.LOGIN_PAGE);
+        } catch (IOException e) {
+            logger.log(Level.ERROR, e);
+        }
         return page;
     }
 }

@@ -1,7 +1,7 @@
 package by.learning.web.controller.attribute;
 
 /**
- * <pre>Contains page paths and values constants</pre>
+ * <pre>Contains page paths and value constants</pre>
  *
  * @author Illia Aheyeu
  */

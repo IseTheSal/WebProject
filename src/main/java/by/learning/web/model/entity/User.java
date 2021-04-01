@@ -1,5 +1,10 @@
 package by.learning.web.model.entity;
 
+/**
+ * User entity.
+ *
+ * @author Illia Aheyeu
+ */
 public class User {
     private int id;
     private String login;
@@ -8,6 +13,12 @@ public class User {
     private String email;
     private Role role;
 
+    /**
+     * Enum user`s roles.
+     * Does not include Guest role (unauthorized role)
+     *
+     * @author Illia Aheyeu
+     */
     public enum Role {
         ADMIN,
         CLIENT

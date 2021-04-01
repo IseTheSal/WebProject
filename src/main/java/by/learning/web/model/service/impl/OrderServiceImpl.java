@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
         if (couponValid) {
             code = code.toUpperCase(Locale.ROOT);
             try {
-                result = orderDao.findAvailableCouponDiscount(code);
+                result = orderDao.findAvailableCoupon(code);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }
@@ -98,9 +98,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int countCartAmount(HashMap<Game, Integer> hashMap) {
+    public int countCartAmount(HashMap<Game, Integer> cartMap) {
         int totalAmount = 0;
-        Collection<Integer> gameAmount = hashMap.values();
+        Collection<Integer> gameAmount = cartMap.values();
         for (Integer amount : gameAmount) {
             totalAmount += amount;
         }

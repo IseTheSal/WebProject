@@ -15,6 +15,13 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * <pre>Enum with "Singleton" pattern used to manage {@link ProxyConnection}.</pre>
+ *
+ * @author Illia Aheyeu
+ * @see ProxyConnection
+ * @see ConnectionPool
+ */
 public enum ConnectionPool {
     INSTANCE;
 
@@ -37,6 +44,12 @@ public enum ConnectionPool {
         }
     }
 
+    /**
+     * Taking {@link ProxyConnection} from <code>BlockingQueue</code>.
+     *
+     * @return {@link Connection} object
+     * @throws ConnectionPoolException if interrupted while waiting
+     */
     public Connection takeConnection() throws ConnectionPoolException {
         ProxyConnection connection;
         try {
@@ -49,6 +62,11 @@ public enum ConnectionPool {
         return connection;
     }
 
+    /**
+     * Release {@link ProxyConnection} back to <code>BlockingQueue</code>
+     *
+     * @param connection Connection object, which should be {@link ProxyConnection}
+     */
     public void releaseConnection(Connection connection) {
         if (ProxyConnection.class == connection.getClass()) {
             ProxyConnection proxyConnection = (ProxyConnection) connection;
@@ -63,6 +81,11 @@ public enum ConnectionPool {
         }
     }
 
+    /**
+     * Destroy connection pool. called during program termination.
+     *
+     * @throws ConnectionPoolException if {@link InterruptedException} or {@link SQLException} were thrown
+     */
     public void destroyPool() throws ConnectionPoolException {
         try {
             for (int i = 0; i < POOL_SIZE; i++) {
@@ -78,13 +101,18 @@ public enum ConnectionPool {
         }
     }
 
+    /**
+     * Deregister drivers. Called during program termination.
+     *
+     * @throws ConnectionPoolException if {@link SQLException} was thrown
+     */
     private void deregisterDrivers() throws ConnectionPoolException {
         try {
             while (DriverManager.getDrivers().hasMoreElements()) {
                 Driver driver = DriverManager.getDrivers().nextElement();
                 DriverManager.deregisterDriver(driver);
             }
-            logger.log(Level.INFO, "Driver was deregistered");
+            logger.log(Level.INFO, "Drivers were deregistered");
         } catch (SQLException e) {
             throw new ConnectionPoolException(e);
         }

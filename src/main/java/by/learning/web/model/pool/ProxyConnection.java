@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * Connection with "Proxy" pattern.
+ *
+ * @author Illia Aheyeu
+ */
 public class ProxyConnection implements Connection {
 
     private final Connection connection;
@@ -53,11 +58,21 @@ public class ProxyConnection implements Connection {
         connection.rollback();
     }
 
+    /**
+     * Release connection to {@link ConnectionPool ConnectionPool}.
+     *
+     * @throws SQLException if a database access error occurs
+     */
     @Override
     public void close() throws SQLException {
         ConnectionPool.INSTANCE.releaseConnection(this);
     }
 
+    /**
+     * Close connection.
+     *
+     * @throws SQLException if a database access error occurs
+     */
     void reallyClose() throws SQLException {
         connection.close();
     }

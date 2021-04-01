@@ -75,7 +75,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Optional<Coupon> findAvailableCouponDiscount(String codeName) throws DaoException {
+    public Optional<Coupon> findAvailableCoupon(String codeName) throws DaoException {
         Optional<Coupon> result = Optional.empty();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

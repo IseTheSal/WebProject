@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSessionListener;
 import java.util.HashMap;
 
 /**
- * Listener initialized session starting attributes
+ * <pre>Listener initialized session starting attributes.</pre>
  *
  * @author Illia Aheyeu
  */

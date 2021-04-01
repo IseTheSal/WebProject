@@ -43,6 +43,7 @@ public class UsePromocodeCommand implements ActionCommand {
                 session.setAttribute(SessionAttribute.COUPON, availableCoupon);
                 short discount = availableCoupon.getDiscount();
                 session.setAttribute(SessionAttribute.COUPON_DISCOUNT, discount);
+                request.setAttribute(RequestParameter.SUCCESS, true);
             } else {
                 request.setAttribute(RequestParameter.COUPON_EXIST, false);
             }

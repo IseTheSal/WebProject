@@ -70,6 +70,7 @@
         <url-pattern>/changePassword.do</url-pattern>
         <url-pattern>/findOrderHistory.do</url-pattern>
         <url-pattern>/jsp/registration.jsp</url-pattern>
+        <url-pattern>/jsp/login.jsp</url-pattern>
         <url-pattern>/register.do</url-pattern>
         <url-pattern>/jsp/admin/adminMenu.jsp</url-pattern>
         <url-pattern>/createGame.do</url-pattern>

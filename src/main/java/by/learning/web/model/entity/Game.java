@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * Game entity.
+ *
+ * @author Illia Aheyeu
+ */
 public class Game {
 
     private int id;
@@ -15,6 +20,12 @@ public class Game {
     private Set<GameGenre> genres = EnumSet.noneOf(GameGenre.class);
     private Set<GameCategory> categories = EnumSet.noneOf(GameCategory.class);
 
+    /**
+     * Game genres enum.
+     *
+     * @author Illia Aheyeu
+     * @see Game
+     */
     public enum GameGenre {
         ACTION,
         ADVENTURE,
@@ -34,6 +45,12 @@ public class Game {
 
         private static final String DELIMITER = ",";
 
+        /**
+         * Allows convert genres from <code>String</code>  which divided by delimiter
+         *
+         * @param genreString Genres string
+         * @return <code>Set</code> of genres
+         */
         private static Set<GameGenre> convertFromString(String genreString) {
             Set<GameGenre> result = EnumSet.noneOf(GameGenre.class);
             String[] genreArray = genreString.split(DELIMITER);
@@ -45,6 +62,12 @@ public class Game {
         }
     }
 
+    /**
+     * Game categories enum.
+     *
+     * @author Illia Aheyeu
+     * @see Game
+     */
     public enum GameCategory {
         SINGLEPLAYER,
         MULTIPLAYER,
@@ -54,6 +77,12 @@ public class Game {
 
         private static final String DELIMITER = ",";
 
+        /**
+         * Allows convert categories from <code>String</code> which divided by delimiter
+         *
+         * @param categoryString Genres string
+         * @return <code>Set</code> of categories
+         */
         private static Set<GameCategory> convertFromString(String categoryString) {
             Set<GameCategory> result = EnumSet.noneOf(GameCategory.class);
             String[] categoryArray = categoryString.split(DELIMITER);

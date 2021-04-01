@@ -2,6 +2,13 @@ package by.learning.web.model.entity;
 
 import java.util.Locale;
 
+/**
+ * <pre>Coupon entity.</pre>
+ * Used to make discount for Clients
+ *
+ * @author Illia Aheyeu
+ * @see ClientOrder
+ */
 public class Coupon {
 
     private int id;

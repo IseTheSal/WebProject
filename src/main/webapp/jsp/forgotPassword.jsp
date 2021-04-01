@@ -29,8 +29,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                            aria-describedby="passwordHelp"
                            required pattern="[a-zA-Z0-9]{8,20}"
                            minlength="8" maxlength="20">
-                    <div class="invalid-feedback" style="white-space: pre"><span class="fas fa-times"></span>
-                        <fmt:message key="registration.helpPassword"/></div>
+                    <div class="invalid-feedback" style="white-space: pre"><span
+                            class="fas fa-times"></span> <fmt:message key="registration.helpPassword"/></div>
                 </div>
                 <div class="form-group">
                     <label class="neon-title-white" for="txtConfirmPassword"><fmt:message

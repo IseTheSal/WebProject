@@ -3,6 +3,11 @@ package by.learning.web.model.entity;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+/**
+ * <pre>Client order entity.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class ClientOrder {
 
     private int userId;

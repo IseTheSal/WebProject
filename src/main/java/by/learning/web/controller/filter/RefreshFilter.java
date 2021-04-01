@@ -1,6 +1,5 @@
 package by.learning.web.controller.filter;
 
-import by.learning.web.controller.attribute.PagePath;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import org.apache.logging.log4j.Level;
@@ -51,7 +50,8 @@ public class RefreshFilter implements Filter {
             } catch (IllegalStateException | NumberFormatException ex) {
                 logger.log(Level.ERROR, ex);
                 HttpServletResponse httpServletResponse = (HttpServletResponse) res;
-                httpServletResponse.sendRedirect(PagePath.INDEX);
+                String page = httpServletRequest.getParameter(RequestParameter.CURRENT_PAGE);
+                httpServletResponse.sendRedirect(page);
             }
         }
     }

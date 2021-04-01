@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * <pre>Game dao interface</pre>
+ * <pre>Game dao interface.</pre>
  *
  * @author Illia Aheyeu
  */
@@ -46,7 +46,7 @@ public interface GameDao extends BaseDao {
      * @param game         {@link Game game}
      * @param genresId     array with genre id
      * @param categoriesId array with category id
-     * @return <code>true</code> if game successfully added, otherwise <code>false</code>
+     * @return <code>true</code> if game was added, otherwise <code>false</code>
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
     boolean createGame(Game game, int[] genresId, int[] categoriesId) throws DaoException;
@@ -91,7 +91,7 @@ public interface GameDao extends BaseDao {
      * @param game         {@link Game game}
      * @param genresId     array with genre id
      * @param categoriesId array with category id
-     * @return <code>true</code> if game edited successfully. otherwise <code>false</code>
+     * @return <code>true</code> if game was edited, otherwise <code>false</code>
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
     boolean editGame(Game game, int[] genresId, int[] categoriesId) throws DaoException;

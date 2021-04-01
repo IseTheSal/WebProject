@@ -10,6 +10,11 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 
+/**
+ * <pre>User to create {@link Connection} objects.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 class ConnectionCreator {
 
     private static final Logger logger = LogManager.getLogger();
@@ -32,6 +37,12 @@ class ConnectionCreator {
     private ConnectionCreator() {
     }
 
+    /**
+     * Create {@link Connection}.
+     *
+     * @return {@link Connection}
+     * @throws SQLException if a database access error occurs or the url is null
+     */
     static Connection createConnection() throws SQLException {
         return DriverManager.getConnection(PROPERTY.getProperty(URL), PROPERTY);
     }

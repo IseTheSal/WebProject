@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * <pre>Main application controller witch process every user`s request</pre>
+ * <pre>Main application controller witch process every user`s request.</pre>
  *
  * @author Illia Aheyeu
  */

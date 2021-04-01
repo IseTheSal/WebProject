@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Order dao interface
+ * <pre>Order dao interface.</pre>
  *
  * @author Illia Aheyeu
  */
@@ -23,7 +23,7 @@ public interface OrderDao extends BaseDao {
      * @return Optional {@link Coupon}
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
-    Optional<Coupon> findAvailableCouponDiscount(String codeName) throws DaoException;
+    Optional<Coupon> findAvailableCoupon(String codeName) throws DaoException;
 
     /**
      * Searching {@link Coupon}.
@@ -66,7 +66,7 @@ public interface OrderDao extends BaseDao {
      * Create {@link ClientOrder}.
      *
      * @param order {@link ClientOrder}
-     * @return <code>true</code> if order successfully created. otherwise <code>false</code>
+     * @return <code>true</code> if order was created, otherwise <code>false</code>
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
     boolean createOrder(ClientOrder order) throws DaoException;
@@ -95,7 +95,7 @@ public interface OrderDao extends BaseDao {
      * @param codeName {@link Coupon} promocode
      * @param amount   changing <code>int</code> value of coupon amount
      * @param increase <code>true</code> if increasing, <code>false</code> if decreasing
-     * @return <code>true</code> if change successfully proceed, otherwise <code>false</code>
+     * @return <code>true</code> if change was successfully proceed, otherwise <code>false</code>
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
     boolean changeCouponAmountByName(String codeName, int amount, boolean increase) throws DaoException;
@@ -123,7 +123,7 @@ public interface OrderDao extends BaseDao {
      *
      * @param gameId {@link Game} id
      * @param code   gamecode
-     * @return <code>true</code> if added successfully, otherwise <code>false</code>
+     * @return <code>true</code> if game was added, otherwise <code>false</code>
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
     boolean addGameCode(int gameId, String code) throws DaoException;
@@ -140,7 +140,7 @@ public interface OrderDao extends BaseDao {
      * Create new {@link Coupon}.
      *
      * @param coupon {@link Coupon}
-     * @return <code>true</code> if {@link Coupon coupon} added successfully, otherwise <code>false</code>
+     * @return <code>true</code> if {@link Coupon coupon} was added, otherwise <code>false</code>
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
     boolean createCoupon(Coupon coupon) throws DaoException;
@@ -149,7 +149,7 @@ public interface OrderDao extends BaseDao {
      * Delete {@link Coupon coupon} by its promocode.
      *
      * @param code {@link Coupon coupon} promocode
-     * @return <code>true</code> if {@link Coupon coupon} deleted successfully, otherwise <code>false</code>
+     * @return <code>true</code> if {@link Coupon coupon} was deleted, otherwise <code>false</code>
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
     boolean deleteCoupon(String code) throws DaoException;

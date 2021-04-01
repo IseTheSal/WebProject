@@ -159,7 +159,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 totalPriceHtml.item(0).innerHTML = totalPrice + '$';
                 var discount = ${sessionScope.couponDiscount};
                 document.getElementById('promoText').innerHTML = discount + '%';
-                billPriceElements.item(0).innerHTML = (totalPrice - totalPrice * discount / 100).toPrecision(3) + '$';
+                var innerPrice = totalPrice - totalPrice * discount / 100;
+                innerPrice = innerPrice == 0 ? innerPrice.toPrecision(3) : innerPrice.toPrecision(4);
+                billPriceElements.item(0).innerHTML = innerPrice + '$';
             }
         )
     </script>
