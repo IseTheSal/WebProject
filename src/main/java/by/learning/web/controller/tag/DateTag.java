@@ -1,4 +1,4 @@
-package by.learning.web.tag;
+package by.learning.web.controller.tag;
 
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.model.entity.User;

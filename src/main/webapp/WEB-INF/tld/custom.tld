@@ -9,7 +9,7 @@
     <uri>custom_tag</uri>
     <tag>
         <name>adminAccess</name>
-        <tag-class>by.learning.web.tag.DateTag</tag-class>
+        <tag-class>by.learning.web.controller.tag.DateTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>
