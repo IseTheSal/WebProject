@@ -3,6 +3,11 @@ package by.learning.web.validator;
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * <pre>Check {@link by.learning.web.model.entity.ClientOrder Order} input data.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class OrderValidator {
 
     private static final String COUPON_CODE_REGEX = "[a-zA-Z0-9]{5,10}";

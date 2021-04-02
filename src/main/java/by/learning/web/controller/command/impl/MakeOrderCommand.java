@@ -79,7 +79,7 @@ public class MakeOrderCommand implements ActionCommand {
             User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
             boolean isOrderCreated = orderService.createOrder(user.getId(), cartMap, coupon);
             if (isOrderCreated) {
-                orderService.sendGameCodeToUser(cartMap, user);
+                orderService.sentGameCodeToUser(cartMap, user);
                 request.setAttribute(RequestParameter.ORDER_CREATED, true);
                 session.setAttribute(SessionAttribute.CART_AMOUNT, 0);
                 session.setAttribute(SessionAttribute.CART_MAP, new HashMap<Game, Integer>());

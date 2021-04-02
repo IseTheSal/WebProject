@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger();
 
     private static final UserDao userDao = DaoInstance.INSTANCE.getUserDao();
-    ;
 
     private static final String PASSWORD_RESET_TITLE = "RESET YOUR PASSWORD";
     private static final String MAIL_BODY_TITLE = "Your link to reset password";
@@ -157,7 +156,7 @@ public class UserServiceImpl implements UserService {
             }
             MailSender mailSender = new MailSender();
             String body = MAIL_BODY_TITLE + "\n" + RESET_LINK + resetToken + "\n" + WARNING;
-            mailSender.sendMessage(email, PASSWORD_RESET_TITLE, body);
+            mailSender.sentMessage(email, PASSWORD_RESET_TITLE, body);
             info.add(ValidationInformation.SUCCESS.getInfoValue());
         } catch (DaoException e) {
             throw new ServiceException(e);

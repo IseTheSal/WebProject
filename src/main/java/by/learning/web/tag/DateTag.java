@@ -12,6 +12,13 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * <pre>Custom tag class.</pre>
+ * Used to display current {@link LocalDate} for users with role Admin.
+ *
+ * @author Illia Aheyeu
+ * @see User.Role
+ */
 public class DateTag extends TagSupport {
     private static final Logger logger = LogManager.getLogger();
 

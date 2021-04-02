@@ -11,6 +11,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 
+/**
+ * <pre>Used to sent mails to User.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class MailSender {
     private static final Logger logger = LogManager.getLogger();
     private static final String HOST_MAIL = "gamespot.by@gmail.com";
@@ -30,7 +35,14 @@ public class MailSender {
         }
     }
 
-    public void sendMessage(String recipient, String gameTitle, String body) {
+    /**
+     * Sent message to User`s email
+     *
+     * @param recipient User`s email
+     * @param gameTitle Game title value
+     * @param body      Message body value
+     */
+    public void sentMessage(String recipient, String gameTitle, String body) {
         Session session = init();
         try {
             MimeMessage message = new MimeMessage(session);

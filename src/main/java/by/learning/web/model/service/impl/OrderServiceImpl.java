@@ -276,7 +276,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException {
+    public void sentGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException {
         List<Game> gameList = new ArrayList<>(cartMap.keySet());
         for (Game game : gameList) {
             Integer amount = cartMap.get(game);
@@ -289,7 +289,7 @@ public class OrderServiceImpl implements OrderService {
                 String body = convertCodeListToMessage(gameCodeList);
                 String email = user.getEmail();
                 String title = game.getTitle();
-                mailSender.sendMessage(email, title, body);
+                mailSender.sentMessage(email, title, body);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }

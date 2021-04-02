@@ -39,7 +39,7 @@
                     <div class="col" style="max-width: 360px">
                         <a href="${pageContext.request.contextPath}/game.do?command=open_game&gameId=${game.id}"
                            class="card custom-card" style="width: 18rem; text-decoration: none">
-                            <img class="image-card" src="${pageContext.request.contextPath}${game.imagePath}"
+                            <img class="image-card notcopy" src="${pageContext.request.contextPath}${game.imagePath}"
                                  onerror="this.onerror = null; this.src='${pageContext.request.contextPath}/img/IMAGE_UNAVAILABLE.jpg'"
                                  alt="game">
                             <div class="card-body" style="text-align: center">

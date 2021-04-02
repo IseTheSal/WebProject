@@ -3,6 +3,11 @@ package by.learning.web.validator;
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * <pre>Check {@link by.learning.web.model.entity.User User} input data.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class UserValidator {
 
     private static final String LOGIN_REGEX = "^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$";
