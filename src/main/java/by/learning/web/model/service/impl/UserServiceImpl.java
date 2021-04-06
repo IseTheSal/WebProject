@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * <pre>Game service implementation.</pre>
+ * <pre>User service implementation.</pre>
  *
  * @author Illia Aheyeu
  */

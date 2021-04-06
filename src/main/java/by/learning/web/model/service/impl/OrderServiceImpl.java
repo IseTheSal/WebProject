@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * <pre>Game service implementation.</pre>
+ * <pre>Order service implementation.</pre>
  *
  * @author Illia Aheyeu
  */
