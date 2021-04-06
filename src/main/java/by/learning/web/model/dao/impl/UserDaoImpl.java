@@ -18,6 +18,11 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * <pre>User dao implementation.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class UserDaoImpl implements UserDao {
     private static final Logger logger = LogManager.getLogger();
 

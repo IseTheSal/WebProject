@@ -3,6 +3,7 @@ package by.learning.web.util;
 import by.learning.web.exception.ServiceException;
 
 import javax.imageio.ImageIO;
+import javax.mail.Folder;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,14 +16,9 @@ import java.nio.file.Path;
  * @author Illia Aheyeu
  */
 public class CustomFileReader {
-
-    /**
-     * Folder FROM where images are LOADED
-     */
+    //Folder FROM where images are LOADED
     private static final String UPLOAD_DIRECTORY = "C:\\logo";
-    /**
-     * folder where pictures are UPLOADED
-     */
+    //Folder where pictures are UPLOADED
     private static final String UPLOAD_PROJECT_DIRECTORY = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\webapp\\img\\logo";
     private static final String JPG_FORMAT = "jpg";
     private static CustomFileReader instance;

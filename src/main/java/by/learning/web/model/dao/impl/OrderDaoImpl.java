@@ -16,6 +16,11 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * <pre>Order dao implementation.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class OrderDaoImpl implements OrderDao {
     private static final Logger logger = LogManager.getLogger();
 

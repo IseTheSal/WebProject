@@ -19,6 +19,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * <pre>Game service implementation.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger();
 

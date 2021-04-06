@@ -17,6 +17,11 @@ import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * <pre>Game service implementation.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class GameServiceImpl implements GameService {
     private static final Logger logger = LogManager.getLogger();
 

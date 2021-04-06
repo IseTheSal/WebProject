@@ -4,6 +4,11 @@ import by.learning.web.model.dao.GameDao;
 import by.learning.web.model.dao.OrderDao;
 import by.learning.web.model.dao.UserDao;
 
+/**
+ * <pre>Hold dao implementation objects.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public enum DaoInstance {
     INSTANCE;
 

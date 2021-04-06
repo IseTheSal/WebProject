@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * <pre>Game dao implementation.</pre>
  *
+ * @author Illia Aheyeu
  */
 public class GameDaoImpl implements GameDao {
     private static final Logger logger = LogManager.getLogger();

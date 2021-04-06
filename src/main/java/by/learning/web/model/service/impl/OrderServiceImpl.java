@@ -22,6 +22,11 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * <pre>Game service implementation.</pre>
+ *
+ * @author Illia Aheyeu
+ */
 public class OrderServiceImpl implements OrderService {
     private static final Logger logger = LogManager.getLogger();
 
