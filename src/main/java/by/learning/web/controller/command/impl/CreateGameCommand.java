@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -34,7 +34,7 @@ public class CreateGameCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_MENU_PAGE;
+        String page = PageValue.ADMIN_MENU_PAGE;
         String gameTitle = request.getParameter(RequestParameter.GAME_TITLE);
         String imagePath = request.getParameter(RequestParameter.GAME_IMAGE_PATH);
         String description = request.getParameter(RequestParameter.GAME_DESCRIPTION);
@@ -51,7 +51,7 @@ public class CreateGameCommand implements ActionCommand {
                         response.sendRedirect(request.getContextPath() + page);
                         CustomFileReader customFileReader = CustomFileReader.getInstance();
                         outputStream.write(customFileReader.readAndWriteImage(imagePath));
-                        page = PagePath.UPLOAD_VALUE;
+                        page = PageValue.ALREADY_REDIRECTED;
                         return page;
                     } catch (IOException | ServiceException e) {
                         logger.log(Level.ERROR, e);

@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -38,11 +38,11 @@ public class HomeCommand implements ActionCommand {
             List<Game> allGames = service.findAllGames();
             HttpSession session = request.getSession();
             session.setAttribute(SessionAttribute.GAME_LIST, allGames);
-            page = PagePath.MAIN_PAGE;
+            page = PageValue.MAIN_PAGE;
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
-            page = PagePath.SERVER_ERROR_PAGE;
+            page = PageValue.SERVER_ERROR_PAGE;
         }
         return page;
     }

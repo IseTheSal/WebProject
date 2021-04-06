@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -139,5 +140,27 @@ public class GameServiceImpl implements GameService {
             }
         }
         return valueValidInfo;
+    }
+
+    @Override
+    public List<Game> filterAllGames(int startPrice, int endPrice, String[] categories, String[] genres) throws ServiceException {
+        List<Game> result;
+        Set<Game.GameCategory> categorySet = Arrays.stream(categories)
+                .map(category -> Game.GameCategory.valueOf(category.toUpperCase(Locale.ROOT)))
+                .collect(Collectors.toCollection(() -> EnumSet.noneOf(Game.GameCategory.class)));
+        Set<Game.GameGenre> genreSet = Arrays.stream(genres)
+                .map(category -> Game.GameGenre.valueOf(category.toUpperCase(Locale.ROOT)))
+                .collect(Collectors.toCollection(() -> EnumSet.noneOf(Game.GameGenre.class)));
+        try {
+            result = findAllGames().stream()
+                    .filter(game -> (game.getPrice().setScale(0, RoundingMode.FLOOR).intValue() >= startPrice)
+                            && (game.getPrice().setScale(0, RoundingMode.CEILING).intValue() <= endPrice)
+                            && (game.getCategories().containsAll(categorySet))
+                            && (game.getGenres().containsAll(genreSet)))
+                    .collect(Collectors.toList());
+        } catch (ServiceException e) {
+            throw new ServiceException(e);
+        }
+        return result;
     }
 }

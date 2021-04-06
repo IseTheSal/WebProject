@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -43,16 +43,16 @@ public class OpenGameCommand implements ActionCommand {
                 Game game = gameById.get();
                 HttpSession session = request.getSession();
                 session.setAttribute(SessionAttribute.CURRENT_GAME, game);
-                page = PagePath.GAME_PAGE;
+                page = PageValue.GAME_PAGE;
             } else {
                 logger.log(Level.INFO, "Game with id {} not found", id);
                 request.setAttribute(RequestParameter.FAIL, true);
-                page = PagePath.INDEX;
+                page = PageValue.INDEX;
             }
         } catch (ServiceException e) {
             logger.log(Level.INFO, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
-            page = PagePath.SERVER_ERROR_PAGE;
+            page = PageValue.SERVER_ERROR_PAGE;
         }
         return page;
     }

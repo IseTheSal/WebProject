@@ -37,6 +37,13 @@
     min-width: 100%;
 }
 
+.button-border-green {
+    background-color: transparent !important;
+    outline: none;
+    border-color: #1aa114;
+    min-width: 100%;
+}
+
 .button-locale-change {
     background-color: transparent !important;
     border: none;

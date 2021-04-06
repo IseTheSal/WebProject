@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -28,12 +28,12 @@ public class OpenResetPasswordCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.LOGIN_PAGE;
+        String page = PageValue.LOGIN_PAGE;
         String resetToken = request.getParameter(RequestParameter.RESET_TOKEN);
         try {
             boolean tokenExist = userService.isTokenExist(resetToken);
             if (tokenExist) {
-                page = PagePath.FORGOT_PASSWORD_PAGE;
+                page = PageValue.FORGOT_PASSWORD_PAGE;
                 request.setAttribute(RequestParameter.RESET_TOKEN, resetToken);
             } else {
                 request.setAttribute(RequestParameter.TOKEN_NOT_EXIST, true);

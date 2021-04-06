@@ -1,6 +1,6 @@
 package by.learning.web.controller.filter;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.CommandType;
@@ -35,7 +35,8 @@ public class CommandAccessFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        guestCommands = EnumSet.of(CommandType.ADD_TO_CART,
+        guestCommands = EnumSet.of(CommandType.HOME,
+                CommandType.ADD_TO_CART,
                 CommandType.OPEN_GAME,
                 CommandType.REMOVE_FROM_CART,
                 CommandType.CHANGE_CART_AMOUNT,
@@ -45,7 +46,8 @@ public class CommandAccessFilter implements Filter {
                 CommandType.CHANGE_LOCALE,
                 CommandType.FORGOT_PASSWORD,
                 CommandType.OPEN_RESET_PASSWORD,
-                CommandType.RESET_PASSWORD);
+                CommandType.RESET_PASSWORD,
+                CommandType.DEFINE_PRICE_RANGE);
         adminCommands = EnumSet.of(CommandType.CREATE_GAME,
                 CommandType.OPEN_GAME,
                 CommandType.OPEN_GAME_CREATOR,
@@ -61,14 +63,16 @@ public class CommandAccessFilter implements Filter {
                 CommandType.DELETE_COUPON,
                 CommandType.OPEN_ORDER_LIST,
                 CommandType.OPEN_USER_LIST,
-                CommandType.ADD_ADMIN);
+                CommandType.ADD_ADMIN,
+                CommandType.DEFINE_PRICE_RANGE);
         clientCommands = EnumSet.of(CommandType.ADD_TO_CART,
                 CommandType.OPEN_GAME,
                 CommandType.REMOVE_FROM_CART,
                 CommandType.CHANGE_CART_AMOUNT,
                 CommandType.USE_PROMOCODE,
                 CommandType.MAKE_ORDER,
-                CommandType.CHANGE_LOCALE);
+                CommandType.CHANGE_LOCALE,
+                CommandType.DEFINE_PRICE_RANGE);
         authorizedUserCommands = EnumSet.of(CommandType.LOGOUT,
                 CommandType.CHANGE_EMAIL,
                 CommandType.CHANGE_PASSWORD,
@@ -84,7 +88,7 @@ public class CommandAccessFilter implements Filter {
         User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
         String commandValue = req.getParameter(RequestParameter.COMMAND_PARAM);
         if (commandValue == null) {
-            ((HttpServletResponse) response).sendRedirect(PagePath.INDEX);
+            ((HttpServletResponse) response).sendRedirect(PageValue.INDEX);
             return;
         }
         CommandType command = CommandType.valueOf(commandValue.toUpperCase(Locale.ROOT));
@@ -95,7 +99,7 @@ public class CommandAccessFilter implements Filter {
         if (user == null) {
             logger.log(Level.INFO, "user is null");
             req.setAttribute(RequestParameter.NEED_AUTHORIZATION_FIRST, true);
-            RequestDispatcher requestDispatcher = req.getServletContext().getRequestDispatcher(PagePath.LOGIN_PAGE);
+            RequestDispatcher requestDispatcher = req.getServletContext().getRequestDispatcher(PageValue.LOGIN_PAGE);
             requestDispatcher.forward(request, response);
             return;
         } else if (authorizedUserCommands.contains(command)) {

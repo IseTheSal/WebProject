@@ -276,7 +276,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void sentGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException {
+    public void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException {
         List<Game> gameList = new ArrayList<>(cartMap.keySet());
         for (Game game : gameList) {
             Integer amount = cartMap.get(game);

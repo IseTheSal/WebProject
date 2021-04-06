@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -33,7 +33,7 @@ public class OpenCouponListCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_COUPON_LIST_PAGE;
+        String page = PageValue.ADMIN_COUPON_LIST_PAGE;
         try {
             List<Coupon> allCoupons = orderService.findAllCoupons();
             HttpSession session = request.getSession();

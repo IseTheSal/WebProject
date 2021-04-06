@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -32,7 +32,7 @@ public class EditGameCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_GAME_LIST_PAGE;
+        String page = PageValue.ADMIN_GAME_LIST_PAGE;
         String gameIdValue = request.getParameter(RequestParameter.GAME_ID);
         String title = request.getParameter(RequestParameter.GAME_TITLE);
         String imagePath = request.getParameter(RequestParameter.GAME_IMAGE_PATH);

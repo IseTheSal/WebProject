@@ -95,5 +95,4 @@ public interface GameDao extends BaseDao {
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
     boolean editGame(Game game, int[] genresId, int[] categoriesId) throws DaoException;
-
 }

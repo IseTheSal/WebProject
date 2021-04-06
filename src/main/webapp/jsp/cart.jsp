@@ -14,7 +14,7 @@
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%">
-        <div class="wrap cf">
+        <div class="wrap cf" style="margin-bottom: 6%">
             <h1 class="projTitle"><fmt:message key="cart.title"/></h1>
             <div class="cart">
                 <ul class="cartWrap">
@@ -124,7 +124,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                 </ul>
             </div>
         </div>
-        <div style="margin-top: 6%">
+        <div style="">
             <jsp:include page="support/footer.jsp"/>
         </div>
     </div>

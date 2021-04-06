@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -48,16 +48,16 @@ public class LoginCommand implements ActionCommand {
                     session.removeAttribute(SessionAttribute.CART_AMOUNT);
                     session.removeAttribute(SessionAttribute.COUPON_DISCOUNT);
                 }
-                page = PagePath.INDEX;
+                page = PageValue.INDEX;
             } else {
                 request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");
-                page = PagePath.LOGIN_PAGE;
+                page = PageValue.LOGIN_PAGE;
                 logger.log(Level.INFO, "Error in logging");
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
-            page = PagePath.LOGIN_PAGE;
+            page = PageValue.LOGIN_PAGE;
         }
         return page;
     }

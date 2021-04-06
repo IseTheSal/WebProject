@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.command.ActionCommand;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -21,12 +21,12 @@ public class LogoutCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.UPLOAD_VALUE;
+        String page = PageValue.ALREADY_REDIRECTED;
         HttpSession session = request.getSession();
         session.invalidate();
         logger.log(Level.INFO, "Session was invalidate");
         try {
-            response.sendRedirect(PagePath.LOGIN_PAGE);
+            response.sendRedirect(PageValue.LOGIN_PAGE);
         } catch (IOException e) {
             logger.log(Level.ERROR, e);
         }

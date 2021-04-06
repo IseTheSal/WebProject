@@ -1,6 +1,6 @@
 package by.learning.web.controller.filter;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.model.entity.User;
@@ -33,23 +33,23 @@ public class PageAccessFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        commonPageAccess = Set.of(PagePath.INDEX,
-                PagePath.MAIN_PAGE,
-                PagePath.GAME_PAGE,
-                PagePath.ABOUT_PAGE,
-                PagePath.TERMS_PAGE);
-        guestPageAccess = Set.of(PagePath.CART_PAGE,
-                PagePath.LOGIN_PAGE,
-                PagePath.REGISTRATION_PAGE);
-        userPageAccess = Set.of(PagePath.PROFILE_PAGE,
-                PagePath.CART_PAGE);
-        adminPageAccess = Set.of(PagePath.PROFILE_PAGE,
-                PagePath.ADMIN_MENU_PAGE,
-                PagePath.CREATE_GAME_PAGE,
-                PagePath.ADMIN_GAME_LIST_PAGE,
-                PagePath.ADMIN_COUPON_LIST_PAGE,
-                PagePath.ADMIN_ORDER_LIST_PAGE,
-                PagePath.ADMIN_USER_LIST_PAGE);
+        commonPageAccess = Set.of(PageValue.INDEX,
+                PageValue.MAIN_PAGE,
+                PageValue.GAME_PAGE,
+                PageValue.ABOUT_PAGE,
+                PageValue.TERMS_PAGE);
+        guestPageAccess = Set.of(PageValue.CART_PAGE,
+                PageValue.LOGIN_PAGE,
+                PageValue.REGISTRATION_PAGE);
+        userPageAccess = Set.of(PageValue.PROFILE_PAGE,
+                PageValue.CART_PAGE);
+        adminPageAccess = Set.of(PageValue.PROFILE_PAGE,
+                PageValue.ADMIN_MENU_PAGE,
+                PageValue.CREATE_GAME_PAGE,
+                PageValue.ADMIN_GAME_LIST_PAGE,
+                PageValue.ADMIN_COUPON_LIST_PAGE,
+                PageValue.ADMIN_ORDER_LIST_PAGE,
+                PageValue.ADMIN_USER_LIST_PAGE);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class PageAccessFilter implements Filter {
         if (user == null) {
             logger.log(Level.INFO, "user is null");
             request.setAttribute(RequestParameter.NEED_AUTHORIZATION_FIRST, true);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(PagePath.LOGIN_PAGE);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(PageValue.LOGIN_PAGE);
             requestDispatcher.forward(request, response);
             return;
         }

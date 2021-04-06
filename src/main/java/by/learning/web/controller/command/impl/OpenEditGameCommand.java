@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -52,15 +52,15 @@ public class OpenEditGameCommand implements ActionCommand {
                 session.setAttribute(SessionAttribute.GENRES_MAP, allGenres);
                 HashMap<Integer, String> allCategories = gameService.findAllCategories();
                 session.setAttribute(SessionAttribute.CATEGORIES_MAP, allCategories);
-                page = PagePath.EDIT_GAME_PAGE;
+                page = PageValue.EDIT_GAME_PAGE;
             } else {
                 logger.log(Level.INFO, "game doesnt exist");
                 request.setAttribute(RequestParameter.FAIL, true);
-                page = PagePath.ADMIN_GAME_LIST_PAGE;
+                page = PageValue.ADMIN_GAME_LIST_PAGE;
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            page = PagePath.ADMIN_GAME_LIST_PAGE;
+            page = PageValue.ADMIN_GAME_LIST_PAGE;
             request.setAttribute(RequestParameter.FAIL, true);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }

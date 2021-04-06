@@ -2,7 +2,6 @@ function autocomplete(inp, arr, idArr) {
     var currentFocus;
     inp.addEventListener("input", function (e) {
         var a, b, i, val = this.value;
-        var c = this.value;
         closeAllLists();
         if (!val) {
             return false;

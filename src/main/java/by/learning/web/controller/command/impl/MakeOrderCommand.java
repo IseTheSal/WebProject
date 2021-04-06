@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 /**
- * <pre>Command provides users with role Client process their order and send gamecodes to their emails.</pre>
+ * <pre>Command provides users with role Client process their order and sent gamecodes to their emails.</pre>
  * <p>Cases when the order will not be processed:</p>
  * <p>
  * If cart is empty.
@@ -43,7 +43,7 @@ public class MakeOrderCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.CART_PAGE;
+        String page = PageValue.CART_PAGE;
         HttpSession session = request.getSession();
         HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
         if (cartMap.isEmpty()) {
@@ -63,7 +63,7 @@ public class MakeOrderCommand implements ActionCommand {
                     discount = orderService.findCouponDiscount(coupon.getCodeName());
                     coupon.setDiscount(discount);
                 } else {
-                    page = PagePath.CART_PAGE;
+                    page = PageValue.CART_PAGE;
                     short newDiscount = 0;
                     session.setAttribute(SessionAttribute.COUPON_DISCOUNT, newDiscount);
                     session.removeAttribute(SessionAttribute.COUPON);
@@ -79,14 +79,14 @@ public class MakeOrderCommand implements ActionCommand {
             User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
             boolean isOrderCreated = orderService.createOrder(user.getId(), cartMap, coupon);
             if (isOrderCreated) {
-                orderService.sentGameCodeToUser(cartMap, user);
+                orderService.sendGameCodeToUser(cartMap, user);
                 request.setAttribute(RequestParameter.ORDER_CREATED, true);
                 session.setAttribute(SessionAttribute.CART_AMOUNT, 0);
                 session.setAttribute(SessionAttribute.CART_MAP, new HashMap<Game, Integer>());
                 short newDiscount = 0;
                 session.setAttribute(SessionAttribute.COUPON_DISCOUNT, newDiscount);
                 session.removeAttribute(SessionAttribute.COUPON);
-                page = PagePath.INDEX;
+                page = PageValue.INDEX;
             } else {
                 session.setAttribute(SessionAttribute.CART_AMOUNT, orderService.countCartAmount(cartMap));
                 request.setAttribute(RequestParameter.CART_AMOUNT_CHANGED, true);

@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -31,7 +31,7 @@ public class ResetPasswordCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.LOGIN_PAGE;
+        String page = PageValue.LOGIN_PAGE;
         String resetToken = request.getParameter(RequestParameter.RESET_TOKEN);
         String newPassword = request.getParameter(RequestParameter.PASSWORD);
         String newPasswordRepeat = request.getParameter(RequestParameter.REPEAT_PASSWORD);
@@ -46,7 +46,7 @@ public class ResetPasswordCommand implements ActionCommand {
                 } else {
                     request.setAttribute(RequestParameter.RESET_TOKEN, resetToken);
                     request.setAttribute(RequestParameter.VALID_ISSUES, info);
-                    page = PagePath.FORGOT_PASSWORD_PAGE;
+                    page = PageValue.FORGOT_PASSWORD_PAGE;
                 }
             }
         } catch (ServiceException e) {

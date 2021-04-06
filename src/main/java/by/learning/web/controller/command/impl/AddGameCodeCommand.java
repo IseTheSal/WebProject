@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -31,7 +31,7 @@ public class AddGameCodeCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_MENU_PAGE;
+        String page = PageValue.ADMIN_MENU_PAGE;
         String gameId = request.getParameter(RequestParameter.GAME_ID);
         String gameCode = request.getParameter(RequestParameter.GAME_CODE).toUpperCase(Locale.ROOT);
         try {

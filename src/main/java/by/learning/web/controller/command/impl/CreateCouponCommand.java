@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -33,7 +33,7 @@ public class CreateCouponCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_MENU_PAGE;
+        String page = PageValue.ADMIN_MENU_PAGE;
         String code = request.getParameter(RequestParameter.COUPON_CODE);
         Optional<Coupon> coupon;
         try {

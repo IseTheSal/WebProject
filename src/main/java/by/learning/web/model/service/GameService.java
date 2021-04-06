@@ -101,5 +101,18 @@ public interface GameService {
     Set<String> editGame(String gameIdValue, String gameTitle, String imagePath,
                          String description, String priceValue, String trailerLink,
                          String[] genres, String[] categories) throws ServiceException;
+
+
+    /**
+     * Filter all {@link Game games} by parameters.
+     *
+     * @param startPrice starting price point
+     * @param endPrice ending price point
+     * @param categories specified categories, which game must include
+     * @param genres specified genres, which game must include
+     * @return <code>List</code> of {@link Game games}
+     * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
+     */
+    List<Game> filterAllGames(int startPrice, int endPrice, String[] categories, String[] genres) throws ServiceException;
 }
 

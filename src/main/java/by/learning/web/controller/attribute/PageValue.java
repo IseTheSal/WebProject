@@ -5,7 +5,7 @@ package by.learning.web.controller.attribute;
  *
  * @author Illia Aheyeu
  */
-public class PagePath {
+public class PageValue {
     public static final String INDEX = "/index.jsp";
     public static final String MAIN_PAGE = "/jsp/main.jsp";
     public static final String LOGIN_PAGE = "/jsp/login.jsp";
@@ -26,8 +26,8 @@ public class PagePath {
     public static final String TERMS_PAGE = "/jsp/support/terms.jsp";
     public static final String ABOUT_PAGE = "/jsp/support/about.jsp";
     public static final String FORGOT_PASSWORD_PAGE = "/jsp/forgotPassword.jsp";
-    public static final String UPLOAD_VALUE = "upload";
+    public static final String ALREADY_REDIRECTED = "redirected";
 
-    private PagePath() {
+    private PageValue() {
     }
 }

@@ -146,7 +146,7 @@ public interface OrderService {
      * @param user    Client, whom made order
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
-    void sentGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException;
+    void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException;
 
     /**
      * Search order history of Client.

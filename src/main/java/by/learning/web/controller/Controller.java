@@ -1,6 +1,6 @@
 package by.learning.web.controller;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.controller.command.CommandProvider;
@@ -46,12 +46,12 @@ public class Controller extends HttpServlet {
         String page = command.execute(req, resp);
         logger.log(Level.DEBUG, "to page - " + page);
         if (page != null) {
-            if (!page.equals(PagePath.UPLOAD_VALUE)) {
+            if (!page.equals(PageValue.ALREADY_REDIRECTED)) {
                 RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(page);
                 dispatcher.forward(req, resp);
             }
         } else {
-            page = PagePath.PAGE_NOT_FOUND;
+            page = PageValue.PAGE_NOT_FOUND;
             resp.sendRedirect(req.getContextPath() + page);
         }
     }

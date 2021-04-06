@@ -2,6 +2,7 @@ package by.learning.web.model.entity;
 
 import java.math.BigDecimal;
 import java.util.EnumSet;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -55,7 +56,7 @@ public class Game {
             Set<GameGenre> result = EnumSet.noneOf(GameGenre.class);
             String[] genreArray = genreString.split(DELIMITER);
             for (String genre : genreArray) {
-                GameGenre gameGenre = GameGenre.valueOf(genre);
+                GameGenre gameGenre = GameGenre.valueOf(genre.toUpperCase(Locale.ROOT));
                 result.add(gameGenre);
             }
             return result;
@@ -85,9 +86,12 @@ public class Game {
          */
         private static Set<GameCategory> convertFromString(String categoryString) {
             Set<GameCategory> result = EnumSet.noneOf(GameCategory.class);
+            if (categoryString == null || categoryString.isBlank()) {
+                return result;
+            }
             String[] categoryArray = categoryString.split(DELIMITER);
             for (String category : categoryArray) {
-                GameCategory gameCategory = GameCategory.valueOf(category);
+                GameCategory gameCategory = GameCategory.valueOf(category.toUpperCase(Locale.ROOT));
                 result.add(gameCategory);
             }
             return result;

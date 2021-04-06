@@ -121,7 +121,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/toast-script.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log("there");
         var serverError = ${not empty requestScope.serverError};
         if (serverError) {
             funcBtns.alertError('<fmt:message key="alert.header.error"/>', '<fmt:message key="server.error"/>')
@@ -131,7 +130,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
             funcBtns.alertWarning('<fmt:message key="alert.header.fail"/>');
         }
         let success = ${not empty requestScope.success};
-        console.log(success);
         if (success) {
             funcBtns.alertOkOnlyTitle('<fmt:message key="alert.header.done"/>');
         }

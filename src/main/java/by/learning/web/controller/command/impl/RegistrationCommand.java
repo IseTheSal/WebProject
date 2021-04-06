@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -32,7 +32,7 @@ public class RegistrationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.REGISTRATION_PAGE;
+        String page = PageValue.REGISTRATION_PAGE;
         String nameValue = request.getParameter(RequestParameter.FIRSTNAME);
         String lastnameValue = request.getParameter(RequestParameter.LASTNAME);
         String loginValue = request.getParameter(RequestParameter.LOGIN);
@@ -45,11 +45,11 @@ public class RegistrationCommand implements ActionCommand {
                 logger.log(Level.INFO, "Successful registration");
                 request.setAttribute(RequestParameter.REGISTRATION_COMPLETE, true);
                 request.setAttribute(RequestParameter.SUCCESS, true);
-                page = PagePath.LOGIN_PAGE;
+                page = PageValue.LOGIN_PAGE;
             } else if (registrationInfo.remove(ValidationInformation.FAIL.getInfoValue())) {
                 request.setAttribute(RequestParameter.REGISTRATION_FAIL, registrationInfo);
                 request.setAttribute(RequestParameter.FAIL, true);
-                page = PagePath.REGISTRATION_PAGE;
+                page = PageValue.REGISTRATION_PAGE;
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

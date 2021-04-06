@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -30,7 +30,7 @@ public class ForgotPasswordCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.LOGIN_PAGE;
+        String page = PageValue.LOGIN_PAGE;
         String reestablishValue = request.getParameter(RequestParameter.REESTABLISH_VALUE);
         try {
             Set<String> info = userService.sentResetPasswordLink(reestablishValue);

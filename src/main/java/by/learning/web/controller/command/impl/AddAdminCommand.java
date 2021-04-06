@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
@@ -31,7 +31,7 @@ public class AddAdminCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_MENU_PAGE;
+        String page = PageValue.ADMIN_MENU_PAGE;
         String firstName = request.getParameter(RequestParameter.FIRSTNAME);
         String lastName = request.getParameter(RequestParameter.LASTNAME);
         String login = request.getParameter(RequestParameter.LOGIN);

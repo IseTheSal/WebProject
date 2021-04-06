@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -34,7 +34,7 @@ public class OpenOrderListCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = PagePath.ADMIN_ORDER_LIST_PAGE;
+        String page = PageValue.ADMIN_ORDER_LIST_PAGE;
         try {
             HashMap<User, ClientOrder> allOrders = orderService.findAllOrders();
             HttpSession session = request.getSession();

@@ -59,6 +59,10 @@ public class RequestParameter {
     public static final String TOKEN_NOT_EXIST = "tokenNotExist";
     public static final String PASSWORD_CHANGED = "passwordChanged";
     public static final String CART_IS_EMPTY = "cartIsEmpty";
+    public static final String MIN_PRICE = "minPrice";
+    public static final String MAX_PRICE = "maxPrice";
+    public static final String GENRE_FILTER = "genreFilter";
+    public static final String CATEGORY_FILTER = "categoryFilter";
 
     private RequestParameter() {
     }

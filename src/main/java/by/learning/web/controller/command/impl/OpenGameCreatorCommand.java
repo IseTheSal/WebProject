@@ -1,6 +1,6 @@
 package by.learning.web.controller.command.impl;
 
-import by.learning.web.controller.attribute.PagePath;
+import by.learning.web.controller.attribute.PageValue;
 import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
@@ -42,11 +42,11 @@ public class OpenGameCreatorCommand implements ActionCommand {
             }
             session.setAttribute(SessionAttribute.GENRES_MAP, gameGenres);
             session.setAttribute(SessionAttribute.CATEGORIES_MAP, gameCategories);
-            page = PagePath.CREATE_GAME_PAGE;
+            page = PageValue.CREATE_GAME_PAGE;
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
-            page = PagePath.ADMIN_MENU_PAGE;
+            page = PageValue.ADMIN_MENU_PAGE;
         }
         return page;
     }

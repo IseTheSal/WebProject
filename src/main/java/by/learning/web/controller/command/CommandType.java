@@ -40,7 +40,8 @@ public enum CommandType {
     ADD_ADMIN(new AddAdminCommand(new UserServiceImpl())),
     FORGOT_PASSWORD(new ForgotPasswordCommand(new UserServiceImpl())),
     OPEN_RESET_PASSWORD(new OpenResetPasswordCommand(new UserServiceImpl())),
-    RESET_PASSWORD(new ResetPasswordCommand(new UserServiceImpl()));
+    RESET_PASSWORD(new ResetPasswordCommand(new UserServiceImpl())),
+    DEFINE_PRICE_RANGE(new GameFilterCommand(new GameServiceImpl()));
 
     private final ActionCommand command;
 
