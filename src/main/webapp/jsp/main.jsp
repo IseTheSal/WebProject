@@ -19,29 +19,31 @@
 <div style="background-image: url(/img/registration-background.jpg);
     background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden;">
     <jsp:include page="support/header.jsp"/>
-
     <div style="padding-top: 5%">
-        <form method="get" action="${pageContext.request.contextPath}/sort.do" id="sortForm" class="notcopy"
-              style="position: absolute; right: 16.5%; top: 11%">
-            <input type="hidden" name="command" value="order_games">
-            <strong style="color:white;"><fmt:message key="main.sort"/></strong>
-            <input class="custom-radio" type="radio" id="titleAsc" name="sortBy" value="titleAsc"
-                   onclick="sortSubmit()" ${sessionScope.sortBy.equals('titleAsc') ? "checked" : ""}>
-            <label for="titleAsc"><i style="color: white" class="fas fa-sort-alpha-down"></i></label>
+        <c:if test="${not empty sessionScope.gameList}">
+            <form method="get" action="${pageContext.request.contextPath}/sort.do" id="sortForm" class="notcopy"
+                  style="position: absolute; right: 16.5%; top: 11%">
+                <input type="hidden" name="command" value="order_games">
+                <strong style="color:white;"><fmt:message key="main.sort"/></strong>
+                <input class="custom-radio" type="radio" id="titleAsc" name="sortBy" value="titleAsc"
+                       onclick="sortSubmit()" ${sessionScope.sortBy.equals('titleAsc') ? "checked" : ""}>
+                <label for="titleAsc"><i style="color: white" class="fas fa-sort-alpha-down"></i></label>
 
-            <input class="custom-radio" type="radio" id="titleDesc" name="sortBy" value="titleDesc"
-                   onclick="sortSubmit()" ${sessionScope.sortBy.equals('titleDesc') ? "checked" : ""}>
-            <label for="titleDesc"><i style="color: white" class="fas fa-sort-alpha-up"></i></label>
+                <input class="custom-radio" type="radio" id="titleDesc" name="sortBy" value="titleDesc"
+                       onclick="sortSubmit()" ${sessionScope.sortBy.equals('titleDesc') ? "checked" : ""}>
+                <label for="titleDesc"><i style="color: white" class="fas fa-sort-alpha-up"></i></label>
 
-            <input class="custom-radio" type="radio" id="priceASC" name="sortBy" value="priceAsc"
-                   onclick="sortSubmit()" ${sessionScope.sortBy.equals('priceAsc') ? "checked" : ""}>
-            <label style="color: white" for="priceASC"><strong>&dollar;</strong><i class="fas fa-long-arrow-alt-up"></i></label>
+                <input class="custom-radio" type="radio" id="priceASC" name="sortBy" value="priceAsc"
+                       onclick="sortSubmit()" ${sessionScope.sortBy.equals('priceAsc') ? "checked" : ""}>
+                <label style="color: white" for="priceASC"><strong>&dollar;</strong><i
+                        class="fas fa-long-arrow-alt-up"></i></label>
 
-            <input class="custom-radio" type="radio" id="priceDesc" name="sortBy" value="priceDesc"
-                   onclick="sortSubmit()" ${sessionScope.sortBy.equals('priceDesc') ? "checked" : ""}>
-            <label style="color: white" for="priceDesc"><strong>&dollar;</strong><i
-                    class="fas fa-long-arrow-alt-down"></i></label>
-        </form>
+                <input class="custom-radio" type="radio" id="priceDesc" name="sortBy" value="priceDesc"
+                       onclick="sortSubmit()" ${sessionScope.sortBy.equals('priceDesc') ? "checked" : ""}>
+                <label style="color: white" for="priceDesc"><strong>&dollar;</strong><i
+                        class="fas fa-long-arrow-alt-down"></i></label>
+            </form>
+        </c:if>
         <form autocomplete="off" method="get" action="${pageContext.request.contextPath}/game.do">
             <div style="position: fixed; margin-left: 1%; margin-top: 2%">
                 <input type="hidden" name="command" value="open_game"/>

@@ -82,7 +82,10 @@
                 <div class="form-group" style="">
                     <label class="neon-title-white" for="txtPrice"
                            style="position: relative; margin-bottom: 1px">
-                        <fmt:message key="creategame.price"/> $
+                        <fmt:message key="creategame.price"/> &dollar;
+                    </label>
+                    <label style="color: gray" for="txtPrice">
+                        <fmt:message key="create.game.price.example"/>
                     </label>
                     <div class="form-inline">
                         <input name="gamePrice" id="txtPrice"
