@@ -109,7 +109,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                    required pattern="^[a-zA-Z0-9]{8,20}$"
                                    minlength="8" maxlength="20">
                             <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
-                                    key="registration.invalidPasswordMatch"/></div>
+                                    key="registration.invalidPasswordMatchOrInvalid"/></div>
                         </div>
                         <br>
                         <button class="button-glow-lime" type="submit"

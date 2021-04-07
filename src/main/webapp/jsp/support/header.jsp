@@ -65,7 +65,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
                             ${sessionScope.currentUser.firstname}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"
-                         style="background:  rgba(152,148,148,0.2);
+                         style="background:  rgba(0,0,0,0.9);
                           border: none; position: fixed; left: 90%; top: 8%; width: 40px">
                         <a class="dropdown-item neon-title-white"
                            style="text-align: center; background-color: transparent"

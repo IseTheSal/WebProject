@@ -27,11 +27,11 @@
             <strong style="color:white;"><fmt:message key="main.sort"/></strong>
             <input class="custom-radio" type="radio" id="titleAsc" name="sortBy" value="titleAsc"
                    onclick="sortSubmit()" ${sessionScope.sortBy.equals('titleAsc') ? "checked" : ""}>
-            <label for="titleAsc"><i style="color: white" class="fas fa-sort-alpha-up-alt"></i></label>
+            <label for="titleAsc"><i style="color: white" class="fas fa-sort-alpha-down"></i></label>
 
             <input class="custom-radio" type="radio" id="titleDesc" name="sortBy" value="titleDesc"
                    onclick="sortSubmit()" ${sessionScope.sortBy.equals('titleDesc') ? "checked" : ""}>
-            <label for="titleDesc"><i style="color: white" class="fas fa-sort-alpha-down-alt"></i></label>
+            <label for="titleDesc"><i style="color: white" class="fas fa-sort-alpha-up"></i></label>
 
             <input class="custom-radio" type="radio" id="priceASC" name="sortBy" value="priceAsc"
                    onclick="sortSubmit()" ${sessionScope.sortBy.equals('priceAsc') ? "checked" : ""}>
