@@ -63,6 +63,7 @@ public class RequestParameter {
     public static final String MAX_PRICE = "maxPrice";
     public static final String GENRE_FILTER = "genreFilter";
     public static final String CATEGORY_FILTER = "categoryFilter";
+    public static final String SORT_FILTER = "sortBy";
 
     private RequestParameter() {
     }

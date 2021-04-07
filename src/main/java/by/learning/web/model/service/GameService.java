@@ -107,12 +107,21 @@ public interface GameService {
      * Filter all {@link Game games} by parameters.
      *
      * @param startPrice starting price point
-     * @param endPrice ending price point
+     * @param endPrice   ending price point
      * @param categories specified categories, which game must include
-     * @param genres specified genres, which game must include
+     * @param genres     specified genres, which game must include
+     * @param sortValue  specified ordering value
      * @return <code>List</code> of {@link Game games}
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
-    List<Game> filterAllGames(int startPrice, int endPrice, String[] categories, String[] genres) throws ServiceException;
+    List<Game> filterAllGames(int startPrice, int endPrice, String[] categories, String[] genres, String sortValue) throws ServiceException;
+
+    /**
+     * Sort game list in specific order.
+     *
+     * @param gameList    <code>List</code> of {@link Game games}
+     * @param sortByValue specified sort value
+     */
+    void orderGameList(List<Game> gameList, String sortByValue);
 }
 

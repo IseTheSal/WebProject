@@ -1,0 +1,24 @@
+.custom-radio:after {
+    width: 12px;
+    height: 12px;
+    border-radius: 15px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+.custom-radio:checked:after {
+    width: 12px;
+    height: 12px;
+    border-radius: 15px;
+    position: relative;
+    background-color: #aa00ff;
+    box-shadow: 0 0 15px #8000ff;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}

@@ -68,23 +68,25 @@ public class PageAccessFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
-        if (user == null) {
+        boolean userConfirm = userPageAccess.stream().anyMatch(requestURI::contains);
+        boolean adminConfirm = adminPageAccess.stream().anyMatch(requestURI::contains);
+        if (user == null && (userConfirm || adminConfirm)) {
             logger.log(Level.INFO, "user is null");
             request.setAttribute(RequestParameter.NEED_AUTHORIZATION_FIRST, true);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(PageValue.LOGIN_PAGE);
             requestDispatcher.forward(request, response);
             return;
+        } else if (!userConfirm && !adminConfirm) {
+            resp.sendError(404);
+            return;
         }
+
         User.Role role = user.getRole();
-        boolean userConfirm = userPageAccess.stream().anyMatch(requestURI::contains);
-        boolean adminConfirm = adminPageAccess.stream().anyMatch(requestURI::contains);
         if ((role == User.Role.CLIENT && userConfirm)
                 || (role == User.Role.ADMIN && adminConfirm)) {
             chain.doFilter(request, response);
-        } else if (userConfirm || adminConfirm || guestConfirm) {
-            resp.sendError(403);
         } else {
-            resp.sendError(404);
+            resp.sendError(403);
         }
     }
 }

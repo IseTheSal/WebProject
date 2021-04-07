@@ -11,6 +11,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/price-slider.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/checkbox-style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/radioButton-style.css">
 
 </head>
 <html>
@@ -18,7 +19,29 @@
 <div style="background-image: url(/img/registration-background.jpg);
     background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden;">
     <jsp:include page="support/header.jsp"/>
+
     <div style="padding-top: 5%">
+        <form method="get" action="${pageContext.request.contextPath}/sort.do" id="sortForm" class="notcopy"
+              style="position: absolute; right: 16.5%; top: 11%">
+            <input type="hidden" name="command" value="order_games">
+            <strong style="color:white;"><fmt:message key="main.sort"/></strong>
+            <input class="custom-radio" type="radio" id="titleAsc" name="sortBy" value="titleAsc"
+                   onclick="sortSubmit()" ${sessionScope.sortBy.equals('titleAsc') ? "checked" : ""}>
+            <label for="titleAsc"><i style="color: white" class="fas fa-sort-alpha-up-alt"></i></label>
+
+            <input class="custom-radio" type="radio" id="titleDesc" name="sortBy" value="titleDesc"
+                   onclick="sortSubmit()" ${sessionScope.sortBy.equals('titleDesc') ? "checked" : ""}>
+            <label for="titleDesc"><i style="color: white" class="fas fa-sort-alpha-down-alt"></i></label>
+
+            <input class="custom-radio" type="radio" id="priceASC" name="sortBy" value="priceAsc"
+                   onclick="sortSubmit()" ${sessionScope.sortBy.equals('priceAsc') ? "checked" : ""}>
+            <label style="color: white" for="priceASC"><strong>&dollar;</strong><i class="fas fa-long-arrow-alt-up"></i></label>
+
+            <input class="custom-radio" type="radio" id="priceDesc" name="sortBy" value="priceDesc"
+                   onclick="sortSubmit()" ${sessionScope.sortBy.equals('priceDesc') ? "checked" : ""}>
+            <label style="color: white" for="priceDesc"><strong>&dollar;</strong><i
+                    class="fas fa-long-arrow-alt-down"></i></label>
+        </form>
         <form autocomplete="off" method="get" action="${pageContext.request.contextPath}/game.do">
             <div style="position: fixed; margin-left: 1%; margin-top: 2%">
                 <input type="hidden" name="command" value="open_game"/>
@@ -35,7 +58,7 @@
             </div>
         </form>
         <div style="position: fixed">
-            <div class="container notcopy" style="position: fixed; float: right; margin-left: 85%;">
+            <div class="container notcopy" style="position: fixed; float: right; margin-left: 85%; margin-top: -0.5%">
                 <strong style="margin-left: 6.5%; color: white"><fmt:message key="main.price"/></strong>
                 <div class="row" style="cursor: pointer; margin-top: 1%">
                     <div class="col-sm-12">
@@ -52,77 +75,77 @@
                     </div>
                 </div>
                 <form id="filter_form" method="get" action="${pageContext.request.contextPath}/filter_price.do">
-                    <input type="hidden" name="command" value="define_price_range">
-                    <input type="hidden" name="minPrice" id="fromPrice" value="${requestScope.minPrice + 0}">
-                    <input type="hidden" name="maxPrice" id="toPrice" value="${requestScope.maxPrice + 0}">
+                    <input type="hidden" name="command" value="filter_game">
+                    <input type="hidden" name="minPrice" id="fromPrice" value="${sessionScope.minPrice + 0}">
+                    <input type="hidden" name="maxPrice" id="toPrice" value="${sessionScope.maxPrice + 0}">
                     <strong style="padding-left: 5.5%;color: white"><fmt:message key="main.genres"/></strong>
                     <div class="checkbox-container">
                         <ul class="ks-cboxtags">
                             <li><input type="checkbox" id="checkboxOneCt" class="genre"
-                            ${requestScope.genreFilter.contains('ACTION') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('ACTION') ? "checked" : ""}
                                        value="ACTION"><label
                                     for="checkboxOneCt"><fmt:message key="main.genre.action"/></label></li>
                             <li><input type="checkbox" id="checkboxTwoCt" class="genre"
-                            ${requestScope.genreFilter.contains('ADVENTURE') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('ADVENTURE') ? "checked" : ""}
                                        value="ADVENTURE"><label
                                     for="checkboxTwoCt"><fmt:message key="main.genre.adventure"/></label></li>
                             <li><input type="checkbox" id="checkboxThreeCt" class="genre"
-                            ${requestScope.genreFilter.contains('ARCADE') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('ARCADE') ? "checked" : ""}
                                        value="ARCADE"><label
                                     for="checkboxThreeCt"><fmt:message key="main.genre.arcade"/></label>
                             </li>
                             <li><input type="checkbox" id="checkboxFourCt" class="genre"
-                            ${requestScope.genreFilter.contains('CASUAL') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('CASUAL') ? "checked" : ""}
                                        value="CASUAL"><label
                                     for="checkboxFourCt"><fmt:message key="main.genre.casual"/></label>
                             </li>
                             <li><input type="checkbox" id="checkboxFiveCt" class="genre"
-                            ${requestScope.genreFilter.contains('HORROR') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('HORROR') ? "checked" : ""}
                                        value="HORROR"><label
                                     for="checkboxFiveCt"><fmt:message key="main.genre.horror"/></label></li>
                             <li><input type="checkbox" id="checkboxSixCt" class="genre"
-                            ${requestScope.genreFilter.contains('INDIE') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('INDIE') ? "checked" : ""}
                                        value="INDIE"><label
                                     for="checkboxSixCt"><fmt:message key="main.genre.indie"/></label></li>
                             <li><input type="checkbox" id="checkboxSevenCt" class="genre"
-                            ${requestScope.genreFilter.contains('OPEN_WORLD') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('OPEN_WORLD') ? "checked" : ""}
                                        value="OPEN_WORLD"><label
                                     for="checkboxSevenCt"><fmt:message key="main.genre.openWorld"/></label>
                             </li>
                             <li><input type="checkbox" id="checkboxEightCt" class="genre"
-                            ${requestScope.genreFilter.contains('RACING') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('RACING') ? "checked" : ""}
                                        value="RACING"><label
                                     for="checkboxEightCt"><fmt:message key="main.genre.racing"/></label>
                             </li>
                             <li><input type="checkbox" id="checkboxNineCt" class="genre"
-                            ${requestScope.genreFilter.contains('RPG') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('RPG') ? "checked" : ""}
                                        value="RPG"><label
                                     for="checkboxNineCt"><fmt:message key="main.genre.rpg"/></label></li>
                             <li><input type="checkbox" id="checkboxTenCt" class="genre"
-                            ${requestScope.genreFilter.contains('SHOOTERS') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('SHOOTERS') ? "checked" : ""}
                                        value="SHOOTERS"><label
                                     for="checkboxTenCt"><fmt:message key="main.genre.shooters"/></label>
                             </li>
                             <li class=""><input type="checkbox" id="checkboxElevenCt" class="genre"
-                            ${requestScope.genreFilter.contains('SIMULATORS') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('SIMULATORS') ? "checked" : ""}
                                                 value="SIMULATORS"><label
                                     for="checkboxElevenCt"><fmt:message key="main.genre.simulators"/></label></li>
                             <li><input type="checkbox" id="checkboxTwelveCt" class="genre"
-                            ${requestScope.genreFilter.contains('SPORT') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('SPORT') ? "checked" : ""}
                                        value="SPORT"><label
                                     for="checkboxTwelveCt"><fmt:message key="main.genre.sport"/></label></li>
                             <li><input type="checkbox" id="checkboxThirteenCt" class="genre"
-                            ${requestScope.genreFilter.contains('STRATEGIES') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('STRATEGIES') ? "checked" : ""}
                                        value="STRATEGIES"><label
                                     for="checkboxThirteenCt"><fmt:message key="main.genre.strategies"/></label></li>
                             <li><input type="checkbox" id="checkboxFourteenCt" class="genre"
-                            ${requestScope.genreFilter.contains('SURVIVAL') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('SURVIVAL') ? "checked" : ""}
                                        value="SURVIVAL"><label
                                     for="checkboxFourteenCt"><fmt:message key="main.genre.survival"/></label>
                             </li>
                             <li><input type="checkbox" class="genre"
                                        id="checkboxFifteenCt"
-                            ${requestScope.genreFilter.contains('VR') ? "checked" : ""}
+                            ${sessionScope.genreFilter.contains('VR') ? "checked" : ""}
                                        value="VR"><label
                                     for="checkboxFifteenCt"><fmt:message key="main.genre.vr"/></label>
                             </li>
@@ -134,26 +157,26 @@
                         <div class="checkbox-container">
                             <ul class="ks-cboxtags" style="font-size: 10px !important">
                                 <li><input type="checkbox" class="category"
-                                           id="checkboxOne" ${requestScope.categoryFilter.contains('SINGLEPLAYER') ? "checked" : ""}
+                                           id="checkboxOne" ${sessionScope.categoryFilter.contains('SINGLEPLAYER') ? "checked" : ""}
                                            value="SINGLEPLAYER"><label
                                         for="checkboxOne"><fmt:message key="main.category.singleplayer"/></label></li>
                                 <li style="margin-left: 5%"><input type="checkbox" class="category"
-                                                                   id="checkboxTwo" ${requestScope.categoryFilter.contains('MULTIPLAYER') ? "checked" : ""}
+                                                                   id="checkboxTwo" ${sessionScope.categoryFilter.contains('MULTIPLAYER') ? "checked" : ""}
                                                                    value="MULTIPLAYER"><label
                                         for="checkboxTwo"><fmt:message key="main.category.multiplayer"/></label></li>
                                 <li><input type="checkbox" class="category"
-                                           id="checkboxThree" ${requestScope.categoryFilter.contains('COOPERATIVE') ? "checked" : ""}
+                                           id="checkboxThree" ${sessionScope.categoryFilter.contains('COOPERATIVE') ? "checked" : ""}
                                            value="COOPERATIVE"><label
                                         for="checkboxThree"><fmt:message key="main.category.cooperative"/></label>
                                 </li>
                                 <li style="margin-left: 5.5%"><input type="checkbox" class="category"
-                                                                     id="checkboxFour" ${requestScope.categoryFilter.contains('ONLINE_COOP') ? "checked" : ""}
+                                                                     id="checkboxFour" ${sessionScope.categoryFilter.contains('ONLINE_COOP') ? "checked" : ""}
                                                                      value="ONLINE_COOP"><label
                                         for="checkboxFour"><fmt:message key="main.category.onlineCoop"/></label>
                                 </li>
                                 <li style="margin-left: 23% !important;">
                                     <input type="checkbox" class="category"
-                                           id="checkboxFive" ${requestScope.categoryFilter.contains('CONTROLLER_FRIENDLY') ? "checked" : ""}
+                                           id="checkboxFive" ${sessionScope.categoryFilter.contains('CONTROLLER_FRIENDLY') ? "checked" : ""}
                                            value="CONTROLLER_FRIENDLY">
                                     <label for="checkboxFive"><fmt:message
                                             key="main.category.controllerFriendly"/></label></li>
@@ -241,6 +264,10 @@
     }
 </script>
 <script type="text/javascript">
+    function sortSubmit() {
+        document.getElementById('sortForm').submit();
+    }
+
     function connect(idName, className) {
         if (className == 'category')
             $('#categoryFilter').prop('checked', true)

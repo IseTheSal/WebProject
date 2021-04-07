@@ -3,7 +3,6 @@ package by.learning.web.util;
 import by.learning.web.exception.ServiceException;
 
 import javax.imageio.ImageIO;
-import javax.mail.Folder;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

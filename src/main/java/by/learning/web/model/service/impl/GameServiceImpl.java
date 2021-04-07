@@ -148,7 +148,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<Game> filterAllGames(int startPrice, int endPrice, String[] categories, String[] genres) throws ServiceException {
+    public List<Game> filterAllGames(int startPrice, int endPrice, String[] categories, String[] genres, String sortValue) throws ServiceException {
         List<Game> result;
         Set<Game.GameCategory> categorySet = Arrays.stream(categories)
                 .map(category -> Game.GameCategory.valueOf(category.toUpperCase(Locale.ROOT)))
@@ -163,9 +163,30 @@ public class GameServiceImpl implements GameService {
                             && (game.getCategories().containsAll(categorySet))
                             && (game.getGenres().containsAll(genreSet)))
                     .collect(Collectors.toList());
+            orderGameList(result, sortValue);
         } catch (ServiceException e) {
             throw new ServiceException(e);
         }
         return result;
+    }
+
+    @Override
+    public void orderGameList(List<Game> gameList, String sortByValue) {
+        switch (sortByValue) {
+            case "titleAsc" -> {
+                gameList.sort(Comparator.comparing(Game::getTitle));
+            }
+            case "titleDesc" -> {
+                gameList.sort(Comparator.comparing(Game::getTitle));
+                Collections.reverse(gameList);
+            }
+            case "priceAsc" -> {
+                gameList.sort(Comparator.comparing(Game::getPrice));
+            }
+            case "priceDesc" -> {
+                gameList.sort(Comparator.comparing(Game::getPrice));
+                Collections.reverse(gameList);
+            }
+        }
     }
 }

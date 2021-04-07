@@ -41,14 +41,14 @@ public enum CommandType {
     FORGOT_PASSWORD(new ForgotPasswordCommand(new UserServiceImpl())),
     OPEN_RESET_PASSWORD(new OpenResetPasswordCommand(new UserServiceImpl())),
     RESET_PASSWORD(new ResetPasswordCommand(new UserServiceImpl())),
-    DEFINE_PRICE_RANGE(new GameFilterCommand(new GameServiceImpl()));
+    FILTER_GAME(new FilterGameCommand(new GameServiceImpl())),
+    ORDER_GAMES(new OrderGameCommand(new GameServiceImpl()));
 
     private final ActionCommand command;
 
     CommandType(ActionCommand command) {
         this.command = command;
     }
-
 
     /**
      * Get commands.

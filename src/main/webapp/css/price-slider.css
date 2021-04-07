@@ -1,12 +1,7 @@
-
 .slider-labels {
     margin-top: 10px;
 }
 
-/* Functional styling;
- * These styles are required for noUiSlider to function.
- * You don't need to change these rules to apply your design.
- */
 .noUi-target, .noUi-target * {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -29,7 +24,6 @@
     height: 100%;
     position: relative;
     z-index: 1;
-    /* Fix 401 */
 }
 
 .noUi-origin {
@@ -46,8 +40,6 @@
 }
 
 .noUi-stacking .noUi-handle {
-    /* This class is applied to the lower origin when
-       its values is > 50%. */
     z-index: 10;
 }
 
@@ -60,16 +52,11 @@
     cursor: inherit !important;
 }
 
-/* Painting and performance;
- * Browsers can paint handles in their own layer.
- */
 .noUi-base, .noUi-handle {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
 
-/* Slider size and handle placement;
- */
 .noUi-horizontal {
     height: 4px;
 }
@@ -83,8 +70,6 @@
     background-color: #838383;
 }
 
-/* Styling;
- */
 .noUi-background {
     background: #ffffff;
 }
@@ -106,8 +91,6 @@
 .noUi-target.noUi-connect {
 }
 
-/* Handles and cursors;
- */
 .noUi-draggable {
     cursor: w-resize;
 }
@@ -132,8 +115,6 @@
     top: -14px;
 }
 
-/* Disabled state;
- */
 [disabled].noUi-connect, [disabled] .noUi-connect {
     background: #B8B8B8;
 }

@@ -23,6 +23,11 @@ public class SessionAttribute {
     public static final String COUPON_LIST = "couponList";
     public static final String CLIENT_ORDERS_MAP = "clientOrders";
     public static final String USER_SET = "userSet";
+    public static final String GENRE_FILTER = "genreFilter";
+    public static final String CATEGORY_FILTER = "categoryFilter";
+    public static final String MIN_PRICE = "minPrice";
+    public static final String MAX_PRICE = "maxPrice";
+    public static final String SORT_FILTER = "sortBy";
 
     private SessionAttribute() {
     }

@@ -41,7 +41,6 @@ public class AddToCartCommand implements ActionCommand {
                 HashMap<Game, Integer> cartMap = (HashMap<Game, Integer>) session.getAttribute(SessionAttribute.CART_MAP);
                 Game game = (Game) session.getAttribute(SessionAttribute.CURRENT_GAME);
                 orderService.addGameToCart(game, cartMap);
-                session.setAttribute(SessionAttribute.CART_MAP, cartMap);
                 int cartAmount = orderService.countCartAmount(cartMap);
                 session.setAttribute(SessionAttribute.CART_AMOUNT, cartAmount);
             } else {

@@ -31,7 +31,8 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                            style="display:inline; color: black; font-size: 18px; margin-left: 20px">${games.value}</p>
                                         &#120;
                                         <p id="price" class="priceClass"
-                                           style="display:inline; color: black; font-size: 18px">${games.key.price}$</p>
+                                           style="display:inline; color: black; font-size: 18px">
+                                                ${games.key.price}&dollar;</p>
                                     </div>
                                     <form style="display: inline" method="post"
                                           action="${pageContext.request.contextPath}/decreaseCart.do">
@@ -64,8 +65,9 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                                value="${pageContext.request.requestURI}">
                                         <input name="gameId" type="hidden" value="${games.key.id}"/>
                                         <p id="gameTotalPrice" class="gameTotalPrice"
-                                           style="color: black; font-size: 18px">&#48;&dollar;</p>
-                                        <input type="submit" value="x" class="remove" style="cursor: pointer"/>
+                                           style="color: black; font-size: 18px; margin-right: 10%">&#48;&dollar;</p>
+                                        <input type="submit" value="x" class="remove"
+                                               style="cursor: pointer;position: absolute;"/>
                                     </form>
                                 </div>
                             </div>
@@ -136,7 +138,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             e.preventDefault();
             $(this).parent().parent().parent().hide(400);
         })
-
         var cardElements = document.getElementsByClassName("items");
         var size = cardElements.length;
         var totalPriceHtml = document.getElementsByClassName('totalPriceClass');
@@ -154,13 +155,13 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     var amount = cardElements.item(i).getElementsByClassName('amountClass').item(0).innerHTML;
                     var gameTotalPrice = parseFloat(price) * parseInt(amount);
                     totalPrice += gameTotalPrice;
-                    cardElements.item(i).getElementsByClassName('gameTotalPrice').item(0).innerHTML = gameTotalPrice + '$';
+                    cardElements.item(i).getElementsByClassName('gameTotalPrice').item(0).innerHTML = ((gameTotalPrice == 0) ? gameTotalPrice.toPrecision(3) : gameTotalPrice.toPrecision(4)) + '$';
                 }
-                totalPriceHtml.item(0).innerHTML = totalPrice + '$';
+                totalPriceHtml.item(0).innerHTML = ((totalPrice == 0) ? totalPrice.toPrecision(3) : totalPrice.toPrecision(4)) + '$';
                 var discount = ${sessionScope.couponDiscount};
                 document.getElementById('promoText').innerHTML = discount + '%';
                 var innerPrice = totalPrice - totalPrice * discount / 100;
-                innerPrice = innerPrice == 0 ? innerPrice.toPrecision(3) : innerPrice.toPrecision(4);
+                innerPrice = (innerPrice == 0) ? innerPrice.toPrecision(3) : innerPrice.toPrecision(4);
                 billPriceElements.item(0).innerHTML = innerPrice + '$';
             }
         )

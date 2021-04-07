@@ -36,13 +36,13 @@ public class MailSender {
     }
 
     /**
-     * Sent message to User`s email
+     * Send message to User`s email
      *
      * @param recipient User`s email
      * @param gameTitle Game title value
      * @param body      Message body value
      */
-    public void sentMessage(String recipient, String gameTitle, String body) {
+    public void sendMessage(String recipient, String gameTitle, String body) {
         Session session = init();
         try {
             MimeMessage message = new MimeMessage(session);
@@ -57,7 +57,6 @@ public class MailSender {
             logger.log(Level.ERROR, e);
         }
     }
-
 
     private Session init() {
         Session session = Session.getInstance(properties, new Authenticator() {

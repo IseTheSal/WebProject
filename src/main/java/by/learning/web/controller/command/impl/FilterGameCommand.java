@@ -23,13 +23,13 @@ import java.util.List;
  * @author Illia Aheyeu
  * @see by.learning.web.model.entity.Game
  */
-public class GameFilterCommand implements ActionCommand {
+public class FilterGameCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
     private static final String DELIMITER = "\s";
 
     private GameService gameService;
 
-    public GameFilterCommand(GameService gameService) {
+    public FilterGameCommand(GameService gameService) {
         this.gameService = gameService;
     }
 
@@ -43,13 +43,18 @@ public class GameFilterCommand implements ActionCommand {
         String genre = request.getParameter(RequestParameter.GENRE_FILTER);
         String[] genres = genre == null ? new String[]{} : genre.split(DELIMITER);
         try {
-            List<Game> gameList = gameService.filterAllGames(Integer.parseInt(minPrice), Integer.parseInt(maxPrice), categories, genres);
             HttpSession session = request.getSession();
+            Object sortFilter = session.getAttribute(SessionAttribute.SORT_FILTER);
+            String sortValue = "";
+            if (sortFilter != null) {
+                sortValue = (String) sortFilter;
+            }
+            List<Game> gameList = gameService.filterAllGames(Integer.parseInt(minPrice), Integer.parseInt(maxPrice), categories, genres, sortValue);
             session.setAttribute(SessionAttribute.GAME_LIST, gameList);
-            request.setAttribute(RequestParameter.MIN_PRICE, minPrice);
-            request.setAttribute(RequestParameter.MAX_PRICE, maxPrice);
-            request.setAttribute(RequestParameter.CATEGORY_FILTER, Arrays.asList(categories));
-            request.setAttribute(RequestParameter.GENRE_FILTER, Arrays.asList(genres));
+            session.setAttribute(SessionAttribute.MIN_PRICE, minPrice);
+            session.setAttribute(SessionAttribute.MAX_PRICE, maxPrice);
+            session.setAttribute(SessionAttribute.CATEGORY_FILTER, Arrays.asList(categories));
+            session.setAttribute(SessionAttribute.GENRE_FILTER, Arrays.asList(genres));
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);

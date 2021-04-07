@@ -39,7 +39,6 @@ public class ChangeCartAmountCommand implements ActionCommand {
             int gameId = Integer.parseInt(gameIdString);
             String operation = request.getParameter(RequestParameter.OPERATION);
             orderService.changeGameCartAmount(cartMap, gameId, operation);
-            session.setAttribute(SessionAttribute.CART_MAP, cartMap);
             int cartAmount = orderService.countCartAmount(cartMap);
             session.setAttribute(SessionAttribute.CART_AMOUNT, cartAmount);
         } catch (ServiceException e) {

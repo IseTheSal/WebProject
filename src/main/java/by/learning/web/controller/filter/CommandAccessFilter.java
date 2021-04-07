@@ -47,12 +47,12 @@ public class CommandAccessFilter implements Filter {
                 CommandType.FORGOT_PASSWORD,
                 CommandType.OPEN_RESET_PASSWORD,
                 CommandType.RESET_PASSWORD,
-                CommandType.DEFINE_PRICE_RANGE);
-        adminCommands = EnumSet.of(CommandType.CREATE_GAME,
-                CommandType.OPEN_GAME,
+                CommandType.FILTER_GAME,
+                CommandType.ORDER_GAMES);
+        adminCommands = EnumSet.of(
+                CommandType.CREATE_GAME,
                 CommandType.OPEN_GAME_CREATOR,
                 CommandType.FIND_CODE_AMOUNT,
-                CommandType.CHANGE_LOCALE,
                 CommandType.ADD_GAME_CODE,
                 CommandType.OPEN_GAME_EDITOR,
                 CommandType.EDIT_GAME,
@@ -63,17 +63,20 @@ public class CommandAccessFilter implements Filter {
                 CommandType.DELETE_COUPON,
                 CommandType.OPEN_ORDER_LIST,
                 CommandType.OPEN_USER_LIST,
-                CommandType.ADD_ADMIN,
-                CommandType.DEFINE_PRICE_RANGE);
-        clientCommands = EnumSet.of(CommandType.ADD_TO_CART,
-                CommandType.OPEN_GAME,
+                CommandType.ADD_ADMIN);
+        clientCommands = EnumSet.of(
+                CommandType.ADD_TO_CART,
                 CommandType.REMOVE_FROM_CART,
                 CommandType.CHANGE_CART_AMOUNT,
                 CommandType.USE_PROMOCODE,
-                CommandType.MAKE_ORDER,
+                CommandType.MAKE_ORDER);
+        authorizedUserCommands = EnumSet.of(
+                CommandType.HOME,
+                CommandType.OPEN_GAME,
+                CommandType.FILTER_GAME,
                 CommandType.CHANGE_LOCALE,
-                CommandType.DEFINE_PRICE_RANGE);
-        authorizedUserCommands = EnumSet.of(CommandType.LOGOUT,
+                CommandType.ORDER_GAMES,
+                CommandType.LOGOUT,
                 CommandType.CHANGE_EMAIL,
                 CommandType.CHANGE_PASSWORD,
                 CommandType.FIND_ORDER_HISTORY);
@@ -88,16 +91,23 @@ public class CommandAccessFilter implements Filter {
         User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
         String commandValue = req.getParameter(RequestParameter.COMMAND_PARAM);
         if (commandValue == null) {
-            ((HttpServletResponse) response).sendRedirect(PageValue.INDEX);
+            resp.sendRedirect(PageValue.INDEX);
             return;
         }
-        CommandType command = CommandType.valueOf(commandValue.toUpperCase(Locale.ROOT));
+        CommandType command;
+        try {
+            command = CommandType.valueOf(commandValue.toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException ex) {
+            logger.log(Level.DEBUG, ex);
+            resp.sendError(400);
+            return;
+        }
         if (guestCommands.contains(command) && user == null) {
             chain.doFilter(request, response);
             return;
         }
         if (user == null) {
-            logger.log(Level.INFO, "user is null");
+            logger.log(Level.DEBUG, "user is null");
             req.setAttribute(RequestParameter.NEED_AUTHORIZATION_FIRST, true);
             RequestDispatcher requestDispatcher = req.getServletContext().getRequestDispatcher(PageValue.LOGIN_PAGE);
             requestDispatcher.forward(request, response);

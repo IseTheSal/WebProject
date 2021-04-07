@@ -38,6 +38,11 @@ public class HomeCommand implements ActionCommand {
             List<Game> allGames = service.findAllGames();
             HttpSession session = request.getSession();
             session.setAttribute(SessionAttribute.GAME_LIST, allGames);
+            session.removeAttribute(SessionAttribute.CATEGORY_FILTER);
+            session.removeAttribute(SessionAttribute.GENRE_FILTER);
+            session.removeAttribute(SessionAttribute.MIN_PRICE);
+            session.removeAttribute(SessionAttribute.MAX_PRICE);
+            session.removeAttribute(SessionAttribute.SORT_FILTER);
             page = PageValue.MAIN_PAGE;
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

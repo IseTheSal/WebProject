@@ -7,13 +7,6 @@
     user-select: none;
 }
 
-.green-text-shadow {
-    text-shadow: 0 0 5px #aaabaa,
-    0 0 10px #9fa09f,
-    0 0 20px #7c7d7c,
-    0 0 40px #797979;
-}
-
 .purple-text-shadow {
     text-shadow: 0 0 5px #b42ae9,
     0 0 10px #b42ae9,
@@ -76,6 +69,13 @@
     0 0 10px #700000,
     0 0 20px #530000,
     0 0 40px #370000;
+}
+
+.green-text-shadow {
+    text-shadow: 0 0 5px #aaabaa,
+    0 0 10px #9fa09f,
+    0 0 20px #7c7d7c,
+    0 0 40px #797979;
 }
 
 .neon-title-blue {

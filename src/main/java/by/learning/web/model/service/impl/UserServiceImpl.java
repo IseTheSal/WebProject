@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
             }
             MailSender mailSender = new MailSender();
             String body = MAIL_BODY_TITLE + "\n" + RESET_LINK + resetToken + "\n" + WARNING;
-            mailSender.sentMessage(email, PASSWORD_RESET_TITLE, body);
+            mailSender.sendMessage(email, PASSWORD_RESET_TITLE, body);
             info.add(ValidationInformation.SUCCESS.getInfoValue());
         } catch (DaoException e) {
             throw new ServiceException(e);
