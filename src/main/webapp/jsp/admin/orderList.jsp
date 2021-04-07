@@ -72,7 +72,7 @@
                                         </c:forEach>
                                     </c:if>
                                     <c:if test="${empty order.value.gameMap}">
-                                        <label class="neon-title-white">LIST IS EMPTY</label>
+                                        <label class="neon-title-white"><fmt:message key="admin.order.list.empty"/> </label>
                                     </c:if>
                                 </div>
                             </div>

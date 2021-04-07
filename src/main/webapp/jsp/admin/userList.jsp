@@ -69,7 +69,6 @@
                                             <input name="email" id="newEmail${user.id}"
                                                    style="width: 300px; height: 40px; border-width: medium"
                                                    class="form-control"
-                                                   onkeyup="check(document.getElementById('newEmailRepeat${user.id}'), this)"
                                                    placeholder="<fmt:message key="profile.newEmail"/>" required
                                                    type="email"
                                                    maxlength="320">
@@ -87,7 +86,7 @@
                                             <input name="repeatEmail" id="newEmailRepeat${user.id}"
                                                    style="width: 300px; height: 40px; border-width: medium"
                                                    class="form-control"
-                                                   onkeyup="check(this, document.getElementById('newEmail${user.id}'))"
+                                                   onmouseleave="check(this, document.getElementById('newEmail${user.id}'))"
                                                    placeholder="<fmt:message key="profile.newEmailRepeat"/>" required
                                                    type="email"
                                                    maxlength="320">

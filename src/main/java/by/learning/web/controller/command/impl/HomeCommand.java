@@ -25,17 +25,17 @@ import java.util.List;
 public class HomeCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private GameService service;
+    private GameService gameService;
 
     public HomeCommand(GameService service) {
-        this.service = service;
+        this.gameService = service;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         try {
-            List<Game> allGames = service.findAllGames();
+            List<Game> allGames = gameService.findAllGames();
             HttpSession session = request.getSession();
             session.setAttribute(SessionAttribute.GAME_LIST, allGames);
             session.removeAttribute(SessionAttribute.CATEGORY_FILTER);
