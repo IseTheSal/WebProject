@@ -49,7 +49,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-
     <filter>
         <filter-name>RefreshFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.RefreshFilter</filter-class>
@@ -81,7 +80,6 @@
         <url-pattern>/editGame.do</url-pattern>
         <url-pattern>/addAdmin.do</url-pattern>
         <url-pattern>/changeEmail.do</url-pattern>
-
         <url-pattern>/editGame.do</url-pattern>
         <url-pattern>/jsp/admin/createGame.jsp</url-pattern>
         <url-pattern>/createGame.do</url-pattern>
@@ -106,6 +104,5 @@
         <filter-name>CommandAccessFilter</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
-
 </web-app>
 

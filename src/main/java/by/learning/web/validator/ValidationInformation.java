@@ -1,7 +1,7 @@
 package by.learning.web.validator;
 
 /**
- * Enum used to sent feedback about data validation and operation performing
+ * Enum used to send feedback about data validation and operation performing
  */
 public enum ValidationInformation {
     SUCCESS("success"),
