@@ -192,9 +192,9 @@
                     <input type='checkbox' checked="checked" name="genreFilter"
                            style="opacity:0; position:absolute; left:9999px;"
                            id='genreFilter' value="">
-                    <span style="border-bottom: 3px solid; background-color: white !important; color: #c6c6c6 !important; display: block; width: 190px; margin-left: -1%; margin-bottom: 2%"></span>
+                    <span style="border-bottom: 3px solid; background-color: white !important; color: #c6c6c6 !important; display: block; width: 200px; margin-left: -1%; margin-bottom: 2%"></span>
                     <button class="btn btn-outline-success neon-title-green button-border-green"
-                            style="min-width: 4% !important; font-size: 16px; float: right; margin-right: 84%"
+                            style="min-width: 4% !important; font-size: 16px; float: right; margin-right: 83%"
                             onclick="connect('categoryFilter','category'); connect('genreFilter','genre')"
                             type="submit"><fmt:message key="main.apply"/>
                     </button>

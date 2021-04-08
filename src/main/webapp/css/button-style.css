@@ -44,11 +44,11 @@
     min-width: 100%;
 }
 
+
 .button-locale-change {
     background-color: transparent !important;
     border: none;
     border-radius: 35%;
-
 }
 
 .button-locale-change:hover {

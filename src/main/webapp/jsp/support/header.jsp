@@ -19,7 +19,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/modal-window.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/toast-window.css">
 </head>
-
 <body style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%">
 <nav class="navbar fixed-top navbar-dark"
