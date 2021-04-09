@@ -46,14 +46,14 @@ public class UserDaoImpl implements UserDao {
     private static final String FIND_EMAIL_BY_LOGIN = "SELECT email FROM users WHERE users.login = ?";
     private static final String FIND_RESET_TOKEN_BY_EMAIL = "SELECT reset_token " +
             "FROM password_tokens " +
-            "INNER JOIN users u on u.user_id = password_tokens.user_id " +
-            "where email = ?";
+            "INNER JOIN users u ON u.user_id = password_tokens.user_id " +
+            "WHERE email = ?";
     private static final String FIND_TOKEN_ID = "SELECT token_id FROM password_tokens p WHERE p.reset_token = ?";
     private static final String REMOVE_RESET_TOKEN = "DELETE FROM password_tokens WHERE reset_token = ?";
     private static final String FIND_USER_TOKEN_ID = "SELECT users.user_id " +
-            "from users " +
-            "inner join password_tokens pt on users.user_id = pt.user_id " +
-            "where reset_token = ?";
+            "FROM users " +
+            "INNER JOIN password_tokens pt ON users.user_id = pt.user_id " +
+            "WHERE reset_token = ?";
 
 
     UserDaoImpl() {
