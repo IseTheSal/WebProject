@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 /**
- * <p>Command allows users with roles Guest or Client add game to cart</p>
+ * <pre>Command allows users with roles Guest or Client add game to cart</pre>
  *
  * @author Illia Aheyeu
  */

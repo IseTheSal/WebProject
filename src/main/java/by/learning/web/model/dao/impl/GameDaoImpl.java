@@ -5,7 +5,6 @@ import by.learning.web.exception.DaoException;
 import by.learning.web.model.dao.GameDao;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.pool.ConnectionPool;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -162,6 +161,7 @@ public class GameDaoImpl implements GameDao {
                 }
                 isCreated = true;
             }
+            connection.commit();
         } catch (ConnectionPoolException | SQLException ex) {
             rollback(connection);
             throw new DaoException(ex);
@@ -169,9 +169,11 @@ public class GameDaoImpl implements GameDao {
             setAutoCommitTrue(connection);
             close(generatedKeys);
             close(preparedStatement);
+            close(connection);
         }
         return isCreated;
     }
+
 
     private void relateGameCategories(Connection connection, int gameId, int categoryId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(RELATE_GAME_CATEGORY)) {
@@ -283,7 +285,6 @@ public class GameDaoImpl implements GameDao {
 
     @Override
     public boolean editGame(Game game, int[] genresId, int[] categoriesId) throws DaoException {
-        boolean gameEdited;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -297,8 +298,6 @@ public class GameDaoImpl implements GameDao {
             preparedStatement.setString(5, game.getTrailer());
             int gameId = game.getId();
             preparedStatement.setInt(6, gameId);
-            logger.log(Level.DEBUG, categoriesId);
-            logger.log(Level.DEBUG, genresId);
             preparedStatement.executeUpdate();
             deleteAllGameCategories(connection, gameId);
             deleteAllGameGenres(connection, gameId);
@@ -308,7 +307,7 @@ public class GameDaoImpl implements GameDao {
             for (int genreId : genresId) {
                 relateGameGenres(connection, gameId, genreId);
             }
-            gameEdited = true;
+            connection.commit();
         } catch (SQLException | ConnectionPoolException ex) {
             rollback(connection);
             throw new DaoException(ex);
@@ -317,7 +316,7 @@ public class GameDaoImpl implements GameDao {
             close(preparedStatement);
             close(connection);
         }
-        return gameEdited;
+        return true;
     }
 
     private void deleteAllGameCategories(Connection connection, int gameId) throws SQLException {

@@ -7,6 +7,7 @@ import by.learning.web.model.entity.Game;
 import by.learning.web.model.entity.User;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,20 +67,11 @@ public interface OrderDao extends BaseDao {
      * Create {@link ClientOrder}.
      *
      * @param order {@link ClientOrder}
-     * @return <code>true</code> if order was created, otherwise <code>false</code>
+     * @return <code>Hashmap</code> with gamecodes
      * @throws DaoException if {@link java.sql.SQLException} was thrown
      */
-    boolean createOrder(ClientOrder order) throws DaoException;
+    HashMap<Game, List<String>> createOrder(ClientOrder order) throws DaoException;
 
-    /**
-     * Search gamecodes of certain {@link Game}.
-     *
-     * @param gameId id of {@link Game}
-     * @param amount amount of gamecodes for searching
-     * @return <code>List</code> of String with gamecodes
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
-     */
-    List<String> findLimitedGameCodes(int gameId, int amount) throws DaoException;
 
     /**
      * Set <code>false</code> for each gamecode in <code>List</code>.

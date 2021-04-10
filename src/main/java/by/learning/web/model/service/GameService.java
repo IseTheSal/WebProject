@@ -41,8 +41,8 @@ public interface GameService {
      * @param description short {@link Game game} description
      * @param price       {@link Game game} price
      * @param trailerLink {@link Game game} trailer link
-     * @param genres      {@link Game game} {@link by.learning.web.model.entity.Game.GameGenre genres}
-     * @param categories  {@link Game game} {@link by.learning.web.model.entity.Game.GameCategory categories}
+     * @param genres      {@link Game game} {@link Game.Genre genres}
+     * @param categories  {@link Game game} {@link Game.Category categories}
      * @return <code>Set</code> of {@link by.learning.web.validator.ValidationInformation validation info}, if game was created return <code>Set</code> with {@link by.learning.web.validator.ValidationInformation SUCCESS}, otherwise with  {@link by.learning.web.validator.ValidationInformation FAIL}  and another issues information
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
@@ -51,7 +51,7 @@ public interface GameService {
                            String[] genres, String[] categories) throws ServiceException;
 
     /**
-     * Search all {@link Game game} {@link by.learning.web.model.entity.Game.GameGenre genres}.
+     * Search all {@link Game game} {@link Game.Genre genres}.
      *
      * @return <code>HashMap</code> where Integer - genre id, String - genre title
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
@@ -59,7 +59,7 @@ public interface GameService {
     HashMap<Integer, String> findAllGenres() throws ServiceException;
 
     /**
-     * Search all {@link Game game} {@link by.learning.web.model.entity.Game.GameCategory categories}.
+     * Search all {@link Game game} {@link Game.Category categories}.
      *
      * @return <code>HashMap</code> where Integer - category id, String - category title
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
@@ -67,7 +67,7 @@ public interface GameService {
     HashMap<Integer, String> findAllCategories() throws ServiceException;
 
     /**
-     * Search certain {@link Game game} {@link by.learning.web.model.entity.Game.GameCategory categories}.
+     * Search certain {@link Game game} {@link Game.Category categories}.
      *
      * @param gameId id of certain {@link Game game}
      * @return <code>HashMap</code> where Integer - category id, String - category title
@@ -76,7 +76,7 @@ public interface GameService {
     HashMap<Integer, String> findGameCategories(int gameId) throws ServiceException;
 
     /**
-     * Search certain {@link Game game} {@link by.learning.web.model.entity.Game.GameGenre genres}.
+     * Search certain {@link Game game} {@link Game.Genre genres}.
      *
      * @param gameId id of certain {@link Game game}
      * @return <code>HashMap</code> where Integer - genre id, String - genre title
@@ -93,8 +93,8 @@ public interface GameService {
      * @param description short {@link Game game} description
      * @param priceValue  {@link Game game} price
      * @param trailerLink {@link Game game} trailer link
-     * @param genres      {@link Game game} {@link by.learning.web.model.entity.Game.GameGenre genres}
-     * @param categories  {@link Game game} {@link by.learning.web.model.entity.Game.GameCategory categories}
+     * @param genres      {@link Game game} {@link Game.Genre genres}
+     * @param categories  {@link Game game} {@link Game.Category categories}
      * @return <code>Set</code> of {@link by.learning.web.validator.ValidationInformation validation info}, if game was edited return <code>Set</code> with {@link by.learning.web.validator.ValidationInformation SUCCESS}, otherwise with  {@link by.learning.web.validator.ValidationInformation FAIL}  and another issues information
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */

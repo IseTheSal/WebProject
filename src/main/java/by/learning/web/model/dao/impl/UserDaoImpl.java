@@ -55,7 +55,6 @@ public class UserDaoImpl implements UserDao {
             "INNER JOIN password_tokens pt ON users.user_id = pt.user_id " +
             "WHERE reset_token = ?";
 
-
     UserDaoImpl() {
     }
 

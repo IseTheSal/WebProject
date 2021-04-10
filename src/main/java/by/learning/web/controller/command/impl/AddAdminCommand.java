@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
 /**
- * <p>Command allows users with Admin role add new admin.</p>
+ * <pre>Command allows users with Admin role add new admin.</pre>
  *
  * @author Illia Aheyeu
  */

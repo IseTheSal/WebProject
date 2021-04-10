@@ -44,11 +44,6 @@ public class OrderDaoImpl implements OrderDao {
     private static final String FIND_COUPON_DISCOUNT = "SELECT discount " +
             "FROM coupons " +
             "WHERE code = ?;";
-    private static final String FIND_LIMITED_GAME_CODE = "SELECT game_code " +
-            "FROM codes " +
-            "WHERE sold IS FALSE " +
-            "  AND game_id = ? " +
-            "LIMIT ?";
     private static final String SET_CODE_SOLD_TRUE = "UPDATE codes " +
             "SET sold = TRUE " +
             "WHERE game_code = ?";
@@ -74,6 +69,10 @@ public class OrderDaoImpl implements OrderDao {
     private static final String FIND_ALL_COUPONS = "SELECT coupon_id, code, discount, amount FROM coupons";
     private static final String CREATE_COUPON = "INSERT INTO coupons(coupon_id, code, discount, amount) VALUES (default, ?, ?, ?)";
     private static final String DELETE_COUPON = "DELETE FROM coupons WHERE code = ?";
+    private static final String FIND_NEW_ORDER_GAMECODES = "UPDATE codes " +
+            "SET sold = TRUE " +
+            "WHERE game_code = (SELECT game_code FROM codes WHERE sold = false and game_id = ? LIMIT 1) " +
+            "RETURNING game_code;";
 
 
     OrderDaoImpl() {
@@ -238,7 +237,8 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public boolean createOrder(ClientOrder order) throws DaoException {
+    public HashMap<Game, List<String>> createOrder(ClientOrder order) throws DaoException {
+        HashMap<Game, List<String>> clientGameCodes = new HashMap<>();
         boolean isCreated = false;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -263,15 +263,22 @@ public class OrderDaoImpl implements OrderDao {
                 Set<Game> keySet = new HashSet<>(gameMap.keySet());
                 int orderId = generatedKeys.getInt(1);
                 for (Game game : keySet) {
-                    int value = gameMap.get(game);
+                    int amount = gameMap.get(game);
                     int i = 0;
-                    while (i < value && executed) {
+                    List<String> orderGameCodes = findOrderGameCodes(connection, game.getId(), amount);
+                    if (orderGameCodes.size() < amount) {
+                        connection.rollback();
+                        return new HashMap<>();
+                    } else {
+                        clientGameCodes.put(game, orderGameCodes);
+                    }
+                    while (i < amount && executed) {
                         executed = relateGameOrder(connection, game.getId(), orderId);
                         i++;
                     }
                 }
-                isCreated = executed;
             }
+            connection.commit();
         } catch (ConnectionPoolException | SQLException e) {
             rollback(connection);
             throw new DaoException(e);
@@ -279,8 +286,9 @@ public class OrderDaoImpl implements OrderDao {
             setAutoCommitTrue(connection);
             close(generatedKeys);
             close(preparedStatement);
+            close(connection);
         }
-        return isCreated;
+        return clientGameCodes;
     }
 
     private boolean relateGameOrder(Connection connection, int gameId, int orderId) throws SQLException {
@@ -292,23 +300,22 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
-    @Override
-    public List<String> findLimitedGameCodes(int gameId, int amount) throws DaoException {
+    private List<String> findOrderGameCodes(Connection connection, int gameId, int amount) throws SQLException {
         List<String> result = new ArrayList<>();
-        ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.takeConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_LIMITED_GAME_CODE)) {
-            preparedStatement.setInt(1, gameId);
-            preparedStatement.setInt(2, amount);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String code = resultSet.getString(1);
-                result.add(code);
+        for (int i = 0; i < amount; i++) {
+            ResultSet resultSet = null;
+            try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_NEW_ORDER_GAMECODES)) {
+                preparedStatement.setInt(1, gameId);
+                resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    String code = resultSet.getString(1);
+                    result.add(code);
+                } else {
+                    return new ArrayList<>();
+                }
+            } finally {
+                close(resultSet);
             }
-        } catch (SQLException | ConnectionPoolException ex) {
-            throw new DaoException(ex);
-        } finally {
-            close(resultSet);
         }
         return result;
     }

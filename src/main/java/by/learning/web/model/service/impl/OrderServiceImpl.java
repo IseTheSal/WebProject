@@ -247,11 +247,33 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean createOrder(int userId, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
+    public boolean createOrder(User user, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
         if (cartMap.isEmpty()) {
             return false;
         }
         boolean isCreated = false;
+        boolean amountValid = isAmountValid(cartMap);
+        if (amountValid) {
+            BigDecimal orderPrice = countOrderPrice(cartMap);
+            BigDecimal totalPrice = countPriceDiscount(orderPrice, coupon);
+            ClientOrder order = new ClientOrder(user.getId(), cartMap, totalPrice);
+            order.setCoupon(coupon);
+            try {
+                HashMap<Game, List<String>> clientOrderGameCodes = orderDao.createOrder(order);
+                if (!clientOrderGameCodes.isEmpty()) {
+                    sendGameCodeToUser(clientOrderGameCodes, user);
+                    isCreated = true;
+                } else {
+                    isAmountValid(cartMap);
+                }
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return isCreated;
+    }
+
+    private boolean isAmountValid(HashMap<Game, Integer> cartMap) throws ServiceException {
         List<Game> gameList = new ArrayList<>(cartMap.keySet());
         boolean amountValid = true;
         for (Game game : gameList) {
@@ -266,38 +288,17 @@ public class OrderServiceImpl implements OrderService {
                 }
             }
         }
-        if (amountValid) {
-            BigDecimal orderPrice = countOrderPrice(cartMap);
-            BigDecimal totalPrice = countPriceDiscount(orderPrice, coupon);
-            ClientOrder order = new ClientOrder(userId, cartMap, totalPrice);
-            order.setCoupon(coupon);
-            try {
-                isCreated = orderDao.createOrder(order);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
-        }
-        return isCreated;
+        return amountValid;
     }
 
-    @Override
-    public void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException {
-        List<Game> gameList = new ArrayList<>(cartMap.keySet());
-        for (Game game : gameList) {
-            Integer amount = cartMap.get(game);
-            try {
-                List<String> gameCodeList = orderDao.findLimitedGameCodes(game.getId(), amount);
-                if (!gameCodeList.isEmpty()) {
-                    orderDao.putSoldGameCodeList(gameCodeList);
-                }
-                MailSender mailSender = new MailSender();
-                String body = convertCodeListToMessage(gameCodeList);
-                String email = user.getEmail();
-                String title = game.getTitle();
-                mailSender.sendMessage(email, title, body);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
+    private void sendGameCodeToUser(HashMap<Game, List<String>> gameCodeMap, User user) {
+        for (Game game : gameCodeMap.keySet()) {
+            List<String> gameCodes = gameCodeMap.get(game);
+            MailSender mailSender = new MailSender();
+            String body = convertCodeListToMessage(gameCodes);
+            String email = user.getEmail();
+            String title = game.getTitle();
+            mailSender.sendMessage(email, title, body);
         }
     }
 

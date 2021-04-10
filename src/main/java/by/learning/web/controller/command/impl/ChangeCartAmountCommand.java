@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 /**
- * <p>Command allows users with roles Guest or Client change (increase/decrease) game from their cart.</p>
+ * <pre>Command allows users with roles Guest or Client change (increase/decrease) game from their cart.</pre>
  *
  * @author Illia Aheyeu
  */

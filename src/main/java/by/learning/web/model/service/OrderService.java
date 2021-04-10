@@ -94,13 +94,13 @@ public interface OrderService {
     /**
      * Create {@link ClientOrder order}.
      *
-     * @param userId  {@link User user id}
+     * @param user    {@link User user}
      * @param cartMap Client cart, where <code>Integer</code> is total amount of certain {@link Game game}
      * @param coupon  {@link Coupon} with discount
      * @return <code>true</code> if order was created, otherwise <code>false</code>
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
-    boolean createOrder(int userId, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException;
+    boolean createOrder(User user, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException;
 
     /**
      * Decrease {@link Coupon} amount.
@@ -138,15 +138,6 @@ public interface OrderService {
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
     boolean decreaseAvailableCouponAmount(String codeName, int decreaseAmount) throws ServiceException;
-
-    /**
-     * Sent gamecodes to user`s email.
-     *
-     * @param cartMap Client cart, where <code>Integer</code> is total amount of certain {@link Game game}
-     * @param user    Client, whom made order
-     * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
-     */
-    void sendGameCodeToUser(HashMap<Game, Integer> cartMap, User user) throws ServiceException;
 
     /**
      * Search order history of Client.

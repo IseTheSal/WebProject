@@ -16,7 +16,7 @@ import java.util.Locale;
 import java.util.Set;
 
 /**
- * <p>Command allows users with Admin role add gamecode of existing game</p>
+ * <pre>Command allows users with Admin role add gamecode of existing game</pre>
  *
  * @author Illia Aheyeu
  */

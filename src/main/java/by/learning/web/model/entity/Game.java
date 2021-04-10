@@ -18,8 +18,8 @@ public class Game {
     private String imagePath;
     private BigDecimal price;
     private String trailer;
-    private Set<GameGenre> genres = EnumSet.noneOf(GameGenre.class);
-    private Set<GameCategory> categories = EnumSet.noneOf(GameCategory.class);
+    private Set<Genre> genres = EnumSet.noneOf(Genre.class);
+    private Set<Category> categories = EnumSet.noneOf(Category.class);
 
     /**
      * Game genres enum.
@@ -27,7 +27,7 @@ public class Game {
      * @author Illia Aheyeu
      * @see Game
      */
-    public enum GameGenre {
+    public enum Genre {
         ACTION,
         ADVENTURE,
         ARCADE,
@@ -52,11 +52,11 @@ public class Game {
          * @param genreString Genres string
          * @return <code>Set</code> of genres
          */
-        private static Set<GameGenre> convertFromString(String genreString) {
-            Set<GameGenre> result = EnumSet.noneOf(GameGenre.class);
+        private static Set<Genre> convertFromString(String genreString) {
+            Set<Genre> result = EnumSet.noneOf(Genre.class);
             String[] genreArray = genreString.split(DELIMITER);
             for (String genre : genreArray) {
-                GameGenre gameGenre = GameGenre.valueOf(genre.toUpperCase(Locale.ROOT));
+                Genre gameGenre = Genre.valueOf(genre.toUpperCase(Locale.ROOT));
                 result.add(gameGenre);
             }
             return result;
@@ -69,7 +69,7 @@ public class Game {
      * @author Illia Aheyeu
      * @see Game
      */
-    public enum GameCategory {
+    public enum Category {
         SINGLEPLAYER,
         MULTIPLAYER,
         COOPERATIVE,
@@ -84,14 +84,14 @@ public class Game {
          * @param categoryString Genres string
          * @return <code>Set</code> of categories
          */
-        private static Set<GameCategory> convertFromString(String categoryString) {
-            Set<GameCategory> result = EnumSet.noneOf(GameCategory.class);
+        private static Set<Category> convertFromString(String categoryString) {
+            Set<Category> result = EnumSet.noneOf(Category.class);
             if (categoryString == null || categoryString.isBlank()) {
                 return result;
             }
             String[] categoryArray = categoryString.split(DELIMITER);
             for (String category : categoryArray) {
-                GameCategory gameCategory = GameCategory.valueOf(category.toUpperCase(Locale.ROOT));
+                Category gameCategory = Category.valueOf(category.toUpperCase(Locale.ROOT));
                 result.add(gameCategory);
             }
             return result;
@@ -128,8 +128,8 @@ public class Game {
         this.imagePath = imagePath;
         this.price = price;
         this.trailer = trailer;
-        this.genres = GameGenre.convertFromString(genreString);
-        this.categories = GameCategory.convertFromString(categoryString);
+        this.genres = Genre.convertFromString(genreString);
+        this.categories = Category.convertFromString(categoryString);
     }
 
     public Game(int id, String title, String imagePath, BigDecimal price, String genreString, String categoryString) {
@@ -137,8 +137,8 @@ public class Game {
         this.title = title;
         this.imagePath = imagePath;
         this.price = price;
-        this.genres = GameGenre.convertFromString(genreString);
-        this.categories = GameCategory.convertFromString(categoryString);
+        this.genres = Genre.convertFromString(genreString);
+        this.categories = Category.convertFromString(categoryString);
     }
 
     public int getId() {
@@ -169,27 +169,27 @@ public class Game {
         this.imagePath = imagePath;
     }
 
-    public Set<GameGenre> getGenres() {
+    public Set<Genre> getGenres() {
         return Set.copyOf(genres);
     }
 
-    public void setGenres(EnumSet<GameGenre> genres) {
+    public void setGenres(EnumSet<Genre> genres) {
         this.genres = genres;
     }
 
-    public boolean addGenre(GameGenre genre) {
+    public boolean addGenre(Genre genre) {
         return genres.add(genre);
     }
 
-    public Set<GameCategory> getCategories() {
+    public Set<Category> getCategories() {
         return Set.copyOf(categories);
     }
 
-    public void setCategories(EnumSet<GameCategory> categories) {
+    public void setCategories(EnumSet<Category> categories) {
         this.categories = categories;
     }
 
-    public boolean addCategory(GameCategory category) {
+    public boolean addCategory(Category category) {
         return categories.add(category);
     }
 

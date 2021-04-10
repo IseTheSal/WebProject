@@ -150,12 +150,12 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<Game> filterAllGames(int startPrice, int endPrice, String[] categories, String[] genres, String sortValue) throws ServiceException {
         List<Game> result;
-        Set<Game.GameCategory> categorySet = Arrays.stream(categories)
-                .map(category -> Game.GameCategory.valueOf(category.toUpperCase(Locale.ROOT)))
-                .collect(Collectors.toCollection(() -> EnumSet.noneOf(Game.GameCategory.class)));
-        Set<Game.GameGenre> genreSet = Arrays.stream(genres)
-                .map(category -> Game.GameGenre.valueOf(category.toUpperCase(Locale.ROOT)))
-                .collect(Collectors.toCollection(() -> EnumSet.noneOf(Game.GameGenre.class)));
+        Set<Game.Category> categorySet = Arrays.stream(categories)
+                .map(category -> Game.Category.valueOf(category.toUpperCase(Locale.ROOT)))
+                .collect(Collectors.toCollection(() -> EnumSet.noneOf(Game.Category.class)));
+        Set<Game.Genre> genreSet = Arrays.stream(genres)
+                .map(category -> Game.Genre.valueOf(category.toUpperCase(Locale.ROOT)))
+                .collect(Collectors.toCollection(() -> EnumSet.noneOf(Game.Genre.class)));
         try {
             result = findAllGames().stream()
                     .filter(game -> (game.getPrice().setScale(0, RoundingMode.FLOOR).intValue() >= startPrice)
