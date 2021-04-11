@@ -85,6 +85,7 @@
         <url-pattern>/createGame.do</url-pattern>
         <url-pattern>/resetPassword.do</url-pattern>
         <url-pattern>/forgotPassword.do</url-pattern>
+        <url-pattern>/increaseBalance.do</url-pattern>
     </filter-mapping>
 
     <filter>

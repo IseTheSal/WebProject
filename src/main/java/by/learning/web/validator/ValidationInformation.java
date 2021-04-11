@@ -25,7 +25,10 @@ public enum ValidationInformation {
     FIRSTNAME_INCORRECT("firstname is incorrect"),
     SECONDNAME_INCORRECT("secondname is incorrect"),
     LOGIN_OR_EMAIL_EXIST("This login or email already exists"),
-    USER_NOT_FOUND("User not found");
+    USER_NOT_FOUND("User not found"),
+    CART_EMPTY("Cart is empty"),
+    CART_AMOUNT_INVALID("Invalid cart amount"),
+    USER_BALANCE_INVALID("Invalid user balance");
 
     private final String value;
 

@@ -26,14 +26,12 @@ public class DateTag extends TagSupport {
     public int doStartTag() {
         HttpSession session = pageContext.getSession();
         User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
-        if (user != null) {
-            if (user.getRole() == User.Role.ADMIN) {
-                try {
-                    JspWriter out = pageContext.getOut();
-                    out.write("<label>" + user.getRole() + ".\s" + LocalDate.now() + "</label>");
-                } catch (IOException e) {
-                    logger.log(Level.ERROR, e);
-                }
+        if (user.getRole() == User.Role.ADMIN) {
+            try {
+                JspWriter out = pageContext.getOut();
+                out.write("<label>" + user.getRole() + ".\s" + LocalDate.now() + "</label>");
+            } catch (IOException e) {
+                logger.log(Level.ERROR, e);
             }
         }
         return SKIP_BODY;

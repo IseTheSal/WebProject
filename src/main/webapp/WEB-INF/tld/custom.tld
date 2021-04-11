@@ -12,4 +12,10 @@
         <tag-class>by.learning.web.controller.tag.DateTag</tag-class>
         <body-content>empty</body-content>
     </tag>
+
+    <tag>
+        <name>clientBalance</name>
+        <tag-class>by.learning.web.controller.tag.BalanceTag</tag-class>
+        <body-content>empty</body-content>
+    </tag>
 </taglib>

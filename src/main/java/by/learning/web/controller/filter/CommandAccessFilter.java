@@ -69,7 +69,8 @@ public class CommandAccessFilter implements Filter {
                 CommandType.REMOVE_FROM_CART,
                 CommandType.CHANGE_CART_AMOUNT,
                 CommandType.USE_PROMOCODE,
-                CommandType.MAKE_ORDER);
+                CommandType.MAKE_ORDER,
+                CommandType.INCREASE_BALANCE);
         authorizedUserCommands = EnumSet.of(
                 CommandType.HOME,
                 CommandType.OPEN_GAME,

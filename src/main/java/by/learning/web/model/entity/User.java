@@ -1,5 +1,7 @@
 package by.learning.web.model.entity;
 
+import java.math.BigDecimal;
+
 /**
  * User entity.
  *
@@ -12,6 +14,7 @@ public class User {
     private String lastname;
     private String email;
     private Role role;
+    private BigDecimal balance;
 
     /**
      * Enum user`s roles.
@@ -85,6 +88,14 @@ public class User {
         this.role = role;
     }
 
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,7 +108,8 @@ public class User {
         if (firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) return false;
         if (lastname != null ? !lastname.equals(user.lastname) : user.lastname != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        return role == user.role;
+        if (role != user.role) return false;
+        return balance != null ? balance.equals(user.balance) : user.balance == null;
     }
 
     @Override
@@ -108,6 +120,7 @@ public class User {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (balance != null ? balance.hashCode() : 0);
         return result;
     }
 
@@ -120,6 +133,7 @@ public class User {
         sb.append(", lastname='").append(lastname).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", role=").append(role);
+        sb.append(", balance=").append(balance);
         sb.append('}');
         return sb.toString();
     }

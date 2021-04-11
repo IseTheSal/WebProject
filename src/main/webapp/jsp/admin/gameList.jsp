@@ -40,7 +40,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             <tr>
                 <th scope="col"><fmt:message key="admin.games.list.game.title"/></th>
                 <th scope="col"><fmt:message key="admin.games.list.game.price"/></th>
-                <th scope="col"><fmt:message key="admin.games.list.game.amount"/></th>
+                <th scope="col" data-sortable="false"><fmt:message key="admin.games.list.game.amount"/></th>
                 <th scope="col" data-sortable="false"></th>
             </tr>
             </thead>

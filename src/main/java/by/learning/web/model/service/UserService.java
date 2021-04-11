@@ -3,6 +3,7 @@ package by.learning.web.model.service;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.User;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
 
@@ -108,4 +109,23 @@ public interface UserService {
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
     boolean isTokenExist(String resetToken) throws ServiceException;
+
+    /**
+     * Increase user balance.
+     *
+     * @param userId {@link User user} id
+     * @param money  increased value
+     * @return <code>true</code> if balance was increased, otherwise <code>false</code>
+     * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
+     */
+    boolean increaseUserBalance(int userId, String money) throws ServiceException;
+
+    /**
+     * Find user balance.
+     *
+     * @param userId {@link User user} id
+     * @return User money balance
+     * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
+     */
+    BigDecimal findUserBalance(int userId) throws ServiceException;
 }

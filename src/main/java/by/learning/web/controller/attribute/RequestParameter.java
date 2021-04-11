@@ -64,6 +64,8 @@ public class RequestParameter {
     public static final String GENRE_FILTER = "genreFilter";
     public static final String CATEGORY_FILTER = "categoryFilter";
     public static final String SORT_FILTER = "sortBy";
+    public static final String MONEY_AMOUNT = "moneyAmount";
+    public static final String INVALID_BALANCE = "invalidBalance";
 
     private RequestParameter() {
     }

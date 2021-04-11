@@ -73,6 +73,10 @@ public class OrderDaoImpl implements OrderDao {
             "SET sold = TRUE " +
             "WHERE game_code = (SELECT game_code FROM codes WHERE sold = false and game_id = ? LIMIT 1) " +
             "RETURNING game_code;";
+    private static final String INCREASE_BALANCE = "UPDATE users " +
+            "SET balance = balance - ? " +
+            "WHERE user_id = ? " +
+            "  AND ((balance - ?) >= 0);";
 
 
     OrderDaoImpl() {
@@ -238,22 +242,29 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public HashMap<Game, List<String>> createOrder(ClientOrder order) throws DaoException {
+
         HashMap<Game, List<String>> clientGameCodes = new HashMap<>();
-        boolean isCreated = false;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet generatedKeys = null;
         try {
             connection = CONNECTION_POOL.takeConnection();
             connection.setAutoCommit(false);
+            int userId = order.getUserId();
+            BigDecimal totalPrice = order.getPrice();
+            boolean decreasedBalance = decreaseBalance(connection, userId, totalPrice);
+            if (!decreasedBalance) {
+                rollback(connection);
+                return new HashMap<>();
+            }
             if (order.getCoupon() == null) {
                 preparedStatement = connection.prepareStatement(INSERT_ORDER_WITHOUT_COUPON, Statement.RETURN_GENERATED_KEYS);
             } else {
                 preparedStatement = connection.prepareStatement(INSERT_ORDER_WITH_COUPON, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setInt(3, order.getCoupon().getId());
             }
-            preparedStatement.setInt(1, order.getUserId());
-            preparedStatement.setBigDecimal(2, order.getPrice());
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setBigDecimal(2, totalPrice);
             int executeUpdate = preparedStatement.executeUpdate();
             if (executeUpdate > 0) {
                 generatedKeys = preparedStatement.getGeneratedKeys();
@@ -289,6 +300,16 @@ public class OrderDaoImpl implements OrderDao {
             close(connection);
         }
         return clientGameCodes;
+    }
+
+    private boolean decreaseBalance(Connection connection, int userId, BigDecimal orderPrice) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(INCREASE_BALANCE)) {
+            preparedStatement.setBigDecimal(1, orderPrice);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.setBigDecimal(3, orderPrice);
+            int executeUpdate = preparedStatement.executeUpdate();
+            return (executeUpdate > 0);
+        }
     }
 
     private boolean relateGameOrder(Connection connection, int gameId, int orderId) throws SQLException {

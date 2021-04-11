@@ -28,6 +28,7 @@ public class SessionAttribute {
     public static final String MIN_PRICE = "minPrice";
     public static final String MAX_PRICE = "maxPrice";
     public static final String SORT_FILTER = "sortBy";
+    public static final String USER_BALANCE = "userBalance";
 
     private SessionAttribute() {
     }

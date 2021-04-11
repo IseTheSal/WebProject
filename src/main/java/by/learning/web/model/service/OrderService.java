@@ -97,10 +97,10 @@ public interface OrderService {
      * @param user    {@link User user}
      * @param cartMap Client cart, where <code>Integer</code> is total amount of certain {@link Game game}
      * @param coupon  {@link Coupon} with discount
-     * @return <code>true</code> if order was created, otherwise <code>false</code>
+     * @return <code>Set</code> of {@link by.learning.web.validator.ValidationInformation validation info}, if order was created return <code>Set</code> with {@link by.learning.web.validator.ValidationInformation SUCCESS}, otherwise with  {@link by.learning.web.validator.ValidationInformation FAIL}  and another issues information
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
-    boolean createOrder(User user, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException;
+    Set<String> createOrder(User user, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException;
 
     /**
      * Decrease {@link Coupon} amount.

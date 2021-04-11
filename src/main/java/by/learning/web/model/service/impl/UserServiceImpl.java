@@ -8,12 +8,14 @@ import by.learning.web.model.entity.User;
 import by.learning.web.model.service.UserService;
 import by.learning.web.util.CryptEncoder;
 import by.learning.web.util.MailSender;
+import by.learning.web.validator.GameValidator;
 import by.learning.web.validator.UserValidator;
 import by.learning.web.validator.ValidationInformation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -213,5 +215,33 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
         return info;
+    }
+
+    @Override
+    public boolean increaseUserBalance(int userId, String money) throws ServiceException {
+        boolean priceValid = GameValidator.isPriceValid(money);
+        if (!priceValid) {
+            return false;
+        }
+        boolean isIncreased;
+        try {
+            BigDecimal moneyValue = new BigDecimal(money);
+            isIncreased = userDao.increaseClientBalance(userId, moneyValue);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return isIncreased;
+    }
+
+    @Override
+    public BigDecimal findUserBalance(int userId) throws ServiceException {
+        BigDecimal balance;
+        try {
+            Optional<BigDecimal> userBalance = userDao.findUserBalance(userId);
+            balance = userBalance.orElseGet(() -> new BigDecimal("0.00"));
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return balance;
     }
 }

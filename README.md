@@ -8,7 +8,7 @@
   * View and search games
   * Search games by name, price, genres, categories
   * Sort by specific values
-  * Reset password
+  * Reset password  
 * GUEST
   * Authentication & authorization
   * Registration
@@ -27,5 +27,6 @@
   * Change email
   * Change password
   * Find order history
+  * Increase money balance
 
   

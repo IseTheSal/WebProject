@@ -39,7 +39,8 @@ public enum CommandType {
     OPEN_RESET_PASSWORD(new OpenResetPasswordCommand()),
     RESET_PASSWORD(new ResetPasswordCommand()),
     FILTER_GAME(new FilterGameCommand()),
-    ORDER_GAMES(new OrderGameCommand());
+    ORDER_GAMES(new OrderGameCommand()),
+    INCREASE_BALANCE(new IncreaseBalanceCommand());
 
     private final ActionCommand command;
 

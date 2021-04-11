@@ -10,6 +10,7 @@ import by.learning.web.model.entity.Game;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.OrderService;
 import by.learning.web.model.service.impl.ServiceInstance;
+import by.learning.web.validator.ValidationInformation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * <pre>Command provides users with role Client process their order and sent gamecodes to their emails.</pre>
@@ -68,14 +70,14 @@ public class MakeOrderCommand implements ActionCommand {
                     return page;
                 }
             } catch (ServiceException e) {
-                request.setAttribute(RequestParameter.SERVER_ERROR, true);
                 logger.log(Level.ERROR, e);
+                request.setAttribute(RequestParameter.SERVER_ERROR, true);
             }
         }
         try {
             User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
-            boolean isOrderCreated = orderService.createOrder(user, cartMap, coupon);
-            if (isOrderCreated) {
+            Set<String> orderCreationInfo = orderService.createOrder(user, cartMap, coupon);
+            if (orderCreationInfo.contains(ValidationInformation.SUCCESS.getInfoValue())) {
                 request.setAttribute(RequestParameter.ORDER_CREATED, true);
                 int cartAmount = 0;
                 session.setAttribute(SessionAttribute.CART_AMOUNT, cartAmount);
@@ -84,16 +86,20 @@ public class MakeOrderCommand implements ActionCommand {
                 session.setAttribute(SessionAttribute.COUPON_DISCOUNT, newDiscount);
                 session.removeAttribute(SessionAttribute.COUPON);
                 page = PageValue.INDEX;
-            } else {
-                session.setAttribute(SessionAttribute.CART_AMOUNT, orderService.countCartAmount(cartMap));
-                request.setAttribute(RequestParameter.CART_AMOUNT_CHANGED, true);
-            }
-            if ((coupon != null) && !isOrderCreated) {
-                orderService.increaseCouponAmount(coupon.getCodeName(), 1);
+            } else if (orderCreationInfo.remove(ValidationInformation.FAIL.getInfoValue())) {
+                if ((coupon != null)) {
+                    orderService.increaseCouponAmount(coupon.getCodeName(), 1);
+                }
+                if (orderCreationInfo.contains(ValidationInformation.CART_AMOUNT_INVALID.getInfoValue())) {
+                    session.setAttribute(SessionAttribute.CART_AMOUNT, orderService.countCartAmount(cartMap));
+                    request.setAttribute(RequestParameter.CART_AMOUNT_CHANGED, true);
+                } else {
+                    request.setAttribute(RequestParameter.INVALID_BALANCE, true);
+                }
             }
         } catch (ServiceException e) {
-            request.setAttribute(RequestParameter.SERVER_ERROR, true);
             logger.log(Level.ERROR, e);
+            request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }
         return page;
     }

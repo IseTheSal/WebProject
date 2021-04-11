@@ -181,6 +181,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
             if (couponDismissed) {
                 funcBtns.alertWarning('<fmt:message key="cart.couponDismiss"/>');
             }
+            var invalidBalance = ${not empty requestScope.invalidBalance};
+            if (invalidBalance) {
+                funcBtns.alertWarning('<fmt:message key="cart.invalid.balance"/>');
+            }
         });
     </script>
     <script>

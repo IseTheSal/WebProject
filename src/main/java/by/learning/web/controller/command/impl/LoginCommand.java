@@ -40,6 +40,7 @@ public class LoginCommand implements ActionCommand {
                 User currentUser = user.get();
                 HttpSession session = request.getSession(true);
                 session.setAttribute(SessionAttribute.CURRENT_USER, currentUser);
+                session.setAttribute(SessionAttribute.USER_BALANCE, currentUser.getBalance());
                 if (currentUser.getRole() == User.Role.ADMIN) {
                     session.removeAttribute(SessionAttribute.CART_MAP);
                     session.removeAttribute(SessionAttribute.CART_AMOUNT);

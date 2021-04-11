@@ -3,6 +3,7 @@ package by.learning.web.model.dao;
 import by.learning.web.exception.DaoException;
 import by.learning.web.model.entity.User;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public interface UserDao extends BaseDao {
      * @param login    {@link User user} login value
      * @param password {@link User user} login value
      * @return Optional {@link User user}
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     Optional<User> findUser(String login, String password) throws DaoException;
 
@@ -29,7 +30,7 @@ public interface UserDao extends BaseDao {
      * @param user          {@link User user}
      * @param cryptPassword encrypted {@link User user} password
      * @return <code>true</code> if user successfully was created, otherwise <code>false</code>
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      * @see by.learning.web.util.CryptEncoder
      */
     boolean addUser(User user, String cryptPassword) throws DaoException;
@@ -40,7 +41,7 @@ public interface UserDao extends BaseDao {
      * @param userId {@link User user} id
      * @param email  new {@link User user} email
      * @return <code>true</code> if email successfully was changed, otherwise <code>false</code>
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     boolean changeUserEmail(int userId, String email) throws DaoException;
 
@@ -49,7 +50,7 @@ public interface UserDao extends BaseDao {
      *
      * @param userId {@link User user} id
      * @return Optional encrypted password
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      * @see by.learning.web.util.CryptEncoder
      */
     Optional<String> findUserPassword(int userId) throws DaoException;
@@ -60,7 +61,7 @@ public interface UserDao extends BaseDao {
      * @param userId      {@link User user} id
      * @param newPassword encrypted {@link User user} password
      * @return <code>true</code> if password successfully was changed, otherwise <code>false</code>
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      * @see by.learning.web.util.CryptEncoder
      */
     boolean changeUserPassword(int userId, String newPassword) throws DaoException;
@@ -69,7 +70,7 @@ public interface UserDao extends BaseDao {
      * Search all users with role Client.
      *
      * @return <code>Set</code> of clients
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      * @see User.Role
      */
     Set<User> findAllClients() throws DaoException;
@@ -78,7 +79,7 @@ public interface UserDao extends BaseDao {
      * Search all users.
      *
      * @return <code>Set</code> of users
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     Set<User> findAllUsers() throws DaoException;
 
@@ -87,7 +88,7 @@ public interface UserDao extends BaseDao {
      *
      * @param email {@link User user} email
      * @return Reset token value
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     String createResetToken(String email) throws DaoException;
 
@@ -96,14 +97,14 @@ public interface UserDao extends BaseDao {
      *
      * @param token reset password token
      * @return user id
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     int findUserIdByResetToken(String token) throws DaoException;
 
     /**
      * Delete all time-expired tokens.
      *
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     void clearResetTokens() throws DaoException;
 
@@ -112,7 +113,7 @@ public interface UserDao extends BaseDao {
      *
      * @param userAttribute email or login of {@link User user}.
      * @return reset password token
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     String findResetToken(String userAttribute) throws DaoException;
 
@@ -121,7 +122,7 @@ public interface UserDao extends BaseDao {
      *
      * @param token reset password token
      * @return <code>true</code> if token successfully was removed, otherwise <code>false</code>
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     boolean removeResetToken(String token) throws DaoException;
 
@@ -130,7 +131,7 @@ public interface UserDao extends BaseDao {
      *
      * @param resetToken reset token value
      * @return <code>true</code> if token exists, otherwise <code>false</code>
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     boolean isTokenExist(String resetToken) throws DaoException;
 
@@ -139,7 +140,26 @@ public interface UserDao extends BaseDao {
      *
      * @param login {@link User user`s} login
      * @return Optional {@link User user`s} email
-     * @throws DaoException if {@link java.sql.SQLException} was thrown
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     Optional<String> findUserEmail(String login) throws DaoException;
+
+    /**
+     * Increase user balance.
+     *
+     * @param userId {@link User user} id
+     * @param money  increased value
+     * @return <code>true</code> if balance was increased, otherwise <code>false</code>
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
+     */
+    boolean increaseClientBalance(int userId, BigDecimal money) throws DaoException;
+
+    /**
+     * Find user balance.
+     *
+     * @param userId {@link User user} id
+     * @return User money balance
+     * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
+     */
+    Optional<BigDecimal> findUserBalance(int userId) throws DaoException;
 }

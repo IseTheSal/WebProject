@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,12 +29,12 @@ public class UserDaoImpl implements UserDao {
 
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.INSTANCE;
 
-    private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, role " +
+    private final static String FIND_USER = "SELECT user_id, password, firstname, lastname, email, role, balance " +
             "FROM users WHERE users.login = ?";
     private static final String CONTAIN_LOGIN = "SELECT COUNT(*) FROM users WHERE users.login = ?";
     private static final String CONTAIN_EMAIL = "SELECT COUNT(*) FROM users WHERE users.email = ?";
-    private static final String ADD_USER = "INSERT INTO users (login, password, firstname, lastname, email, role) " +
-            "VALUES(?,?,?,?,?,?)";
+    private static final String ADD_USER = "INSERT INTO users (login, password, firstname, lastname, email, role, balance) " +
+            "VALUES(?,?,?,?,?,?, default)";
     private static final String UPDATE_EMAIL = "UPDATE users SET email = ? WHERE users.user_id = ?";
     private static final String UPDATE_PASSWORD = "UPDATE users SET password = ? WHERE users.user_id = ?";
     private static final String FIND_USER_PASSWORD = "SELECT password FROM users WHERE users.user_id = ?";
@@ -54,6 +55,8 @@ public class UserDaoImpl implements UserDao {
             "FROM users " +
             "INNER JOIN password_tokens pt ON users.user_id = pt.user_id " +
             "WHERE reset_token = ?";
+    private static final String INCREASE_BALANCE = "UPDATE users SET balance = balance + ? WHERE user_id = ?";
+    private static final String FIND_BALANCE = "SELECT balance FROM users WHERE user_id = ?";
 
     UserDaoImpl() {
     }
@@ -76,8 +79,11 @@ public class UserDaoImpl implements UserDao {
                     String lastname = resultSet.getString(4);
                     String email = resultSet.getString(5);
                     String roleString = resultSet.getString(6);
+                    BigDecimal balance = resultSet.getBigDecimal(7);
                     User.Role role = User.Role.valueOf(roleString);
-                    result = Optional.of(new User(id, login, firstname, lastname, email, role));
+                    User user = new User(id, login, firstname, lastname, email, role);
+                    user.setBalance(balance);
+                    result = Optional.of(user);
                 }
             }
         } catch (SQLException | ConnectionPoolException ex) {
@@ -337,7 +343,7 @@ public class UserDaoImpl implements UserDao {
         int id;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        try (Connection connection = CONNECTION_POOL.takeConnection();) {
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
             preparedStatement = connection.prepareStatement(FIND_USER_TOKEN_ID);
             preparedStatement.setString(1, token);
             resultSet = preparedStatement.executeQuery();
@@ -362,5 +368,44 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(ex);
         }
         return isRemoved;
+    }
+
+    @Override
+    public boolean increaseClientBalance(int userId, BigDecimal money) throws DaoException {
+        boolean isIncreased;
+        PreparedStatement preparedStatement = null;
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
+            preparedStatement = connection.prepareStatement(INCREASE_BALANCE);
+            preparedStatement.setBigDecimal(1, money);
+            preparedStatement.setInt(2, userId);
+            int executeUpdate = preparedStatement.executeUpdate();
+            isIncreased = (executeUpdate > 0);
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(preparedStatement);
+        }
+        return isIncreased;
+    }
+
+    @Override
+    public Optional<BigDecimal> findUserBalance(int userId) throws DaoException {
+        Optional<BigDecimal> userBalance = Optional.empty();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try (Connection connection = CONNECTION_POOL.takeConnection()) {
+            preparedStatement = connection.prepareStatement(FIND_BALANCE);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                userBalance = Optional.of(resultSet.getBigDecimal(1));
+            }
+        } catch (SQLException | ConnectionPoolException ex) {
+            throw new DaoException(ex);
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return userBalance;
     }
 }

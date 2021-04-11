@@ -247,11 +247,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean createOrder(User user, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
+    public Set<String> createOrder(User user, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
+        Set<String> validInfo = new HashSet<>();
         if (cartMap.isEmpty()) {
-            return false;
+            validInfo.add(ValidationInformation.CART_EMPTY.getInfoValue());
+            return validInfo;
         }
-        boolean isCreated = false;
         boolean amountValid = isAmountValid(cartMap);
         if (amountValid) {
             BigDecimal orderPrice = countOrderPrice(cartMap);
@@ -262,15 +263,19 @@ public class OrderServiceImpl implements OrderService {
                 HashMap<Game, List<String>> clientOrderGameCodes = orderDao.createOrder(order);
                 if (!clientOrderGameCodes.isEmpty()) {
                     sendGameCodeToUser(clientOrderGameCodes, user);
-                    isCreated = true;
+                    validInfo.add(ValidationInformation.SUCCESS.getInfoValue());
                 } else {
-                    isAmountValid(cartMap);
+                    validInfo.add(ValidationInformation.FAIL.getInfoValue());
+                    validInfo.add(isAmountValid(cartMap) ? ValidationInformation.USER_BALANCE_INVALID.getInfoValue() : ValidationInformation.CART_AMOUNT_INVALID.getInfoValue());
                 }
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }
+        } else {
+            validInfo.add(ValidationInformation.FAIL.getInfoValue());
+            validInfo.add(ValidationInformation.CART_AMOUNT_INVALID.getInfoValue());
         }
-        return isCreated;
+        return validInfo;
     }
 
     private boolean isAmountValid(HashMap<Game, Integer> cartMap) throws ServiceException {

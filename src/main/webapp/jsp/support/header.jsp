@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language.language"/>
+<%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -18,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/card-style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/modal-window.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/toast-window.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/payment-style.css">
 </head>
 <body style="background-image: url(/img/registration-background.jpg);
 background-size: cover; background-attachment: fixed; min-height: 100%">
@@ -35,10 +37,14 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
 
     <div class="navbar pull-right">
         <c:if test="${sessionScope.currentUser.role != 'ADMIN'}">
+            <c:if test="${sessionScope.currentUser.role == 'CLIENT'}">
+                <ctg:clientBalance/>
+            </c:if>
             <a style="text-decoration: none; color: white;" id="shopMap"
                class="neon-title-white-shadow-light"
                href="${pageContext.request.contextPath}/jsp/cart.jsp"><span
-                    class="fas fa-shopping-cart"></span>&nbsp(${sessionScope.cartAmount})</a>
+                    class="fas fa-shopping-cart"></span>&nbsp&#40;${sessionScope.cartAmount}&#41;
+            </a>
         </c:if>
         <div style="display: inline-grid; margin-left: 50px">
             <c:if test="${empty sessionScope.currentUser}">
@@ -107,6 +113,96 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
 </nav>
 <br>
 
+<button type="button" id="balanceButton" class="btn btn-primary invisible" style="position: absolute"
+        data-toggle="modal" data-target="#exampleModalCenter">
+</button>
+<div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important"
+     id="exampleModalCenter"
+     tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog center-modal" style="border: none !important;" role="document">
+        <div class="modal-content"
+             style="background-color: rgba(105,105,105,0.7); border: none !important; margin-top: -90px;">
+            <div class="modal-header" style="border-bottom: 0 none; color: white">
+                <fmt:message key="header.increase.balance"/>
+                <button type="button" id="clsBtn" class="close neon-title-red" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <main class="page payment-page">
+                    <div class="container">
+                        <form method="post" action="${pageContext.request.contextPath}/increaseBalance.do">
+                            <input type="hidden" name="command" value="increase_balance"/>
+                            <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
+                            <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
+                            <div class="card-details">
+                                <h3 style="color: white" class="title"><fmt:message key="header.credit.card"/></h3>
+                                <div class="row">
+                                    <div class="form-group col-sm-7">
+                                        <label style="color: white" for="card-holder"><fmt:message
+                                                key="header.card.holder"/></label>
+                                        <input id="card-holder" type="text" class="form-control"
+                                               placeholder="<fmt:message
+                                                key="header.card.holder"/>" aria-label="Card Holder" required
+                                               minlength="3" maxlength="30"
+                                               aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="form-group col-sm-5">
+                                        <label style="color: white"><fmt:message key="header.card.date"/></label>
+                                        <div class="input-group expiration-date">
+                                            <input id="payMM" type="text" class="form-control"
+                                                   placeholder="<fmt:message key="header.card.date.month"/>"
+                                                   aria-label="MM"
+                                                   aria-describedby="basic-addon1" pattern="^[0-9]{2}$" minlength="2"
+                                                   maxlength="2">
+                                            <input id="payYY" type="text" class="form-control"
+                                                   placeholder="<fmt:message key="header.card.date.year"/>"
+                                                   aria-label="YY"
+                                                   aria-describedby="basic-addon1" pattern="^[0-9]{2}$" minlength="2"
+                                                   maxlength="2">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-8">
+                                        <label style="color: white" for="card-number"><fmt:message
+                                                key="header.card.number"/></label>
+                                        <input id="card-number" type="text" class="form-control"
+                                               placeholder="<fmt:message key="header.card.number"/>"
+                                               aria-label="Card Holder"
+                                               aria-describedby="basic-addon1" maxlength="16" minlength="16">
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label style="color: white" for="cvc"><fmt:message
+                                                key="header.card.cvc"/></label>
+                                        <input id="cvc" type="text" class="form-control"
+                                               placeholder="<fmt:message key="header.card.cvc"/>"
+                                               aria-label="Card Holder" aria-describedby="basic-addon1" required
+                                               pattern="^[0-9]{3}$" minlength="3" maxlength="3">
+                                    </div>
+                                    <div class="form-group" style="margin-left: 30%">
+                                        <label style="color: white" for="amount"><fmt:message key="header.card.money"/>
+                                            &dollar;</label>
+                                        <input id="amount" name="moneyAmount" type="text" class="form-control"
+                                               placeholder="<fmt:message key="header.card.money"/>"
+                                               aria-label="Card Holder" aria-describedby="basic-addon1" required
+                                               pattern="^(\d)*(\.\d{1,2})?$" minlength="1" maxlength="10">
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <button type="submit" class="btn btn-success btn-block"><fmt:message
+                                                key="header.card.btn"/></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -118,6 +214,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/toast-script.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/payment.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var serverError = ${not empty requestScope.serverError};

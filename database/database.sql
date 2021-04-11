@@ -1,14 +1,15 @@
 create table if not exists users
 (
-    user_id   serial       not null
+    user_id   serial               not null
         constraint users_pk
             primary key,
-    login     varchar(12)  not null,
-    password  varchar(72)  not null,
-    firstname varchar(20)  not null,
-    lastname  varchar(20)  not null,
-    email     varchar(320) not null,
-    role      varchar(16)  not null
+    login     varchar(12)          not null,
+    password  varchar(72)          not null,
+    firstname varchar(20)          not null,
+    lastname  varchar(20)          not null,
+    email     varchar(320)         not null,
+    role      varchar(16)          not null,
+    balance   numeric default 0.00 not null
 );
 
 alter table users
