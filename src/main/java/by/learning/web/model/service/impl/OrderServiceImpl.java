@@ -34,6 +34,9 @@ public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = DaoInstance.INSTANCE.getOrderDao();
     private final UserDao userDao = DaoInstance.INSTANCE.getUserDao();
 
+    OrderServiceImpl() {
+    }
+
     public Optional<Coupon> findAvailableCouponByCode(String code) throws ServiceException {
         Optional<Coupon> result = Optional.empty();
         boolean couponValid = OrderValidator.isCouponCodeValid(code);

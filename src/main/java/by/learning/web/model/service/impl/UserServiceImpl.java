@@ -36,6 +36,9 @@ public class UserServiceImpl implements UserService {
     private static final String RESET_LINK = "http://localhost:8080/resetPassword.do?command=open_reset_password&resetToken=";
     private static final String WARNING = "If it is not you, do NOT click this link!";
 
+    UserServiceImpl() {
+    }
+
     @Override
     public Optional<User> singIn(String login, String password) throws ServiceException {
         Optional<User> result = Optional.empty();

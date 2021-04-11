@@ -67,5 +67,4 @@ public class GameDaoImplTest {
         allCategoriesAmount = 0;
         allGenresAmount = 0;
     }
-
 }

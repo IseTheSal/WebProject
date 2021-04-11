@@ -29,6 +29,9 @@ public class GameServiceImpl implements GameService {
 
     private static final String IMG_PROJECT_PATH = "/img/logo/";
 
+    GameServiceImpl() {
+    }
+
     @Override
     public List<Game> findAllGames() throws ServiceException {
         List<Game> result;
