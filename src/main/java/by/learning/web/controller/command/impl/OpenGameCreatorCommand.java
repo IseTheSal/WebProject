@@ -6,6 +6,7 @@ import by.learning.web.controller.attribute.SessionAttribute;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.service.GameService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,11 +25,7 @@ import java.util.HashMap;
 public class OpenGameCreatorCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private GameService gameService;
-
-    public OpenGameCreatorCommand(GameService gameService) {
-        this.gameService = gameService;
-    }
+    private final GameService gameService = ServiceInstance.INSTANCE.getGameService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

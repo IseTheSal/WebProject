@@ -5,6 +5,7 @@ import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.service.UserService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import by.learning.web.validator.ValidationInformation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -23,11 +24,7 @@ import java.util.Set;
 public class ResetPasswordCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private UserService userService;
-
-    public ResetPasswordCommand(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService = ServiceInstance.INSTANCE.getUserService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

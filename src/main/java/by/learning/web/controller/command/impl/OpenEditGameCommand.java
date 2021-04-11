@@ -7,6 +7,7 @@ import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.service.GameService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,11 +27,7 @@ import java.util.Optional;
 public class OpenEditGameCommand implements ActionCommand {
     public static final Logger logger = LogManager.getLogger();
 
-    private GameService gameService;
-
-    public OpenEditGameCommand(GameService gameService) {
-        this.gameService = gameService;
-    }
+    private final GameService gameService = ServiceInstance.INSTANCE.getGameService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

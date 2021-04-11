@@ -7,6 +7,7 @@ import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.OrderService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,11 +27,7 @@ import java.util.List;
 public class FindOrderHistoryCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private OrderService orderService;
-
-    public FindOrderHistoryCommand(OrderService orderService) {
-        this.orderService = orderService;
-    }
+    private final OrderService orderService = ServiceInstance.INSTANCE.getOrderService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

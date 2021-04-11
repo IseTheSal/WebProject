@@ -52,6 +52,8 @@ public interface UserService {
     boolean changeEmail(int userId, String email, String repeatEmail) throws ServiceException;
 
     /**
+     * Change User`s password
+     *
      * @param userId            id of certain user
      * @param oldPassword       old password value
      * @param newPassword       new password value

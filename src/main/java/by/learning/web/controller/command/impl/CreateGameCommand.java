@@ -5,6 +5,7 @@ import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.service.GameService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import by.learning.web.util.CustomFileReader;
 import by.learning.web.validator.ValidationInformation;
 import org.apache.logging.log4j.Level;
@@ -26,11 +27,7 @@ import java.util.Set;
 public class CreateGameCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private GameService gameService;
-
-    public CreateGameCommand(GameService gameService) {
-        this.gameService = gameService;
-    }
+    private final GameService gameService = ServiceInstance.INSTANCE.getGameService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

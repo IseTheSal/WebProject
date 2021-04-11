@@ -6,6 +6,7 @@ import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.UserService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,11 +23,7 @@ import javax.servlet.http.HttpSession;
 public class ChangePasswordCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private UserService userService;
-
-    public ChangePasswordCommand(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService = ServiceInstance.INSTANCE.getUserService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

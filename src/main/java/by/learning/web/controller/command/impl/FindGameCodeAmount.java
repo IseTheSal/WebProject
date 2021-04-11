@@ -5,6 +5,7 @@ import by.learning.web.controller.attribute.RequestParameter;
 import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.service.OrderService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,11 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FindGameCodeAmount implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private OrderService orderService;
-
-    public FindGameCodeAmount(OrderService orderService) {
-        this.orderService = orderService;
-    }
+    private final OrderService orderService = ServiceInstance.INSTANCE.getOrderService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

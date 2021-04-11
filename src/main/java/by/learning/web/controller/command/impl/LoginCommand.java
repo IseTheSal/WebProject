@@ -7,6 +7,7 @@ import by.learning.web.controller.command.ActionCommand;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.UserService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,11 +26,7 @@ import java.util.Optional;
 public class LoginCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private UserService service;
-
-    public LoginCommand(UserService service) {
-        this.service = service;
-    }
+    private final UserService userService = ServiceInstance.INSTANCE.getUserService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -38,7 +35,7 @@ public class LoginCommand implements ActionCommand {
         String passwordValue = request.getParameter(RequestParameter.PASSWORD);
         Optional<User> user;
         try {
-            user = service.singIn(loginValue, passwordValue);
+            user = this.userService.singIn(loginValue, passwordValue);
             if (user.isPresent()) {
                 User currentUser = user.get();
                 HttpSession session = request.getSession(true);

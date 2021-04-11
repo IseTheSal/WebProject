@@ -9,6 +9,7 @@ import by.learning.web.model.entity.Coupon;
 import by.learning.web.model.entity.Game;
 import by.learning.web.model.entity.User;
 import by.learning.web.model.service.OrderService;
+import by.learning.web.model.service.impl.ServiceInstance;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,11 +36,7 @@ import java.util.HashMap;
 public class MakeOrderCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private OrderService orderService;
-
-    public MakeOrderCommand(OrderService orderService) {
-        this.orderService = orderService;
-    }
+    private final OrderService orderService = ServiceInstance.INSTANCE.getOrderService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -80,7 +77,8 @@ public class MakeOrderCommand implements ActionCommand {
             boolean isOrderCreated = orderService.createOrder(user, cartMap, coupon);
             if (isOrderCreated) {
                 request.setAttribute(RequestParameter.ORDER_CREATED, true);
-                session.setAttribute(SessionAttribute.CART_AMOUNT, 0);
+                int cartAmount = 0;
+                session.setAttribute(SessionAttribute.CART_AMOUNT, cartAmount);
                 session.setAttribute(SessionAttribute.CART_MAP, new HashMap<Game, Integer>());
                 short newDiscount = 0;
                 session.setAttribute(SessionAttribute.COUPON_DISCOUNT, newDiscount);
