@@ -78,14 +78,15 @@
         <url-pattern>/editCoupon.do</url-pattern>
         <url-pattern>/deleteCoupon.do</url-pattern>
         <url-pattern>/editGame.do</url-pattern>
+        <url-pattern>/jsp/admin/editGame.jsp</url-pattern>
         <url-pattern>/addAdmin.do</url-pattern>
         <url-pattern>/changeEmail.do</url-pattern>
-        <url-pattern>/editGame.do</url-pattern>
         <url-pattern>/jsp/admin/createGame.jsp</url-pattern>
         <url-pattern>/createGame.do</url-pattern>
         <url-pattern>/resetPassword.do</url-pattern>
         <url-pattern>/forgotPassword.do</url-pattern>
         <url-pattern>/increaseBalance.do</url-pattern>
+        <url-pattern>/gameEditor.do</url-pattern>
     </filter-mapping>
 
     <filter>

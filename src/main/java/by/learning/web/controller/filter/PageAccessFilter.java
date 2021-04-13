@@ -44,6 +44,7 @@ public class PageAccessFilter implements Filter {
         userPageAccess = Set.of(PageValue.PROFILE_PAGE,
                 PageValue.CART_PAGE);
         adminPageAccess = Set.of(PageValue.PROFILE_PAGE,
+                PageValue.ADMIN_EDIT_GAME_PAGE,
                 PageValue.ADMIN_MENU_PAGE,
                 PageValue.CREATE_GAME_PAGE,
                 PageValue.ADMIN_GAME_LIST_PAGE,

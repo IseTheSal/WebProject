@@ -132,8 +132,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void changeGameCartAmount(HashMap<Game, Integer> cartMap, int gameId, String operation) throws
-            ServiceException {
+    public void changeGameCartAmount(HashMap<Game, Integer> cartMap, int gameId, String operation) throws ServiceException {
         try {
             Optional<Game> gameById = gameDao.findGameById(gameId);
             if (gameById.isPresent()) {
@@ -151,8 +150,7 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private void changeAmount(HashMap<Game, Integer> cartMap, Game game, String operation) throws
-            ServiceException {
+    private void changeAmount(HashMap<Game, Integer> cartMap, Game game, String operation) throws ServiceException {
         Integer amount = cartMap.get(game);
         switch (operation) {
             case "+" -> {

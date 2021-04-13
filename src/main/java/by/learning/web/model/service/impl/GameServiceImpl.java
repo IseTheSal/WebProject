@@ -125,6 +125,7 @@ public class GameServiceImpl implements GameService {
         return result;
     }
 
+    @Override
     public Set<String> editGame(String gameIdValue, String gameTitle, String imagePath,
                                 String description, String priceValue, String trailerLink,
                                 String[] genres, String[] categories) throws ServiceException {

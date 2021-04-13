@@ -9,6 +9,7 @@
     <title><fmt:message key="admin.menu.title"/></title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin-menu-style.css">
 </head>
+<ctg:gameListUpdate/>
 <body class="custom-admin-body">
 <jsp:include page="../support/header.jsp"/>
 <div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important;" id="adminCodeModal"

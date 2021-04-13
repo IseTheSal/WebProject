@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -45,15 +46,17 @@ public class EditGameCommand implements ActionCommand {
             Set<String> editInfo = gameService.editGame(gameIdValue, title, imagePath, description, price, trailerLink, genres, categories);
             if (editInfo.remove(ValidationInformation.SUCCESS.getInfoValue())) {
                 request.setAttribute(RequestParameter.SUCCESS, true);
+                page = PageValue.ALREADY_REDIRECTED;
+                response.sendRedirect(PageValue.ADMIN_GAME_LIST_PAGE);
             } else if (editInfo.remove(ValidationInformation.FAIL.getInfoValue())) {
                 logger.log(Level.DEBUG, editInfo.toString());
                 request.setAttribute(RequestParameter.VALID_ISSUES, editInfo);
                 request.setAttribute(RequestParameter.FAIL, true);
+                page = PageValue.EDIT_GAME_PAGE;
             }
             request.getSession().removeAttribute(SessionAttribute.CURRENT_GAME);
-        } catch (ServiceException e) {
+        } catch (ServiceException | IOException e) {
             logger.log(Level.ERROR, e);
-            request.setAttribute(RequestParameter.FAIL, true);
             request.setAttribute(RequestParameter.SERVER_ERROR, true);
         }
         return page;

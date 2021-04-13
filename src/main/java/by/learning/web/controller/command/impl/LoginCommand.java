@@ -45,8 +45,10 @@ public class LoginCommand implements ActionCommand {
                     session.removeAttribute(SessionAttribute.CART_MAP);
                     session.removeAttribute(SessionAttribute.CART_AMOUNT);
                     session.removeAttribute(SessionAttribute.COUPON_DISCOUNT);
+                    page = PageValue.ADMIN_MENU_PAGE;
+                } else {
+                    page = PageValue.INDEX;
                 }
-                page = PageValue.INDEX;
             } else {
                 request.setAttribute(RequestParameter.ERROR_SING_IN, "Incorrect login or password");
                 page = PageValue.LOGIN_PAGE;

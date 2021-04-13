@@ -18,4 +18,10 @@
         <tag-class>by.learning.web.controller.tag.BalanceTag</tag-class>
         <body-content>empty</body-content>
     </tag>
+
+    <tag>
+        <name>gameListUpdate</name>
+        <tag-class>by.learning.web.controller.tag.UpdateGameListTag</tag-class>
+        <body-content>empty</body-content>
+    </tag>
 </taglib>

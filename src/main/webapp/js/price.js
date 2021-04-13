@@ -1,5 +1,3 @@
-// Requires jQuery
-
 // Initialize slider:
 $(document).ready(function () {
     $('.noUi-handle').on('click', function () {
