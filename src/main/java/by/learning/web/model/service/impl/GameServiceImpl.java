@@ -56,7 +56,10 @@ public class GameServiceImpl implements GameService {
         int[] categoriesId = Arrays.stream(categories).mapToInt(Integer::parseInt).toArray();
         BigDecimal priceValue = new BigDecimal(price);
         imagePath = IMG_PROJECT_PATH + imagePath;
-        Game game = new Game(gameTitle, imagePath, description, priceValue, trailerLink);
+        Game game = new Game.GameBuilder(gameTitle, imagePath)
+                .description(description)
+                .price(priceValue)
+                .trailer(trailerLink).build();
         try {
             boolean isCreated = gameDao.createGame(game, genresId, categoriesId);
             valueValidInfo.add(isCreated ? ValidationInformation.SUCCESS.getInfoValue() : ValidationInformation.FAIL.getInfoValue());
@@ -140,7 +143,10 @@ public class GameServiceImpl implements GameService {
             BigDecimal price = new BigDecimal(priceValue);
             int[] genresId = Arrays.stream(genres).mapToInt(Integer::parseInt).toArray();
             int[] categoriesId = Arrays.stream(categories).mapToInt(Integer::parseInt).toArray();
-            Game game = new Game(gameId, gameTitle, imagePath, description, price, trailerLink);
+            Game game = new Game.GameBuilder(gameTitle, imagePath).id(gameId)
+                    .description(description)
+                    .price(price)
+                    .trailer(trailerLink).build();
             try {
                 boolean gameEdited = gameDao.editGame(game, genresId, categoriesId);
                 valueValidInfo.add(gameEdited ? ValidationInformation.SUCCESS.getInfoValue() : ValidationInformation.FAIL.getInfoValue());

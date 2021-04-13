@@ -185,7 +185,7 @@ public class OrderDaoImpl implements OrderDao {
                 int gameId = resultSet.getInt(1);
                 String title = resultSet.getString(2);
                 String imagePath = resultSet.getString(3);
-                Game game = new Game(gameId, title, imagePath);
+                Game game = new Game.GameBuilder(title, imagePath).id(gameId).build();
                 result.add(game);
             }
         } catch (SQLException | ConnectionPoolException ex) {

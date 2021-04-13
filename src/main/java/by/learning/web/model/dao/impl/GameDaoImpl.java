@@ -100,7 +100,7 @@ public class GameDaoImpl implements GameDao {
                 BigDecimal price = resultSet.getBigDecimal(4);
                 String genreString = resultSet.getString(5);
                 String categoryString = resultSet.getString(6);
-                Game game = new Game(gameId, title, imagePath, price, genreString, categoryString);
+                Game game = new Game.GameBuilder(title, imagePath).id(gameId).price(price).genres(genreString).categories(categoryString).build();
                 result.add(game);
             }
         } catch (ConnectionPoolException | SQLException e) {
@@ -208,7 +208,12 @@ public class GameDaoImpl implements GameDao {
                 String trailer = resultSet.getString(5);
                 String genreString = resultSet.getString(6);
                 String categoryString = resultSet.getString(7);
-                Game game = new Game(gameId, title, description, imagePath, price, trailer, genreString, categoryString);
+                Game game = new Game.GameBuilder(title, imagePath).id(gameId)
+                        .description(description)
+                        .price(price)
+                        .trailer(trailer)
+                        .genres(genreString)
+                        .categories(categoryString).build();
                 result = Optional.of(game);
             }
         } catch (ConnectionPoolException | SQLException e) {

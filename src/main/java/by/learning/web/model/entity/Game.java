@@ -12,14 +12,14 @@ import java.util.Set;
  */
 public class Game {
 
-    private int id;
-    private String title;
-    private String description;
-    private String imagePath;
-    private BigDecimal price;
-    private String trailer;
-    private Set<Genre> genres = EnumSet.noneOf(Genre.class);
-    private Set<Category> categories = EnumSet.noneOf(Category.class);
+    private final int id;
+    private final String title;
+    private final String description;
+    private final String imagePath;
+    private final BigDecimal price;
+    private final String trailer;
+    private final Set<Genre> genres;
+    private final Set<Category> categories;
 
     /**
      * Game genres enum.
@@ -98,47 +98,71 @@ public class Game {
         }
     }
 
-    public Game(int id, String title, String imagePath) {
-        this.id = id;
-        this.title = title;
-        this.imagePath = imagePath;
+    private Game(GameBuilder builder) {
+        this.id = builder.id;
+        this.title = builder.title;
+        this.description = builder.description;
+        this.imagePath = builder.imagePath;
+        this.price = builder.price;
+        this.trailer = builder.trailer;
+        this.genres = builder.genres;
+        this.categories = builder.categories;
     }
 
-    public Game(int id, String title, String imagePath, String description, BigDecimal price, String trailer) {
-        this.id = id;
-        this.title = title;
-        this.imagePath = imagePath;
-        this.description = description;
-        this.price = price;
-        this.trailer = trailer;
-    }
+    /**
+     * Create game with Builder pattern.
+     *
+     * @author Illia Aheyeu
+     * @see Game
+     */
+    public static class GameBuilder {
+        private int id;
+        private final String title;
+        private String description;
+        private final String imagePath;
+        private BigDecimal price;
+        private String trailer;
+        private Set<Genre> genres = EnumSet.noneOf(Genre.class);
+        private Set<Category> categories = EnumSet.noneOf(Category.class);
 
-    public Game(String title, String imagePath, String description, BigDecimal price, String trailer) {
-        this.title = title;
-        this.imagePath = imagePath;
-        this.description = description;
-        this.price = price;
-        this.trailer = trailer;
-    }
+        public GameBuilder(String title, String imagePath) {
+            this.title = title;
+            this.imagePath = imagePath;
+        }
 
-    public Game(int id, String title, String description, String imagePath, BigDecimal price, String trailer, String genreString, String categoryString) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.imagePath = imagePath;
-        this.price = price;
-        this.trailer = trailer;
-        this.genres = Genre.convertFromString(genreString);
-        this.categories = Category.convertFromString(categoryString);
-    }
+        public GameBuilder id(int id) {
+            this.id = id;
+            return this;
+        }
 
-    public Game(int id, String title, String imagePath, BigDecimal price, String genreString, String categoryString) {
-        this.id = id;
-        this.title = title;
-        this.imagePath = imagePath;
-        this.price = price;
-        this.genres = Genre.convertFromString(genreString);
-        this.categories = Category.convertFromString(categoryString);
+        public GameBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public GameBuilder price(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+
+        public GameBuilder trailer(String trailer) {
+            this.trailer = trailer;
+            return this;
+        }
+
+        public GameBuilder genres(String genres) {
+            this.genres = Genre.convertFromString(genres);
+            return this;
+        }
+
+        public GameBuilder categories(String categories) {
+            this.categories = Category.convertFromString(categories);
+            return this;
+        }
+
+        public Game build() {
+            return new Game(this);
+        }
     }
 
     public int getId() {
@@ -149,64 +173,28 @@ public class Game {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
     public Set<Genre> getGenres() {
         return Set.copyOf(genres);
-    }
-
-    public void setGenres(EnumSet<Genre> genres) {
-        this.genres = genres;
-    }
-
-    public boolean addGenre(Genre genre) {
-        return genres.add(genre);
     }
 
     public Set<Category> getCategories() {
         return Set.copyOf(categories);
     }
 
-    public void setCategories(EnumSet<Category> categories) {
-        this.categories = categories;
-    }
-
-    public boolean addCategory(Category category) {
-        return categories.add(category);
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public String getTrailer() {
         return trailer;
-    }
-
-    public void setTrailer(String trailer) {
-        this.trailer = trailer;
     }
 
     @Override
