@@ -251,6 +251,7 @@ public class OrderServiceImpl implements OrderService {
     public Set<String> createOrder(User user, HashMap<Game, Integer> cartMap, Coupon coupon) throws ServiceException {
         Set<String> validInfo = new HashSet<>();
         if (cartMap.isEmpty()) {
+            validInfo.add(ValidationInformation.FAIL.getInfoValue());
             validInfo.add(ValidationInformation.CART_EMPTY.getInfoValue());
             return validInfo;
         }

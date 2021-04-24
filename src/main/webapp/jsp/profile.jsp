@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/collapse-style.css">
 </head>
 <body>
-<div style="background-image: url(/img/registration-background.jpg);
+<div style="background-image: url(/img/main-background.png);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%; font-size: 18px">

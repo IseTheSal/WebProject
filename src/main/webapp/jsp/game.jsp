@@ -9,7 +9,7 @@
     <link rel="icon" href="${pageContext.request.contextPath}/favicon.png"/>
 </head>
 <body>
-<div style="background-image: url(/img/registration-background.jpg);
+<div style="background-image: url(/img/main-background.png);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div class="modal" style="border: none !important; background-color: rgba(0,0,0,0.5) !important;" id="gameModal"

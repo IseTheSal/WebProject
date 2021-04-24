@@ -8,7 +8,7 @@
             key="error.pageNotFound.title"/></title>
 </head>
 <body>
-<div style="background-image: url(/img/registration-background.jpg);
+<div style="background-image: url(/img/main-background.png);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="../support/header.jsp"/>
     <h1 class="neon-title-cyan-light" style="padding-top: 20%;text-align: center"><fmt:message

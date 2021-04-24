@@ -8,7 +8,7 @@
     <title><fmt:message key="registration.title"/></title>
 </head>
 <body>
-<div style="background-image: url(/img/registration-background.jpg);
+<div style="background-image: url(/img/main-background.png);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="support/header.jsp"/>
     <div style="padding-top: 5%">

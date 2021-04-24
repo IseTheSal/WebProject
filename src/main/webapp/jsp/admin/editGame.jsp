@@ -10,7 +10,7 @@
           href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006288/BBBootstrap/choices.min.css?version=7.0.0">
 </head>
 <body>
-<div style="background-image: url(/img/registration-background.jpg);
+<div style="background-image: url(/img/main-background.png);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="../support/header.jsp"/>
     <div style="padding-top: 5%">

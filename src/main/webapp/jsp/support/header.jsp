@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/toast-window.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/payment-style.css">
 </head>
-<body style="background-image: url(/img/registration-background.jpg);
+<body style="background-image: url(/img/main-background.png);
 background-size: cover; background-attachment: fixed; min-height: 100%">
 <nav class="navbar fixed-top navbar-dark"
      style="padding-top: 2px;padding-bottom: 2px; zoom: 0.9;
@@ -49,11 +49,11 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
         <div style="display: inline-grid; margin-left: 50px">
             <c:if test="${empty sessionScope.currentUser}">
                 <a href="${pageContext.request.contextPath}/jsp/registration.jsp"
-                   style="text-decoration: none" class="neon-title-lime">
+                   style="text-decoration: none" class="neon-title-lime white-hover">
                     <span class="far fa-user" style="margin-right:0.40em; display:inline-block;"></span><fmt:message
                         key="header.signUp"/></a>
                 <a href="${pageContext.request.contextPath}/jsp/login.jsp"
-                   style="text-decoration: none" class="neon-title-orange">
+                   style="text-decoration: none" class="neon-title-orange white-hover">
                     <span class="fas fa-sign-in-alt"
                           style="margin-right:0.30em; display:inline-block;"></span><fmt:message
                         key="header.login"/></a>
