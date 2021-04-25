@@ -139,14 +139,8 @@ public class UserServiceImpl implements UserService {
         return userEmail;
     }
 
-    //        1. clear tokens
-//        2. find email
-//        3. find token
-//        4. if token is null -> create
-//        5. if token exist create link
-//        6. sent email with link
     @Override
-    public Set<String> sentResetPasswordLink(String reestablishParameter) throws ServiceException {
+    public Set<String> sendResetPasswordLink(String reestablishParameter) throws ServiceException {
         Set<String> info = new HashSet<>();
         try {
             String email;
@@ -162,7 +156,14 @@ public class UserServiceImpl implements UserService {
             userDao.clearResetTokens();
             String resetToken = userDao.findResetToken(email);
             if (resetToken.isBlank()) {
-                resetToken = userDao.createResetToken(email);
+                Optional<String> resetOptional = userDao.createResetToken(email);
+                if (resetOptional.isPresent()) {
+                    resetToken = resetOptional.get();
+                } else {
+                    info.add(ValidationInformation.INPUT_INCORRECT.getInfoValue());
+                    info.add(ValidationInformation.FAIL.getInfoValue());
+                    return info;
+                }
             }
             MailSender mailSender = new MailSender();
             String body = MAIL_BODY_TITLE + "\n" + RESET_LINK + resetToken + "\n" + WARNING;

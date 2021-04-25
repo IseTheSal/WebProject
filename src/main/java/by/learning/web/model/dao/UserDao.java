@@ -87,10 +87,10 @@ public interface UserDao extends BaseDao {
      * Create token to reset user`s password.
      *
      * @param email {@link User user} email
-     * @return Reset token value
+     * @return Optional reset token value
      * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
-    String createResetToken(String email) throws DaoException;
+    Optional<String> createResetToken(String email) throws DaoException;
 
     /**
      * Search user id by existing token.
@@ -112,7 +112,7 @@ public interface UserDao extends BaseDao {
      * Search reset password token.
      *
      * @param userAttribute email or login of {@link User user}.
-     * @return reset password token
+     * @return Reset password token
      * @throws DaoException if {@link java.sql.SQLException SQLException} was thrown
      */
     String findResetToken(String userAttribute) throws DaoException;

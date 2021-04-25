@@ -259,8 +259,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public String createResetToken(String email) throws DaoException {
-        return findToken(email, CREATE_RESET_TOKEN);
+    public Optional<String> createResetToken(String email) throws DaoException {
+        Optional<String> token = Optional.empty();
+        if (existEmail(email)) {
+            token = Optional.ofNullable(findToken(email, CREATE_RESET_TOKEN));
+        }
+        return token;
     }
 
     @Override

@@ -82,7 +82,7 @@ public interface UserService {
      * @return <code>Set</code> of {@link by.learning.web.validator.ValidationInformation validation info}, if email was send return <code>Set</code> with {@link by.learning.web.validator.ValidationInformation SUCCESS}, otherwise with {@link by.learning.web.validator.ValidationInformation FAIL} and another issues information
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
-    Set<String> sentResetPasswordLink(String reestablishParameter) throws ServiceException;
+    Set<String> sendResetPasswordLink(String reestablishParameter) throws ServiceException;
 
     /**
      * Search all users.

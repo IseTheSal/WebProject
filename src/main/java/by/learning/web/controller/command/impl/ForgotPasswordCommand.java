@@ -30,7 +30,7 @@ public class ForgotPasswordCommand implements ActionCommand {
         String page = PageValue.LOGIN_PAGE;
         String reestablishValue = request.getParameter(RequestParameter.REESTABLISH_VALUE);
         try {
-            Set<String> info = userService.sentResetPasswordLink(reestablishValue);
+            Set<String> info = userService.sendResetPasswordLink(reestablishValue);
             if (info.remove(ValidationInformation.SUCCESS.getInfoValue())) {
                 request.setAttribute(RequestParameter.CHECK_EMAIL, true);
             } else if (info.remove(ValidationInformation.FAIL.getInfoValue())) {

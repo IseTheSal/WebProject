@@ -166,17 +166,13 @@ public class GameServiceImpl implements GameService {
         Set<Game.Genre> genreSet = Arrays.stream(genres)
                 .map(category -> Game.Genre.valueOf(category.toUpperCase(Locale.ROOT)))
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(Game.Genre.class)));
-        try {
-            result = findAllGames().stream()
-                    .filter(game -> (game.getPrice().setScale(0, RoundingMode.FLOOR).intValue() >= startPrice)
-                            && (game.getPrice().setScale(0, RoundingMode.CEILING).intValue() <= endPrice)
-                            && (game.getCategories().containsAll(categorySet))
-                            && (game.getGenres().containsAll(genreSet)))
-                    .collect(Collectors.toList());
-            orderGameList(result, sortValue);
-        } catch (ServiceException e) {
-            throw new ServiceException(e);
-        }
+        result = findAllGames().stream()
+                .filter(game -> (game.getPrice().setScale(0, RoundingMode.FLOOR).intValue() >= startPrice)
+                        && (game.getPrice().setScale(0, RoundingMode.CEILING).intValue() <= endPrice)
+                        && (game.getCategories().containsAll(categorySet))
+                        && (game.getGenres().containsAll(genreSet)))
+                .collect(Collectors.toList());
+        orderGameList(result, sortValue);
         return result;
     }
 
@@ -184,10 +180,10 @@ public class GameServiceImpl implements GameService {
     public void orderGameList(List<Game> gameList, String sortByValue) {
         switch (sortByValue) {
             case "titleAsc" -> {
-                gameList.sort(Comparator.comparing(Game::getTitle));
+                gameList.sort(Comparator.comparing(o -> o.getTitle().toLowerCase(Locale.ROOT)));
             }
             case "titleDesc" -> {
-                gameList.sort(Comparator.comparing(Game::getTitle));
+                gameList.sort(Comparator.comparing(o -> o.getTitle().toLowerCase(Locale.ROOT)));
                 Collections.reverse(gameList);
             }
             case "priceAsc" -> {

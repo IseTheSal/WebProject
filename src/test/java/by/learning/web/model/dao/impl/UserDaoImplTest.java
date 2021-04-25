@@ -5,6 +5,7 @@ import by.learning.web.model.dao.UserDao;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.testng.Assert.assertFalse;
@@ -21,13 +22,13 @@ public class UserDaoImplTest {
             if (userEmail.isPresent()) {
                 String resetToken = userDao.findResetToken(userEmail.get());
                 if (resetToken.isBlank()) {
-                    String token = userDao.createResetToken(userEmail.get());
+                    String token = userDao.createResetToken(userEmail.get()).orElseThrow();
                     assertFalse(token.isBlank());
                 }
             } else {
                 Assert.fail();
             }
-        } catch (DaoException e) {
+        } catch (DaoException | NoSuchElementException e) {
             Assert.fail(e.getMessage());
         }
     }

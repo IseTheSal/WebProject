@@ -47,7 +47,7 @@ public class RefreshFilter implements Filter {
                     HttpServletResponse httpServletResponse = (HttpServletResponse) res;
                     httpServletResponse.sendRedirect(page);
                 }
-            } catch (IllegalStateException | NumberFormatException ex) {
+            } catch (IllegalStateException | NumberFormatException | NullPointerException ex) {
                 logger.log(Level.ERROR, ex);
                 HttpServletResponse httpServletResponse = (HttpServletResponse) res;
                 String page = httpServletRequest.getParameter(RequestParameter.CURRENT_PAGE);
