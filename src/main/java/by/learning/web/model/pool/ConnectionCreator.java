@@ -11,7 +11,7 @@ import java.util.Properties;
 
 
 /**
- * <pre>User to create {@link Connection} objects.</pre>
+ * <pre>Used to create {@link Connection} objects.</pre>
  *
  * @author Illia Aheyeu
  */
