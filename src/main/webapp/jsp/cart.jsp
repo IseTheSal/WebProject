@@ -118,7 +118,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                             <input type="hidden" name="currentPage"
                                    value="${pageContext.request.requestURI}">
                             <c:if test="${not empty sessionScope.cartMap}">
-                                <input type="submit" value="Buy" style="width: 175px"
+                                <input type="submit" value="<fmt:message key="cart.buy"/>" style="width: 175px"
                                        class="btn custom-btn"/>
                             </c:if>
                         </form>
