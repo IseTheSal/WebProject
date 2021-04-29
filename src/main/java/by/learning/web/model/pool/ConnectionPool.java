@@ -108,6 +108,7 @@ public enum ConnectionPool {
             while (DriverManager.getDrivers().hasMoreElements()) {
                 Driver driver = DriverManager.getDrivers().nextElement();
                 DriverManager.deregisterDriver(driver);
+                logger.log(Level.DEBUG, driver.toString());
             }
             logger.log(Level.INFO, "Drivers were deregistered");
         } catch (SQLException e) {
