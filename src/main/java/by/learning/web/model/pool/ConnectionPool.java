@@ -1,6 +1,7 @@
 package by.learning.web.model.pool;
 
 
+import by.learning.web.controller.Controller;
 import by.learning.web.exception.ConnectionPoolException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -10,8 +11,6 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -28,11 +27,9 @@ public enum ConnectionPool {
     private final Logger logger = LogManager.getLogger();
     private static final int POOL_SIZE = 10;
     private final BlockingQueue<ProxyConnection> freeConnections;
-    private final Queue<ProxyConnection> engagedConnections;
 
     ConnectionPool() {
         freeConnections = new LinkedBlockingQueue<>();
-        engagedConnections = new ArrayDeque<>();
         for (int i = 0; i < POOL_SIZE; i++) {
             try {
                 Connection connection = ConnectionCreator.createConnection();
@@ -54,7 +51,6 @@ public enum ConnectionPool {
         ProxyConnection connection;
         try {
             connection = freeConnections.take();
-            engagedConnections.offer(connection);
         } catch (InterruptedException e) {
             logger.log(Level.ERROR, e);
             throw new ConnectionPoolException(e);
@@ -70,34 +66,35 @@ public enum ConnectionPool {
     public void releaseConnection(Connection connection) {
         if (ProxyConnection.class == connection.getClass()) {
             ProxyConnection proxyConnection = (ProxyConnection) connection;
-            if (engagedConnections.remove(proxyConnection)) {
-                freeConnections.offer(proxyConnection);
-                logger.log(Level.DEBUG, "Connection was released");
-            } else {
-                logger.log(Level.WARN, "Connection was not released");
-            }
+            freeConnections.offer(proxyConnection);
+            logger.log(Level.DEBUG, "Connection was released");
         } else {
             logger.log(Level.WARN, "Incorrect connection type");
         }
     }
 
     /**
-     * Destroy connection pool. called during program termination.
+     * Destroy connection pool. Called during program termination.
      *
+     * @param object {@link Object} object. Used to check accessibility for pool destroy.
      * @throws ConnectionPoolException if {@link InterruptedException} or {@link SQLException} were thrown
      */
-    public void destroyPool() throws ConnectionPoolException {
-        try {
-            for (int i = 0; i < POOL_SIZE; i++) {
-                ProxyConnection proxyConnection = freeConnections.take();
-                proxyConnection.reallyClose();
+    public void destroyPool(Object object) throws ConnectionPoolException {
+        if (object.getClass() == Controller.class) {
+            try {
+                for (int i = 0; i < POOL_SIZE; i++) {
+                    ProxyConnection proxyConnection = freeConnections.take();
+                    proxyConnection.reallyClose();
+                }
+                logger.log(Level.INFO, "Connection pool has been destroyed");
+            } catch (InterruptedException | SQLException e) {
+                logger.log(Level.ERROR, e);
+                throw new ConnectionPoolException(e);
+            } finally {
+                deregisterDrivers();
             }
-            logger.log(Level.INFO, "Connection pool has been destroyed");
-        } catch (InterruptedException | SQLException e) {
-            logger.log(Level.ERROR, e);
-            throw new ConnectionPoolException(e);
-        } finally {
-            deregisterDrivers();
+        } else {
+            logger.log(Level.WARN, "Method available only for Controller class");
         }
     }
 
@@ -114,6 +111,7 @@ public enum ConnectionPool {
             }
             logger.log(Level.INFO, "Drivers were deregistered");
         } catch (SQLException e) {
+            logger.log(Level.ERROR, e);
             throw new ConnectionPoolException(e);
         }
     }

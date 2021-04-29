@@ -59,7 +59,7 @@ public class Controller extends HttpServlet {
     @Override
     public void destroy() {
         try {
-            ConnectionPool.INSTANCE.destroyPool();
+            ConnectionPool.INSTANCE.destroyPool(this);
         } catch (ConnectionPoolException e) {
             logger.log(Level.ERROR, e);
         }
