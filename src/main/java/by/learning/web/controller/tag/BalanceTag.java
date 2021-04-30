@@ -72,6 +72,4 @@ public class BalanceTag extends TagSupport {
             }
         }
     }
-
-
 }

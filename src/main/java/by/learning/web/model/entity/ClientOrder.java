@@ -9,9 +9,8 @@ import java.util.HashMap;
  * @author Illia Aheyeu
  */
 public class ClientOrder {
-
-    private int userId;
-    private HashMap<Game, Integer> gameMap;
+    private final int userId;
+    private final HashMap<Game, Integer> gameMap;
     private BigDecimal price;
     private Coupon coupon;
 
@@ -26,11 +25,7 @@ public class ClientOrder {
     }
 
     public HashMap<Game, Integer> getGameMap() {
-        return gameMap;
-    }
-
-    public void setGameMap(HashMap<Game, Integer> gameMap) {
-        this.gameMap = gameMap;
+        return new HashMap<>(gameMap);
     }
 
     public BigDecimal getPrice() {

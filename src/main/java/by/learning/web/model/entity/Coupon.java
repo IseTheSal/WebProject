@@ -10,7 +10,6 @@ import java.util.Locale;
  * @see ClientOrder
  */
 public class Coupon {
-
     private int id;
     private short discount;
     private String codeName;

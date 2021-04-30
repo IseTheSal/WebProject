@@ -23,10 +23,6 @@ public class RefreshFilter implements Filter {
     private static final String GET_METHOD = "GET";
 
     @Override
-    public void init(FilterConfig fg) throws ServletException {
-    }
-
-    @Override
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) req;
@@ -53,10 +49,6 @@ public class RefreshFilter implements Filter {
                 httpServletResponse.sendRedirect(page);
             }
         }
-    }
-
-    @Override
-    public void destroy() {
     }
 }
 

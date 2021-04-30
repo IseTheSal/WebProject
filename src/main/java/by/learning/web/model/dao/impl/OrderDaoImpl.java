@@ -242,7 +242,6 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public HashMap<Game, List<String>> createOrder(ClientOrder order) throws DaoException {
-
         HashMap<Game, List<String>> clientGameCodes = new HashMap<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;

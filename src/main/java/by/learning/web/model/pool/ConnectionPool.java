@@ -26,18 +26,26 @@ public enum ConnectionPool {
 
     private final Logger logger = LogManager.getLogger();
     private static final int POOL_SIZE = 10;
+    private static final int ERROR_CONNECTION_CREATOR = 3;
     private final BlockingQueue<ProxyConnection> freeConnections;
+
 
     ConnectionPool() {
         freeConnections = new LinkedBlockingQueue<>();
+        int errorCounter = 0;
         for (int i = 0; i < POOL_SIZE; i++) {
             try {
                 Connection connection = ConnectionCreator.createConnection();
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 freeConnections.offer(proxyConnection);
             } catch (SQLException exception) {
-                logger.log(Level.FATAL, exception);
+                logger.log(Level.ERROR, exception);
+                errorCounter++;
             }
+        }
+        if (errorCounter >= ERROR_CONNECTION_CREATOR) {
+            logger.log(Level.FATAL, "Count of errors during connection creation - " + errorCounter);
+            throw new RuntimeException("Count of errors during connection creation - " + errorCounter);
         }
     }
 
@@ -108,7 +116,6 @@ public enum ConnectionPool {
             while (DriverManager.getDrivers().hasMoreElements()) {
                 Driver driver = DriverManager.getDrivers().nextElement();
                 DriverManager.deregisterDriver(driver);
-                logger.log(Level.DEBUG, driver.toString());
             }
             logger.log(Level.INFO, "Drivers were deregistered");
         } catch (SQLException e) {

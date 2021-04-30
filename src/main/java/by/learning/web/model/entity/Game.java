@@ -11,7 +11,6 @@ import java.util.Set;
  * @author Illia Aheyeu
  */
 public class Game {
-
     private final int id;
     private final String title;
     private final String description;
