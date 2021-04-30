@@ -12,6 +12,7 @@
           rel=stylesheet>
 </head>
 <body>
+<ctg:gameListUpdate/>
 <div style="background-image: url(/img/main-background.png);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="../support/header.jsp"/>
@@ -72,7 +73,6 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
         </table>
     </div>
 </div>
-<ctg:gameListUpdate/>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/jquery.dataTables.min.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/dataTables.bootstrap4.min.js></script>
 <script>

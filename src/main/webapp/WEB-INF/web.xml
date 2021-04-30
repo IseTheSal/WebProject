@@ -22,24 +22,6 @@
         <filter-name>CharacterSetFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <error-page>
-        <error-code>400</error-code>
-        <location>/jsp/error/error400.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/error/error404.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>403</error-code>
-        <location>/jsp/error/error403.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/jsp/error/error500.jsp</location>
-    </error-page>
-
     <filter>
         <filter-name>XSSAttackFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.XSSFilter</filter-class>
@@ -48,7 +30,6 @@
         <filter-name>XSSAttackFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
     <filter>
         <filter-name>RefreshFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.RefreshFilter</filter-class>
@@ -88,7 +69,6 @@
         <url-pattern>/increaseBalance.do</url-pattern>
         <url-pattern>/gameEditor.do</url-pattern>
     </filter-mapping>
-
     <filter>
         <filter-name>PageAccessFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.PageAccessFilter</filter-class>
@@ -97,7 +77,6 @@
         <filter-name>PageAccessFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
     </filter-mapping>
-
     <filter>
         <filter-name>CommandAccessFilter</filter-name>
         <filter-class>by.learning.web.controller.filter.CommandAccessFilter</filter-class>
@@ -106,5 +85,22 @@
         <filter-name>CommandAccessFilter</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
+
+    <error-page>
+        <error-code>400</error-code>
+        <location>/jsp/error/error400.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/error/error404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/jsp/error/error403.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/jsp/error/error500.jsp</location>
+    </error-page>
 </web-app>
 
