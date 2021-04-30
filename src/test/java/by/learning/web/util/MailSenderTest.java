@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class MailSenderTest {
 
-    MailSender mailSender = new MailSender();
+    MailSender mailSender = MailSender.getInstance();
 
     @Test
     public void testSendMessage() {

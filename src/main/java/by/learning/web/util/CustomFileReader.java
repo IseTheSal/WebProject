@@ -20,16 +20,22 @@ public class CustomFileReader {
     //Folder where pictures are UPLOADED
     private static final String UPLOAD_PROJECT_DIRECTORY = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\webapp\\img\\logo";
     private static final String JPG_FORMAT = "jpg";
-    private static CustomFileReader instance;
+    private static volatile CustomFileReader instance;
 
     private CustomFileReader() {
     }
 
     public static CustomFileReader getInstance() {
-        if (instance == null) {
-            instance = new CustomFileReader();
+        CustomFileReader local = instance;
+        if (local == null) {
+            synchronized (CustomFileReader.class) {
+                local = instance;
+                if (local == null) {
+                    instance = local = new CustomFileReader();
+                }
+            }
         }
-        return instance;
+        return local;
     }
 
     public byte[] readAndWriteImage(String fileName) throws ServiceException {

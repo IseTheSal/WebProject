@@ -23,16 +23,24 @@ public class MailSender {
     private static final String SUBJECT_NAME = "GameSpot!";
     private static final String MESSAGE_FOOTER = "If you have any questions, write to our email";
     private static final String PROPERTIES_PATH = "/property/mail.properties";
+    private static final Properties PROPERTIES;
 
-    private final Properties properties;
+    private static final MailSender INSTANCE = new MailSender();
 
-    public MailSender() {
-        properties = new Properties();
+    public static MailSender getInstance() {
+        return INSTANCE;
+    }
+
+    static {
+        PROPERTIES = new Properties();
         try {
-            properties.load(MailSender.class.getResourceAsStream(PROPERTIES_PATH));
+            PROPERTIES.load(MailSender.class.getResourceAsStream(PROPERTIES_PATH));
         } catch (IOException e) {
             logger.log(Level.ERROR, e);
         }
+    }
+
+    private MailSender() {
     }
 
     /**
@@ -59,7 +67,7 @@ public class MailSender {
     }
 
     private Session init() {
-        Session session = Session.getInstance(properties, new Authenticator() {
+        Session session = Session.getInstance(PROPERTIES, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(HOST_MAIL, HOST_PASSWORD);
             }

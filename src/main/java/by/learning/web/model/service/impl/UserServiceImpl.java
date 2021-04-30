@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService {
                     return info;
                 }
             }
-            MailSender mailSender = new MailSender();
+            MailSender mailSender = MailSender.getInstance();
             String body = MAIL_BODY_TITLE + "\n" + RESET_LINK + resetToken + "\n" + WARNING;
             mailSender.sendMessage(email, PASSWORD_RESET_TITLE, body);
             info.add(ValidationInformation.SUCCESS.getInfoValue());

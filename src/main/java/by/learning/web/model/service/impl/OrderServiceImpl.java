@@ -301,7 +301,7 @@ public class OrderServiceImpl implements OrderService {
     private void sendGameCodeToUser(HashMap<Game, List<String>> gameCodeMap, User user) {
         for (Game game : gameCodeMap.keySet()) {
             List<String> gameCodes = gameCodeMap.get(game);
-            MailSender mailSender = new MailSender();
+            MailSender mailSender = MailSender.getInstance();
             String body = convertCodeListToMessage(gameCodes);
             String email = user.getEmail();
             String title = game.getTitle();
