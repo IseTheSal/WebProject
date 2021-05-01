@@ -1,5 +1,6 @@
 package by.learning.web.validator;
 
+import javax.mail.Folder;
 import java.io.File;
 import java.util.EnumSet;
 import java.util.Set;
@@ -14,14 +15,13 @@ public class GameValidator {
     private static final String DESCRIPTION_REGEX = "^[A-z0-9.,?!;:\\-()№'\"\\s®™*’“”]{10,300}";
     private static final String PRICE_REGEX = "^(\\d)*(\\.\\d{1,2})?$";
     private static final String TRAILER_LINK_REGEX = "^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$";
-    /**
-     * Folder FROM where images are LOADED
-     */
+    // Folder FROM where images are LOADED
     private static final String IMAGE_FOLDER_PATH = "C:\\logo\\";
-    /**
-     * folder where pictures are UPLOADED
-     */
+    // Folder where pictures are UPLOADED
     private static final String IMAGE_PROJECT_PATH = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\webapp\\img\\logo";
+
+    private GameValidator() {
+    }
 
     public static boolean isTitleValid(String title) {
         boolean isValid = true;

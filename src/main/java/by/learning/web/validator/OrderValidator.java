@@ -9,11 +9,13 @@ import java.util.Set;
  * @author Illia Aheyeu
  */
 public class OrderValidator {
-
     private static final String COUPON_CODE_REGEX = "[a-zA-Z0-9]{5,10}";
     private static final String GAMECODE_REGEX = "^([A-z0-9]{5}-)([A-z0-9]{5}-)([A-z0-9]{5})$";
     private static final String COUPON_DISCOUNT_REGEX = "^[1-9][0-9]?$";
     private static final String COUPON_AMOUNT_REGEX = "^[1-9][0-9]{0,5}$";
+
+    private OrderValidator() {
+    }
 
     public static boolean isGameCodeValid(String gameCode) {
         boolean isValid = true;

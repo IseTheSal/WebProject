@@ -24,7 +24,7 @@ const checkHolder = function (e) {
 }
 
 const checkDate = function (e) {
-    if (payMM.value > 12) {
+    if (payMM.value > 12 || payMM.value == 0) {
         payMM.value = ''
         return;
     }

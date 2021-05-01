@@ -24,11 +24,9 @@ public class MailSender {
     private static final String MESSAGE_FOOTER = "If you have any questions, write to our email";
     private static final String PROPERTIES_PATH = "/property/mail.properties";
     private static final Properties PROPERTIES;
-
     private static final MailSender INSTANCE = new MailSender();
 
-    public static MailSender getInstance() {
-        return INSTANCE;
+    private MailSender() {
     }
 
     static {
@@ -40,7 +38,8 @@ public class MailSender {
         }
     }
 
-    private MailSender() {
+    public static MailSender getInstance() {
+        return INSTANCE;
     }
 
     /**
