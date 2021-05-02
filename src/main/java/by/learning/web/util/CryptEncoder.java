@@ -17,6 +17,7 @@ public class CryptEncoder {
      * The log2 of the number of rounds of hashing to apply - the work factor therefore increases as 2**log_rounds.
      */
     private static final int LOG_ROUND = 10;
+
     /**
      * Generate encrypted password.
      *

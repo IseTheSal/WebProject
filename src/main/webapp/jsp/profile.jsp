@@ -97,7 +97,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                type="password"
                                class="form-control" id="txtNewPassword"
                                placeholder="<fmt:message key="profile.newPassword"/>"
-                               required pattern="[a-zA-Z0-9]{8,20}$"
+                               required pattern="^[a-zA-Z0-9]{8,20}$"
                                minlength="8" maxlength="20">
                         <br>
                         <div class="form-inline">

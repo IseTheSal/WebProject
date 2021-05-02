@@ -84,7 +84,7 @@
                              style="width:300px; cursor: pointer; display: inline;">
                             <input id="couponCode" class="custom-admin-input" type="text"
                                    placeholder="<fmt:message key="admin.menu.coupon.code.placeholder"/>"
-                                   name="couponCode" required pattern="[a-zA-Z0-9]{5,10}"
+                                   name="couponCode" required pattern="^[a-zA-Z0-9]{5,10}$"
                                    minlength="5" maxlength="10"
                                    style="color: #ff2525; box-shadow:0 0 30px #ffffff;float: left; text-transform: uppercase"/>
                             <input id="discount" class="custom-admin-input" type="text"

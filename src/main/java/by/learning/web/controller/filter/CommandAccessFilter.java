@@ -50,7 +50,6 @@ public class CommandAccessFilter implements Filter {
                 CommandType.FILTER_GAME,
                 CommandType.ORDER_GAMES);
         adminCommands = EnumSet.of(
-                CommandType.CREATE_GAME,
                 CommandType.OPEN_GAME_CREATOR,
                 CommandType.FIND_CODE_AMOUNT,
                 CommandType.ADD_GAME_CODE,

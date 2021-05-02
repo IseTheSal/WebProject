@@ -3,6 +3,7 @@ package by.learning.web.model.service;
 import by.learning.web.exception.ServiceException;
 import by.learning.web.model.entity.Game;
 
+import javax.servlet.http.Part;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -34,10 +35,10 @@ public interface GameService {
     List<Game> findAllGames() throws ServiceException;
 
     /**
-     * Create {@link Game game}.
+     * Create {@link Game game} and upload Image to server.
      *
      * @param gameTitle   tile of {@link Game game}
-     * @param imagePath   image path of {@link Game game}
+     * @param imagePart   image part of {@link Game game}
      * @param description short {@link Game game} description
      * @param price       {@link Game game} price
      * @param trailerLink {@link Game game} trailer link
@@ -46,7 +47,7 @@ public interface GameService {
      * @return <code>Set</code> of {@link by.learning.web.validator.ValidationInformation validation info}, if game was created return <code>Set</code> with {@link by.learning.web.validator.ValidationInformation SUCCESS}, otherwise with  {@link by.learning.web.validator.ValidationInformation FAIL}  and another issues information
      * @throws ServiceException if {@link by.learning.web.exception.DaoException DaoException} was thrown
      */
-    Set<String> createGame(String gameTitle, String imagePath,
+    Set<String> createGame(String gameTitle, Part imagePart,
                            String description, String price, String trailerLink,
                            String[] genres, String[] categories) throws ServiceException;
 

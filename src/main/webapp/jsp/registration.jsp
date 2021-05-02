@@ -28,9 +28,10 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                     <div class="form-inline">
                         <input name="login" id="txtUsername"
                                type="text" style="width: 300px; border-width: medium"
+                               onkeyup="this.value=this.value.toLowerCase()"
                                class="form-control" aria-describedby="usernameHelp"
                                placeholder="<fmt:message key="registration.usernamePlaceHolder"/>"
-                               required pattern="^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$"
+                               required pattern="^[a-z0-9]([_](?![_])|[a-z0-9]){4,10}[a-z0-9]$"
                                minlength="6" maxlength="12"/>
                         <small id="usernameHelp" style="margin-left: 20px;margin-top: -2%;
                  white-space: pre-line; color: darkgrey"> <fmt:message key="registration.helpUsername"/>
@@ -50,7 +51,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                                class="form-control" id="txtPassword"
                                placeholder="<fmt:message key="registration.passwordPlaceHolder"/>"
                                aria-describedby="passwordHelp"
-                               required pattern="[a-zA-Z0-9]{8,20}"
+                               required pattern="^[a-zA-Z0-9]{8,20}$"
                                minlength="8" maxlength="20">
                         <small id="passwordHelp" style="margin-left: 20px; color: darkgrey;
                                    white-space: pre-line"> <fmt:message key="registration.helpPassword"/>

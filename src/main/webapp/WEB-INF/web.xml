@@ -53,7 +53,6 @@
         <url-pattern>/jsp/login.jsp</url-pattern>
         <url-pattern>/register.do</url-pattern>
         <url-pattern>/jsp/admin/adminMenu.jsp</url-pattern>
-        <url-pattern>/createGame.do</url-pattern>
         <url-pattern>/addGameCode.do</url-pattern>
         <url-pattern>/createCoupon.do</url-pattern>
         <url-pattern>/editCoupon.do</url-pattern>
@@ -68,6 +67,7 @@
         <url-pattern>/forgotPassword.do</url-pattern>
         <url-pattern>/increaseBalance.do</url-pattern>
         <url-pattern>/gameEditor.do</url-pattern>
+        <url-pattern>/createGame.upload</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>PageAccessFilter</filter-name>

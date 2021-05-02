@@ -14,8 +14,8 @@
     background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="../support/header.jsp"/>
     <div style="padding-top: 5%">
-        <form class="needs-validation" novalidate method="post"
-              action="${pageContext.request.contextPath}/createGame.do">
+        <form class="needs-validation" novalidate method="post" enctype="multipart/form-data"
+              action="${pageContext.request.contextPath}/createGame.upload">
             <input type="hidden" name="command" value="create_game"/>
             <input name="clientToken" type="hidden" value="${sessionScope.serverToken}"/>
             <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
@@ -66,7 +66,7 @@
                         <fmt:message key="creategame.description"/>
                     </label>
                     <div class="form-inline">
-    <textarea name="gameDescription"
+    <textarea name="gameDescription" oninput="checkDescriptionValid()"
               style="width: 420px; border-width: medium; min-height: 80px; max-height: 500px"
               class="form-control"
               id="txtDescription"
@@ -185,6 +185,16 @@
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
+    </script>
+    <script>
+        function checkDescriptionValid() {
+            const descriptionRegex = /^[A-z0-9.,?!;:\-()№'"\s®™*’“”]{10,300}$/
+            const description = document.getElementById('txtDescription');
+            description.setCustomValidity("");
+            if (!description.value.match(descriptionRegex)) {
+                description.setCustomValidity("Incorrect");
+            }
+        }
     </script>
 </body>
 </html>

@@ -23,7 +23,6 @@ public enum CommandType {
     USE_PROMOCODE(new UsePromocodeCommand()),
     MAKE_ORDER(new MakeOrderCommand()),
     FIND_CODE_AMOUNT(new FindGameCodeAmount()),
-    CREATE_GAME(new CreateGameCommand()),
     OPEN_GAME_CREATOR(new OpenGameCreatorCommand()),
     ADD_GAME_CODE(new AddGameCodeCommand()),
     OPEN_GAME_EDITOR(new OpenEditGameCommand()),

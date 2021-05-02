@@ -12,6 +12,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -26,7 +30,7 @@ public class GameServiceImpl implements GameService {
     private static final Logger logger = LogManager.getLogger();
 
     private final GameDao gameDao = DaoInstance.INSTANCE.getGameDao();
-
+    private static final String UPLOAD_PATH = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\webapp\\img\\logo\\";
     private static final String IMG_PROJECT_PATH = "/img/logo/";
 
     GameServiceImpl() {
@@ -44,9 +48,10 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Set<String> createGame(String gameTitle, String imagePath,
+    public Set<String> createGame(String gameTitle, Part imagePart,
                                   String description, String price, String trailerLink,
                                   String[] genres, String[] categories) throws ServiceException {
+        String imagePath = imagePart.getSubmittedFileName();
         Set<ValidationInformation> validInfo = GameValidator.findGameValidationIssues(gameTitle, imagePath, description, price, trailerLink);
         Set<String> valueValidInfo = validInfo.stream().map(ValidationInformation::getInfoValue).collect(Collectors.toSet());
         if (!valueValidInfo.isEmpty()) {
@@ -55,8 +60,13 @@ public class GameServiceImpl implements GameService {
         int[] genresId = Arrays.stream(genres).mapToInt(Integer::parseInt).toArray();
         int[] categoriesId = Arrays.stream(categories).mapToInt(Integer::parseInt).toArray();
         BigDecimal priceValue = new BigDecimal(price);
-        imagePath = IMG_PROJECT_PATH + imagePath;
-        Game game = new Game.GameBuilder(gameTitle, imagePath)
+        String uploadDirectoryPath = UPLOAD_PATH + imagePath;
+        try (InputStream inputStream = imagePart.getInputStream()) {
+            uploadFile(inputStream, uploadDirectoryPath);
+        } catch (IOException ex) {
+            throw new ServiceException(ex);
+        }
+        Game game = new Game.GameBuilder(gameTitle, IMG_PROJECT_PATH + imagePath)
                 .description(description)
                 .price(priceValue)
                 .trailer(trailerLink).build();
@@ -67,6 +77,26 @@ public class GameServiceImpl implements GameService {
             throw new ServiceException(e);
         }
         return valueValidInfo;
+    }
+
+
+    /**
+     * Upload file
+     *
+     * @param inputStream InputStream
+     * @param path        Image path from game
+     * @throws ServiceException if {@link IOException} was thrown
+     */
+    private void uploadFile(InputStream inputStream, String path) throws ServiceException {
+        try {
+            byte[] bytes = new byte[inputStream.available()];
+            if (inputStream.read(bytes) != -1) {
+                FileOutputStream fops = new FileOutputStream(path);
+                fops.write(bytes);
+            }
+        } catch (IOException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override

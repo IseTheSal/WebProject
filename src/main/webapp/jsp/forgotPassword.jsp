@@ -27,7 +27,7 @@ background-size: cover; background-attachment: fixed; min-height: 100%; overflow
                            class="form-control" id="txtPassword"
                            placeholder="<fmt:message key="registration.passwordPlaceHolder"/>"
                            aria-describedby="passwordHelp"
-                           required pattern="[a-zA-Z0-9]{8,20}"
+                           required pattern="^[a-zA-Z0-9]{8,20}$"
                            minlength="8" maxlength="20">
                     <div class="invalid-feedback" style="white-space: pre"><span
                             class="fas fa-times"></span> <fmt:message key="registration.helpPassword"/></div>

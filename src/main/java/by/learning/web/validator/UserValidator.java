@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class UserValidator {
     private static final String LOGIN_REGEX = "^[a-z0-9]([_](?![_])|[a-zA-Z0-9]){4,10}[a-z0-9]$";
-    private static final String PASSWORD_REGEX = "[a-zA-Z0-9]{8,20}";
+    private static final String PASSWORD_REGEX = "^[a-zA-Z0-9]{8,20}$";
     private static final String NAME_REGEX = "^[A-Za-z|А-я]{2,20}$";
     private static final String EMAIL_REGEX = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
