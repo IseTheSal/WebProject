@@ -95,21 +95,23 @@ background-size: cover; background-attachment: fixed; min-height: 100%">
             </c:if>
         </div>
     </div>
-    <form method="post" action="${pageContext.request.contextPath}/changeLanguage.do"
-          style="position: absolute; top: 80px; left: 20px">
-        <input type="hidden" name="command" value="change_locale"/>
-        <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
-        <button type="submit" name="currentLocale" value="en_US" class="button-locale-change neon-title-white">
-            <fmt:message key="header.English"/>
-        </button>
-        <button type="submit" name="currentLocale" value="pl_PL" class="button-locale-change neon-title-white">
-            <fmt:message key="header.Polish"/>
-        </button>
-        <button type="submit" name="currentLocale" value="ru_RU" class="button-locale-change neon-title-white">
-            <fmt:message key="header.Russian"/>
-        </button>
-        <h1 class="neon-title-white">${pageContext.request.contextPath}</h1>
-    </form>
+    <c:if test="${empty requestScope.resetToken}">
+        <form method="post" action="${pageContext.request.contextPath}/changeLanguage.do"
+              style="position: absolute; top: 80px; left: 20px">
+            <input type="hidden" name="command" value="change_locale"/>
+            <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}">
+            <button type="submit" name="currentLocale" value="en_US" class="button-locale-change neon-title-white">
+                <fmt:message key="header.English"/>
+            </button>
+            <button type="submit" name="currentLocale" value="pl_PL" class="button-locale-change neon-title-white">
+                <fmt:message key="header.Polish"/>
+            </button>
+            <button type="submit" name="currentLocale" value="ru_RU" class="button-locale-change neon-title-white">
+                <fmt:message key="header.Russian"/>
+            </button>
+            <h1 class="neon-title-white">${pageContext.request.contextPath}</h1>
+        </form>
+    </c:if>
 </nav>
 <br>
 

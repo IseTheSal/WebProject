@@ -35,6 +35,7 @@ public class ResetPasswordCommand implements ActionCommand {
         try {
             Set<String> info = userService.resetPassword(resetToken, newPassword, newPasswordRepeat);
             if (info.remove(ValidationInformation.SUCCESS.getInfoValue())) {
+                request.removeAttribute(RequestParameter.RESET_TOKEN);
                 request.setAttribute(RequestParameter.PASSWORD_CHANGED, true);
             } else if (info.remove(ValidationInformation.FAIL.getInfoValue())) {
                 request.setAttribute(RequestParameter.FAIL, true);
