@@ -24,7 +24,7 @@ public class MailSender {
     private static final String MESSAGE_FOOTER = "If you have any questions, write to our email";
     private static final String PROPERTIES_PATH = "/property/mail.properties";
     private static final Properties PROPERTIES;
-    private static final MailSender INSTANCE = new MailSender();
+    private static volatile MailSender INSTANCE;
 
     private MailSender() {
     }
@@ -38,8 +38,22 @@ public class MailSender {
         }
     }
 
+    /**
+     * Return object {@link MailSender} with double check volatile "Singleton" pattern
+     *
+     * @return {@link MailSender} INSTANCE
+     */
     public static MailSender getInstance() {
-        return INSTANCE;
+        MailSender local = INSTANCE;
+        if (local == null) {
+            synchronized (MailSender.class) {
+                local = INSTANCE;
+                if (local == null) {
+                    INSTANCE = local = new MailSender();
+                }
+            }
+        }
+        return local;
     }
 
     /**
