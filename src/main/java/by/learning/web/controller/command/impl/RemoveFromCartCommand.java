@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class RemoveFromCartCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger();
 
-    private OrderService orderService = ServiceInstance.INSTANCE.getOrderService();
+    private final OrderService orderService = ServiceInstance.INSTANCE.getOrderService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

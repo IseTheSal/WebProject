@@ -35,7 +35,7 @@
                                class="form-control"
                                placeholder="<fmt:message key="create.game.title.placeholder"/>"
                                required
-                               pattern="^[A-z0-9`\s:]{2,35}$"
+                               pattern="^(([A-z0-9`:]+\s)*[A-z0-9`:]+){2,35}$"
                                minlength="1" maxlength="35"/>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
@@ -66,13 +66,13 @@
                         <fmt:message key="creategame.description"/>
                     </label>
                     <div class="form-inline">
-    <textarea name="gameDescription" oninput="checkDescriptionValid()"
+    <textarea name="gameDescription" onmouseleave="checkDescriptionValid()"
               style="width: 420px; border-width: medium; min-height: 80px; max-height: 500px"
               class="form-control"
               id="txtDescription"
               placeholder="<fmt:message key="create.game.description.placeholder"/>"
               required
-              minlength="8" maxlength="300"></textarea>
+              minlength="10" maxlength="300"></textarea>
                         <div class="valid-feedback"><span class="fas fa-check"></span><fmt:message
                                 key="creategame.correct"/></div>
                         <div class="invalid-feedback"><span class="fas fa-times"></span><fmt:message
@@ -188,7 +188,7 @@
     </script>
     <script>
         function checkDescriptionValid() {
-            const descriptionRegex = /^[A-z0-9.,?!;:\-()№'"\s®™*’“”]{10,300}$/
+            const descriptionRegex = /^(([A-z0-9.,?!;:\-()№'"®™*’“”]+\s)*[A-z0-9.,?!;:\-()№'"®™*’“”]+)$/
             const description = document.getElementById('txtDescription');
             description.setCustomValidity("");
             if (!description.value.match(descriptionRegex)) {

@@ -15,8 +15,6 @@ import java.sql.Statement;
  * @author Illia Aheyeu
  */
 public interface BaseDao {
-
-
     /**
      * Close statement.
      *
@@ -32,7 +30,6 @@ public interface BaseDao {
             }
         }
     }
-
 
     /**
      * Close database connection.

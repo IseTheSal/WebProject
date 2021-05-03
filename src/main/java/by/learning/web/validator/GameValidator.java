@@ -9,12 +9,10 @@ import java.util.Set;
  * @author Illia Aheyeu
  */
 public class GameValidator {
-    private static final String TITLE_REGEX = "^[A-z0-9`\\s:]{2,35}$";
-    private static final String DESCRIPTION_REGEX = "^[A-z0-9.,?!;:\\-()№'\"\\s®™*’“”]{10,300}$";
+    private static final String TITLE_REGEX = "^(([A-z0-9`:]+\\s)*[A-z0-9`:]+){2,35}$";
+    private static final String DESCRIPTION_REGEX = "^(([A-z0-9.,?!;:\\-()№'\"®™*’“”]+\\s)*[A-z0-9.,?!;:\\-()№'\"®™*’“”]+){10,300}$";
     private static final String PRICE_REGEX = "^(\\d)*(\\.\\d{1,2})?$";
     private static final String TRAILER_LINK_REGEX = "^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$";
-    // Folder FROM where images are LOADED
-    private static final String IMAGE_FOLDER_PATH = "C:\\logo\\";
     // Folder where pictures are UPLOADED
     private static final String IMAGE_PROJECT_PATH = "C:\\Users\\illya\\Desktop\\Epam\\Epam Learning\\Servlet\\src\\main\\webapp\\img\\logo";
 
@@ -23,7 +21,8 @@ public class GameValidator {
 
     public static boolean isTitleValid(String title) {
         boolean isValid = true;
-        if ((title == null) || (!title.matches(TITLE_REGEX))) {
+        if ((title == null) || (!title.matches(TITLE_REGEX))
+                || title.length() > 35 || title.length() < 2) {
             isValid = false;
         }
         return isValid;
@@ -39,7 +38,8 @@ public class GameValidator {
 
     public static boolean isDescriptionValid(String description) {
         boolean isValid = true;
-        if ((description == null) || (!description.matches(DESCRIPTION_REGEX))) {
+        if ((description == null) || (!description.matches(DESCRIPTION_REGEX))
+                || description.length() > 300 || description.length() < 10) {
             isValid = false;
         }
         return isValid;
