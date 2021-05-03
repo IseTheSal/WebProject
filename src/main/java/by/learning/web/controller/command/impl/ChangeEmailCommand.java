@@ -39,7 +39,9 @@ public class ChangeEmailCommand implements ActionCommand {
                 User user = (User) session.getAttribute(SessionAttribute.CURRENT_USER);
                 if (user.getRole() == User.Role.ADMIN && user.getId() != userId) {
                     Set<User> userSet = (Set<User>) session.getAttribute(SessionAttribute.USER_SET);
-                    userSet.stream().filter(userClient -> userClient.getId() == userId).findFirst().ifPresent(userClient -> userClient.setEmail(email));
+                    userSet.stream().filter(userClient -> userClient.getId() == userId)
+                            .findFirst()
+                            .ifPresent(userClient -> userClient.setEmail(email));
                 } else {
                     user.setEmail(email);
                 }

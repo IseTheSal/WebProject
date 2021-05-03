@@ -80,7 +80,6 @@ public class UploadController extends HttpServlet {
                         page = PageValue.ADMIN_MENU_PAGE;
                         successOperation = true;
                     } else if (informationSet.remove(ValidationInformation.FAIL.getInfoValue())) {
-                        logger.log(Level.DEBUG, informationSet.toString());
                         request.setAttribute(RequestParameter.VALID_ISSUES, informationSet);
                         request.setAttribute(RequestParameter.FAIL, true);
                     }

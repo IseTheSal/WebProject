@@ -12,7 +12,6 @@
           rel=stylesheet>
 </head>
 <body>
-<ctg:gameListUpdate/>
 <div style="background-image: url(/img/main-background.png);
 background-size: cover; background-attachment: fixed; min-height: 100%; overflow: hidden">
     <jsp:include page="../support/header.jsp"/>
